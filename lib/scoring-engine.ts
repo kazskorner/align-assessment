@@ -295,6 +295,7 @@ export class AlignScoringEngine {
     return {
       respondentName: `${firstName} ${lastName}`.trim(),
       email,
+      phone,
       tier,
       leadScore,
       traitResults: {
