@@ -97,7 +97,6 @@ export class AlignScoringEngine {
     const qNumbers = questionMaps[category].qNumbers;
     let sideAScore = 0;
     let sideBScore = 0;
-    const scores: { question: number; direction: string; points: number }[] = [];
 
     // Sum points for each side
     qNumbers.forEach((qNum) => {
@@ -196,7 +195,7 @@ export class AlignScoringEngine {
     questions.forEach((qNum) => {
       const response = responses[qNum];
       const points = this.getPointValue(qNum, response);
-      scores.push({ question: qNum, points });
+
       score += points;
     });
 
