@@ -1,14 +1,13 @@
-import { 
-  QuizResponse, 
-  ScoringResult, 
+import {
+  QuizResponse,
+  ScoringResult,
   BipolarTraitCategory,
-  PersonaType 
+  PersonaType
 } from './types';
-import { 
-  ALIGN_QUESTIONS, 
-  BIPOLAR_TRAIT_CATEGORIES, 
+import {
+  ALIGN_QUESTIONS,
+  BIPOLAR_TRAIT_CATEGORIES,
   QUADRANT_PERSONAS,
-  TIER_RULES 
 } from './scoring-data';
 
 export class AlignScoringEngine {
@@ -104,16 +103,16 @@ export class AlignScoringEngine {
     qNumbers.forEach((qNum) => {
       const response = responses[qNum];
       const question = ALIGN_QUESTIONS[qNum as keyof typeof ALIGN_QUESTIONS];
-      
+
       if (question && response) {
         const answerData = question.answers[response as keyof typeof question.answers];
         if (answerData) {
           const points = answerData.points;
           const direction = answerData.trait;
-          
+
           if (direction !== "—") {
             scores.push({ question: qNum, direction, points });
-            
+
             // Determine which side (A or B)
             const traitCategory = BIPOLAR_TRAIT_CATEGORIES[category];
             if (direction === traitCategory.a) {
