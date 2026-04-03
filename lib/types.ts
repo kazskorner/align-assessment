@@ -11,6 +11,7 @@ export interface QuizResponse {
 export interface ScoringResult {
   respondentName: string;
   email: string;
+  phone?: string;
   tier: 'A' | 'B' | 'C';
   leadScore: number;
   
@@ -69,7 +70,6 @@ export interface CopyMatrixEntry {
 
 export interface TierRule {
   ruleOrder: number;
-  ruleName: string;
   ruleName: string;
   ruleCondition: string;
   assignedTier: 'A' | 'B' | 'C';
