@@ -105,7 +105,7 @@ export class AlignScoringEngine {
 
       if (question && response) {
         const answerData = question.answers[response as keyof typeof question.answers] as any;
-        if (answerData) {
+        if (answerData && answerData.points !== undefined) {
           const points = answerData.points;
           const direction = answerData.trait;
 
@@ -217,14 +217,11 @@ export class AlignScoringEngine {
     return score > 0 ? 'High' : 'Low';
   }
 
-  /**
-   * Get point value for a specific answer
-   */
   private getPointValue(questionNum: number, response: string): number {
     const question = ALIGN_QUESTIONS[questionNum as keyof typeof ALIGN_QUESTIONS];
     if (question && response) {
-      const answerData = question.answers[response as keyof typeof question.answers];
-      if (answerData) {
+      const answerData = question.answers[response as keyof typeof question.answers] as any;
+      if (answerData && answerData.points !== undefined) {
         return answerData.points;
       }
     }
