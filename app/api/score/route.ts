@@ -2,7 +2,7 @@ import type { NextRequest } from 'next/server';
 import { NextResponse } from 'next/server';
 import { query } from '@/lib/db';
 import AlignScoringEngine from '@/lib/scoring-engine';
-import type { QuizResponse, ScoringResult } from '@/lib/types';
+import type { QuizResponse } from '@/lib/types';
 
 export async function POST(request: NextRequest) {
   try {
