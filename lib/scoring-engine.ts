@@ -109,10 +109,8 @@ export class AlignScoringEngine {
         if (answerData) {
           const points = answerData.points;
           const direction = answerData.trait;
-          const direction = answerData.trait;
 
           if (direction !== "—") {
-            scores.push({ question: qNum, direction, points });
 
             // Determine which side (A or B)
             const traitCategory = BIPOLAR_TRAIT_CATEGORIES[category];
