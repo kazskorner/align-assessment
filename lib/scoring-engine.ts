@@ -105,9 +105,10 @@ export class AlignScoringEngine {
       const question = ALIGN_QUESTIONS[qNum as keyof typeof ALIGN_QUESTIONS];
 
       if (question && response) {
-        const answerData = question.answers[response as keyof typeof question.answers];
+        const answerData = question.answers[response as keyof typeof question.answers] as any;
         if (answerData) {
           const points = answerData.points;
+          const direction = answerData.trait;
           const direction = answerData.trait;
 
           if (direction !== "—") {
