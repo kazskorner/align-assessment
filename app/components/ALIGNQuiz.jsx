@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
+import { useRouter } from 'next/navigation';
 
 /* ─── All 50 US States ─────────────────────────────────────────────────────── */
 const US_STATES = [
@@ -468,4 +469,149 @@ export default function ALIGNQuiz() {
             </div>
         </div>
     );
+  }
+
+  // ── GATE (after all 36 questions) ─────────────────────────────────────
+  if (phase === 'gate') {
+    return (
+      <div style={{ maxWidth: '540px', margin: '60px auto', padding: '24px', fontFamily: 'sans-serif' }}>
+        <div style={{ textAlign: 'center', marginBottom: '30px' }}>
+          <div style={{ fontSize: '52px', marginBottom: '12px' }}>✅</div>
+          <h1 style={{ color: BLUE, fontSize: '26px', marginBottom: '8px' }}>You're almost there!</h1>
+          <p style={{ color: '#555', fontSize: '16px' }}>
+            Enter your details below to unlock your personalized retirement profile.
+          </p>
+        </div>
+
+        <form onSubmit={handleGateSubmit}>
+          <div style={{ display: 'flex', gap: '12px', marginBottom: '14px' }}>
+            <div style={{ flex: 1 }}>
+              <label style={{ display: 'block', marginBottom: '5px', fontWeight: '600', color: '#333', fontSize: '14px' }}>First Name</label>
+              <input
+                type="text" value={firstName} onChange={e => setFirstName(e.target.value)}
+                required placeholder="Jane"
+                style={{ width: '100%', padding: '10px', boxSizing: 'border-box', border: '1px solid #ccc', borderRadius: '6px', fontSize: '15px' }}
+              />
+            </div>
+            <div style={{ flex: 1 }}>
+              <label style={{ display: 'block', marginBottom: '5px', fontWeight: '600', color: '#333', fontSize: '14px' }}>Last Name</label>
+              <input
+                type="text" value={lastName} onChange={e => setLastName(e.target.value)}
+                required placeholder="Smith"
+                style={{ width: '100%', padding: '10px', boxSizing: 'border-box', border: '1px solid #ccc', borderRadius: '6px', fontSize: '15px' }}
+              />
+            </div>
+          </div>
+
+          <div style={{ marginBottom: '24px' }}>
+            <label style={{ display: 'block', marginBottom: '5px', fontWeight: '600', color: '#333', fontSize: '14px' }}>Email Address</label>
+            <input
+              type="email" value={email} onChange={e => setEmail(e.target.value)}
+              required placeholder="jane@example.com"
+              style={{ width: '100%', padding: '10px', boxSizing: 'border-box', border: '1px solid #ccc', borderRadius: '6px', fontSize: '15px' }}
+            />
+          </div>
+
+          <button
+            type="submit"
+            style={{
+              width: '100%', padding: '14px',
+              backgroundColor: BLUE, color: 'white',
+              border: 'none', borderRadius: '6px',
+              cursor: 'pointer', fontSize: '17px', fontWeight: 'bold',
+            }}
+          >
+            See My Results →
+          </button>
+
+          <p style={{ textAlign: 'center', fontSize: '12px', color: '#999', marginTop: '12px' }}>
+            Your information is private and will never be sold.
+          </p>
+        </form>
+      </div>
+    );
+  }
+
+  // ── SUBMITTING ────────────────────────────────────────────────────────
+  if (phase === 'submitting') {
+    return (
+      <div style={{ maxWidth: '540px', margin: '120px auto', textAlign: 'center', fontFamily: 'sans-serif' }}>
+        <div style={{ fontSize: '42px', marginBottom: '16px' }}>⏳</div>
+        <h2 style={{ color: BLUE }}>Calculating your results...</h2>
+        <p style={{ color: '#666' }}>This only takes a moment.</p>
+      </div>
+    );
+  }
+
+  // ── QUIZ ──────────────────────────────────────────────────────────────
+  return (
+    <div style={{ maxWidth: '640px', margin: '50px auto', padding: '20px', fontFamily: 'sans-serif' }}>
+
+      {/* Progress bar */}
+      <div style={{ marginBottom: '28px' }}>
+        <div style={{ backgroundColor: '#e0e0e0', height: '8px', borderRadius: '4px', overflow: 'hidden' }}>
+          <div style={{ width: `${progress}%`, height: '100%', backgroundColor: BLUE, transition: 'width 0.3s ease' }} />
+        </div>
+        <p style={{ textAlign: 'center', fontSize: '13px', color: '#777', marginTop: '8px' }}>
+          Question {currentQ + 1} of {QUESTIONS.length}
+        </p>
+      </div>
+
+      {/* Question text */}
+      <h2 style={{ fontSize: '20px', lineHeight: '1.55', color: BLUE, marginBottom: '24px' }}>
+        {question.text}
+      </h2>
+
+      {/* Dropdown — Q36 state */}
+      {question.type === 'dropdown' ? (
+        <div>
+          <select
+            value={selectedState}
+            onChange={e => setSelectedState(e.target.value)}
+            style={{
+              width: '100%', padding: '13px', fontSize: '16px',
+              border: '1px solid #ccc', borderRadius: '6px',
+              backgroundColor: '#fff', color: selectedState ? '#000' : '#888',
+              marginBottom: '16px', cursor: 'pointer', boxSizing: 'border-box',
+            }}
+          >
+            <option value="" disabled>Select your state...</option>
+            {US_STATES.map(s => <option key={s} value={s}>{s}</option>)}
+          </select>
+          <button
+            onClick={handleDropdownContinue}
+            disabled={!selectedState}
+            style={{
+              width: '100%', padding: '14px',
+              backgroundColor: selectedState ? BLUE : '#ccc',
+              color: 'white', border: 'none', borderRadius: '6px',
+              cursor: selectedState ? 'pointer' : 'not-allowed',
+              fontSize: '16px', fontWeight: 'bold',
+            }}
+          >
+            Continue →
+          </button>
+        </div>
+      ) : (
+        /* Button options — all other questions */
+        <div>
+          {question.options.map(opt => (
+            <button
+              key={opt}
+              onClick={() => handleAnswer(opt)}
+              style={{
+                ...BTN_BASE,
+                backgroundColor: responses[question.id] === opt ? BLUE : '#f4f6f9',
+                color: responses[question.id] === opt ? 'white' : '#222',
+                borderColor: responses[question.id] === opt ? BLUE : '#ddd',
+              }}
+            >
+              {opt}
+            </button>
+          ))}
+        </div>
+      )}
+    </div>
+  );
 }
+

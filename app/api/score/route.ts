@@ -6,7 +6,6 @@ import type { QuizResponse } from '@/lib/types';
 
 export async function POST(request: NextRequest) {
   try {
-    // Parse request body
     const body = await request.json();
     const { email, firstName, lastName, phone, responses } = body;
 
@@ -21,7 +20,6 @@ export async function POST(request: NextRequest) {
     // Initialize scoring engine
     const engine = new AlignScoringEngine();
 
-    // Score the quiz
     const quizResponse: QuizResponse = {
       email,
       firstName,
@@ -32,16 +30,16 @@ export async function POST(request: NextRequest) {
 
     const result = engine.score(quizResponse);
 
-    // Store response in database
+    // ── Save to quiz_responses table (existing, full schema) ─────────────
     try {
       await query(
-        `INSERT INTO quiz_responses 
-         (email, first_name, last_name, phone, tier, persona, lead_score, 
+        `INSERT INTO quiz_responses
+         (email, first_name, last_name, phone, tier, persona, lead_score,
           income_source, income_structure, mindset, liquidity, spender, payout_pattern,
           advisor_value_score, self_efficacy_score, age_range, time_to_retirement, assets_saved, tags_applied)
          VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19)
          ON CONFLICT (email) DO UPDATE SET
-         tier = EXCLUDED.tier, 
+         tier = EXCLUDED.tier,
          persona = EXCLUDED.persona,
          lead_score = EXCLUDED.lead_score,
          updated_at = CURRENT_TIMESTAMP`,
@@ -64,34 +62,49 @@ export async function POST(request: NextRequest) {
           result.demographics.ageRange,
           result.demographics.timeToRetirement,
           result.demographics.assetsSaved,
-          false, // tags_applied flag
+          false,
         ]
       );
-
-      // Update trust counters
-      await query(
-        `UPDATE trust_counters SET counter_value = counter_value + 1 
-         WHERE counter_type = 'total_quizzes'`
-      );
-
-      await query(
-        `UPDATE trust_counters SET counter_value = counter_value + 1 
-         WHERE counter_type = $1`,
-        [`total_tier_${result.tier.toLowerCase()}`]
-      );
-
     } catch (dbError) {
-      console.error('Database error:', dbError);
-      // Continue without storing (don't fail the API)
+      console.error('quiz_responses insert error:', dbError);
+      // Continue — don't fail the API if this table has an issue
     }
 
-    // Return scoring result
-    return NextResponse.json(result, {
-      status: 200,
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    });
+    // ── Also save to quiz_results table (simpler lead-capture schema) ───
+    try {
+      await query(
+        `INSERT INTO quiz_results (
+          firstName, lastName, email, tier,
+          incomeSource, incomeStructure, mindset, liquidity, spender, payoutPattern,
+          persona, leadScore
+        ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12)`,
+        [
+          firstName || '',
+          lastName || '',
+          email,
+          result.tier,
+          result.traitResults.incomeSource,
+          result.traitResults.incomeStructure,
+          result.traitResults.mindset,
+          result.traitResults.liquidity,
+          result.traitResults.spender,
+          result.traitResults.payoutPattern,
+          result.persona,
+          result.leadScore,
+        ]
+      );
+    } catch (dbError) {
+      console.error('quiz_results insert error:', dbError);
+      // Continue — run schema.sql in Neon to create this table if not yet created
+    }
+
+    // ── Update trust counters (best-effort) ──────────────────────────────
+    try {
+      await query(`UPDATE trust_counters SET counter_value = counter_value + 1 WHERE counter_type = 'total_quizzes'`);
+      await query(`UPDATE trust_counters SET counter_value = counter_value + 1 WHERE counter_type = $1`, [`total_tier_${result.tier.toLowerCase()}`]);
+    } catch { /* ignore if table not present */ }
+
+    return NextResponse.json(result, { status: 200 });
 
   } catch (error) {
     console.error('Scoring error:', error);
@@ -102,7 +115,7 @@ export async function POST(request: NextRequest) {
   }
 }
 
-// GET endpoint for health check
 export async function GET() {
-  return NextResponse.json({ status: 'healthy', service: 'ALIGN API' });
+  return NextResponse.json({ status: 'healthy', service: 'ALIGN API v2' });
 }
+

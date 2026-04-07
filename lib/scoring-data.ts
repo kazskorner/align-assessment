@@ -212,6 +212,8 @@ export const ALIGN_QUESTIONS = {
       "Tax burden": { points: 1, trait: "Specific concern" },
       "Healthcare costs": { points: 1, trait: "Specific concern" },
       "Legacy planning": { points: 1, trait: "Specific concern" },
+      "Market volatility": { points: 1, trait: "Specific concern" },
+      "Inflation": { points: 1, trait: "Specific concern" },
       "Just exploring": { points: 0, trait: "No urgency" },
     },
   },
@@ -222,6 +224,9 @@ export const ALIGN_QUESTIONS = {
     answers: {
       "Build a new relationship": { points: 2, trait: "Advisory intent" },
       "Update an existing plan": { points: 1, trait: "Advisory intent" },
+      "Update existing strategy": { points: 1, trait: "Advisory intent" },
+      "Just exploring": { points: 0, trait: "No advisory intent" },
+      "Other": { points: 0, trait: "No advisory intent" },
       "Neither": { points: 0, trait: "No advisory intent" },
     },
   },
@@ -232,6 +237,7 @@ export const ALIGN_QUESTIONS = {
     answers: {
       "0–3 years": { points: 10, trait: "Urgent" },
       "3–5 years": { points: 8, trait: "Near-term" },
+      "Already Retired": { points: 7, trait: "Distribution phase" },
       "Already retired": { points: 7, trait: "Distribution phase" },
       "5–10 years": { points: 4, trait: "Mid-horizon" },
       "10–15 years": { points: 1, trait: "Long-horizon" },
@@ -416,6 +422,14 @@ export const ALIGN_QUESTIONS = {
     category: "Demographics",
     engine: "Tier Calc",
     answers: {
+      // Frontend answer strings (active)
+      "$5M+ investments": { points: 4, trait: "Financial profile" },
+      "$2.2M+ NW": { points: 3, trait: "Financial profile" },
+      "$1M–$2.2M NW": { points: 1, trait: "Financial profile" },
+      "$200k+ HH income": { points: 2, trait: "Financial profile" },
+      "$300k+ HH income": { points: 2, trait: "Financial profile" },
+      "Under $1M NW": { points: 0, trait: "Financial profile" },
+      // Legacy backend strings (kept for backwards compatibility)
       "$5M+ in investments": { points: 4, trait: "Financial profile" },
       "Net worth ≥ $2.2M": { points: 3, trait: "Financial profile" },
       "$1.1M+ under advice": { points: 3, trait: "Financial profile" },
