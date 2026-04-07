@@ -22,7 +22,7 @@ export class AlignScoringEngine {
     score: number;
   } {
     // Extract key questions
-    const q20Response = responses[20]; // Time to retirement
+    const q19Response = responses[19]; // Time to retirement ("When will you retire?")
     const q31Response = responses[31]; // Age
     const q32Response = responses[32]; // Assets saved
     const q33Response = responses[33]; // Income/NW qualifier
@@ -31,7 +31,7 @@ export class AlignScoringEngine {
     const q35Response = responses[35]; // Tax buckets
 
     // Map responses to point values
-    const q20Points = this.getPointValue(20, q20Response);
+    const q19Points = this.getPointValue(19, q19Response);
     const q31Points = this.getPointValue(31, q31Response);
     const q32Points = this.getPointValue(32, q32Response);
     const q33Points = this.getPointValue(33, q33Response);
@@ -40,11 +40,11 @@ export class AlignScoringEngine {
     const q35Points = q35Response === "Only 1 bucket checked" ? 1 : 0; // Bonus
 
     // Calculate raw tier score
-    const rawScore = q20Points + q31Points + q32Points + q33Points + q17Points + q18Points + q35Points;
+    const rawScore = q19Points + q31Points + q32Points + q33Points + q17Points + q18Points + q35Points;
 
     // Parse assets for waterfall rule
     const assetsValue = this.parseAssets(q32Response);
-    const timeToRetirementValue = this.parseTimeToRetirement(q20Response);
+    const timeToRetirementValue = this.parseTimeToRetirement(q19Response);
 
     // Apply Waterfall Rules
     // Rule 1: Hard Knockout
@@ -277,7 +277,7 @@ export class AlignScoringEngine {
 
     // Get demographics
     const ageRange = responses[31] || "Unknown";
-    const timeToRetirement = responses[20] || "Unknown";
+    const timeToRetirement = responses[19] || "Unknown"; // Q19: "When will you retire?"
     const assetsSaved = responses[32] || "Unknown";
     const taxBuckets = responses[35] || "Unknown";
 
