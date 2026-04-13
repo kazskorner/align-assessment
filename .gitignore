@@ -37,3 +37,8 @@ yarn-error.log*
 
 # Testing
 coverage/
+
+# Large video files — host via Vercel Blob or CDN, not git
+public/videos/*.mp4
+public/videos/*.mov
+public/videos/*.webm
