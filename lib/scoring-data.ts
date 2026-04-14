@@ -1,12 +1,9 @@
-// ALIGN Quiz Master — 36 Questions with Scoring Key
-// Source: ALIGN_Quiz_Master spreadsheet
-
+// GENERATED SCORING DATA - Auto-aligned with quiz-copy.ts
 export const ALIGN_QUESTIONS = {
-  // Block 1: Hook (Q1–3) — Personality feel, no financial exposure
   1: {
     text: "Enjoying life when I can matters more to me than preserving spending later.",
     category: "Spender",
-    engine: "Bipolar (0–2)",
+    engine: "Bipolar (0-2)",
     answers: {
       "Strongly Agree": { points: 2, trait: "Front Loaded" },
       "Agree": { points: 1, trait: "Front Loaded" },
@@ -18,7 +15,7 @@ export const ALIGN_QUESTIONS = {
   2: {
     text: "A steady, reliable income matters more to me than maximizing my net worth.",
     category: "Mindset",
-    engine: "Bipolar (0–2)",
+    engine: "Bipolar (0-2)",
     answers: {
       "Strongly Agree": { points: 2, trait: "Income Mindset" },
       "Agree": { points: 1, trait: "Income Mindset" },
@@ -30,7 +27,7 @@ export const ALIGN_QUESTIONS = {
   3: {
     text: "I'd rather spend more in the early years of retirement while I'm more active.",
     category: "Spender",
-    engine: "Bipolar (0–2)",
+    engine: "Bipolar (0-2)",
     answers: {
       "Strongly Agree": { points: 2, trait: "Front Loaded" },
       "Agree": { points: 1, trait: "Front Loaded" },
@@ -39,12 +36,10 @@ export const ALIGN_QUESTIONS = {
       "Strongly Disagree": { points: 2, trait: "Back Loaded" },
     },
   },
-
-  // Block 2: Traits — Income Source (Q4–7)
   4: {
-    text: "Pension income or annuity payments are more valuable to me than a larger lump sum I have to manage myself.",
+    text: "I want my essential living expenses covered regardless of market performance.",
     category: "Income Source",
-    engine: "Bipolar (0–2)",
+    engine: "Bipolar (0-2)",
     answers: {
       "Strongly Agree": { points: 2, trait: "Contractual" },
       "Agree": { points: 1, trait: "Contractual" },
@@ -54,21 +49,21 @@ export const ALIGN_QUESTIONS = {
     },
   },
   5: {
-    text: "I want my retirement income to come from investments I control, not a fixed payment from an insurance company.",
+    text: "I am okay if my retirement income changes based on market performance.",
     category: "Income Source",
-    engine: "Bipolar (0–2)",
+    engine: "Bipolar (0-2)",
     answers: {
-      "Strongly Agree": { points: 2, trait: "Market Driven" },
-      "Agree": { points: 1, trait: "Market Driven" },
+      "Strongly Agree": { points: 2, trait: "Contractual" },
+      "Agree": { points: 1, trait: "Contractual" },
       "Neutral": { points: 0, trait: "—" },
-      "Disagree": { points: 1, trait: "Contractual" },
-      "Strongly Disagree": { points: 2, trait: "Contractual" },
+      "Disagree": { points: 1, trait: "Market Driven" },
+      "Strongly Disagree": { points: 2, trait: "Market Driven" },
     },
   },
   6: {
-    text: "I prefer knowing my retirement income won't change, even if it means lower overall returns.",
+    text: "Stable income for my essential needs matters more to me than chasing investment upside.",
     category: "Income Source",
-    engine: "Bipolar (0–2)",
+    engine: "Bipolar (0-2)",
     answers: {
       "Strongly Agree": { points: 2, trait: "Contractual" },
       "Agree": { points: 1, trait: "Contractual" },
@@ -78,35 +73,33 @@ export const ALIGN_QUESTIONS = {
     },
   },
   7: {
-    text: "The 4% rule (withdrawing 4% annually from my portfolio) is an acceptable way to fund my retirement.",
+    text: "I'm comfortable with income variability if it increases long-term growth of my net worth.",
     category: "Income Source",
-    engine: "Bipolar (0–2)",
+    engine: "Bipolar (0-2)",
     answers: {
-      "Strongly Agree": { points: 2, trait: "Market Driven" },
-      "Agree": { points: 1, trait: "Market Driven" },
+      "Strongly Agree": { points: 2, trait: "Contractual" },
+      "Agree": { points: 1, trait: "Contractual" },
       "Neutral": { points: 0, trait: "—" },
-      "Disagree": { points: 1, trait: "Contractual" },
-      "Strongly Disagree": { points: 2, trait: "Contractual" },
+      "Disagree": { points: 1, trait: "Market Driven" },
+      "Strongly Disagree": { points: 2, trait: "Market Driven" },
     },
   },
-
-  // Block 3: Traits — Income Structure (Q8–11)
   8: {
-    text: "I want my retirement plan to be flexible so I can adjust my income based on what's happening in the market.",
+    text: "I prefer having the ability to change my mind over locking in guaranteed long-term outcomes.",
     category: "Income Structure",
-    engine: "Bipolar (0–2)",
+    engine: "Bipolar (0-2)",
     answers: {
-      "Strongly Agree": { points: 2, trait: "Adjustable" },
-      "Agree": { points: 1, trait: "Adjustable" },
+      "Strongly Agree": { points: 2, trait: "Committed" },
+      "Agree": { points: 1, trait: "Committed" },
       "Neutral": { points: 0, trait: "—" },
-      "Disagree": { points: 1, trait: "Committed" },
-      "Strongly Disagree": { points: 2, trait: "Committed" },
+      "Disagree": { points: 1, trait: "Adjustable" },
+      "Strongly Disagree": { points: 2, trait: "Adjustable" },
     },
   },
   9: {
-    text: "Once I set my retirement income level, I want it to stay locked in and not change.",
+    text: "I want the flexibility to adjust my retirement income strategy as life changes.",
     category: "Income Structure",
-    engine: "Bipolar (0–2)",
+    engine: "Bipolar (0-2)",
     answers: {
       "Strongly Agree": { points: 2, trait: "Committed" },
       "Agree": { points: 1, trait: "Committed" },
@@ -116,21 +109,9 @@ export const ALIGN_QUESTIONS = {
     },
   },
   10: {
-    text: "I prefer a retirement plan that I can modify as my life circumstances change.",
+    text: "The longer my planning timeframe, the more important a stable, consistent retirement income strategy becomes to me.",
     category: "Income Structure",
-    engine: "Bipolar (0–2)",
-    answers: {
-      "Strongly Agree": { points: 2, trait: "Adjustable" },
-      "Agree": { points: 1, trait: "Adjustable" },
-      "Neutral": { points: 0, trait: "—" },
-      "Disagree": { points: 1, trait: "Committed" },
-      "Strongly Disagree": { points: 2, trait: "Committed" },
-    },
-  },
-  11: {
-    text: "Once my retirement income is set up, I want minimal changes to the structure.",
-    category: "Income Structure",
-    engine: "Bipolar (0–2)",
+    engine: "Bipolar (0-2)",
     answers: {
       "Strongly Agree": { points: 2, trait: "Committed" },
       "Agree": { points: 1, trait: "Committed" },
@@ -139,12 +120,22 @@ export const ALIGN_QUESTIONS = {
       "Strongly Disagree": { points: 2, trait: "Adjustable" },
     },
   },
-
-  // Block 4: Traits — Secondary (Q12–16) + Intent (Q17–19)
+  11: {
+    text: "I would rather adapt over time than commit to one long-term strategy.",
+    category: "Income Structure",
+    engine: "Bipolar (0-2)",
+    answers: {
+      "Strongly Agree": { points: 2, trait: "Committed" },
+      "Agree": { points: 1, trait: "Committed" },
+      "Neutral": { points: 0, trait: "—" },
+      "Disagree": { points: 1, trait: "Adjustable" },
+      "Strongly Disagree": { points: 2, trait: "Adjustable" },
+    },
+  },
   12: {
-    text: "Protecting my purchasing power over time is more important than generating the highest possible returns.",
+    text: "I'm comfortable drawing from my principal if it improves the quality of my retirement.",
     category: "Mindset",
-    engine: "Bipolar (0–2)",
+    engine: "Bipolar (0-2)",
     answers: {
       "Strongly Agree": { points: 2, trait: "Income Mindset" },
       "Agree": { points: 1, trait: "Income Mindset" },
@@ -154,33 +145,33 @@ export const ALIGN_QUESTIONS = {
     },
   },
   13: {
-    text: "I want my retirement portfolio to be larger when I die than when I started.",
+    text: "I will sacrifice lifestyle in retirement to preserve my portfolio's value.",
     category: "Mindset",
-    engine: "Bipolar (0–2)",
+    engine: "Bipolar (0-2)",
     answers: {
-      "Strongly Agree": { points: 2, trait: "Net Worth Mindset" },
-      "Agree": { points: 1, trait: "Net Worth Mindset" },
+      "Strongly Agree": { points: 2, trait: "Income Mindset" },
+      "Agree": { points: 1, trait: "Income Mindset" },
       "Neutral": { points: 0, trait: "—" },
-      "Disagree": { points: 1, trait: "Income Mindset" },
-      "Strongly Disagree": { points: 2, trait: "Income Mindset" },
+      "Disagree": { points: 1, trait: "Net Worth Mindset" },
+      "Strongly Disagree": { points: 2, trait: "Net Worth Mindset" },
     },
   },
   14: {
-    text: "I want to keep my retirement assets invested rather than in cash.",
+    text: "I will sell some investments for 'pop-up' expenses.",
     category: "Liquidity",
-    engine: "Bipolar (0–2)",
+    engine: "Bipolar (0-2)",
     answers: {
-      "Strongly Agree": { points: 2, trait: "Investment Liquidity" },
-      "Agree": { points: 1, trait: "Investment Liquidity" },
+      "Strongly Agree": { points: 2, trait: "Cash Liquidity" },
+      "Agree": { points: 1, trait: "Cash Liquidity" },
       "Neutral": { points: 0, trait: "—" },
-      "Disagree": { points: 1, trait: "Cash Liquidity" },
-      "Strongly Disagree": { points: 2, trait: "Cash Liquidity" },
+      "Disagree": { points: 1, trait: "Investment Liquidity" },
+      "Strongly Disagree": { points: 2, trait: "Investment Liquidity" },
     },
   },
   15: {
-    text: "I sleep better knowing I have a dedicated cash reserve separate from my investments.",
+    text: "Having a surplus of cash available helps me feel calm.",
     category: "Liquidity",
-    engine: "Bipolar (0–2)",
+    engine: "Bipolar (0-2)",
     answers: {
       "Strongly Agree": { points: 2, trait: "Cash Liquidity" },
       "Agree": { points: 1, trait: "Cash Liquidity" },
@@ -190,77 +181,68 @@ export const ALIGN_QUESTIONS = {
     },
   },
   16: {
-    text: "I'm comfortable accessing my retirement income by selling investments as needed.",
-    category: "Liquidity",
-    engine: "Bipolar (0–2)",
-    answers: {
-      "Strongly Agree": { points: 2, trait: "Investment Liquidity" },
-      "Agree": { points: 1, trait: "Investment Liquidity" },
-      "Neutral": { points: 0, trait: "—" },
-      "Disagree": { points: 1, trait: "Cash Liquidity" },
-      "Strongly Disagree": { points: 2, trait: "Cash Liquidity" },
-    },
-  },
-
-  // Block 5: Intent Signals (Q17–19)
-  17: {
-    text: "What is your biggest concern about retirement?",
+    text: "What is your biggest concern today?",
     category: "Intent",
-    engine: "Tier Calc — Intent",
+    engine: "Tier Calc",
     answers: {
-      "Running out of money": { points: 1, trait: "Specific concern" },
-      "Tax burden": { points: 1, trait: "Specific concern" },
-      "Healthcare costs": { points: 1, trait: "Specific concern" },
-      "Legacy planning": { points: 1, trait: "Specific concern" },
-      "Market volatility": { points: 1, trait: "Specific concern" },
-      "Inflation": { points: 1, trait: "Specific concern" },
+      "Do I have enough to retire?": { points: 1, trait: "Specific concern" },
+      "How do I turn assets into income?": { points: 1, trait: "Specific concern" },
+      "Am I on track?": { points: 1, trait: "Specific concern" },
+      "Tax efficiency": { points: 1, trait: "Specific concern" },
       "Just exploring": { points: 0, trait: "No urgency" },
     },
   },
-  18: {
-    text: "Are you looking for an advisor?",
+  17: {
+    text: "Are you looking for an advisor to customize or build a retirement strategy?",
     category: "Intent",
-    engine: "Tier Calc — Intent",
+    engine: "Tier Calc",
     answers: {
-      "Build a new relationship": { points: 2, trait: "Advisory intent" },
-      "Update an existing plan": { points: 1, trait: "Advisory intent" },
-      "Update existing strategy": { points: 1, trait: "Advisory intent" },
-      "Just exploring": { points: 0, trait: "No advisory intent" },
-      "Other": { points: 0, trait: "No advisory intent" },
-      "Neither": { points: 0, trait: "No advisory intent" },
+      "Build New": { points: 1, trait: "Advisory" },
+      "Update Existing": { points: 1, trait: "Advisory" },
+      "Neither": { points: 0, trait: "No advisory" },
+    },
+  },
+  18: {
+    text: "How long until you plan to retire?",
+    category: "Timeline",
+    engine: "Tier Calc",
+    answers: {
+      "0 – 3 years": { points: 10, trait: "Urgent" },
+      "Already Retired": { points: 7, trait: "Distribution" },
+      "3 – 5 years": { points: 8, trait: "Near-term" },
+      "5 – 10 years": { points: 4, trait: "Mid" },
+      "10 – 15 years": { points: 1, trait: "Long" },
+      "15+ years": { points: 0, trait: "Very long" },
     },
   },
   19: {
-    text: "When do you plan to retire?",
-    category: "Timeline",
-    engine: "Tier Calc — Timeline Urgency",
+    text: "Structuring cash flows by time periods helps me feel in control.",
+    category: "Payout Pattern",
+    engine: "Bipolar (0-2)",
     answers: {
-      "0–3 years": { points: 10, trait: "Urgent" },
-      "3–5 years": { points: 8, trait: "Near-term" },
-      "Already Retired": { points: 7, trait: "Distribution phase" },
-      "Already retired": { points: 7, trait: "Distribution phase" },
-      "5–10 years": { points: 4, trait: "Mid-horizon" },
-      "10–15 years": { points: 1, trait: "Long-horizon" },
-      "15+ years": { points: 0, trait: "Very long-horizon" },
+      "Strongly Agree": { points: 2, trait: "Phased Income" },
+      "Agree": { points: 1, trait: "Phased Income" },
+      "Neutral": { points: 0, trait: "—" },
+      "Disagree": { points: 1, trait: "Lifetime Income" },
+      "Strongly Disagree": { points: 2, trait: "Lifetime Income" },
     },
   },
-
-  // Block 6: Implementation (Q20–24) + More Traits (Q21–24)
   20: {
-    text: "How much does your spouse/partner influence your financial decisions?",
-    category: "Demographics",
-    engine: "Profile only",
+    text: "I prefer having income streams that last the rest of my life.",
+    category: "Payout Pattern",
+    engine: "Bipolar (0-2)",
     answers: {
-      "Heavily — we decide together": { points: 0, trait: "Household decision" },
-      "Moderately — they have input": { points: 0, trait: "Household decision" },
-      "Minimally — I lead the decisions": { points: 0, trait: "Solo decision" },
-      "I don't have a spouse/partner": { points: 0, trait: "Solo decision" },
+      "Strongly Agree": { points: 2, trait: "Phased Income" },
+      "Agree": { points: 1, trait: "Phased Income" },
+      "Neutral": { points: 0, trait: "—" },
+      "Disagree": { points: 1, trait: "Lifetime Income" },
+      "Strongly Disagree": { points: 2, trait: "Lifetime Income" },
     },
   },
   21: {
-    text: "I'm comfortable adjusting my spending in retirement based on market performance.",
+    text: "Organizing income into time segments (every 5–7 years) makes sense to me.",
     category: "Payout Pattern",
-    engine: "Bipolar (0–2)",
+    engine: "Bipolar (0-2)",
     answers: {
       "Strongly Agree": { points: 2, trait: "Phased Income" },
       "Agree": { points: 1, trait: "Phased Income" },
@@ -270,209 +252,155 @@ export const ALIGN_QUESTIONS = {
     },
   },
   22: {
-    text: "I want a retirement income strategy where my spending can change based on my life stage.",
-    category: "Payout Pattern",
-    engine: "Bipolar (0–2)",
+    text: "If I see cash in the bank, I worry that it should be invested.",
+    category: "Liquidity",
+    engine: "Bipolar (0-2)",
     answers: {
-      "Strongly Agree": { points: 2, trait: "Phased Income" },
-      "Agree": { points: 1, trait: "Phased Income" },
+      "Strongly Agree": { points: 2, trait: "Cash Liquidity" },
+      "Agree": { points: 1, trait: "Cash Liquidity" },
       "Neutral": { points: 0, trait: "—" },
-      "Disagree": { points: 1, trait: "Lifetime Income" },
-      "Strongly Disagree": { points: 2, trait: "Lifetime Income" },
+      "Disagree": { points: 1, trait: "Investment Liquidity" },
+      "Strongly Disagree": { points: 2, trait: "Investment Liquidity" },
     },
   },
   23: {
-    text: "I want my retirement income to be consistent and predictable throughout my life.",
-    category: "Payout Pattern",
-    engine: "Bipolar (0–2)",
-    answers: {
-      "Strongly Agree": { points: 2, trait: "Lifetime Income" },
-      "Agree": { points: 1, trait: "Lifetime Income" },
-      "Neutral": { points: 0, trait: "—" },
-      "Disagree": { points: 1, trait: "Phased Income" },
-      "Strongly Disagree": { points: 2, trait: "Phased Income" },
-    },
-  },
-  24: {
-    text: "How comfortable are you accessing your retirement assets in case of emergency?",
-    category: "Liquidity",
-    engine: "Bipolar (0–2)",
-    answers: {
-      "Very comfortable": { points: 2, trait: "Investment Liquidity" },
-      "Somewhat comfortable": { points: 1, trait: "Investment Liquidity" },
-      "Neutral": { points: 0, trait: "—" },
-      "Somewhat uncomfortable": { points: 1, trait: "Cash Liquidity" },
-      "Very uncomfortable": { points: 2, trait: "Cash Liquidity" },
-    },
-  },
-
-  // Block 7: Implementation (Q25–30) — Quadrant
-  25: {
-    text: "I value having a professional advisor who can explain their thinking and involve me in decisions.",
+    text: "I believe a financial professional can identify risks in my retirement plan that I may overlook on my own.",
     category: "Advisor Value",
     engine: "Quadrant (-3 to +3)",
     answers: {
       "Strongly Agree": { points: 3, trait: "High advisor value" },
       "Agree": { points: 2, trait: "High advisor value" },
-      "Somewhat Agree": { points: 1, trait: "High advisor value" },
-      "Neutral": { points: 0, trait: "Neutral" },
-      "Somewhat Disagree": { points: -1, trait: "Low advisor value" },
-      "Disagree": { points: -2, trait: "Low advisor value" },
+      "Neutral": { points: 1, trait: "High advisor value" },
+      "Disagree": { points: 0, trait: "Neutral" },
+      "Strongly Disagree": { points: -3, trait: "Low advisor value" },
+    },
+  },
+  24: {
+    text: "I prefer to be presented with a few vetted options, rather than researching every available financial product myself.",
+    category: "Advisor Value",
+    engine: "Quadrant (-3 to +3)",
+    answers: {
+      "Strongly Agree": { points: 3, trait: "High advisor value" },
+      "Agree": { points: 2, trait: "High advisor value" },
+      "Neutral": { points: 1, trait: "High advisor value" },
+      "Disagree": { points: 0, trait: "Neutral" },
+      "Strongly Disagree": { points: -3, trait: "Low advisor value" },
+    },
+  },
+  25: {
+    text: "The primary value of a financial advisor is providing access to exclusive investment opportunities I cannot reach on my own.",
+    category: "Advisor Value",
+    engine: "Quadrant (-3 to +3)",
+    answers: {
+      "Strongly Agree": { points: 3, trait: "High advisor value" },
+      "Agree": { points: 2, trait: "High advisor value" },
+      "Neutral": { points: 1, trait: "High advisor value" },
+      "Disagree": { points: 0, trait: "Neutral" },
       "Strongly Disagree": { points: -3, trait: "Low advisor value" },
     },
   },
   26: {
-    text: "I'd rather delegate the complex parts of retirement planning to someone I trust.",
-    category: "Advisor Value",
-    engine: "Quadrant (-3 to +3)",
-    answers: {
-      "Strongly Agree": { points: 3, trait: "High advisor value" },
-      "Agree": { points: 2, trait: "High advisor value" },
-      "Somewhat Agree": { points: 1, trait: "High advisor value" },
-      "Neutral": { points: 0, trait: "Neutral" },
-      "Somewhat Disagree": { points: -1, trait: "Low advisor value" },
-      "Disagree": { points: -2, trait: "Low advisor value" },
-      "Strongly Disagree": { points: -3, trait: "Low advisor value" },
-    },
-  },
-  27: {
-    text: "I prefer to make retirement decisions myself rather than rely on an advisor.",
-    category: "Advisor Value",
-    engine: "Quadrant (-3 to +3)",
-    answers: {
-      "Strongly Agree": { points: -3, trait: "Low advisor value" },
-      "Agree": { points: -2, trait: "Low advisor value" },
-      "Somewhat Agree": { points: -1, trait: "Low advisor value" },
-      "Neutral": { points: 0, trait: "Neutral" },
-      "Somewhat Disagree": { points: 1, trait: "High advisor value" },
-      "Disagree": { points: 2, trait: "High advisor value" },
-      "Strongly Disagree": { points: 3, trait: "High advisor value" },
-    },
-  },
-  28: {
-    text: "I'm confident making financial decisions on my own.",
+    text: "I understand financial concepts like: sequence of returns risk and tax loss harvesting.",
     category: "Self Efficacy",
     engine: "Quadrant (-3 to +3)",
     answers: {
       "Strongly Agree": { points: 3, trait: "High self efficacy" },
       "Agree": { points: 2, trait: "High self efficacy" },
-      "Somewhat Agree": { points: 1, trait: "High self efficacy" },
-      "Neutral": { points: 0, trait: "Neutral" },
-      "Somewhat Disagree": { points: -1, trait: "Low self efficacy" },
-      "Disagree": { points: -2, trait: "Low self efficacy" },
+      "Neutral": { points: 1, trait: "High self efficacy" },
+      "Disagree": { points: 0, trait: "Neutral" },
+      "Strongly Disagree": { points: -3, trait: "Low self efficacy" },
+    },
+  },
+  27: {
+    text: "I feel overwhelmed by the complexity of retirement income planning.",
+    category: "Self Efficacy",
+    engine: "Quadrant (-3 to +3)",
+    answers: {
+      "Strongly Agree": { points: 3, trait: "High self efficacy" },
+      "Agree": { points: 2, trait: "High self efficacy" },
+      "Neutral": { points: 1, trait: "High self efficacy" },
+      "Disagree": { points: 0, trait: "Neutral" },
+      "Strongly Disagree": { points: -3, trait: "Low self efficacy" },
+    },
+  },
+  28: {
+    text: "If I had to implement my retirement plan tomorrow, without any outside help, I am confident I would succeed.",
+    category: "Self Efficacy",
+    engine: "Quadrant (-3 to +3)",
+    answers: {
+      "Strongly Agree": { points: 3, trait: "High self efficacy" },
+      "Agree": { points: 2, trait: "High self efficacy" },
+      "Neutral": { points: 1, trait: "High self efficacy" },
+      "Disagree": { points: 0, trait: "Neutral" },
       "Strongly Disagree": { points: -3, trait: "Low self efficacy" },
     },
   },
   29: {
-    text: "I understand the tax implications of different retirement strategies.",
-    category: "Self Efficacy",
-    engine: "Quadrant (-3 to +3)",
-    answers: {
-      "Strongly Agree": { points: 3, trait: "High self efficacy" },
-      "Agree": { points: 2, trait: "High self efficacy" },
-      "Somewhat Agree": { points: 1, trait: "High self efficacy" },
-      "Neutral": { points: 0, trait: "Neutral" },
-      "Somewhat Disagree": { points: -1, trait: "Low self efficacy" },
-      "Disagree": { points: -2, trait: "Low self efficacy" },
-      "Strongly Disagree": { points: -3, trait: "Low self efficacy" },
-    },
-  },
-  30: {
-    text: "I feel uncertain about whether my current retirement plan will actually work.",
-    category: "Self Efficacy",
-    engine: "Quadrant (-3 to +3)",
-    answers: {
-      "Strongly Agree": { points: -3, trait: "Low self efficacy" },
-      "Agree": { points: -2, trait: "Low self efficacy" },
-      "Somewhat Agree": { points: -1, trait: "Low self efficacy" },
-      "Neutral": { points: 0, trait: "Neutral" },
-      "Somewhat Disagree": { points: 1, trait: "High self efficacy" },
-      "Disagree": { points: 2, trait: "High self efficacy" },
-      "Strongly Disagree": { points: 3, trait: "High self efficacy" },
-    },
-  },
-
-  // Block 8: Financial Profile (Q31–36)
-  31: {
     text: "What is your age range?",
     category: "Demographics",
     engine: "Tier Calc",
     answers: {
       "Under 50": { points: 1, trait: "Age band" },
-      "51–62": { points: 2, trait: "Age band" },
-      "62–67": { points: 3, trait: "Age band" },
-      "68–74": { points: 3, trait: "Age band" },
+      "51–62": { points: 1, trait: "Age band" },
+      "62–67": { points: 1, trait: "Age band" },
+      "68–74": { points: 1, trait: "Age band" },
       "75+": { points: 1, trait: "Age band" },
     },
   },
-  32: {
-    text: "How much have you saved for retirement?",
+  30: {
+    text: "About how much do you currently have saved and invested (excluding your home)?",
     category: "Demographics",
     engine: "Tier Calc",
     answers: {
       "$3M+": { points: 8, trait: "Asset level" },
-      "$1.5M–$3M": { points: 6, trait: "Asset level" },
-      "$750k–$1.5M": { points: 4, trait: "Asset level" },
-      "$250k–$750k": { points: 1, trait: "Asset level" },
-      "Less than $250k": { points: 0, trait: "Asset level" },
+      "$1.5M – $3M": { points: 8, trait: "Asset level" },
+      "$750k – $1.5M": { points: 4, trait: "Asset level" },
+      "$250k – $750k": { points: 4, trait: "Asset level" },
+      "Less than $250k": { points: 1, trait: "Asset level" },
     },
   },
-  33: {
-    text: "Which of the following applies to you?",
+  31: {
+    text: "Which of the following apply to you?",
     category: "Demographics",
     engine: "Tier Calc",
     answers: {
-      // Frontend answer strings (active)
-      "$5M+ investments": { points: 4, trait: "Financial profile" },
-      "$2.2M+ NW": { points: 3, trait: "Financial profile" },
-      "$1M–$2.2M NW": { points: 1, trait: "Financial profile" },
-      "$200k+ HH income": { points: 2, trait: "Financial profile" },
-      "$300k+ HH income": { points: 2, trait: "Financial profile" },
-      "Under $1M NW": { points: 0, trait: "Financial profile" },
-      // Legacy backend strings (kept for backwards compatibility)
-      "$5M+ in investments": { points: 4, trait: "Financial profile" },
-      "Net worth ≥ $2.2M": { points: 3, trait: "Financial profile" },
-      "$1.1M+ under advice": { points: 3, trait: "Financial profile" },
-      "Income $200k+": { points: 2, trait: "Financial profile" },
-      "Household income $300k+": { points: 2, trait: "Financial profile" },
-      "Net worth ≥ $1M": { points: 1, trait: "Financial profile" },
-      "None of the above": { points: 0, trait: "Financial profile" },
+      "$5M+ active investments": { points: 1, trait: "Financial" },
+      "Net worth excl. home ≥ $2.2M": { points: 1, trait: "Financial" },
+      "$1.1M+ managed by advisor": { points: 1, trait: "Financial" },
+      "Individual income $200k+ (past 2 yrs)": { points: 1, trait: "Financial" },
+      "Household income $300k+ (past 2 yrs)": { points: 1, trait: "Financial" },
+      "Net worth excl. home ≥ $1M": { points: 1, trait: "Financial" },
+      "None of the above": { points: 1, trait: "Financial" },
+    },
+  },
+  32: {
+    text: "A financial need, late in life, keeps me up at night.",
+    category: "Spender",
+    engine: "Bipolar (0-2)",
+    answers: {
+      "Strongly Agree": { points: 2, trait: "Front Loaded" },
+      "Agree": { points: 1, trait: "Front Loaded" },
+      "Neutral": { points: 0, trait: "—" },
+      "Disagree": { points: 1, trait: "Back Loaded" },
+      "Strongly Disagree": { points: 2, trait: "Back Loaded" },
+    },
+  },
+  33: {
+    text: "Which tax buckets hold your assets? (select one that best applies)",
+    category: "Demographics",
+    engine: "Tier Calc",
+    answers: {
+      "Only 1 bucket checked": { points: 5, trait: "Tax" },
+      "Not sure": { points: 3, trait: "Tax" },
+      "2 buckets checked": { points: 2, trait: "Tax" },
+      "3+ buckets checked": { points: 1, trait: "Tax" },
     },
   },
   34: {
-    text: "How would you describe your spending in the first 10 years of retirement?",
-    category: "Spender",
-    engine: "Bipolar (0–2)",
-    answers: {
-      "I'd spend MORE early, then reduce later": { points: 2, trait: "Front Loaded" },
-      "Somewhat more early": { points: 1, trait: "Front Loaded" },
-      "About the same each year": { points: 0, trait: "—" },
-      "Somewhat less early": { points: 1, trait: "Back Loaded" },
-      "I'd spend LESS early, then increase later": { points: 2, trait: "Back Loaded" },
-    },
-  },
-  35: {
-    text: "Which tax buckets hold your assets? (Select all that apply)",
-    category: "Demographics",
-    engine: "Profile / Lead Score",
-    answers: {
-      "Only 1 bucket checked": { points: 5, trait: "Tax profile" },
-      "Not sure": { points: 3, trait: "Tax profile" },
-      "2 buckets checked": { points: 2, trait: "Tax profile" },
-      "3+ buckets checked": { points: 1, trait: "Tax profile" },
-    },
-  },
-  36: {
     text: "State of Residence",
     category: "Demographics",
-    engine: "Profile only",
+    engine: "Profile",
     answers: {
-      // All US states as options
-      "AL": { points: 0, trait: "Geography" },
-      "AK": { points: 0, trait: "Geography" },
-      "AZ": { points: 0, trait: "Geography" },
-      // ... (all 50 states) — abbreviated for length
-      "WY": { points: 0, trait: "Geography" },
     },
   },
 };
@@ -487,25 +415,8 @@ export const BIPOLAR_TRAIT_CATEGORIES = {
 };
 
 export const QUADRANT_PERSONAS = {
-  "HighAdvisor_HighEfficacy": "Collaborative Visionary",
-  "HighAdvisor_LowEfficacy": "Lifestyle Curator",
+  "HighAdvisor_HighEfficacy": "Collaborative Partner",
+  "HighAdvisor_LowEfficacy": "Strategic Delegator",
   "LowAdvisor_HighEfficacy": "Confident Investor",
-  "LowAdvisor_LowEfficacy": "Pragmatic Realist",
+  "LowAdvisor_LowEfficacy": "Independent Learner",
 };
-
-export const TIER_RULES = [
-  {
-    ruleOrder: 1,
-    ruleName: "Hard Knockout",
-    condition: (assets: number, timeToRetire: number) =>
-      assets < 750000 && timeToRetire > 10,
-    tier: "C" as const,
-  },
-  {
-    ruleOrder: 2,
-    ruleName: "Tier A",
-    condition: (assets: number, timeToRetire: number) =>
-      assets >= 1500000 && timeToRetire <= 5,
-    tier: "A" as const,
-  },
-];

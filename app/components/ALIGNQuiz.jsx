@@ -1,617 +1,609 @@
 'use client';
 
 import React, { useState } from 'react';
-import { useRouter } from 'next/navigation';
+import { QUESTIONS, US_STATES, TIER_CTA, PRIMARY_TRAIT_COPY, SECONDARY_TRAIT_COPY, PERSONA_COPY } from '../../lib/quiz-copy';
 
-/* ─── All 50 US States ─────────────────────────────────────────────────────── */
-const US_STATES = [
-    'Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California', 'Colorado',
-    'Connecticut', 'Delaware', 'Florida', 'Georgia', 'Hawaii', 'Idaho',
-    'Illinois', 'Indiana', 'Iowa', 'Kansas', 'Kentucky', 'Louisiana',
-    'Maine', 'Maryland', 'Massachusetts', 'Michigan', 'Minnesota', 'Mississippi',
-    'Missouri', 'Montana', 'Nebraska', 'Nevada', 'New Hampshire', 'New Jersey',
-    'New Mexico', 'New York', 'North Carolina', 'North Dakota', 'Ohio', 'Oklahoma',
-    'Oregon', 'Pennsylvania', 'Rhode Island', 'South Carolina', 'South Dakota',
-    'Tennessee', 'Texas', 'Utah', 'Vermont', 'Virginia', 'Washington',
-    'West Virginia', 'Wisconsin', 'Wyoming',
-];
-
-/* ─── Questions ─────────────────────────────────────────────────────────────── */
-const QUESTIONS = [
-    { id: 1,  text: "I'd spend LESS early, then increase later",       options: ["Strongly Agree", "Agree", "Disagree", "Strongly Disagree"] },
-    { id: 2,  text: "I prioritize income over net worth growth",        options: ["Strongly Agree", "Agree", "Disagree", "Strongly Disagree"] },
-    { id: 3,  text: "I'd spend MORE early, then decrease later",        options: ["Strongly Agree", "Agree", "Disagree", "Strongly Disagree"] },
-    { id: 4,  text: "My income is contractual/guaranteed",              options: ["Strongly Agree", "Agree", "Disagree", "Strongly Disagree"] },
-    { id: 5,  text: "My income is market-driven/variable",              options: ["Strongly Agree", "Agree", "Disagree", "Strongly Disagree"] },
-    { id: 6,  text: "I have high income stability",                     options: ["Strongly Agree", "Agree", "Disagree", "Strongly Disagree"] },
-    { id: 7,  text: "My income fluctuates significantly",               options: ["Strongly Agree", "Agree", "Disagree", "Strongly Disagree"] },
-    { id: 8,  text: "I prefer committed/predictable income",            options: ["Strongly Agree", "Agree", "Disagree", "Strongly Disagree"] },
-    { id: 9,  text: "I want flexibility to adjust income",              options: ["Strongly Agree", "Agree", "Disagree", "Strongly Disagree"] },
-    { id: 10, text: "I need income I can count on",                     options: ["Strongly Agree", "Agree", "Disagree", "Strongly Disagree"] },
-    { id: 11, text: "I like adjusting income based on needs",           options: ["Strongly Agree", "Agree", "Disagree", "Strongly Disagree"] },
-    { id: 12, text: "Net worth growth is my priority",                  options: ["Strongly Agree", "Agree", "Disagree", "Strongly Disagree"] },
-    { id: 13, text: "Income generation is my priority",                 options: ["Strongly Agree", "Agree", "Disagree", "Strongly Disagree"] },
-    { id: 14, text: "I keep cash accessible",                           options: ["Strongly Agree", "Agree", "Disagree", "Strongly Disagree"] },
-    { id: 15, text: "I invest most assets for growth",                  options: ["Strongly Agree", "Agree", "Disagree", "Strongly Disagree"] },
-    { id: 16, text: "Emergency fund is important to me",                options: ["Strongly Agree", "Agree", "Disagree", "Strongly Disagree"] },
-    { id: 17, text: "My biggest concern is...",                         options: ["Tax burden", "Market volatility", "Inflation", "Legacy planning"] },
-    { id: 18, text: "I'm looking to...",                                options: ["Build a new relationship", "Update existing strategy", "Just exploring", "Other"] },
-    { id: 19, text: "When will you retire?",                            options: ["Already Retired", "0–3 years", "3–5 years", "5–10 years", "10–15 years", "15+ years"] },
-    { id: 20, text: "Comfort with current plan?",                       options: ["Very comfortable", "Comfortable", "Neutral", "Uncomfortable", "Very uncomfortable"] },
-    { id: 21, text: "Prefer lifetime income stream",                    options: ["Strongly Agree", "Agree", "Disagree", "Strongly Disagree"] },
-    { id: 22, text: "Want phased withdrawal approach",                  options: ["Strongly Agree", "Agree", "Disagree", "Strongly Disagree"] },
-    { id: 23, text: "Prefer lump sum over time",                        options: ["Strongly Agree", "Agree", "Disagree", "Strongly Disagree"] },
-    { id: 24, text: "Investment knowledge?",                            options: ["Very comfortable", "Comfortable", "Neutral", "Uncomfortable", "Very uncomfortable"] },
-    { id: 25, text: "Advisor adds significant value",                   options: ["Strongly Agree", "Agree", "Disagree", "Strongly Disagree"] },
-    { id: 26, text: "I benefit from professional guidance",             options: ["Strongly Agree", "Agree", "Disagree", "Strongly Disagree"] },
-    { id: 27, text: "I can manage investments alone",                   options: ["Strongly Agree", "Agree", "Disagree", "Strongly Disagree"] },
-    { id: 28, text: "I'm confident in my decisions",                    options: ["Strongly Agree", "Agree", "Disagree", "Strongly Disagree"] },
-    { id: 29, text: "I trust my financial judgment",                    options: ["Strongly Agree", "Agree", "Disagree", "Strongly Disagree"] },
-    { id: 30, text: "I need expert support",                            options: ["Strongly Agree", "Agree", "Disagree", "Strongly Disagree"] },
-    { id: 31, text: "What's your age range?",                           options: ["Under 50", "51–62", "62–67", "68–74", "75+"] },
-    { id: 32, text: "How much have you saved?",                         options: ["Less than $250k", "$250k–$750k", "$750k–$1.5M", "$1.5M–$3M", "$3M+"] },
-    { id: 33, text: "Income/net worth qualifier?",                      options: ["Under $1M NW", "$1M–$2.2M NW", "$2.2M+ NW", "$200k+ HH income", "$300k+ HH income", "$5M+ investments"] },
-    { id: 34, text: "Annual spending pattern?",                         options: ["About the same each year", "More early, less later", "Less early, more later", "Highly variable"] },
-    { id: 35, text: "How many retirement buckets do you have?",         options: ["Only 1 bucket checked", "Not sure", "2 buckets", "3+ buckets"] },
-    { id: 36, text: "What state do you live in?",                       options: US_STATES, isDropdown: true },
-];
-
-/* ─── Styles ────────────────────────────────────────────────────────────────── */
+/* ─── Brand ─────────────────────────────────────────────────────────────────── */
 const BRAND = '#1a3d5c';
+const BRAND_LIGHT = '#e8f0f7';
 
-const styles = {
-    page: {
-        minHeight: '100vh',
-        display: 'flex',
-        alignItems: 'flex-start',
-        justifyContent: 'center',
-        backgroundColor: '#f5f5f5',
-        fontFamily: "'Segoe UI', Arial, sans-serif",
-        padding: '40px 16px 60px',
-        boxSizing: 'border-box',
-    },
-    card: {
-        width: '100%',
-        maxWidth: '620px',
-        backgroundColor: '#ffffff',
-        borderRadius: '12px',
-        boxShadow: '0 4px 24px rgba(0,0,0,0.10)',
-        padding: '36px 32px',
-        boxSizing: 'border-box',
-    },
-    progressBar: {
-        backgroundColor: '#e0e0e0',
-        height: '8px',
-        borderRadius: '4px',
-        overflow: 'hidden',
-        marginBottom: '8px',
-    },
-    progressFill: (pct) => ({
-        width: `${pct}%`,
-        height: '100%',
-        backgroundColor: BRAND,
-        transition: 'width 0.3s ease',
-    }),
-    progressLabel: {
-        textAlign: 'center',
-        fontSize: '13px',
-        color: '#666',
-        marginBottom: '28px',
-    },
-    questionText: {
-        fontSize: '20px',
-        fontWeight: '600',
-        color: '#111',
-        marginBottom: '24px',
-        lineHeight: '1.4',
-    },
-    optionBtn: (selected) => ({
-        display: 'block',
-        width: '100%',
-        padding: '13px 16px',
-        marginBottom: '10px',
-        backgroundColor: selected ? BRAND : '#f0f4f8',
-        color: selected ? '#ffffff' : '#222',
-        border: `2px solid ${selected ? BRAND : 'transparent'}`,
-        borderRadius: '8px',
-        cursor: 'pointer',
-        textAlign: 'left',
-        fontSize: '15px',
-        fontWeight: selected ? '600' : '400',
-        transition: 'all 0.18s ease',
-        outline: 'none',
-    }),
-    dropdown: {
-        width: '100%',
-        padding: '12px 14px',
-        fontSize: '15px',
-        border: `2px solid #ccc`,
-        borderRadius: '8px',
-        backgroundColor: '#fff',
-        color: '#222',
-        cursor: 'pointer',
-        marginBottom: '16px',
-        outline: 'none',
-        appearance: 'auto',
-    },
-    submitBtn: (disabled) => ({
-        width: '100%',
-        padding: '14px',
-        marginTop: '8px',
-        backgroundColor: disabled ? '#aaa' : '#28a745',
-        color: '#fff',
-        border: 'none',
-        borderRadius: '8px',
-        cursor: disabled ? 'not-allowed' : 'pointer',
-        fontSize: '16px',
-        fontWeight: '700',
-        letterSpacing: '0.5px',
-    }),
-    retakeBtn: {
-        width: '100%',
-        padding: '12px',
-        marginTop: '24px',
-        backgroundColor: BRAND,
-        color: '#fff',
-        border: 'none',
-        borderRadius: '8px',
-        cursor: 'pointer',
-        fontSize: '15px',
-    },
-    fieldGroup: {
-        marginBottom: '18px',
-    },
-    label: {
-        display: 'block',
-        fontSize: '14px',
-        fontWeight: '600',
-        color: '#333',
-        marginBottom: '6px',
-    },
-    input: (hasError) => ({
-        width: '100%',
-        padding: '11px 14px',
-        fontSize: '15px',
-        border: `2px solid ${hasError ? '#dc3545' : '#ccc'}`,
-        borderRadius: '8px',
-        boxSizing: 'border-box',
-        outline: 'none',
-        color: '#111',
-    }),
-    errorText: {
-        fontSize: '13px',
-        color: '#dc3545',
-        marginTop: '4px',
-    },
-    resultCard: {
-        backgroundColor: '#f0f4f8',
-        padding: '20px',
-        borderRadius: '10px',
-        marginBottom: '24px',
-    },
-};
-
-/* ─── Email format validator ────────────────────────────────────────────────── */
+/* ─── Helpers ────────────────────────────────────────────────────────────────── */
 function isValidEmail(email) {
-    return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email.trim());
+  return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email.trim());
 }
 
-/* ─── Component ─────────────────────────────────────────────────────────────── */
+function getBlockLabel(id) {
+  if (id <= 3)  return 'Getting Started';
+  if (id <= 15) return 'Your Preferences';
+  if (id <= 17) return 'Your Situation';
+  if (id === 18) return 'Your Timeline';
+  if (id <= 25) return 'Income Planning';
+  if (id <= 28) return 'Your Approach';
+  if (id <= 33) return 'Your Profile';
+  return 'Final Step';
+}
+
+/**
+ * Look up secondary trait copy using the 3-part composite key.
+ * incomeSource  : "Contractual" | "Market Driven"
+ * incomeStructure : "Committed" | "Adjustable"
+ */
+function getSecondaryTraitCopy(traitValue, incomeSource, incomeStructure) {
+  if (!traitValue || !incomeSource || !incomeStructure) return null;
+  const key = `${traitValue}|${incomeSource}|${incomeStructure}`;
+  return SECONDARY_TRAIT_COPY[key] || null;
+}
+
+/* ─── Styles ─────────────────────────────────────────────────────────────────── */
+const S = {
+  page: {
+    minHeight: '100vh',
+    display: 'flex',
+    alignItems: 'flex-start',
+    justifyContent: 'center',
+    backgroundColor: '#f0f4f8',
+    fontFamily: "'Segoe UI', system-ui, Arial, sans-serif",
+    padding: '40px 16px 80px',
+    boxSizing: 'border-box',
+  },
+  card: {
+    width: '100%',
+    maxWidth: '680px',
+    backgroundColor: '#ffffff',
+    borderRadius: '16px',
+    boxShadow: '0 4px 32px rgba(0,0,0,0.09)',
+    padding: '44px 40px',
+    boxSizing: 'border-box',
+  },
+  logo: {
+    fontSize: '13px',
+    fontWeight: '700',
+    letterSpacing: '2px',
+    color: BRAND,
+    textTransform: 'uppercase',
+    marginBottom: '24px',
+    display: 'block',
+  },
+  progressRow: {
+    display: 'flex',
+    alignItems: 'center',
+    gap: '12px',
+    marginBottom: '32px',
+  },
+  backBtn: {
+    background: 'none',
+    border: 'none',
+    cursor: 'pointer',
+    color: '#94a3b8',
+    fontSize: '20px',
+    padding: '0 4px',
+    lineHeight: 1,
+    flexShrink: 0,
+    display: 'flex',
+    alignItems: 'center',
+    transition: 'color 0.15s',
+  },
+  progressWrap: { flex: 1 },
+  progressBar: {
+    backgroundColor: '#e2e8f0',
+    height: '5px',
+    borderRadius: '3px',
+    overflow: 'hidden',
+    marginBottom: '5px',
+  },
+  progressFill: (pct) => ({
+    width: `${pct}%`,
+    height: '100%',
+    backgroundColor: BRAND,
+    transition: 'width 0.3s ease',
+  }),
+  progressLabel: {
+    fontSize: '11px',
+    color: '#94a3b8',
+    letterSpacing: '0.3px',
+    textAlign: 'right',
+  },
+  blockLabel: {
+    fontSize: '11px',
+    fontWeight: '700',
+    letterSpacing: '1.5px',
+    color: '#94a3b8',
+    textTransform: 'uppercase',
+    marginBottom: '10px',
+  },
+  questionText: {
+    fontSize: '20px',
+    fontWeight: '600',
+    color: '#0f172a',
+    marginBottom: '28px',
+    lineHeight: '1.5',
+  },
+  optionBtn: (selected) => ({
+    display: 'block',
+    width: '100%',
+    padding: '14px 18px',
+    marginBottom: '10px',
+    backgroundColor: selected ? BRAND : '#f8fafc',
+    color: selected ? '#ffffff' : '#1e293b',
+    border: `2px solid ${selected ? BRAND : '#e2e8f0'}`,
+    borderRadius: '10px',
+    cursor: 'pointer',
+    textAlign: 'left',
+    fontSize: '15px',
+    fontWeight: selected ? '600' : '400',
+    transition: 'all 0.13s ease',
+    outline: 'none',
+    lineHeight: '1.4',
+  }),
+  dropdown: {
+    width: '100%',
+    padding: '13px 16px',
+    fontSize: '15px',
+    border: '2px solid #e2e8f0',
+    borderRadius: '10px',
+    backgroundColor: '#fff',
+    color: '#1e293b',
+    cursor: 'pointer',
+    marginBottom: '16px',
+    outline: 'none',
+    appearance: 'auto',
+  },
+  primaryBtn: (disabled) => ({
+    width: '100%',
+    padding: '15px',
+    marginTop: '8px',
+    backgroundColor: disabled ? '#cbd5e1' : BRAND,
+    color: '#fff',
+    border: 'none',
+    borderRadius: '10px',
+    cursor: disabled ? 'not-allowed' : 'pointer',
+    fontSize: '16px',
+    fontWeight: '700',
+    letterSpacing: '0.3px',
+    transition: 'background 0.15s ease',
+  }),
+  retakeBtn: {
+    width: '100%',
+    padding: '13px',
+    marginTop: '20px',
+    backgroundColor: 'transparent',
+    color: BRAND,
+    border: `2px solid ${BRAND}`,
+    borderRadius: '10px',
+    cursor: 'pointer',
+    fontSize: '15px',
+    fontWeight: '600',
+  },
+  fieldGroup: { marginBottom: '18px' },
+  label: {
+    display: 'block',
+    fontSize: '13px',
+    fontWeight: '600',
+    color: '#475569',
+    marginBottom: '6px',
+    letterSpacing: '0.3px',
+  },
+  input: (hasError) => ({
+    width: '100%',
+    padding: '12px 14px',
+    fontSize: '15px',
+    border: `2px solid ${hasError ? '#ef4444' : '#e2e8f0'}`,
+    borderRadius: '8px',
+    boxSizing: 'border-box',
+    outline: 'none',
+    color: '#0f172a',
+  }),
+  errorText: { fontSize: '12px', color: '#ef4444', marginTop: '4px' },
+
+  // Results
+  divider: {
+    borderTop: '1px solid #e2e8f0',
+    paddingTop: '32px',
+    marginTop: '32px',
+  },
+  sectionLabel: {
+    fontSize: '10px',
+    fontWeight: '800',
+    letterSpacing: '2px',
+    color: '#94a3b8',
+    textTransform: 'uppercase',
+    marginBottom: '12px',
+  },
+  traitRow: {
+    display: 'flex',
+    flexWrap: 'wrap',
+    gap: '8px',
+    marginBottom: '8px',
+  },
+  chip: (variant) => {
+    const colors = {
+      primary: { bg: BRAND, color: '#fff' },
+      secondary: { bg: BRAND_LIGHT, color: BRAND },
+    };
+    const c = colors[variant] || colors.secondary;
+    return {
+      display: 'inline-block',
+      padding: '5px 14px',
+      backgroundColor: c.bg,
+      color: c.color,
+      borderRadius: '100px',
+      fontSize: '13px',
+      fontWeight: '600',
+      whiteSpace: 'nowrap',
+    };
+  },
+  tierBadge: (tier) => ({
+    display: 'inline-block',
+    padding: '3px 14px',
+    backgroundColor: tier === 'A' ? '#065f46' : tier === 'B' ? '#1e40af' : '#475569',
+    color: '#fff',
+    borderRadius: '100px',
+    fontSize: '13px',
+    fontWeight: '700',
+    letterSpacing: '1px',
+    marginLeft: '10px',
+    verticalAlign: 'middle',
+  }),
+  traitCard: {
+    backgroundColor: '#f8fafc',
+    borderRadius: '12px',
+    padding: '22px 24px',
+    marginBottom: '14px',
+    borderLeft: `3px solid ${BRAND}`,
+  },
+  traitCardTitle: {
+    fontSize: '16px',
+    fontWeight: '700',
+    color: '#0f172a',
+    marginBottom: '4px',
+  },
+  traitCardSubtitle: {
+    fontSize: '12px',
+    color: '#64748b',
+    marginBottom: '14px',
+    fontWeight: '500',
+  },
+  copyBlock: {
+    fontSize: '14px',
+    lineHeight: '1.8',
+    color: '#334155',
+    whiteSpace: 'pre-line',
+  },
+  ctaBox: {
+    backgroundColor: BRAND_LIGHT,
+    border: `1px solid ${BRAND}30`,
+    borderRadius: '12px',
+    padding: '26px',
+    marginTop: '8px',
+  },
+  ctaSubLabel: {
+    fontSize: '17px',
+    fontWeight: '700',
+    color: '#0f172a',
+    marginBottom: '10px',
+  },
+  ctaDesc: {
+    fontSize: '14px',
+    color: '#475569',
+    lineHeight: '1.7',
+    marginBottom: '0',
+  },
+  ctaBtn: {
+    display: 'inline-block',
+    marginTop: '18px',
+    padding: '13px 28px',
+    backgroundColor: BRAND,
+    color: '#fff',
+    borderRadius: '8px',
+    textDecoration: 'none',
+    fontSize: '15px',
+    fontWeight: '700',
+    border: 'none',
+    cursor: 'pointer',
+  },
+};
+
+/* ─── Component ──────────────────────────────────────────────────────────────── */
 export default function ALIGNQuiz() {
-    // Quiz state
-    const [currentQuestion, setCurrentQuestion] = useState(0);
-    const [responses, setResponses]             = useState({});
-    const [selectedState, setSelectedState]     = useState('');
+  const [currentQuestion, setCurrentQuestion] = useState(0);
+  const [responses, setResponses]             = useState({});
+  const [selectedState, setSelectedState]     = useState('');
 
-    // Lead gate state (shown after all questions, before results)
-    const [showGate, setShowGate]   = useState(false);
-    const [gateFirstName, setGateFirstName] = useState('');
-    const [gateLastName, setGateLastName]   = useState('');
-    const [gateEmail, setGateEmail]         = useState('');
-    const [gateErrors, setGateErrors]       = useState({});
+  const [showGate, setShowGate]           = useState(false);
+  const [gateFirstName, setGateFirstName] = useState('');
+  const [gateLastName, setGateLastName]   = useState('');
+  const [gateEmail, setGateEmail]         = useState('');
+  const [gateErrors, setGateErrors]       = useState({});
 
-    // Results state
-    const [loading, setLoading] = useState(false);
-    const [results, setResults] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [results, setResults] = useState(null);
 
-    /* ── Answer handler ─────────────────────────────────────────────────────── */
-    const handleAnswer = (answer) => {
-        const newResponses = { ...responses, [QUESTIONS[currentQuestion].id]: answer };
-        setResponses(newResponses);
-
-        if (currentQuestion < QUESTIONS.length - 1) {
-            setCurrentQuestion(currentQuestion + 1);
-            setSelectedState(''); // reset dropdown for next render
-        } else {
-            // Last question answered — show the lead gate
-            setShowGate(true);
-        }
-    };
-
-    /* ── Dropdown answer (Q36) ──────────────────────────────────────────────── */
-    const handleDropdownChange = (e) => {
-        setSelectedState(e.target.value);
-    };
-
-    const handleDropdownConfirm = () => {
-        if (!selectedState) return;
-        handleAnswer(selectedState);
-    };
-
-    /* ── Gate submission ────────────────────────────────────────────────────── */
-    const validateGate = () => {
-        const errors = {};
-        if (!gateFirstName.trim()) errors.firstName = 'First name is required.';
-        if (!gateLastName.trim())  errors.lastName  = 'Last name is required.';
-        if (!gateEmail.trim())         errors.email = 'Email is required.';
-        else if (!isValidEmail(gateEmail)) errors.email = 'Please enter a valid email address.';
-        return errors;
-    };
-
-    const handleGateSubmit = async (e) => {
-        e.preventDefault();
-        const errors = validateGate();
-        if (Object.keys(errors).length > 0) {
-            setGateErrors(errors);
-            return;
-        }
-        setGateErrors({});
-        await submitQuiz(gateFirstName.trim(), gateLastName.trim(), gateEmail.trim());
-    };
-
-    /* ── API call ───────────────────────────────────────────────────────────── */
-    const submitQuiz = async (firstName, lastName, email) => {
-        setLoading(true);
-        try {
-            const response = await fetch('/api/score', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ email, firstName, lastName, responses }),
-            });
-            const data = await response.json();
-            setResults(data);
-            setShowGate(false);
-        } catch (error) {
-            console.error('Submission error:', error);
-            alert('Something went wrong. Please try again.');
-        }
-        setLoading(false);
-    };
-
-    /* ── Reset quiz ─────────────────────────────────────────────────────────── */
-    const resetQuiz = () => {
-        setCurrentQuestion(0);
-        setResponses({});
-        setSelectedState('');
-        setShowGate(false);
-        setGateFirstName('');
-        setGateLastName('');
-        setGateEmail('');
-        setGateErrors({});
-        setResults(null);
-        setLoading(false);
-    };
-
-    /* ════════════════════════════════════════════════════════════════════════
-       RENDER: Results page
-    ════════════════════════════════════════════════════════════════════════ */
-    if (results) {
-        return (
-            <div style={styles.page}>
-                <div style={styles.card}>
-                    <h1 style={{ fontSize: '26px', marginBottom: '24px', color: '#111' }}>Your ALIGN Results</h1>
-
-                    <div style={styles.resultCard}>
-                        <h2 style={{ marginTop: 0 }}>Tier: <strong style={{ color: BRAND }}>{results.tier}</strong></h2>
-                        <p style={{ margin: '6px 0' }}>Lead Score: <strong>{results.leadScore}</strong></p>
-                        <p style={{ margin: '6px 0' }}>Persona: <strong>{results.persona}</strong></p>
-                    </div>
-
-                    <h3 style={{ color: '#111', marginBottom: '12px' }}>Your Traits</h3>
-                    <ul style={{ paddingLeft: '20px', lineHeight: '1.9', marginBottom: '24px' }}>
-                        <li><strong>Income Source:</strong> {results.traitResults.incomeSource}</li>
-                        <li><strong>Income Structure:</strong> {results.traitResults.incomeStructure}</li>
-                        <li><strong>Mindset:</strong> {results.traitResults.mindset}</li>
-                        <li><strong>Liquidity:</strong> {results.traitResults.liquidity}</li>
-                        <li><strong>Spender:</strong> {results.traitResults.spender}</li>
-                        <li><strong>Payout Pattern:</strong> {results.traitResults.payoutPattern}</li>
-                    </ul>
-
-                    <h3 style={{ color: '#111', marginBottom: '12px' }}>Demographics</h3>
-                    <ul style={{ paddingLeft: '20px', lineHeight: '1.9', marginBottom: '24px' }}>
-                        <li><strong>Age Range:</strong> {results.demographics.ageRange}</li>
-                        <li><strong>Time to Retirement:</strong> {results.demographics.timeToRetirement}</li>
-                        <li><strong>Assets Saved:</strong> {results.demographics.assetsSaved}</li>
-                    </ul>
-
-                    <h3 style={{ color: '#111', marginBottom: '8px' }}>Next Steps</h3>
-                    {results.tier === 'A' && <p>Schedule a strategy-building session to maximize your retirement wealth.</p>}
-                    {results.tier === 'B' && <p>Let's discuss how to optimize your retirement income plan.</p>}
-                    {results.tier === 'C' && <p>Check out our retirement education resources to get started.</p>}
-
-                    <button onClick={resetQuiz} style={styles.retakeBtn}>
-                        Retake Quiz
-                    </button>
-                </div>
-            </div>
-        );
-    }
-
-    /* ════════════════════════════════════════════════════════════════════════
-       RENDER: Lead gate (shown after Q36, before results)
-    ════════════════════════════════════════════════════════════════════════ */
+  /* ── Navigate back ─────────────────────────────────────────────────────── */
+  const handleBack = () => {
     if (showGate) {
-        return (
-            <div style={styles.page}>
-                <div style={styles.card}>
-                    {/* Progress bar – stays at 100% */}
-                    <div style={styles.progressBar}>
-                        <div style={styles.progressFill(100)} />
-                    </div>
-                    <p style={styles.progressLabel}>Quiz complete!</p>
-
-                    <h1 style={{ fontSize: '22px', marginBottom: '10px', color: '#111' }}>
-                        Almost there — your personalized results are ready.
-                    </h1>
-                    <p style={{ fontSize: '15px', color: '#555', marginBottom: '28px', lineHeight: '1.5' }}>
-                        Enter your details below to unlock your ALIGN profile, including your retirement tier, income persona, and recommended next steps.
-                    </p>
-
-                    <form onSubmit={handleGateSubmit} noValidate>
-                        <div style={styles.fieldGroup}>
-                            <label htmlFor="gateFirstName" style={styles.label}>First Name</label>
-                            <input
-                                id="gateFirstName"
-                                type="text"
-                                value={gateFirstName}
-                                onChange={(e) => setGateFirstName(e.target.value)}
-                                placeholder="e.g. Jane"
-                                style={styles.input(!!gateErrors.firstName)}
-                                autoComplete="given-name"
-                            />
-                            {gateErrors.firstName && <p style={styles.errorText}>{gateErrors.firstName}</p>}
-                        </div>
-
-                        <div style={styles.fieldGroup}>
-                            <label htmlFor="gateLastName" style={styles.label}>Last Name</label>
-                            <input
-                                id="gateLastName"
-                                type="text"
-                                value={gateLastName}
-                                onChange={(e) => setGateLastName(e.target.value)}
-                                placeholder="e.g. Smith"
-                                style={styles.input(!!gateErrors.lastName)}
-                                autoComplete="family-name"
-                            />
-                            {gateErrors.lastName && <p style={styles.errorText}>{gateErrors.lastName}</p>}
-                        </div>
-
-                        <div style={styles.fieldGroup}>
-                            <label htmlFor="gateEmail" style={styles.label}>Email Address</label>
-                            <input
-                                id="gateEmail"
-                                type="email"
-                                value={gateEmail}
-                                onChange={(e) => setGateEmail(e.target.value)}
-                                placeholder="e.g. jane@email.com"
-                                style={styles.input(!!gateErrors.email)}
-                                autoComplete="email"
-                            />
-                            {gateErrors.email && <p style={styles.errorText}>{gateErrors.email}</p>}
-                        </div>
-
-                        <button type="submit" disabled={loading} style={styles.submitBtn(loading)}>
-                            {loading ? 'Calculating your results…' : 'Show My Results →'}
-                        </button>
-                    </form>
-                </div>
-            </div>
-        );
+      setShowGate(false);
+      return;
     }
+    if (currentQuestion > 0) {
+      setCurrentQuestion(currentQuestion - 1);
+    }
+  };
 
-    /* ════════════════════════════════════════════════════════════════════════
-       RENDER: Quiz questions
-    ════════════════════════════════════════════════════════════════════════ */
-    const question = QUESTIONS[currentQuestion];
-    const progress  = ((currentQuestion + 1) / QUESTIONS.length) * 100;
-    const isLastQ   = currentQuestion === QUESTIONS.length - 1;
+  /* ── Answer handler ──────────────────────────────────────────────────── */
+  const handleAnswer = (answer) => {
+    const newResponses = { ...responses, [QUESTIONS[currentQuestion].id]: answer };
+    setResponses(newResponses);
+    if (currentQuestion < QUESTIONS.length - 1) {
+      setCurrentQuestion(currentQuestion + 1);
+    } else {
+      setShowGate(true);
+    }
+  };
+
+  /* ── Dropdown handlers ───────────────────────────────────────────────── */
+  const handleDropdownChange  = (e) => setSelectedState(e.target.value);
+  const handleDropdownConfirm = () => {
+    if (!selectedState) return;
+    const newResponses = { ...responses, [QUESTIONS[currentQuestion].id]: selectedState };
+    setResponses(newResponses);
+    if (currentQuestion >= QUESTIONS.length - 1) setShowGate(true);
+    else setCurrentQuestion(currentQuestion + 1);
+  };
+
+  /* ── Gate submit ──────────────────────────────────────────────────────── */
+  const handleGateSubmit = async (e) => {
+    e.preventDefault();
+    const errors = {};
+    if (!gateFirstName.trim()) errors.firstName = 'First name is required.';
+    if (!gateLastName.trim())  errors.lastName  = 'Last name is required.';
+    if (!isValidEmail(gateEmail)) errors.email  = 'A valid email is required.';
+    if (Object.keys(errors).length > 0) { setGateErrors(errors); return; }
+    setGateErrors({});
+    setLoading(true);
+    try {
+      const response = await fetch('/api/score', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: gateEmail.trim(), firstName: gateFirstName.trim(), lastName: gateLastName.trim(), responses }),
+      });
+      const data = await response.json();
+      setResults(data);
+      setShowGate(false);
+    } catch {
+      alert('Something went wrong. Please try again.');
+    }
+    setLoading(false);
+  };
+
+  /* ── Reset ────────────────────────────────────────────────────────────── */
+  const resetQuiz = () => {
+    setCurrentQuestion(0); setResponses({}); setSelectedState('');
+    setShowGate(false); setGateFirstName(''); setGateLastName('');
+    setGateEmail(''); setGateErrors({}); setResults(null); setLoading(false);
+  };
+
+  /* ════════════════════════════════════════════════════════════════════════
+     RESULTS
+  ════════════════════════════════════════════════════════════════════════ */
+  if (results) {
+    const cta = TIER_CTA[results.tier] || TIER_CTA.C;
+    const tr  = results.traitResults || {};
+
+    const incomeSource    = tr.incomeSource    || '';
+    const incomeStructure = tr.incomeStructure || '';
+    const incSourceCopy    = PRIMARY_TRAIT_COPY[incomeSource]    || '';
+    const incStructCopy    = PRIMARY_TRAIT_COPY[incomeStructure] || '';
+
+    // 4 secondary traits
+    const secondaryTraits = [
+      { label: 'Mindset',        category: 'Secondary Trait', value: tr.mindset,        icon: '🧠' },
+      { label: 'Liquidity',      category: 'Secondary Trait', value: tr.liquidity,      icon: '💧' },
+      { label: 'Spender',        category: 'Secondary Trait', value: tr.spender,        icon: '📅' },
+      { label: 'Payout Pattern', category: 'Secondary Trait', value: tr.payoutPattern,  icon: '📊' },
+    ];
+
+    const personaCopy = PERSONA_COPY[results.persona] || PERSONA_COPY['Pragmatic Realist'];
 
     return (
-        <div style={styles.page}>
-            <div style={styles.card}>
-                {/* Progress */}
-                <div style={styles.progressBar}>
-                    <div style={styles.progressFill(progress)} />
+      <div style={S.page}>
+        <div style={S.card}>
+          <span style={S.logo}>ALIGN Assessment</span>
+
+          {/* ── Header ── */}
+          <h1 style={{ fontSize: '27px', fontWeight: '700', color: '#0f172a', marginBottom: '6px', lineHeight: 1.3 }}>
+            Your Retirement Profile
+            <span style={S.tierBadge(results.tier)}>Tier {results.tier}</span>
+          </h1>
+          <p style={{ fontSize: '15px', color: '#64748b', marginBottom: '32px', lineHeight: '1.65' }}>
+            {gateFirstName}, here is your personalized ALIGN analysis.
+          </p>
+
+          {/* ── Profile summary chips ── */}
+          <div style={S.sectionLabel}>Your Profile at a Glance</div>
+          <div style={S.traitRow}>
+            {[incomeSource, incomeStructure, tr.mindset, tr.liquidity, tr.spender, tr.payoutPattern].filter(Boolean).map((t) => (
+              <span key={t} style={S.chip('secondary')}>{t}</span>
+            ))}
+          </div>
+
+          {/* ══ PRIMARY TRAIT 1: Income Source ══ */}
+          <div style={S.divider}>
+            <div style={S.sectionLabel}>Primary Trait — Income Source</div>
+            <div style={S.traitCard}>
+              <div style={S.traitCardTitle}>{incomeSource}</div>
+              <div style={S.traitCardSubtitle}>How you prefer your retirement income to be generated</div>
+              <p style={S.copyBlock}>{incSourceCopy}</p>
+            </div>
+          </div>
+
+          {/* ══ PRIMARY TRAIT 2: Income Structure ══ */}
+          <div style={S.divider}>
+            <div style={S.sectionLabel}>Primary Trait — Income Structure</div>
+            <div style={S.traitCard}>
+              <div style={S.traitCardTitle}>{incomeStructure}</div>
+              <div style={S.traitCardSubtitle}>How you prefer your retirement plan to be organized</div>
+              <p style={S.copyBlock}>{incStructCopy}</p>
+            </div>
+          </div>
+
+          {/* ══ SECONDARY TRAITS ══ */}
+          <div style={S.divider}>
+            <div style={S.sectionLabel}>Secondary Traits</div>
+            {secondaryTraits.map(({ label, value, icon }) => {
+              if (!value) return null;
+              const copy = getSecondaryTraitCopy(value, incomeSource, incomeStructure);
+              return (
+                <div key={label} style={S.traitCard}>
+                  <div style={S.traitCardTitle}>{icon} {label} — {value}</div>
+                  <div style={S.traitCardSubtitle}>{incomeSource} + {incomeStructure}</div>
+                  {copy ? (
+                    <p style={S.copyBlock}>{copy}</p>
+                  ) : (
+                    <p style={{ ...S.copyBlock, color: '#94a3b8', fontStyle: 'italic' }}>Result: {value}</p>
+                  )}
                 </div>
-                <p style={styles.progressLabel}>Question {currentQuestion + 1} of {QUESTIONS.length}</p>
+              );
+            })}
+          </div>
 
-                {/* Question text */}
-                <p style={styles.questionText}>{question.text}</p>
-
-                {/* Options */}
-                {question.isDropdown ? (
-                    /* Dropdown for Q36 (state) */
-                    <div>
-                        <select
-                            value={selectedState}
-                            onChange={handleDropdownChange}
-                            style={styles.dropdown}
-                            aria-label="Select your state"
-                        >
-                            <option value="">— Select your state —</option>
-                            {US_STATES.map((state) => (
-                                <option key={state} value={state}>{state}</option>
-                            ))}
-                        </select>
-
-                        <button
-                            onClick={handleDropdownConfirm}
-                            disabled={!selectedState}
-                            style={styles.submitBtn(!selectedState)}
-                        >
-                            Next →
-                        </button>
-                    </div>
-                ) : (
-                    /* Button list for all other questions */
-                    <div>
-                        {question.options.map((option) => (
-                            <button
-                                key={option}
-                                onClick={() => handleAnswer(option)}
-                                style={styles.optionBtn(responses[question.id] === option)}
-                            >
-                                {option}
-                            </button>
-                        ))}
-                    </div>
-                )}
-            </div>
-        </div>
-    );
-  }
-
-  // ── GATE (after all 36 questions) ─────────────────────────────────────
-  if (phase === 'gate') {
-    return (
-      <div style={{ maxWidth: '540px', margin: '60px auto', padding: '24px', fontFamily: 'sans-serif' }}>
-        <div style={{ textAlign: 'center', marginBottom: '30px' }}>
-          <div style={{ fontSize: '52px', marginBottom: '12px' }}>✅</div>
-          <h1 style={{ color: BLUE, fontSize: '26px', marginBottom: '8px' }}>You're almost there!</h1>
-          <p style={{ color: '#555', fontSize: '16px' }}>
-            Enter your details below to unlock your personalized retirement profile.
-          </p>
-        </div>
-
-        <form onSubmit={handleGateSubmit}>
-          <div style={{ display: 'flex', gap: '12px', marginBottom: '14px' }}>
-            <div style={{ flex: 1 }}>
-              <label style={{ display: 'block', marginBottom: '5px', fontWeight: '600', color: '#333', fontSize: '14px' }}>First Name</label>
-              <input
-                type="text" value={firstName} onChange={e => setFirstName(e.target.value)}
-                required placeholder="Jane"
-                style={{ width: '100%', padding: '10px', boxSizing: 'border-box', border: '1px solid #ccc', borderRadius: '6px', fontSize: '15px' }}
-              />
-            </div>
-            <div style={{ flex: 1 }}>
-              <label style={{ display: 'block', marginBottom: '5px', fontWeight: '600', color: '#333', fontSize: '14px' }}>Last Name</label>
-              <input
-                type="text" value={lastName} onChange={e => setLastName(e.target.value)}
-                required placeholder="Smith"
-                style={{ width: '100%', padding: '10px', boxSizing: 'border-box', border: '1px solid #ccc', borderRadius: '6px', fontSize: '15px' }}
-              />
+          {/* ══ IMPLEMENTATION PERSONA ══ */}
+          <div style={S.divider}>
+            <div style={S.sectionLabel}>Implementation Persona</div>
+            <div style={S.traitCard}>
+              <div style={S.traitCardTitle}>{results.persona}</div>
+              <div style={S.traitCardSubtitle}>{personaCopy.quadrant}</div>
+              <p style={S.copyBlock}>{personaCopy.description}</p>
             </div>
           </div>
 
-          <div style={{ marginBottom: '24px' }}>
-            <label style={{ display: 'block', marginBottom: '5px', fontWeight: '600', color: '#333', fontSize: '14px' }}>Email Address</label>
-            <input
-              type="email" value={email} onChange={e => setEmail(e.target.value)}
-              required placeholder="jane@example.com"
-              style={{ width: '100%', padding: '10px', boxSizing: 'border-box', border: '1px solid #ccc', borderRadius: '6px', fontSize: '15px' }}
-            />
+          {/* ══ CTA ══ */}
+          <div style={S.divider}>
+            <div style={S.sectionLabel}>Recommended Next Step</div>
+            <div style={S.ctaBox}>
+              <p style={S.ctaSubLabel}>{cta.sublabel(gateFirstName)}</p>
+              <p style={S.ctaDesc}>{cta.description}</p>
+              {cta.url && (
+                <a href={cta.url} target="_blank" rel="noopener noreferrer" style={S.ctaBtn}>
+                  Book Your {cta.label} →
+                </a>
+              )}
+            </div>
           </div>
 
-          <button
-            type="submit"
-            style={{
-              width: '100%', padding: '14px',
-              backgroundColor: BLUE, color: 'white',
-              border: 'none', borderRadius: '6px',
-              cursor: 'pointer', fontSize: '17px', fontWeight: 'bold',
-            }}
-          >
-            See My Results →
-          </button>
-
-          <p style={{ textAlign: 'center', fontSize: '12px', color: '#999', marginTop: '12px' }}>
-            Your information is private and will never be sold.
-          </p>
-        </form>
+          <button onClick={resetQuiz} style={S.retakeBtn}>Retake Quiz</button>
+        </div>
       </div>
     );
   }
 
-  // ── SUBMITTING ────────────────────────────────────────────────────────
-  if (phase === 'submitting') {
+  /* ════════════════════════════════════════════════════════════════════════
+     LEAD GATE
+  ════════════════════════════════════════════════════════════════════════ */
+  if (showGate) {
     return (
-      <div style={{ maxWidth: '540px', margin: '120px auto', textAlign: 'center', fontFamily: 'sans-serif' }}>
-        <div style={{ fontSize: '42px', marginBottom: '16px' }}>⏳</div>
-        <h2 style={{ color: BLUE }}>Calculating your results...</h2>
-        <p style={{ color: '#666' }}>This only takes a moment.</p>
-      </div>
-    );
-  }
+      <div style={S.page}>
+        <div style={S.card}>
+          <span style={S.logo}>ALIGN Assessment</span>
 
-  // ── QUIZ ──────────────────────────────────────────────────────────────
-  return (
-    <div style={{ maxWidth: '640px', margin: '50px auto', padding: '20px', fontFamily: 'sans-serif' }}>
+          {/* Progress row with back button */}
+          <div style={S.progressRow}>
+            <button onClick={handleBack} style={S.backBtn} aria-label="Go back">←</button>
+            <div style={S.progressWrap}>
+              <div style={S.progressBar}><div style={S.progressFill(100)} /></div>
+              <p style={S.progressLabel}>All {QUESTIONS.length} questions complete</p>
+            </div>
+          </div>
 
-      {/* Progress bar */}
-      <div style={{ marginBottom: '28px' }}>
-        <div style={{ backgroundColor: '#e0e0e0', height: '8px', borderRadius: '4px', overflow: 'hidden' }}>
-          <div style={{ width: `${progress}%`, height: '100%', backgroundColor: BLUE, transition: 'width 0.3s ease' }} />
-        </div>
-        <p style={{ textAlign: 'center', fontSize: '13px', color: '#777', marginTop: '8px' }}>
-          Question {currentQ + 1} of {QUESTIONS.length}
-        </p>
-      </div>
+          <h1 style={{ fontSize: '24px', fontWeight: '700', color: '#0f172a', marginBottom: '10px' }}>
+            Your profile is ready.
+          </h1>
+          <p style={{ fontSize: '15px', color: '#64748b', marginBottom: '32px', lineHeight: '1.65' }}>
+            Enter your details to unlock your personalized ALIGN retirement profile — including your income tier, implementation persona, and recommended next steps.
+          </p>
 
-      {/* Question text */}
-      <h2 style={{ fontSize: '20px', lineHeight: '1.55', color: BLUE, marginBottom: '24px' }}>
-        {question.text}
-      </h2>
-
-      {/* Dropdown — Q36 state */}
-      {question.type === 'dropdown' ? (
-        <div>
-          <select
-            value={selectedState}
-            onChange={e => setSelectedState(e.target.value)}
-            style={{
-              width: '100%', padding: '13px', fontSize: '16px',
-              border: '1px solid #ccc', borderRadius: '6px',
-              backgroundColor: '#fff', color: selectedState ? '#000' : '#888',
-              marginBottom: '16px', cursor: 'pointer', boxSizing: 'border-box',
-            }}
-          >
-            <option value="" disabled>Select your state...</option>
-            {US_STATES.map(s => <option key={s} value={s}>{s}</option>)}
-          </select>
-          <button
-            onClick={handleDropdownContinue}
-            disabled={!selectedState}
-            style={{
-              width: '100%', padding: '14px',
-              backgroundColor: selectedState ? BLUE : '#ccc',
-              color: 'white', border: 'none', borderRadius: '6px',
-              cursor: selectedState ? 'pointer' : 'not-allowed',
-              fontSize: '16px', fontWeight: 'bold',
-            }}
-          >
-            Continue →
-          </button>
-        </div>
-      ) : (
-        /* Button options — all other questions */
-        <div>
-          {question.options.map(opt => (
-            <button
-              key={opt}
-              onClick={() => handleAnswer(opt)}
-              style={{
-                ...BTN_BASE,
-                backgroundColor: responses[question.id] === opt ? BLUE : '#f4f6f9',
-                color: responses[question.id] === opt ? 'white' : '#222',
-                borderColor: responses[question.id] === opt ? BLUE : '#ddd',
-              }}
-            >
-              {opt}
+          <form onSubmit={handleGateSubmit} noValidate>
+            <div style={{ display: 'flex', gap: '14px' }}>
+              <div style={{ ...S.fieldGroup, flex: 1 }}>
+                <label htmlFor="gateFirstName" style={S.label}>First Name</label>
+                <input id="gateFirstName" type="text" value={gateFirstName} onChange={(e) => setGateFirstName(e.target.value)} placeholder="Jane" style={S.input(!!gateErrors.firstName)} autoComplete="given-name" />
+                {gateErrors.firstName && <p style={S.errorText}>{gateErrors.firstName}</p>}
+              </div>
+              <div style={{ ...S.fieldGroup, flex: 1 }}>
+                <label htmlFor="gateLastName" style={S.label}>Last Name</label>
+                <input id="gateLastName" type="text" value={gateLastName} onChange={(e) => setGateLastName(e.target.value)} placeholder="Smith" style={S.input(!!gateErrors.lastName)} autoComplete="family-name" />
+                {gateErrors.lastName && <p style={S.errorText}>{gateErrors.lastName}</p>}
+              </div>
+            </div>
+            <div style={S.fieldGroup}>
+              <label htmlFor="gateEmail" style={S.label}>Email Address</label>
+              <input id="gateEmail" type="email" value={gateEmail} onChange={(e) => setGateEmail(e.target.value)} placeholder="jane@example.com" style={S.input(!!gateErrors.email)} autoComplete="email" />
+              {gateErrors.email && <p style={S.errorText}>{gateErrors.email}</p>}
+            </div>
+            <button type="submit" disabled={loading} style={S.primaryBtn(loading)}>
+              {loading ? 'Calculating your profile…' : 'Unlock My Results →'}
             </button>
-          ))}
+            <p style={{ textAlign: 'center', fontSize: '12px', color: '#94a3b8', marginTop: '14px' }}>
+              Your information is private and will never be sold.
+            </p>
+          </form>
         </div>
-      )}
+      </div>
+    );
+  }
+
+  /* ════════════════════════════════════════════════════════════════════════
+     QUIZ QUESTIONS
+  ════════════════════════════════════════════════════════════════════════ */
+  const question = QUESTIONS[currentQuestion];
+  const progress  = ((currentQuestion + 1) / QUESTIONS.length) * 100;
+  const canGoBack = currentQuestion > 0;
+
+  return (
+    <div style={S.page}>
+      <div style={S.card}>
+        <span style={S.logo}>ALIGN Assessment</span>
+
+        {/* Progress row with back button */}
+        <div style={S.progressRow}>
+          <button
+            onClick={handleBack}
+            disabled={!canGoBack}
+            style={{ ...S.backBtn, opacity: canGoBack ? 1 : 0.25, cursor: canGoBack ? 'pointer' : 'default' }}
+            aria-label="Go back to previous question"
+          >
+            ←
+          </button>
+          <div style={S.progressWrap}>
+            <div style={S.progressBar}><div style={S.progressFill(progress)} /></div>
+            <p style={S.progressLabel}>{currentQuestion + 1} / {QUESTIONS.length}</p>
+          </div>
+        </div>
+
+        <p style={S.blockLabel}>{getBlockLabel(question.id)}</p>
+        <p style={S.questionText}>{question.text}</p>
+
+        {question.isDropdown ? (
+          <div>
+            <select value={selectedState} onChange={handleDropdownChange} style={S.dropdown} aria-label="Select your state">
+              <option value="">— Select your state —</option>
+              {US_STATES.map((state) => (
+                <option key={state} value={state}>{state}</option>
+              ))}
+            </select>
+            <button onClick={handleDropdownConfirm} disabled={!selectedState} style={S.primaryBtn(!selectedState)}>
+              Continue →
+            </button>
+          </div>
+        ) : (
+          <div>
+            {question.options.map((option) => (
+              <button key={option} onClick={() => handleAnswer(option)} style={S.optionBtn(responses[question.id] === option)}>
+                {option}
+              </button>
+            ))}
+          </div>
+        )}
+      </div>
     </div>
   );
 }
-

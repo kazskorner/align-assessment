@@ -22,29 +22,29 @@ export class AlignScoringEngine {
     score: number;
   } {
     // Extract key questions
-    const q19Response = responses[19]; // Time to retirement ("When will you retire?")
-    const q31Response = responses[31]; // Age
-    const q32Response = responses[32]; // Assets saved
-    const q33Response = responses[33]; // Income/NW qualifier
-    const q17Response = responses[17]; // Biggest concern
-    const q18Response = responses[18]; // Looking for advisor
-    const q35Response = responses[35]; // Tax buckets
+    const q18Response = responses[18]; // Time to retirement
+    const q29Response = responses[29]; // Age
+    const q30Response = responses[30]; // Assets saved
+    const q31Response = responses[31]; // Income/NW qualifier
+    const q16Response = responses[16]; // Biggest concern
+    const q17Response = responses[17]; // Looking for advisor
+    const q33Response = responses[33]; // Tax buckets
 
     // Map responses to point values
-    const q19Points = this.getPointValue(19, q19Response);
-    const q31Points = this.getPointValue(31, q31Response);
-    const q32Points = this.getPointValue(32, q32Response);
-    const q33Points = this.getPointValue(33, q33Response);
-    const q17Points = this.getPointValue(17, q17Response);
     const q18Points = this.getPointValue(18, q18Response);
-    const q35Points = q35Response === "Only 1 bucket checked" ? 1 : 0; // Bonus
+    const q29Points = this.getPointValue(29, q29Response);
+    const q30Points = this.getPointValue(30, q30Response);
+    const q31Points = this.getPointValue(31, q31Response);
+    const q16Points = this.getPointValue(16, q16Response);
+    const q17Points = this.getPointValue(17, q17Response);
+    const q33Points = q33Response === "Only 1 bucket checked" ? 1 : 0; // Bonus
 
     // Calculate raw tier score
-    const rawScore = q19Points + q31Points + q32Points + q33Points + q17Points + q18Points + q35Points;
+    const rawScore = q18Points + q29Points + q30Points + q31Points + q16Points + q17Points + q33Points;
 
     // Parse assets for waterfall rule
-    const assetsValue = this.parseAssets(q32Response);
-    const timeToRetirementValue = this.parseTimeToRetirement(q19Response);
+    const assetsValue = this.parseAssets(q30Response);
+    const timeToRetirementValue = this.parseTimeToRetirement(q18Response);
 
     // Apply Waterfall Rules
     // Rule 1: Hard Knockout
@@ -89,9 +89,9 @@ export class AlignScoringEngine {
       incomeSource: { qNumbers: [4, 5, 6, 7], aQuestions: [] },
       incomeStructure: { qNumbers: [8, 9, 10, 11], aQuestions: [] },
       mindset: { qNumbers: [2, 12, 13], aQuestions: [] },
-      liquidity: { qNumbers: [14, 15, 24], aQuestions: [] },
-      spender: { qNumbers: [1, 3, 34], aQuestions: [] },
-      payoutPattern: { qNumbers: [21, 22, 23], aQuestions: [] },
+      liquidity: { qNumbers: [14, 15, 22], aQuestions: [] },
+      spender: { qNumbers: [1, 3, 32], aQuestions: [] },
+      payoutPattern: { qNumbers: [19, 20, 21], aQuestions: [] },
     };
 
     const qNumbers = questionMaps[category].qNumbers;
@@ -171,8 +171,8 @@ export class AlignScoringEngine {
     selfEfficacy: number;
     persona: PersonaType;
   } {
-    const advisorValueScore = this.calculateSubScore([25, 26, 27], responses);
-    const selfEfficacyScore = this.calculateSubScore([28, 29, 30], responses);
+    const advisorValueScore = this.calculateSubScore([23, 24, 25], responses);
+    const selfEfficacyScore = this.calculateSubScore([26, 27, 28], responses);
 
     // Determine persona from quadrant
     const advisorValueLevel = this.determineLevel(advisorValueScore);
@@ -234,9 +234,9 @@ export class AlignScoringEngine {
   private parseAssets(response: string): number {
     const assetMap: Record<string, number> = {
       "$3M+": 3000000,
-      "$1.5M–$3M": 2000000,
-      "$750k–$1.5M": 1000000,
-      "$250k–$750k": 500000,
+      "$1.5M – $3M": 2000000,
+      "$750k – $1.5M": 1000000,
+      "$250k – $750k": 500000,
       "Less than $250k": 100000,
     };
     return assetMap[response] || 0;
@@ -247,11 +247,11 @@ export class AlignScoringEngine {
    */
   private parseTimeToRetirement(response: string): number {
     const timeMap: Record<string, number> = {
-      "0–3 years": 1,
-      "3–5 years": 4,
+      "0 – 3 years": 1,
+      "3 – 5 years": 4,
       "Already Retired": 0,
-      "5–10 years": 7,
-      "10–15 years": 12,
+      "5 – 10 years": 7,
+      "10 – 15 years": 12,
       "15+ years": 20,
     };
     return timeMap[response] || 20;
@@ -276,10 +276,10 @@ export class AlignScoringEngine {
     const leadScore = tierScore + (advisorValue > 0 ? advisorValue : 0) + (selfEfficacy > 0 ? selfEfficacy : 0);
 
     // Get demographics
-    const ageRange = responses[31] || "Unknown";
-    const timeToRetirement = responses[19] || "Unknown"; // Q19: "When will you retire?"
-    const assetsSaved = responses[32] || "Unknown";
-    const taxBuckets = responses[35] || "Unknown";
+    const ageRange = responses[29] || "Unknown";
+    const timeToRetirement = responses[18] || "Unknown"; // Q18: "When will you retire?"
+    const assetsSaved = responses[30] || "Unknown";
+    const taxBuckets = responses[33] || "Unknown";
 
     // Generate Redtail tags
     const redtailTags = this.generateRedtailTags(tier, timeToRetirement, ageRange);
@@ -337,11 +337,11 @@ export class AlignScoringEngine {
 
     // Timeline tag
     const timelineMap: Record<string, string> = {
-      "0–3 years": "Retiring 0-3 Yrs",
-      "3–5 years": "Retiring 3-5 Yrs",
+      "0 – 3 years": "Retiring 0-3 Yrs",
+      "3 – 5 years": "Retiring 3-5 Yrs",
       "Already Retired": "Already Retired",
-      "5–10 years": "Retiring 5-10 Yrs",
-      "10–15 years": "Retiring 10-15 Yrs",
+      "5 – 10 years": "Retiring 5-10 Yrs",
+      "10 – 15 years": "Retiring 10-15 Yrs",
       "15+ years": "Retiring 15+ Yrs",
     };
     if (timelineMap[timeToRetirement]) {

@@ -10,9 +10,9 @@ export async function POST(request: NextRequest) {
     const { email, firstName, lastName, phone, responses } = body;
 
     // Validate required fields
-    if (!email || !responses || Object.keys(responses).length < 36) {
+    if (!email || !responses || Object.keys(responses).length < 34) {
       return NextResponse.json(
-        { error: 'Missing required fields: email and all 36 quiz responses' },
+        { error: 'Missing required fields: email and all 34 quiz responses' },
         { status: 400 }
       );
     }
