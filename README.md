@@ -263,7 +263,7 @@ Proprietary — Convergent Financial Partners / Kaz's Korner
 
 ## Support
 
-For issues or questions, contact: kaz@convergentfp.com
+For issues or questions, contact: adam.kazinec@convergentfp.com
 
 ---
 
