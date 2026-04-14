@@ -2,8 +2,9 @@
 
 import React, { useEffect, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
+import { Suspense } from 'react';
 
-export default function ResultsTierA() {
+function ResultsTierAContent() {
   const searchParams = useSearchParams();
   const [results, setResults] = useState(null);
 
@@ -117,3 +118,11 @@ export default function ResultsTierA() {
   );
 }
 
+
+export default function Page() {
+  return (
+    <Suspense fallback={<div style={{ textAlign: 'center', padding: '80px', fontFamily: 'sans-serif', color: '#555' }}>Loading your results...</div>}>
+      <ResultsTierAContent />
+    </Suspense>
+  );
+}
