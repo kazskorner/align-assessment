@@ -102,7 +102,7 @@ export default function LandingPage() {
           <div className="stat-label">EXPERIENCED ADVISOR</div>
         </div>
         <div className="stat-item">
-          <div className="stat-num">7</div>
+          <div className="stat-num">SEVEN</div>
           <div className="stat-label">DIMENSIONS ANALYZED</div>
         </div>
         <div className="stat-item">
