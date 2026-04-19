@@ -199,7 +199,10 @@ export default function LandingPage() {
           <div className="video-wrap reveal d2">
             <iframe width="560" height="315" src="https://www.youtube.com/embed/mzKr8hsrFSk" title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen></iframe>
           </div>
-          <p className="video-caption reveal d3">"Most retirement plans don't fail because of bad math—they fail because emotions and strategy don't align." — Adam Kazinec</p>
+          <p className="video-caption reveal d3">
+            "Most retirement plans don't fail because of bad math—they fail because emotions and strategy don't align."
+            <em>— Adam Kazinec</em>
+          </p>
         </div>
       </section>
 
