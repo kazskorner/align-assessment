@@ -7,29 +7,29 @@
 /* ─── QUESTIONS (34 total) ───────────────────────────────────────────────── */
 export const QUESTIONS = [
   // Block 1 — Hook (Q1–3)
-  { id: 1,  text: "Enjoying life when I can matters more to me than preserving spending later.", options: ["Strongly Agree", "Agree", "Neutral", "Disagree", "Strongly Disagree"] },
-  { id: 2,  text: "A steady, reliable income matters more to me than maximizing my net worth.", options: ["Strongly Agree", "Agree", "Neutral", "Disagree", "Strongly Disagree"] },
-  { id: 3,  text: "I'd rather spend more in the early years of retirement while I'm more active.", options: ["Strongly Agree", "Agree", "Neutral", "Disagree", "Strongly Disagree"] },
-  // Block 2 — Trait questions (Q4–15)
-  { id: 4,  text: "I want my essential living expenses covered regardless of market performance.", options: ["Strongly Agree", "Agree", "Neutral", "Disagree", "Strongly Disagree"] },
-  { id: 5,  text: "I am okay if my retirement income changes based on market performance.", options: ["Strongly Agree", "Agree", "Neutral", "Disagree", "Strongly Disagree"] },
-  { id: 6,  text: "Stable income for my essential needs matters more to me than chasing investment upside.", options: ["Strongly Agree", "Agree", "Neutral", "Disagree", "Strongly Disagree"] },
-  { id: 7,  text: "I'm comfortable with income variability if it increases long-term growth of my net worth.", options: ["Strongly Agree", "Agree", "Neutral", "Disagree", "Strongly Disagree"] },
-  { id: 8,  text: "I prefer having the ability to change my mind over locking in guaranteed long-term outcomes.", options: ["Strongly Agree", "Agree", "Neutral", "Disagree", "Strongly Disagree"] },
-  { id: 9,  text: "I want the flexibility to adjust my retirement income strategy as life changes.", options: ["Strongly Agree", "Agree", "Neutral", "Disagree", "Strongly Disagree"] },
-  { id: 10, text: "The longer my planning timeframe, the more important a stable, consistent retirement income strategy becomes to me.", options: ["Strongly Agree", "Agree", "Neutral", "Disagree", "Strongly Disagree"] },
-  { id: 11, text: "I would rather adapt over time than commit to one long-term strategy.", options: ["Strongly Agree", "Agree", "Neutral", "Disagree", "Strongly Disagree"] },
+  { id: 1, text: "I'd rather take a variable income in retirement, understanding that it may rise and fall, over locking in a steady amount that may deliver less overall.", options: ["Strongly Agree", "Agree", "Neutral", "Disagree", "Strongly Disagree"] },
+  { id: 2, text: "Having more to spend during retirement matters more to me than how much I leave behind.", options: ["Strongly Agree", "Agree", "Neutral", "Disagree", "Strongly Disagree"] },
+  { id: 3, text: "I'd rather spend more in the early years of retirement, while I'm more active and healthy.", options: ["Strongly Agree", "Agree", "Neutral", "Disagree", "Strongly Disagree"] },
+  // Block 2 — Primary Traits (Q4–15)
+  { id: 4, text: "I want my basic living expenses covered regardless of market performance.", options: ["Strongly Agree", "Agree", "Neutral", "Disagree", "Strongly Disagree"] },
+  { id: 5, text: "I'm okay with my retirement income going up or down depending on how the market performs.", options: ["Strongly Agree", "Agree", "Neutral", "Disagree", "Strongly Disagree"] },
+  { id: 6, text: "Covering my essential expenses reliably matters more to me than chasing higher investment returns.", options: ["Strongly Agree", "Agree", "Neutral", "Disagree", "Strongly Disagree"] },
+  { id: 7, text: "I'm fine with some income variability if it means my overall wealth grows more over time.", options: ["Strongly Agree", "Agree", "Neutral", "Disagree", "Strongly Disagree"] },
+  { id: 8, text: "I prefer investments that stay flexible and liquid, even if that means giving up the certainty of a known outcome.", options: ["Strongly Agree", "Agree", "Neutral", "Disagree", "Strongly Disagree"] },
+  { id: 9, text: "I want the flexibility to adjust my retirement income strategy as life changes.", options: ["Strongly Agree", "Agree", "Neutral", "Disagree", "Strongly Disagree"] },
+  { id: 10, text: "The longer I expect to be in retirement, the more important a stable, consistent income becomes to me.", options: ["Strongly Agree", "Agree", "Neutral", "Disagree", "Strongly Disagree"] },
+  { id: 11, text: "I'd rather revisit and adjust my income strategy throughout retirement than lock into a fixed amount from the start.", options: ["Strongly Agree", "Agree", "Neutral", "Disagree", "Strongly Disagree"] },
   { id: 12, text: "I'm comfortable drawing from my principal if it improves the quality of my retirement.", options: ["Strongly Agree", "Agree", "Neutral", "Disagree", "Strongly Disagree"] },
   { id: 13, text: "I will sacrifice lifestyle in retirement to preserve my portfolio's value.", options: ["Strongly Agree", "Agree", "Neutral", "Disagree", "Strongly Disagree"] },
-  { id: 14, text: "I will sell some investments for 'pop-up' expenses.", options: ["Strongly Agree", "Agree", "Neutral", "Disagree", "Strongly Disagree"] },
-  { id: 15, text: "Having a surplus of cash available helps me feel calm.", options: ["Strongly Agree", "Agree", "Neutral", "Disagree", "Strongly Disagree"] },
+  { id: 14, text: "I'm comfortable tapping my investment portfolio to cover a large or unexpected expense.", options: ["Strongly Agree", "Agree", "Neutral", "Disagree", "Strongly Disagree"] },
+  { id: 15, text: "Keeping extra cash on hand helps me feel calm and in control.", options: ["Strongly Agree", "Agree", "Neutral", "Disagree", "Strongly Disagree"] },
   // Block 3 — Soft intent (Q16–17)
-  { id: 16, text: "What is your biggest concern today?", options: ["Do I have enough to retire?", "How do I turn assets into income?", "Am I on track?", "Tax efficiency", "Just exploring"] },
-  { id: 17, text: "Are you looking for an advisor to customize or build a retirement strategy?", options: ["Build New", "Update Existing", "Neither"] },
+  { id: 16, text: "What is your biggest financial concern today?", options: ["Healthcare concern", "How do I turn assets into income?", "Inflation concerns", "Tax efficiency", "I can’t afford a market crash right now."] },
+  { id: 17, text: "Are you looking for a professional to help you build or fine-tune a retirement strategy?", options: ["Build New", "Update Existing", "Neither"] },
   // Block 4 — Tier signal 1 (Q18)
-  { id: 18, text: "How long until you plan to retire?", options: ["0 – 3 years", "Already Retired", "3 – 5 years", "5 – 10 years", "10 – 15 years", "15+ years"] },
+  { id: 18, text: "How many years until you plan to retire?", options: ["0 – 3 years", "3 – 5 years", "5 – 10 years", "10 – 15 years", "15+ years", "Already Retired"] },
   // Block 5 — Payout Pattern + Quadrant (Q19–25)
-  { id: 19, text: "Structuring cash flows by time periods helps me feel in control.", options: ["Strongly Agree", "Agree", "Neutral", "Disagree", "Strongly Disagree"] },
+  { id: 19, text: "I prefer having my retirement income broken into time segments over relying primarily on income streams that last for life.", options: ["Strongly Agree", "Agree", "Neutral", "Disagree", "Strongly Disagree"] },
   { id: 20, text: "I prefer having income streams that last the rest of my life.", options: ["Strongly Agree", "Agree", "Neutral", "Disagree", "Strongly Disagree"] },
   { id: 21, text: "Organizing income into time segments (every 5–7 years) makes sense to me.", options: ["Strongly Agree", "Agree", "Neutral", "Disagree", "Strongly Disagree"] },
   { id: 22, text: "If I see cash in the bank, I worry that it should be invested.", options: ["Strongly Agree", "Agree", "Neutral", "Disagree", "Strongly Disagree"] },
@@ -37,16 +37,16 @@ export const QUESTIONS = [
   { id: 24, text: "I prefer to be presented with a few vetted options, rather than researching every available financial product myself.", options: ["Strongly Agree", "Agree", "Neutral", "Disagree", "Strongly Disagree"] },
   { id: 25, text: "The primary value of a financial advisor is providing access to exclusive investment opportunities I cannot reach on my own.", options: ["Strongly Agree", "Agree", "Neutral", "Disagree", "Strongly Disagree"] },
   // Block 6 — Self Efficacy + Tier signal 2 (Q26–29)
-  { id: 26, text: "I understand financial concepts like: sequence of returns risk and tax loss harvesting.", options: ["Strongly Agree", "Agree", "Neutral", "Disagree", "Strongly Disagree"] },
+  { id: 26, text: "I understand financial concepts like sequence of returns risk and tax loss harvesting.", options: ["Strongly Agree", "Agree", "Neutral", "Disagree", "Strongly Disagree"] },
   { id: 27, text: "I feel overwhelmed by the complexity of retirement income planning.", options: ["Strongly Agree", "Agree", "Neutral", "Disagree", "Strongly Disagree"] },
-  { id: 28, text: "If I had to implement my retirement plan tomorrow, without any outside help, I am confident I would succeed.", options: ["Strongly Agree", "Agree", "Neutral", "Disagree", "Strongly Disagree"] },
+  { id: 28, text: "If I had to implement my retirement plan tomorrow without any outside help, I am confident I would succeed.", options: ["Strongly Agree", "Agree", "Neutral", "Disagree", "Strongly Disagree"] },
   { id: 29, text: "What is your age range?", options: ["Under 50", "51–62", "62–67", "68–74", "75+"] },
   // Block 7 — Financial profile (Q30–34)
-  { id: 30, text: "About how much do you currently have saved and invested (excluding your home)?", options: ["$3M+", "$1.5M – $3M", "$750k – $1.5M", "$250k – $750k", "Less than $250k"] },
+  { id: 30, text: "About how much do you currently have saved and invested, excluding your home?", options: ["$3M+", "$1.5M – $3M", "$750k – $1.5M", "$250k – $750k", "Less than $250k"] },
   { id: 31, text: "Which of the following apply to you?", options: ["$5M+ active investments", "Net worth excl. home ≥ $2.2M", "$1.1M+ managed by advisor", "Individual income $200k+ (past 2 yrs)", "Household income $300k+ (past 2 yrs)", "Net worth excl. home ≥ $1M", "None of the above"] },
-  { id: 32, text: "A financial need, late in life, keeps me up at night.", options: ["Strongly Agree", "Agree", "Neutral", "Disagree", "Strongly Disagree"] },
-  { id: 33, text: "Which tax buckets hold your assets? (select one that best applies)", options: ["Only 1 bucket checked", "Not sure", "2 buckets checked", "3+ buckets checked"] },
-  { id: 34, text: "State of Residence", options: [], isDropdown: true },
+  { id: 32, text: "The thought of a major financial need late in life keeps me up at night.", options: ["Strongly Agree", "Agree", "Neutral", "Disagree", "Strongly Disagree"] },
+  { id: 33, text: "Which types of accounts hold your retirement savings?", options: ["pre_tax", "roth", "taxable", "not_sure"] },
+  { id: 34, text: "State of residence", options: [], isDropdown: true },
 ] as const;
 
 /* ─── US STATES ─────────────────────────────────────────────────────────── */

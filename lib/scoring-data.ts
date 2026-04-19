@@ -185,11 +185,11 @@ export const ALIGN_QUESTIONS = {
     category: "Intent",
     engine: "Tier Calc",
     answers: {
-      "Do I have enough to retire?": { points: 1, trait: "Specific concern" },
+      "Healthcare concern": { points: 1, trait: "Specific concern" },
       "How do I turn assets into income?": { points: 1, trait: "Specific concern" },
-      "Am I on track?": { points: 1, trait: "Specific concern" },
+      "Inflation concerns": { points: 1, trait: "Specific concern" },
       "Tax efficiency": { points: 1, trait: "Specific concern" },
-      "Just exploring": { points: 0, trait: "No urgency" },
+      "I can’t afford a market crash right now.": { points: 1, trait: "Specific concern" },
     },
   },
   17: {
@@ -386,14 +386,14 @@ export const ALIGN_QUESTIONS = {
     },
   },
   33: {
-    text: "Which tax buckets hold your assets? (select one that best applies)",
+    text: "Which types of accounts hold your retirement savings?",
     category: "Demographics",
     engine: "Tier Calc",
     answers: {
-      "Only 1 bucket checked": { points: 5, trait: "Tax" },
-      "Not sure": { points: 3, trait: "Tax" },
-      "2 buckets checked": { points: 2, trait: "Tax" },
-      "3+ buckets checked": { points: 1, trait: "Tax" },
+      "pre_tax": { points: 1, trait: "Tax" },
+      "roth": { points: 1, trait: "Tax" },
+      "taxable": { points: 1, trait: "Tax" },
+      "not_sure": { points: 0, trait: "Tax" },
     },
   },
   34: {

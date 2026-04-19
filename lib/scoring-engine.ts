@@ -37,7 +37,7 @@ export class AlignScoringEngine {
     const q31Points = this.getPointValue(31, q31Response);
     const q16Points = this.getPointValue(16, q16Response);
     const q17Points = this.getPointValue(17, q17Response);
-    const q33Points = q33Response === "Only 1 bucket checked" ? 1 : 0; // Bonus
+    const q33Points = q33Response && q33Response !== "not_sure" ? 1 : 0; // Bonus if they know their tax buckets
 
     // Calculate raw tier score
     const rawScore = q18Points + q29Points + q30Points + q31Points + q16Points + q17Points + q33Points;
