@@ -98,16 +98,16 @@ export default function LandingPage() {
       {/* ── STAT STRIP ── */}
       <div className="stat-strip">
         <div className="stat-item">
-          <div className="stat-num">SECOND GENERATION ADVISOR</div>
-          <div className="stat-label">17+ YEARS OF CLIENT EXPERIENCE</div>
+          <div className="stat-num">17+ YEARS OF INHERITED EXPERTISE</div>
+          <div className="stat-label">A proprietary assessment designed by a 2nd generation advisor.</div>
         </div>
         <div className="stat-item">
-          <div className="stat-num">ADVANCED PLANNING DESIGNATIONS</div>
-          <div className="stat-label">RICP&reg;, ChFC&reg;, CLU&reg;</div>
+          <div className="stat-num">ADVANCED PLANNING AUTHORITY</div>
+          <div className="stat-label">Leveraging RICP&reg;, CLU&reg; & ChFC&reg; designations for complex income and asset strategies.</div>
         </div>
         <div className="stat-item">
-          <div className="stat-num">SEVEN DIMENSIONS ANALYZED</div>
-          <div className="stat-label">USE IN YOUR OWN CUSTOMIZED STRATEGY</div>
+          <div className="stat-num">7-DIMENSION STRESS TEST</div>
+          <div className="stat-label">Translating your personal financial psychology and core metrics into an exact, actionable strategy.</div>
         </div>
       </div>
 

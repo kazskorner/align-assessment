@@ -294,7 +294,16 @@ nav.scrolled .nav-cta:hover{background:var(--accent);color:#fff}
   letter-spacing:0.02em;
 }
 .stat-num span{font-size:0.55em;font-weight:400;vertical-align:super;color:var(--cyan)}
-.stat-label{font-size:10px;font-weight:700;color:var(--cyan);letter-spacing:0.08em;text-transform:uppercase;font-family:var(--font-sans);}
+.stat-label{
+  font-size:11px;
+  font-weight:400;
+  line-height:1.4;
+  color:rgba(255,255,255,0.85);
+  letter-spacing:0.02em;
+  font-family:var(--font-sans);
+  max-width:280px;
+  margin: 0 auto;
+}
 
 /* ─── SECTION BASE ─── */
 section{padding:100px 48px}
