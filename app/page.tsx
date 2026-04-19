@@ -30,6 +30,7 @@ export default function LandingPage() {
     document.querySelectorAll('.reveal').forEach((el) => revealObserver.observe(el));
 
     return () => {
+      clearTimeout(timer);
       window.removeEventListener('scroll', handleScroll);
       revealObserver.disconnect();
     };
