@@ -235,7 +235,7 @@ export default function LandingPage() {
             <div className="how-step reveal d3">
               <div className="how-step-num">03</div>
               <div className="how-step-title">Strategy Integration</div>
-              <p className="how-step-body">Benefit from a private strategy review with Adam to integrate these behavioral insights into your long-term retirement navigation.</p>
+              <p className="how-step-body">Opportunity to schedule a strategy session to integrate these insights into your retirement plan.</p>
             </div>
           </div>
         </div>
@@ -290,12 +290,14 @@ export default function LandingPage() {
 
       {/* ── FINAL CTA ── */}
       <div className="cta-band reveal">
-        <div className="section-tag">Strategic Clarity — Start Today</div>
-        <h2 className="section-h">Move beyond the generic plan.<br />Discover the strategy <em>you were meant to execute.</em></h2>
-        <p className="section-sub">The full ALIGN assessment takes less than 17 minutes and delivers a personalized behavioral analysis built around the psychological preferences that drive your stewardship.</p>
-        <a href="/quiz" target="_blank" className="btn-primary" style={{ padding: '20px 48px', fontSize: '16px' }}>
-          Execute My Strategy Now <span className="btn-arr">→</span>
-        </a>
+        <div className="section-inner">
+          <div className="section-tag">Start Today</div>
+          <h2 className="section-h">Move beyond a money manager.<br />Hire a <em>distribution strategist.</em></h2>
+          <p className="section-sub">Any advisor can help you build a pile; few have a process to help you spend it. Moving from growth to income is a psychological pivot a spreadsheet can’t solve. The ALIGN Assessment replaces generic ROI with a Return on Life framework—turning your balance sheet into a distribution strategy that prioritizes your life over your ledger.</p>
+          <a href="/quiz" target="_blank" className="btn-primary" style={{ padding: '20px 48px', fontSize: '16px' }}>
+            Execute My Strategy Now <span className="btn-arr">→</span>
+          </a>
+        </div>
       </div>
 
       {/* ── FOOTER ── */}
