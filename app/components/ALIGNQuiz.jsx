@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { QUESTIONS, US_STATES } from '../../lib/quiz-copy';
+import StarfieldBackground from './StarfieldBackground';
 
 /* ─── Brand ─────────────────────────────────────────────────────────────────── */
 const BRAND = '#1a3d5c';
@@ -31,10 +32,12 @@ const S = {
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#111113',
+    backgroundColor: '#0c0c0e',
     fontFamily: "'Inter', system-ui, Arial, sans-serif",
     padding: '40px 16px',
     boxSizing: 'border-box',
+    position: 'relative',
+    overflow: 'hidden',
   },
   card: {
     width: '100%',
@@ -279,6 +282,7 @@ export default function ALIGNQuiz() {
   if (showGate) {
     return (
       <div style={S.page}>
+        <StarfieldBackground />
         <div style={S.card}>
           <span style={S.logo}>ALIGN Assessment</span>
 
@@ -332,6 +336,7 @@ export default function ALIGNQuiz() {
 
   return (
     <div style={S.page}>
+      <StarfieldBackground />
       <div style={S.card}>
         <span style={S.logo}>ALIGN Assessment</span>
 

@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { Suspense } from 'react';
+import StarfieldBackground from '../components/StarfieldBackground';
 import {
   PRIMARY_TRAIT_COPY,
   SECONDARY_TRAIT_COPY,
@@ -130,6 +131,7 @@ function ResultsContent() {
 
   return (
     <>
+      <StarfieldBackground />
       <style>{`
         *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
         html{font-size:16px;scroll-behavior:smooth}
@@ -171,7 +173,7 @@ function ResultsContent() {
         .r-nav-cta:hover{background:var(--accent);transform:translateY(-1px);box-shadow:var(--shadow-md)}
 
         /* HERO */
-        .r-hero{background:var(--panel);padding:120px 48px 80px;text-align:center;position:relative;overflow:hidden}
+        .r-hero{background:#0c0c0e;padding:120px 48px 80px;text-align:center;position:relative;overflow:hidden}
         .r-hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 70% 60% at 50% -10%, rgba(0,240,255,0.08) 0%, transparent 60%);pointer-events:none}
         .r-hero-inner{position:relative;z-index:1;max-width:700px;margin:0 auto}
         .r-hero-title{font-family:var(--font-display);font-size:clamp(28px,4vw,42px);font-weight:700;color:#fff;line-height:1.1;letter-spacing:-0.035em;margin-bottom:16px}
@@ -237,7 +239,7 @@ function ResultsContent() {
         .axis-label{font-size:10px;font-weight:500;color:var(--ink-faint);letter-spacing:0.04em;text-transform:uppercase;font-family:var(--font-sans)}
 
         /* CTA / NEXT STEPS */
-        .next-section{background:var(--panel);padding:80px 48px;position:relative;overflow:hidden}
+        .next-section{background:#0c0c0e;padding:80px 48px;position:relative;overflow:hidden}
         .next-section::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 50% at 50% 0%, rgba(0,240,255,0.06) 0%, transparent 60%);pointer-events:none}
         .next-inner{max-width:900px;margin:0 auto;position:relative;z-index:1}
         .next-tag{display:inline-flex;align-items:center;gap:8px;font-size:12px;font-weight:500;color:var(--cyan);letter-spacing:0.02em;margin-bottom:20px;font-family:var(--font-sans)}
