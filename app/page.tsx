@@ -257,7 +257,6 @@ export default function LandingPage() {
       {/* ── FAQ ── */}
       <section className="faq">
         <div className="section-inner">
-
           <h2 className="section-h reveal d1">Frequently Asked Questions.</h2>
           <div className="faq-grid">
             {[
@@ -266,7 +265,7 @@ export default function LandingPage() {
               { q: 'How long do I have to wait for results?', a: 'Zero wait time. Your results are generated instantly and displayed on your screen, with a PDF download link sent to your email.' },
               { q: 'Is my data kept private?', a: 'Absolutely. We do not sell your data. Your responses are used solely to generate your personalized retirement alignment report.' }
             ].map((item, index) => (
-              <div key={index} className={`faq-item reveal d${index + 1} ${faqOpen === index ? 'open' : ''}`}>
+              <div key={index} className={`faq-item ${faqOpen === index ? 'open' : ''}`}>
                 <div className="faq-q" onClick={() => setFaqOpen(faqOpen === index ? null : index)}>
                   <span>{item.q}</span>
                   <div className="faq-icon">+</div>
@@ -280,8 +279,8 @@ export default function LandingPage() {
 
       {/* ── FINAL CTA ── */}
       <div className="cta-band reveal">
-
-        <h2 className="section-h">Move beyond the generic plan. Discover the strategy <em>you were meant to execute.</em></h2>
+        <div className="section-tag">Strategic Clarity — Start Today</div>
+        <h2 className="section-h">Move beyond the generic plan.<br />Discover the strategy <em>you were meant to execute.</em></h2>
         <p className="section-sub">The full ALIGN assessment takes less than 17 minutes and delivers a personalized behavioral analysis built around the psychological preferences that drive your stewardship.</p>
         <a href="/quiz" target="_blank" className="btn-primary" style={{ padding: '20px 48px', fontSize: '16px' }}>
           Execute My Strategy Now <span className="btn-arr">→</span>

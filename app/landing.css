@@ -939,11 +939,13 @@ section{padding:100px 48px}
 }
 .faq-item.open .faq-icon{transform:rotate(45deg);background:var(--ink);border-color:var(--ink);color:#fff}
 .faq-a{
-  font-size:14px;font-weight:300;line-height:1.8;
-  color:var(--mid-grey);
-  max-height:0;overflow:hidden;transition:max-height 0.4s ease,padding 0.4s;
+  font-size:15px;font-weight:300;line-height:1.8;
+  color:var(--ink-soft);
+  max-height:0;overflow:hidden;
+  transition:all 0.4s ease;
+  opacity: 0;
 }
-.faq-item.open .faq-a{max-height:400px;padding-bottom:24px}
+.faq-item.open .faq-a{max-height:1000px;padding-bottom:32px;opacity: 1;}
 
 /* ─── FINAL CTA BAND ─── */
 .cta-band{
