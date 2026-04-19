@@ -70,7 +70,7 @@ export default function LandingPage() {
           <h1>
             Align your capital<br />
             <em>with your convictions.</em>
-            <span className="subtitle-line">Precision math is universal. Our distinction is a human-centric strategy tailored to your specific behavioral and psychological preferences.</span>
+            <span className="subtitle-line">Every financial institution can model the mathematics of a portfolio. But until now, none have successfully integrated your unique behavior and psychological preferences into the core strategy.</span>
           </h1>
 
           <p className="hero-subtext">
@@ -84,14 +84,6 @@ export default function LandingPage() {
             <a href="#why" className="btn-secondary">
               Why it matters
             </a>
-          </div>
-
-          <div className="hero-trust">
-            <div className="trust-item"><span className="trust-icon">✦</span> Multigeneration Experience</div>
-            <div className="trust-div"></div>
-            <div className="trust-item"><span className="trust-icon">✦</span> Personalized Report</div>
-            <div className="trust-div"></div>
-            <div className="trust-item"><span className="trust-icon">✦</span> Instant Results</div>
           </div>
         </div>
 
@@ -126,33 +118,51 @@ export default function LandingPage() {
       {/* ── PROBLEM ── */}
       <section className="problem" id="why">
         <div className="section-inner">
-          <div className="section-tag reveal">The Problem</div>
-          <h2 className="section-h reveal d1">Great spreadsheets don't<br /><em>quiet 3:00 AM anxiety.</em></h2>
-          <p className="section-sub reveal d2">You can have the perfect portfolio on paper, but if the strategy doesn't align with your emotional relationship with money, you'll abandon it the moment markets move.</p>
-
+          <div className="section-tag reveal">The Challenge</div>
+          <h2 className="section-h reveal d1" style={{ fontSize: 'clamp(32px, 5vw, 64px)', maxWidth: '900px' }}>
+            "A strategy you don't <em>emotionally believe in</em> is a strategy you cannot execute long-term."
+          </h2>
+          
           <div className="problem-grid">
             <div className="problem-left reveal d1">
-              <p className="problem-lead">A strategy you don't <strong>emotionally believe in</strong> is a strategy you cannot execute long-term.</p>
+              <p className="problem-lead">Sophisticated math is only as effective as your <strong>ability to adhere to it.</strong></p>
               <div className="problem-body">
-                <p>Most financial plans are built for "The Average Client." But your tolerance for risk, your need for flexibility, and your desire for guaranteed income are unique. ALIGN bridges the gap between traditional financial math and your personal psychology.</p>
+                <p>Most wealth management plans are built for "The Objective Investor." But your tolerance for risk, your need for autonomy, and your relationship with volatility are deeply personal. ALIGN bridges the gap between traditional financial modeling and your behavioral DNA.</p>
               </div>
             </div>
             <div className="problem-right reveal d2">
-              <div className="mismatch-card">
-                <div className="mismatch-title">The Cost of Misalignment</div>
-                <div className="mismatch-pair">
-                  <div className="mismatch-side bad">
-                    <div className="ms-label">TRADITIONAL PLAN</div>
-                    Maximizes for "Probability of Success"
+              <div className="mismatch-card" style={{ padding: '40px', background: '#fff' }}>
+                <div className="mismatch-title" style={{ fontSize: '14px', color: 'var(--accent-mid)', marginBottom: '32px', letterSpacing: '0.05em' }}>THE STRATEGIC EVOLUTION</div>
+                
+                <div className="mismatch-comparison">
+                  <div className="comparison-phase">
+                    <div className="phase-label">TRADITIONAL INSTITUTIONS</div>
+                    <ul className="phase-metrics">
+                      <li><span>○</span> Risk Tolerance Score</li>
+                      <li><span>○</span> Probability of Success (Monte Carlo)</li>
+                      <li><span>○</span> Static Asset Allocation</li>
+                    </ul>
+                    <div className="phase-result">The "Optimal" Spreadsheet</div>
                   </div>
-                  <div className="mismatch-arrow">→</div>
-                  <div className="mismatch-side good">
-                    <div className="ms-label">ALIGNED PLAN</div>
-                    Maximizes for "Probability of Adherence"
+                  
+                  <div className="comparison-arrow">
+                    <div className="arrow-line"></div>
+                    <div className="arrow-head"></div>
+                  </div>
+                  
+                  <div className="comparison-phase align-phase" style={{ background: '#0047ff', color: '#fff', borderRadius: '12px', padding: '24px' }}>
+                    <div className="phase-label" style={{ color: 'rgba(255,255,255,0.7)' }}>THE ALIGN SYSTEM</div>
+                    <ul className="phase-metrics" style={{ color: '#fff' }}>
+                      <li><span style={{ color: 'var(--cyan)' }}>✦</span> Probability of Adherence</li>
+                      <li><span style={{ color: 'var(--cyan)' }}>✦</span> Emotional Conviction Levels</li>
+                      <li><span style={{ color: 'var(--cyan)' }}>✦</span> Behavioral Error Mitigation</li>
+                    </ul>
+                    <div className="phase-result" style={{ color: 'var(--cyan)', fontWeight: '700' }}>Strategic Clarity & Sustainable Flow</div>
                   </div>
                 </div>
-                <div className="mismatch-cost">
-                  <strong>The Result:</strong> Confidence during volatility instead of second-guessing your advisor at every turn.
+                
+                <div className="mismatch-cost" style={{ borderTop: '1px solid var(--border)', marginTop: '24px' }}>
+                  <strong>The Reality:</strong> Mathematical precision is table stakes. ALIGN ensures your plan is resilient enough to survive the human at the center.
                 </div>
               </div>
             </div>
@@ -175,64 +185,36 @@ export default function LandingPage() {
       {/* ── DISCOVER ── */}
       <section className="discover" id="discover">
         <div className="section-inner">
-          <div className="section-tag reveal">The Report</div>
-          <h2 className="section-h reveal d1">What you'll discover in your<br /><em>personalized 12-page report.</em></h2>
+          <div className="section-tag reveal">Impact Analysis</div>
+          <h2 className="section-h reveal d1">What you'll discover about your<br /><em>optimized retirement strategy.</em></h2>
           
           <div className="discover-grid">
             <div className="d-card reveal d1">
-              <span className="d-num">DIMENSION 01</span>
+              <span className="d-num">COMPONENT 01</span>
               <div className="d-card-icon">🛡️</div>
-              <div className="d-card-title">Income Security Preference</div>
-              <p className="d-card-body">Do you truly prioritize growth, or do you need a "floor" of guaranteed income to feel comfortable spending?</p>
+              <div className="d-card-title">Foundational Components</div>
+              <p className="d-card-body">The bedrock of your strategy: Determining the absolute threshold of capital security required to support your lifestyle without compromise.</p>
               <div className="d-card-accent"></div>
             </div>
             <div className="d-card reveal d2">
-              <span className="d-num">DIMENSION 02</span>
+              <span className="d-num">COMPONENT 02</span>
               <div className="d-card-icon">⚙️</div>
-              <div className="d-card-title">Implementation Style</div>
-              <p className="d-card-body">Wants full control over every trade vs. preferring a set-it-and-forget-it automated income system.</p>
+              <div className="d-card-title">Nuanced Preferences</div>
+              <p className="d-card-body">Beyond risk tolerance: Identifying the specific implementation nuances—from autonomy to automated flow—that define your comfort zone.</p>
               <div className="d-card-accent"></div>
             </div>
             <div className="d-card reveal d3">
-              <span className="d-num">DIMENSION 03</span>
+              <span className="d-num">COMPONENT 03</span>
               <div className="d-card-icon">🧠</div>
-              <div className="d-card-title">Concerns &amp; Legacy</div>
-              <p className="d-card-body">Identifies which risks (longevity, inflation, or market) actually keep you up at night so we can neutralize them.</p>
+              <div className="d-card-title">Implementation Persona</div>
+              <p className="d-card-body">The execution roadmap: Strategic guidance on how best to partner with professionals to ensure your plan is executed with precision.</p>
               <div className="d-card-accent"></div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* ── PERSONAS ── */}
-      <section className="personas">
-        <div className="section-inner">
-          <div className="section-tag reveal">Implementation Styles</div>
-          <h2 className="section-h reveal d1">Everyone retires <em>differently.</em></h2>
-          <div className="persona-grid">
-            <div className="persona-card reveal d1">
-              <div className="persona-tag">THE STABILITY SEEKER</div>
-              <div className="persona-name">Prefers Certainty</div>
-              <p className="persona-desc">You want to know exactly how much is hitting your bank account on the 1st of every month, regardless of what the S&amp;P 500 did yesterday.</p>
-              <div className="persona-traits">
-                <span className="p-trait">Contractual Income</span>
-                <span className="p-trait">Low Volatility</span>
-                <span className="p-trait">High Peace of Mind</span>
-              </div>
-            </div>
-            <div className="persona-card reveal d2">
-              <div className="persona-tag">THE STRATEGIC ADAPTIVE</div>
-              <div className="persona-name">Prefers Flexibility</div>
-              <p className="persona-desc">You are comfortable with market flux in exchange for total control and the ability to pivot your strategy as the world changes.</p>
-              <div className="persona-traits">
-                <span className="p-trait">Market Based</span>
-                <span className="p-trait">Full Control</span>
-                <span className="p-trait">Growth Potential</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+
 
       {/* ── HOW IT WORKS ── */}
       <section className="how">
@@ -242,18 +224,18 @@ export default function LandingPage() {
           <div className="how-steps">
             <div className="how-step reveal d1">
               <div className="how-step-num">01</div>
-              <div className="how-step-title">Take the Quiz</div>
-              <p className="how-step-body">Answer 20 questions about your goals, habits, and feelings about market volatility.</p>
+              <div className="how-step-title">Take the Assessment</div>
+              <p className="how-step-body">Answer key behavioral questions designed to identify your Wealth Implementation Persona in less than 17 minutes.</p>
             </div>
             <div className="how-step reveal d2">
               <div className="how-step-num">02</div>
-              <div className="how-step-title">Get Instant Results</div>
-              <p className="how-step-body">See your alignment score immediately and download your deep-dive 12-page PDF report.</p>
+              <div className="how-step-title">Instant Personal Analysis</div>
+              <p className="how-step-body">Receive your immediate alignment score and foundational results to better understand your capital conviction levels.</p>
             </div>
             <div className="how-step reveal d3">
               <div className="how-step-num">03</div>
-              <div className="how-step-title">Optional Review</div>
-              <p className="how-step-body">Briefly connect with Adam to see how your results should impact your current strategy.</p>
+              <div className="how-step-title">Strategy Integration</div>
+              <p className="how-step-body">Benefit from a private strategy review with Adam to integrate these behavioral insights into your long-term retirement navigation.</p>
             </div>
           </div>
         </div>
@@ -309,13 +291,13 @@ export default function LandingPage() {
 
       {/* ── FINAL CTA ── */}
       <div className="cta-band reveal">
-        <div className="section-tag">Start Today — It's Free</div>
-        <h2 className="section-h">Stop guessing.<br />Start <em>knowing your style.</em></h2>
-        <p className="section-sub">The full ALIGN assessment takes less than 17 minutes and delivers a personalized report built around how you actually think—not a generic template.</p>
+        <div className="section-tag">Strategic Clarity — Start Today</div>
+        <h2 className="section-h">Move beyond the generic plan.<br />Discover the strategy <em>you were meant to execute.</em></h2>
+        <p className="section-sub">The full ALIGN assessment takes less than 17 minutes and delivers a personalized behavioral analysis built around the psychological preferences that drive your stewardship.</p>
         <a href="/quiz" target="_blank" className="btn-primary" style={{ padding: '20px 48px', fontSize: '16px' }}>
-          Identify My Gaps Now <span className="btn-arr">→</span>
+          Execute My Strategy Now <span className="btn-arr">→</span>
         </a>
-        <p className="cta-detail">Quick &amp; Free · Instant Results · 20 Years Experience</p>
+        <p className="cta-detail">Private &amp; Secure · Instant Strategic Insights · Multigenerational Experience</p>
       </div>
 
       {/* ── FOOTER ── */}
