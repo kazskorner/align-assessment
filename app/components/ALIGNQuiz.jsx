@@ -1,7 +1,8 @@
 'use client';
 
 import React, { useState } from 'react';
-import { QUESTIONS, US_STATES, TIER_CTA, PRIMARY_TRAIT_COPY, SECONDARY_TRAIT_COPY, PERSONA_COPY } from '../../lib/quiz-copy';
+import { useRouter } from 'next/navigation';
+import { QUESTIONS, US_STATES } from '../../lib/quiz-copy';
 
 /* ─── Brand ─────────────────────────────────────────────────────────────────── */
 const BRAND = '#1a3d5c';
@@ -21,17 +22,6 @@ function getBlockLabel(id) {
   if (id <= 28) return 'Your Approach';
   if (id <= 33) return 'Your Profile';
   return 'Final Step';
-}
-
-/**
- * Look up secondary trait copy using the 3-part composite key.
- * incomeSource  : "Contractual" | "Market Driven"
- * incomeStructure : "Committed" | "Adjustable"
- */
-function getSecondaryTraitCopy(traitValue, incomeSource, incomeStructure) {
-  if (!traitValue || !incomeSource || !incomeStructure) return null;
-  const key = `${traitValue}|${incomeSource}|${incomeStructure}`;
-  return SECONDARY_TRAIT_COPY[key] || null;
 }
 
 /* ─── Styles ─────────────────────────────────────────────────────────────────── */
@@ -162,18 +152,6 @@ const S = {
     letterSpacing: '0.3px',
     transition: 'background 0.15s ease',
   }),
-  retakeBtn: {
-    width: '100%',
-    padding: '13px',
-    marginTop: '20px',
-    backgroundColor: 'transparent',
-    color: BRAND,
-    border: `2px solid ${BRAND}`,
-    borderRadius: '10px',
-    cursor: 'pointer',
-    fontSize: '15px',
-    fontWeight: '600',
-  },
   fieldGroup: { marginBottom: '18px' },
   label: {
     display: 'block',
@@ -194,117 +172,12 @@ const S = {
     color: '#0f172a',
   }),
   errorText: { fontSize: '12px', color: '#ef4444', marginTop: '4px' },
-
-  // Results
-  divider: {
-    borderTop: '1px solid #e2e8f0',
-    paddingTop: '32px',
-    marginTop: '32px',
-  },
-  sectionLabel: {
-    fontSize: '10px',
-    fontWeight: '800',
-    letterSpacing: '2px',
-    color: '#94a3b8',
-    textTransform: 'uppercase',
-    marginBottom: '12px',
-  },
-  traitRow: {
-    display: 'flex',
-    flexWrap: 'wrap',
-    gap: '8px',
-    marginBottom: '8px',
-  },
-  chip: (variant) => {
-    const colors = {
-      primary: { bg: BRAND, color: '#fff' },
-      secondary: { bg: BRAND_LIGHT, color: BRAND },
-    };
-    const c = colors[variant] || colors.secondary;
-    return {
-      display: 'inline-block',
-      padding: '5px 14px',
-      backgroundColor: c.bg,
-      color: c.color,
-      borderRadius: '100px',
-      fontSize: '13px',
-      fontWeight: '600',
-      whiteSpace: 'nowrap',
-    };
-  },
-  tierBadge: (tier) => ({
-    display: 'inline-block',
-    padding: '3px 14px',
-    backgroundColor: tier === 'A' ? '#065f46' : tier === 'B' ? '#1e40af' : '#475569',
-    color: '#fff',
-    borderRadius: '100px',
-    fontSize: '13px',
-    fontWeight: '700',
-    letterSpacing: '1px',
-    marginLeft: '10px',
-    verticalAlign: 'middle',
-  }),
-  traitCard: {
-    backgroundColor: '#f8fafc',
-    borderRadius: '12px',
-    padding: '22px 24px',
-    marginBottom: '14px',
-    borderLeft: `3px solid ${BRAND}`,
-  },
-  traitCardTitle: {
-    fontSize: '16px',
-    fontWeight: '700',
-    color: '#0f172a',
-    marginBottom: '4px',
-  },
-  traitCardSubtitle: {
-    fontSize: '12px',
-    color: '#64748b',
-    marginBottom: '14px',
-    fontWeight: '500',
-  },
-  copyBlock: {
-    fontSize: '14px',
-    lineHeight: '1.8',
-    color: '#334155',
-    whiteSpace: 'pre-line',
-  },
-  ctaBox: {
-    backgroundColor: BRAND_LIGHT,
-    border: `1px solid ${BRAND}30`,
-    borderRadius: '12px',
-    padding: '26px',
-    marginTop: '8px',
-  },
-  ctaSubLabel: {
-    fontSize: '17px',
-    fontWeight: '700',
-    color: '#0f172a',
-    marginBottom: '10px',
-  },
-  ctaDesc: {
-    fontSize: '14px',
-    color: '#475569',
-    lineHeight: '1.7',
-    marginBottom: '0',
-  },
-  ctaBtn: {
-    display: 'inline-block',
-    marginTop: '18px',
-    padding: '13px 28px',
-    backgroundColor: BRAND,
-    color: '#fff',
-    borderRadius: '8px',
-    textDecoration: 'none',
-    fontSize: '15px',
-    fontWeight: '700',
-    border: 'none',
-    cursor: 'pointer',
-  },
 };
 
 /* ─── Component ──────────────────────────────────────────────────────────────── */
 export default function ALIGNQuiz() {
+  const router = useRouter();
+
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [responses, setResponses]             = useState({});
   const [selectedState, setSelectedState]     = useState('');
@@ -316,17 +189,11 @@ export default function ALIGNQuiz() {
   const [gateErrors, setGateErrors]       = useState({});
 
   const [loading, setLoading] = useState(false);
-  const [results, setResults] = useState(null);
 
   /* ── Navigate back ─────────────────────────────────────────────────────── */
   const handleBack = () => {
-    if (showGate) {
-      setShowGate(false);
-      return;
-    }
-    if (currentQuestion > 0) {
-      setCurrentQuestion(currentQuestion - 1);
-    }
+    if (showGate) { setShowGate(false); return; }
+    if (currentQuestion > 0) setCurrentQuestion(currentQuestion - 1);
   };
 
   /* ── Answer handler ──────────────────────────────────────────────────── */
@@ -360,141 +227,35 @@ export default function ALIGNQuiz() {
     if (Object.keys(errors).length > 0) { setGateErrors(errors); return; }
     setGateErrors({});
     setLoading(true);
+
     try {
       const response = await fetch('/api/score', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email: gateEmail.trim(), firstName: gateFirstName.trim(), lastName: gateLastName.trim(), responses }),
+        body: JSON.stringify({
+          email: gateEmail.trim(),
+          firstName: gateFirstName.trim(),
+          lastName: gateLastName.trim(),
+          responses,
+        }),
       });
+
+      if (!response.ok) throw new Error('Score API error');
+
       const data = await response.json();
-      setResults(data);
-      setShowGate(false);
+
+      // Store result in sessionStorage, then route to single results page
+      sessionStorage.setItem('alignResults', JSON.stringify({
+        ...data,
+        firstName: gateFirstName.trim(),
+      }));
+
+      router.push('/results');
     } catch {
       alert('Something went wrong. Please try again.');
+      setLoading(false);
     }
-    setLoading(false);
   };
-
-  /* ── Reset ────────────────────────────────────────────────────────────── */
-  const resetQuiz = () => {
-    setCurrentQuestion(0); setResponses({}); setSelectedState('');
-    setShowGate(false); setGateFirstName(''); setGateLastName('');
-    setGateEmail(''); setGateErrors({}); setResults(null); setLoading(false);
-  };
-
-  /* ════════════════════════════════════════════════════════════════════════
-     RESULTS
-  ════════════════════════════════════════════════════════════════════════ */
-  if (results) {
-    const cta = TIER_CTA[results.tier] || TIER_CTA.C;
-    const tr  = results.traitResults || {};
-
-    const incomeSource    = tr.incomeSource    || '';
-    const incomeStructure = tr.incomeStructure || '';
-    const incSourceCopy    = PRIMARY_TRAIT_COPY[incomeSource]    || '';
-    const incStructCopy    = PRIMARY_TRAIT_COPY[incomeStructure] || '';
-
-    // 4 secondary traits
-    const secondaryTraits = [
-      { label: 'Mindset',        category: 'Secondary Trait', value: tr.mindset,        icon: '🧠' },
-      { label: 'Liquidity',      category: 'Secondary Trait', value: tr.liquidity,      icon: '💧' },
-      { label: 'Spender',        category: 'Secondary Trait', value: tr.spender,        icon: '📅' },
-      { label: 'Payout Pattern', category: 'Secondary Trait', value: tr.payoutPattern,  icon: '📊' },
-    ];
-
-    const personaCopy = PERSONA_COPY[results.persona] || PERSONA_COPY['Pragmatic Realist'];
-
-    return (
-      <div style={S.page}>
-        <div style={S.card}>
-          <span style={S.logo}>ALIGN Assessment</span>
-
-          {/* ── Header ── */}
-          <h1 style={{ fontSize: '27px', fontWeight: '700', color: '#0f172a', marginBottom: '6px', lineHeight: 1.3 }}>
-            Your Retirement Profile
-            <span style={S.tierBadge(results.tier)}>Tier {results.tier}</span>
-          </h1>
-          <p style={{ fontSize: '15px', color: '#64748b', marginBottom: '32px', lineHeight: '1.65' }}>
-            {gateFirstName}, here is your personalized ALIGN analysis.
-          </p>
-
-          {/* ── Profile summary chips ── */}
-          <div style={S.sectionLabel}>Your Profile at a Glance</div>
-          <div style={S.traitRow}>
-            {[incomeSource, incomeStructure, tr.mindset, tr.liquidity, tr.spender, tr.payoutPattern].filter(Boolean).map((t) => (
-              <span key={t} style={S.chip('secondary')}>{t}</span>
-            ))}
-          </div>
-
-          {/* ══ PRIMARY TRAIT 1: Income Source ══ */}
-          <div style={S.divider}>
-            <div style={S.sectionLabel}>Primary Trait — Income Source</div>
-            <div style={S.traitCard}>
-              <div style={S.traitCardTitle}>{incomeSource}</div>
-              <div style={S.traitCardSubtitle}>How you prefer your retirement income to be generated</div>
-              <p style={S.copyBlock}>{incSourceCopy}</p>
-            </div>
-          </div>
-
-          {/* ══ PRIMARY TRAIT 2: Income Structure ══ */}
-          <div style={S.divider}>
-            <div style={S.sectionLabel}>Primary Trait — Income Structure</div>
-            <div style={S.traitCard}>
-              <div style={S.traitCardTitle}>{incomeStructure}</div>
-              <div style={S.traitCardSubtitle}>How you prefer your retirement plan to be organized</div>
-              <p style={S.copyBlock}>{incStructCopy}</p>
-            </div>
-          </div>
-
-          {/* ══ SECONDARY TRAITS ══ */}
-          <div style={S.divider}>
-            <div style={S.sectionLabel}>Secondary Traits</div>
-            {secondaryTraits.map(({ label, value, icon }) => {
-              if (!value) return null;
-              const copy = getSecondaryTraitCopy(value, incomeSource, incomeStructure);
-              return (
-                <div key={label} style={S.traitCard}>
-                  <div style={S.traitCardTitle}>{icon} {label} — {value}</div>
-                  <div style={S.traitCardSubtitle}>{incomeSource} + {incomeStructure}</div>
-                  {copy ? (
-                    <p style={S.copyBlock}>{copy}</p>
-                  ) : (
-                    <p style={{ ...S.copyBlock, color: '#94a3b8', fontStyle: 'italic' }}>Result: {value}</p>
-                  )}
-                </div>
-              );
-            })}
-          </div>
-
-          {/* ══ IMPLEMENTATION PERSONA ══ */}
-          <div style={S.divider}>
-            <div style={S.sectionLabel}>Implementation Persona</div>
-            <div style={S.traitCard}>
-              <div style={S.traitCardTitle}>{results.persona}</div>
-              <div style={S.traitCardSubtitle}>{personaCopy.quadrant}</div>
-              <p style={S.copyBlock}>{personaCopy.description}</p>
-            </div>
-          </div>
-
-          {/* ══ CTA ══ */}
-          <div style={S.divider}>
-            <div style={S.sectionLabel}>Recommended Next Step</div>
-            <div style={S.ctaBox}>
-              <p style={S.ctaSubLabel}>{cta.sublabel(gateFirstName)}</p>
-              <p style={S.ctaDesc}>{cta.description}</p>
-              {cta.url && (
-                <a href={cta.url} target="_blank" rel="noopener noreferrer" style={S.ctaBtn}>
-                  Book Your {cta.label} →
-                </a>
-              )}
-            </div>
-          </div>
-
-          <button onClick={resetQuiz} style={S.retakeBtn}>Retake Quiz</button>
-        </div>
-      </div>
-    );
-  }
 
   /* ════════════════════════════════════════════════════════════════════════
      LEAD GATE
@@ -505,7 +266,6 @@ export default function ALIGNQuiz() {
         <div style={S.card}>
           <span style={S.logo}>ALIGN Assessment</span>
 
-          {/* Progress row with back button */}
           <div style={S.progressRow}>
             <button onClick={handleBack} style={S.backBtn} aria-label="Go back">←</button>
             <div style={S.progressWrap}>
@@ -518,7 +278,7 @@ export default function ALIGNQuiz() {
             Your profile is ready.
           </h1>
           <p style={{ fontSize: '15px', color: '#64748b', marginBottom: '32px', lineHeight: '1.65' }}>
-            Enter your details to unlock your personalized ALIGN retirement profile — including your income tier, implementation persona, and recommended next steps.
+            Enter your details to unlock your personalized ALIGN retirement profile — including your income style, implementation persona, and recommended next steps.
           </p>
 
           <form onSubmit={handleGateSubmit} noValidate>
@@ -563,7 +323,6 @@ export default function ALIGNQuiz() {
       <div style={S.card}>
         <span style={S.logo}>ALIGN Assessment</span>
 
-        {/* Progress row with back button */}
         <div style={S.progressRow}>
           <button
             onClick={handleBack}
