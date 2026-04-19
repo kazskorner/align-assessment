@@ -235,7 +235,7 @@ export default function LandingPage() {
         <div className="about-inner">
           <div className="about-left reveal d1">
             <div className="adam-photo-wrap">
-              <img src="https://images.squarespace-cdn.com/content/v1/67272895690b213b3e244837/4243a3fa-2388-466d-88b6-df0549419eee/Adam-headshot.jpg?format=500w" alt="Adam Kazinec" className="adam-photo" />
+              <img src="/adam-headshot.jpg" alt="Adam Kazinec" className="adam-photo" />
               <div className="adam-photo-badge">Adam Kazinec RICP® ChFC® CLU®</div>
             </div>
           </div>
