@@ -36,8 +36,7 @@ export default function LandingPage() {
       {/* ── NAV ── */}
       <nav id="nav" className={scrolled ? 'scrolled' : ''}>
         <div className="nav-logo">
-          <div className="nav-logo-mark">ALN</div>
-          ALIGN
+          <img src="/logo.jpg" alt="ALIGN Logo" style={{ height: '32px', width: 'auto' }} />
         </div>
         <div className="nav-links">
           <a href="#why">Why It Matters</a>
@@ -322,8 +321,7 @@ export default function LandingPage() {
       {/* ── FOOTER ── */}
       <footer>
         <div className="foot-brand">
-          <div className="nav-logo-mark">ALN</div>
-          ALIGN
+          <img src="/logo.jpg" alt="ALIGN Logo" style={{ height: '24px', width: 'auto', filter: 'brightness(0) invert(1)' }} />
         </div>
         <div className="foot-copy">© 2026 ALIGN Assessment. Part of Kaz's Korner Ecosystem. All rights reserved.</div>
         <div className="foot-links">
