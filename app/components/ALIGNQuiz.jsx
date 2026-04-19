@@ -29,149 +29,165 @@ const S = {
   page: {
     minHeight: '100vh',
     display: 'flex',
-    alignItems: 'flex-start',
+    alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#f0f4f8',
-    fontFamily: "'Segoe UI', system-ui, Arial, sans-serif",
-    padding: '40px 16px 80px',
+    backgroundColor: '#111113',
+    fontFamily: "'Inter', system-ui, Arial, sans-serif",
+    padding: '40px 16px',
     boxSizing: 'border-box',
   },
   card: {
     width: '100%',
-    maxWidth: '680px',
-    backgroundColor: '#ffffff',
-    borderRadius: '16px',
-    boxShadow: '0 4px 32px rgba(0,0,0,0.09)',
-    padding: '44px 40px',
+    maxWidth: '580px',
+    backgroundColor: '#1c1c1e',
+    borderRadius: '24px',
+    border: '1px solid rgba(255,255,255,0.06)',
+    boxShadow: '0 24px 64px rgba(0,0,0,0.4)',
+    padding: '48px 40px',
     boxSizing: 'border-box',
+    position: 'relative',
+    overflow: 'hidden',
   },
   logo: {
-    fontSize: '13px',
+    fontSize: '11px',
     fontWeight: '700',
-    letterSpacing: '2px',
-    color: BRAND,
+    letterSpacing: '3px',
+    color: '#00f0ff',
     textTransform: 'uppercase',
-    marginBottom: '24px',
+    marginBottom: '32px',
     display: 'block',
+    textAlign: 'center',
+    opacity: 0.8,
   },
   progressRow: {
-    display: 'flex',
-    alignItems: 'center',
-    gap: '12px',
-    marginBottom: '32px',
-  },
-  backBtn: {
-    background: 'none',
-    border: 'none',
-    cursor: 'pointer',
-    color: '#94a3b8',
-    fontSize: '20px',
-    padding: '0 4px',
-    lineHeight: 1,
-    flexShrink: 0,
-    display: 'flex',
-    alignItems: 'center',
-    transition: 'color 0.15s',
+    marginBottom: '40px',
   },
   progressWrap: { flex: 1 },
   progressBar: {
-    backgroundColor: '#e2e8f0',
-    height: '5px',
-    borderRadius: '3px',
+    backgroundColor: 'rgba(255,255,255,0.08)',
+    height: '4px',
+    borderRadius: '2px',
     overflow: 'hidden',
-    marginBottom: '5px',
+    marginBottom: '8px',
   },
   progressFill: (pct) => ({
     width: `${pct}%`,
     height: '100%',
-    backgroundColor: BRAND,
-    transition: 'width 0.3s ease',
+    backgroundColor: '#00f0ff',
+    boxShadow: '0 0 12px rgba(0,240,255,0.4)',
+    transition: 'width 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
   }),
   progressLabel: {
-    fontSize: '11px',
-    color: '#94a3b8',
-    letterSpacing: '0.3px',
+    fontSize: '12px',
+    fontWeight: '500',
+    color: 'rgba(255,255,255,0.4)',
+    letterSpacing: '0.05em',
     textAlign: 'right',
+    fontFamily: 'var(--font-sans)',
   },
   blockLabel: {
-    fontSize: '11px',
+    fontSize: '13px',
     fontWeight: '700',
-    letterSpacing: '1.5px',
-    color: '#94a3b8',
+    letterSpacing: '0.15em',
+    color: '#00f0ff',
     textTransform: 'uppercase',
-    marginBottom: '10px',
+    marginBottom: '12px',
+    opacity: 0.8,
   },
   questionText: {
-    fontSize: '20px',
-    fontWeight: '600',
-    color: '#0f172a',
-    marginBottom: '28px',
-    lineHeight: '1.5',
+    fontSize: '24px',
+    fontWeight: '700',
+    color: '#ffffff',
+    marginBottom: '36px',
+    lineHeight: '1.3',
+    letterSpacing: '-0.02em',
   },
   optionBtn: (selected) => ({
     display: 'block',
     width: '100%',
-    padding: '14px 18px',
-    marginBottom: '10px',
-    backgroundColor: selected ? BRAND : '#f8fafc',
-    color: selected ? '#ffffff' : '#1e293b',
-    border: `2px solid ${selected ? BRAND : '#e2e8f0'}`,
-    borderRadius: '10px',
+    padding: '18px 24px',
+    marginBottom: '12px',
+    backgroundColor: selected ? 'rgba(0,240,255,0.08)' : 'rgba(255,255,255,0.03)',
+    color: selected ? '#00f0ff' : 'rgba(255,255,255,0.85)',
+    border: `1px solid ${selected ? '#00f0ff' : 'rgba(255,255,255,0.08)'}`,
+    borderRadius: '14px',
     cursor: 'pointer',
     textAlign: 'left',
-    fontSize: '15px',
+    fontSize: '16px',
     fontWeight: selected ? '600' : '400',
-    transition: 'all 0.13s ease',
+    transition: 'all 0.2s ease',
     outline: 'none',
     lineHeight: '1.4',
   }),
   dropdown: {
     width: '100%',
-    padding: '13px 16px',
-    fontSize: '15px',
-    border: '2px solid #e2e8f0',
-    borderRadius: '10px',
-    backgroundColor: '#fff',
-    color: '#1e293b',
+    padding: '16px 20px',
+    fontSize: '16px',
+    border: '1px solid rgba(255,255,255,0.1)',
+    borderRadius: '12px',
+    backgroundColor: 'rgba(255,255,255,0.03)',
+    color: '#ffffff',
     cursor: 'pointer',
-    marginBottom: '16px',
+    marginBottom: '20px',
     outline: 'none',
     appearance: 'auto',
   },
   primaryBtn: (disabled) => ({
     width: '100%',
-    padding: '15px',
-    marginTop: '8px',
-    backgroundColor: disabled ? '#cbd5e1' : BRAND,
-    color: '#fff',
+    padding: '18px',
+    marginTop: '12px',
+    backgroundColor: disabled ? 'rgba(255,255,255,0.1)' : '#ffffff',
+    color: disabled ? 'rgba(255,255,255,0.3)' : '#111113',
     border: 'none',
-    borderRadius: '10px',
+    borderRadius: '14px',
     cursor: disabled ? 'not-allowed' : 'pointer',
     fontSize: '16px',
     fontWeight: '700',
-    letterSpacing: '0.3px',
-    transition: 'background 0.15s ease',
+    letterSpacing: '0.02em',
+    transition: 'all 0.2s ease',
   }),
-  fieldGroup: { marginBottom: '18px' },
+  backBtn: {
+    background: 'none',
+    border: 'none',
+    cursor: 'pointer',
+    color: 'rgba(255,255,255,0.4)',
+    fontSize: '13px',
+    fontWeight: '600',
+    letterSpacing: '0.05em',
+    textTransform: 'uppercase',
+    padding: '12px 16px',
+    marginTop: '32px',
+    width: '100%',
+    textAlign: 'center',
+    transition: 'color 0.2s',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: '8px',
+    borderTop: '1px solid rgba(255,255,255,0.06)',
+    paddingTop: '24px',
+  },
+  fieldGroup: { marginBottom: '20px' },
   label: {
     display: 'block',
     fontSize: '13px',
     fontWeight: '600',
-    color: '#475569',
-    marginBottom: '6px',
-    letterSpacing: '0.3px',
+    color: 'rgba(255,255,255,0.6)',
+    marginBottom: '8px',
   },
   input: (hasError) => ({
     width: '100%',
-    padding: '12px 14px',
-    fontSize: '15px',
-    border: `2px solid ${hasError ? '#ef4444' : '#e2e8f0'}`,
-    borderRadius: '8px',
+    padding: '14px 16px',
+    fontSize: '16px',
+    backgroundColor: 'rgba(255,255,255,0.03)',
+    border: `1px solid ${hasError ? '#ff4d4d' : 'rgba(255,255,255,0.1)'}`,
+    borderRadius: '12px',
     boxSizing: 'border-box',
     outline: 'none',
-    color: '#0f172a',
+    color: '#ffffff',
+    transition: 'border-color 0.2s',
   }),
-  errorText: { fontSize: '12px', color: '#ef4444', marginTop: '4px' },
+  errorText: { fontSize: '12px', color: '#ff4d4d', marginTop: '6px' },
 };
 
 /* ─── Component ──────────────────────────────────────────────────────────────── */
@@ -266,18 +282,10 @@ export default function ALIGNQuiz() {
         <div style={S.card}>
           <span style={S.logo}>ALIGN Assessment</span>
 
-          <div style={S.progressRow}>
-            <button onClick={handleBack} style={S.backBtn} aria-label="Go back">←</button>
-            <div style={S.progressWrap}>
-              <div style={S.progressBar}><div style={S.progressFill(100)} /></div>
-              <p style={S.progressLabel}>All {QUESTIONS.length} questions complete</p>
-            </div>
-          </div>
-
-          <h1 style={{ fontSize: '24px', fontWeight: '700', color: '#0f172a', marginBottom: '10px' }}>
+          <h1 style={{ fontSize: '28px', fontWeight: '800', color: '#ffffff', marginBottom: '16px', letterSpacing: '-0.03em' }}>
             Your profile is ready.
           </h1>
-          <p style={{ fontSize: '15px', color: '#64748b', marginBottom: '32px', lineHeight: '1.65' }}>
+          <p style={{ fontSize: '15px', color: 'rgba(255,255,255,0.6)', marginBottom: '32px', lineHeight: '1.65' }}>
             Enter your details to unlock your personalized ALIGN retirement profile — including your income style, implementation persona, and recommended next steps.
           </p>
 
@@ -302,10 +310,14 @@ export default function ALIGNQuiz() {
             <button type="submit" disabled={loading} style={S.primaryBtn(loading)}>
               {loading ? 'Calculating your profile…' : 'Unlock My Results →'}
             </button>
-            <p style={{ textAlign: 'center', fontSize: '12px', color: '#94a3b8', marginTop: '14px' }}>
+            <p style={{ textAlign: 'center', fontSize: '12px', color: 'rgba(255,255,255,0.4)', marginTop: '20px' }}>
               Your information is private and will never be sold.
             </p>
           </form>
+
+          <button onClick={handleBack} style={S.backBtn}>
+            ← Back to Assessment
+          </button>
         </div>
       </div>
     );
@@ -324,17 +336,9 @@ export default function ALIGNQuiz() {
         <span style={S.logo}>ALIGN Assessment</span>
 
         <div style={S.progressRow}>
-          <button
-            onClick={handleBack}
-            disabled={!canGoBack}
-            style={{ ...S.backBtn, opacity: canGoBack ? 1 : 0.25, cursor: canGoBack ? 'pointer' : 'default' }}
-            aria-label="Go back to previous question"
-          >
-            ←
-          </button>
           <div style={S.progressWrap}>
             <div style={S.progressBar}><div style={S.progressFill(progress)} /></div>
-            <p style={S.progressLabel}>{currentQuestion + 1} / {QUESTIONS.length}</p>
+            <p style={S.progressLabel}>{currentQuestion + 1} of {QUESTIONS.length}</p>
           </div>
         </div>
 
@@ -361,6 +365,12 @@ export default function ALIGNQuiz() {
               </button>
             ))}
           </div>
+        )}
+
+        {canGoBack && (
+          <button onClick={handleBack} style={S.backBtn}>
+            ← Previous Question
+          </button>
         )}
       </div>
     </div>
