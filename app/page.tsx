@@ -70,11 +70,10 @@ export default function LandingPage() {
           <h1>
             Align your capital<br />
             <em>with your convictions.</em>
-            <span className="subtitle-line">Every financial institution can model the mathematics of a portfolio. But until now, none have successfully integrated your unique behavior and psychological preferences into the core strategy.</span>
           </h1>
 
           <p className="hero-subtext">
-            Most retirement strategies fail not because of bad math, but because of <strong>emotional misalignment.</strong> Define your Wealth Implementation Persona in less than 17 minutes.
+            Most retirement strategies fail not because of bad math, but because of <strong>emotional misalignment.</strong> Define your Wealth Implementation Persona in Less than 17 minutes.
           </p>
 
           <div className="hero-cta-group">
