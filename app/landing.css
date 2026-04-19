@@ -733,6 +733,8 @@ section{padding:100px 48px}
 
 /* ─── HOW IT WORKS ─── */
 .how{background:#edeff2;border-top:1px solid rgba(0,0,0,0.02)}
+.how .section-tag{color:var(--ink)}
+.how .section-tag::before{background:var(--ink)}
 .how-steps{
   display:flex;gap:0;margin-top:56px;
   position:relative;
