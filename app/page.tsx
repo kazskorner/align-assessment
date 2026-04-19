@@ -113,14 +113,10 @@ export default function LandingPage() {
           </h2>
 
           <div className="transform-card reveal d3">
-            <div className="transform-header">
-              <div className="transform-title">The Retirement Transformation</div>
-              <p className="transform-subtitle">From static accumulation to dynamic behavioral stewardship.</p>
-            </div>
-            
             <div className="transform-grid">
               {/* Stage 1: Traditional */}
               <div className="transform-side side-trad">
+                <div className="side-badge">Before</div>
                 <div className="donut-wrap"></div>
                 <div className="trad-labels">
                   <div>• Static Asset Allocation</div>
@@ -131,6 +127,7 @@ export default function LandingPage() {
 
               {/* Stage 2: ALIGN */}
               <div className="transform-side side-align">
+                <div className="side-badge">After</div>
                 <div className="align-header">
                   <h3>ALIGN Strategy</h3>
                   <p>INTEGRATED ARCHITECTURE</p>
@@ -141,29 +138,23 @@ export default function LandingPage() {
                     <div className="feature-dot"></div>
                     <div className="feature-text">
                       <div className="feature-title">Tax Strategies</div>
-                      <div className="feature-desc">Location planning and optimized withdrawal sequencing.</div>
+                      <div className="feature-desc">Optimized withdrawal sequences and asset location planning.</div>
                     </div>
                   </div>
                   <div className="feature-card">
                     <div className="feature-dot"></div>
                     <div className="feature-text">
                       <div className="feature-title">Income Engine</div>
-                      <div className="feature-desc">Multi-source distribution tactics for durable cash flow.</div>
+                      <div className="feature-desc">Dynamic cash flow management and distribution.</div>
                     </div>
                   </div>
                   <div className="feature-card">
                     <div className="feature-dot"></div>
                     <div className="feature-text">
                       <div className="feature-title">Retirement Rhythm</div>
-                      <div className="feature-desc">Lifestyle-aligned spending driven by your Income DNA.</div>
+                      <div className="feature-desc">Lifestyle spending driven by your Financial DNA.</div>
                     </div>
                   </div>
-                </div>
-
-                <div className="deliverables-mini">
-                  <div className="dev-item">Custom Blueprint</div>
-                  <div className="dev-item">Income Paths</div>
-                  <div className="dev-item">Behavior-Driven</div>
                 </div>
               </div>
             </div>
