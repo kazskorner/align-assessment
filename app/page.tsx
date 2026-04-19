@@ -68,13 +68,13 @@ export default function LandingPage() {
 
         <div className="hero-inner">
           <h1>
-            Build a retirement plan<br />
-            <em>you'll actually stick with.</em>
-            <span className="subtitle-line">Mathematics is the map. Psychology is the fuel.</span>
+            Align your capital<br />
+            <em>with your convictions.</em>
+            <span className="subtitle-line">Precision math is universal. Our distinction is a human-centric strategy tailored to your specific behavioral and psychological preferences.</span>
           </h1>
 
           <p className="hero-subtext">
-            Most retirement strategies fail not because of bad math, but because of <strong>emotional misalignment.</strong> Discover your unique income style in 20 minutes.
+            Most retirement strategies fail not because of bad math, but because of <strong>emotional misalignment.</strong> Define your Wealth Implementation Persona in less than 17 minutes.
           </p>
 
           <div className="hero-cta-group">
@@ -87,7 +87,7 @@ export default function LandingPage() {
           </div>
 
           <div className="hero-trust">
-            <div className="trust-item"><span className="trust-icon">✦</span> 20+ Years Practice</div>
+            <div className="trust-item"><span className="trust-icon">✦</span> Multigeneration Experience</div>
             <div className="trust-div"></div>
             <div className="trust-item"><span className="trust-icon">✦</span> Personalized Report</div>
             <div className="trust-div"></div>
@@ -106,20 +106,20 @@ export default function LandingPage() {
       {/* ── STAT STRIP ── */}
       <div className="stat-strip">
         <div className="stat-item">
-          <div className="stat-num">20<span>+</span></div>
-          <div className="stat-label">YEARS HELPING RETIREES</div>
+          <div className="stat-num" style={{ fontSize: '18px' }}>MULTIGENERATION</div>
+          <div className="stat-label">EXPERIENCED ADVISOR</div>
         </div>
         <div className="stat-item">
-          <div className="stat-num">5</div>
-          <div className="stat-label">DIMENSIONS ASSESSED</div>
+          <div className="stat-num">7</div>
+          <div className="stat-label">DIMENSIONS ANALYZED</div>
         </div>
         <div className="stat-item">
-          <div className="stat-num">20</div>
+          <div className="stat-num" style={{ fontSize: '24px' }}>LESS THAN 17</div>
           <div className="stat-label">MINUTES TO COMPLETE</div>
         </div>
         <div className="stat-item">
-          <div className="stat-num">100<span>%</span></div>
-          <div className="stat-label">PERSONALIZED RESULTS</div>
+          <div className="stat-num" style={{ fontSize: '24px' }}>PERSONALIZED</div>
+          <div className="stat-label">RESULTS</div>
         </div>
       </div>
 
@@ -265,13 +265,13 @@ export default function LandingPage() {
           <div className="about-left reveal d1">
             <div className="adam-photo-wrap">
               <img src="https://images.squarespace-cdn.com/content/v1/67272895690b213b3e244837/4243a3fa-2388-466d-88b6-df0549419eee/Adam-headshot.jpg?format=500w" alt="Adam Kazinec" className="adam-photo" />
-              <div className="adam-photo-badge">20+ Years Practice</div>
+              <div className="adam-photo-badge">Multigeneration Experience</div>
             </div>
           </div>
           <div className="about-right reveal d2">
             <div className="about-tag">About Adam Kazinec</div>
             <h2 className="about-h">Financial planning should feel <em>deeply personal.</em></h2>
-            <p className="about-body">Adam believes that true financial confidence doesn't come from a generic spreadsheet—it comes from an honest conversation about your goals, your vision, and your relationship with risk. For two decades, he has helped people step into retirement with genuine clarity and peace of mind.</p>
+            <p className="about-body">Adam believes that true financial confidence doesn't come from a generic spreadsheet—it comes from an honest conversation about your goals, your vision, and your relationship with risk. With multigenerational experience, he has helped people step into retirement with genuine clarity and peace of mind.</p>
             <div className="about-creds">
               <div className="about-cred"><div className="cred-dot"></div> Host of Kaz's Korner Retirement Podcast</div>
               <div className="about-cred"><div className="cred-dot"></div> Founder of ALIGN Assessment Framework</div>
@@ -311,7 +311,7 @@ export default function LandingPage() {
       <div className="cta-band reveal">
         <div className="section-tag">Start Today — It's Free</div>
         <h2 className="section-h">Stop guessing.<br />Start <em>knowing your style.</em></h2>
-        <p className="section-sub">The full ALIGN assessment takes 20 minutes and delivers a personalized report built around how you actually think—not a generic template.</p>
+        <p className="section-sub">The full ALIGN assessment takes less than 17 minutes and delivers a personalized report built around how you actually think—not a generic template.</p>
         <a href="/quiz" target="_blank" className="btn-primary" style={{ padding: '20px 48px', fontSize: '16px' }}>
           Identify My Gaps Now <span className="btn-arr">→</span>
         </a>
