@@ -114,8 +114,7 @@ export default function LandingPage() {
       {/* ── PROBLEM ── */}
       <section className="problem" id="why">
         <div className="section-inner">
-          <div className="section-tag reveal">The Challenge</div>
-          <h2 className="section-h reveal d1" style={{ fontSize: 'clamp(32px, 5vw, 64px)', maxWidth: '900px' }}>
+          <h2 className="section-h reveal d1" style={{ fontSize: 'clamp(32px, 5vw, 64px)', maxWidth: '1100px' }}>
             "A strategy you don't <em>emotionally believe in</em> is a strategy you cannot execute long-term."
           </h2>
 
