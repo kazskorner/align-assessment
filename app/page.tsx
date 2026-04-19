@@ -119,9 +119,9 @@ export default function LandingPage() {
                 <div className="side-badge">Before</div>
                 <div className="donut-wrap"></div>
                 <div className="trad-labels">
-                  <div>• Static Asset Allocation</div>
-                  <div>• Generic Risk Profiling</div>
-                  <div>• Infrequent Check-ins</div>
+                  <div>• Traditional Asset Allocation</div>
+                  <div>• Generic Risk Tolerance Profile</div>
+                  <div>• Annual Portfolio Reviews</div>
                 </div>
               </div>
 
@@ -132,13 +132,13 @@ export default function LandingPage() {
                   <h3>ALIGN Strategy</h3>
                   <p>INTEGRATED ARCHITECTURE</p>
                 </div>
-                
+
                 <div className="align-features">
                   <div className="feature-card">
                     <div className="feature-dot"></div>
                     <div className="feature-text">
                       <div className="feature-title">Tax Strategies</div>
-                      <div className="feature-desc">Optimized withdrawal sequences and asset location planning.</div>
+                      <div className="feature-desc">Validated withdrawal sequences and asset location planning.</div>
                     </div>
                   </div>
                   <div className="feature-card">
@@ -152,7 +152,7 @@ export default function LandingPage() {
                     <div className="feature-dot"></div>
                     <div className="feature-text">
                       <div className="feature-title">Retirement Rhythm</div>
-                      <div className="feature-desc">Lifestyle spending driven by your Financial DNA.</div>
+                      <div className="feature-desc">Lifestyle spending updates driven by your financial DNA.</div>
                     </div>
                   </div>
                 </div>
@@ -165,13 +165,13 @@ export default function LandingPage() {
       {/* ── VIDEO ── */}
       <section className="video-sec">
         <div className="section-inner" style={{ textAlign: 'center' }}>
-          <div className="section-tag reveal">Deep Dive</div>
-          <h2 className="section-h reveal d1">Why ALIGN matters for you.</h2>
+
+          <h2 className="section-h reveal d1">Why I created ALIGN</h2>
           <div className="video-wrap reveal d2">
             <iframe width="560" height="315" src="https://www.youtube.com/embed/mzKr8hsrFSk" title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen></iframe>
           </div>
           <p className="video-caption reveal d3">
-            "Most retirement plans don't fail because of bad math—they fail because emotions and strategy don't align."
+            "Most retirement plans don't fail because of bad math, they fail because emotions and strategy don't match."
             <em>— Adam Kazinec</em>
           </p>
         </div>
@@ -180,27 +180,21 @@ export default function LandingPage() {
       {/* ── DISCOVER ── */}
       <section className="discover" id="discover">
         <div className="section-inner">
-          <div className="section-tag reveal">Impact Analysis</div>
+
           <h2 className="section-h reveal d1">What you'll discover about your<br /><em>optimized retirement strategy.</em></h2>
 
           <div className="discover-grid">
             <div className="d-card reveal d1">
-              <span className="d-num">COMPONENT 01</span>
-              <div className="d-card-icon">🛡️</div>
               <div className="d-card-title">Foundational Components</div>
-              <p className="d-card-body">The bedrock of your strategy: Determining the absolute threshold of capital security required to support your lifestyle without compromise.</p>
+              <p className="d-card-body">The source of income is your retirement engine and the structure acts as your retirement rhythm.</p>
               <div className="d-card-accent"></div>
             </div>
             <div className="d-card reveal d2">
-              <span className="d-num">COMPONENT 02</span>
-              <div className="d-card-icon">⚙️</div>
               <div className="d-card-title">Nuanced Preferences</div>
               <p className="d-card-body">Beyond risk tolerance: Identifying the specific implementation nuances—from autonomy to automated flow—that define your comfort zone.</p>
               <div className="d-card-accent"></div>
             </div>
             <div className="d-card reveal d3">
-              <span className="d-num">COMPONENT 03</span>
-              <div className="d-card-icon">🧠</div>
               <div className="d-card-title">Implementation Persona</div>
               <p className="d-card-body">The execution roadmap: Strategic guidance on how best to partner with professionals to ensure your plan is executed with precision.</p>
               <div className="d-card-accent"></div>
