@@ -246,6 +246,23 @@ document.querySelectorAll('.opt').forEach(opt=>{
 function nextQ(){
   if(!answers[current])return;
   if(current>=DEMO){
+    // NEW: Send data to the backend
+const payload = {
+    answers: answers,
+    timestamp: new Date().toISOString()
+};
+
+fetch('/api/quiz-submit', { // Replace with your actual API path from the 'lib' folder
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload)
+})
+.then(response => {
+    if (response.ok) {
+        console.log("Data saved to Neon!");
+    }
+})
+.catch(err => console.error("Database error:", err));
     document.getElementById('card-body').style.display='none';
     document.getElementById('card-nav').style.display='none';
     document.getElementById('completion').classList.add('on');
