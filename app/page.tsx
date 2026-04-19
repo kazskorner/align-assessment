@@ -208,7 +208,7 @@ export default function LandingPage() {
       {/* ── HOW IT WORKS ── */}
       <section className="how">
         <div className="section-inner">
-
+          <div className="section-tag reveal">The Process</div>
           <h2 className="section-h reveal d1">How to get your assessment.</h2>
           <div className="how-steps">
             <div className="how-step reveal d1">
@@ -235,8 +235,8 @@ export default function LandingPage() {
         <div className="about-inner">
           <div className="about-left reveal d1">
             <div className="adam-photo-wrap">
-              <img src="/adam.jpg" alt="Adam Kazinec" className="adam-photo" />
-              <div className="adam-photo-badge">Multigeneration Experience</div>
+              <img src="https://images.squarespace-cdn.com/content/v1/67272895690b213b3e244837/4243a3fa-2388-466d-88b6-df0549419eee/Adam-headshot.jpg?format=500w" alt="Adam Kazinec" className="adam-photo" />
+              <div className="adam-photo-badge">Adam Kazinec RICP® ChFC® CLU®</div>
             </div>
           </div>
           <div className="about-right reveal d2">
@@ -244,7 +244,7 @@ export default function LandingPage() {
             <h2 className="about-h">Financial planning should feel <em>deeply personal.</em></h2>
             <p className="about-body">Adam believes that true financial confidence doesn't come from a generic spreadsheet—it comes from an honest conversation about your goals, your vision, and your relationship with risk. With multigenerational experience, he has helped people step into retirement with genuine clarity and peace of mind.</p>
             <div className="about-creds">
-              <div className="about-cred"><div className="cred-dot"></div> Host of Kaz's Korner Retirement Podcast & <a href="https://www.youtube.com/@retirewithkaz" target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'underline', color: 'inherit' }}>YouTube Channel</a></div>
+              <div className="about-cred"><div className="cred-dot"></div> Host of Kaz's Korner Retirement Podcast & <a href="https://www.youtube.com/@KazsKornerPodcast" target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'underline', color: 'inherit' }}>YouTube Channel</a></div>
               <div className="about-cred"><div className="cred-dot"></div> Founder of ALIGN Assessment Framework</div>
               <div className="about-cred"><div className="cred-dot"></div> Specialist in Retirement Guardrails & Time Segmentation</div>
             </div>
@@ -257,7 +257,7 @@ export default function LandingPage() {
       {/* ── FAQ ── */}
       <section className="faq">
         <div className="section-inner">
-          <div className="section-tag reveal">Questions</div>
+
           <h2 className="section-h reveal d1">Frequently Asked Questions.</h2>
           <div className="faq-grid">
             {[
@@ -280,8 +280,8 @@ export default function LandingPage() {
 
       {/* ── FINAL CTA ── */}
       <div className="cta-band reveal">
-        <div className="section-tag">Strategic Clarity — Start Today</div>
-        <h2 className="section-h">Move beyond the generic plan.<br />Discover the strategy <em>you were meant to execute.</em></h2>
+
+        <h2 className="section-h">Move beyond the generic plan. Discover the strategy <em>you were meant to execute.</em></h2>
         <p className="section-sub">The full ALIGN assessment takes less than 17 minutes and delivers a personalized behavioral analysis built around the psychological preferences that drive your stewardship.</p>
         <a href="/quiz" target="_blank" className="btn-primary" style={{ padding: '20px 48px', fontSize: '16px' }}>
           Execute My Strategy Now <span className="btn-arr">→</span>
