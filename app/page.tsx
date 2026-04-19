@@ -186,17 +186,17 @@ export default function LandingPage() {
           <div className="discover-grid">
             <div className="d-card reveal d1">
               <div className="d-card-title">Foundational Components</div>
-              <p className="d-card-body">The source of income is your retirement engine and the structure acts as your retirement rhythm.</p>
+              <p className="d-card-body">Think of these as your Retirement "Engine" and "Rhythm".</p>
               <div className="d-card-accent"></div>
             </div>
             <div className="d-card reveal d2">
               <div className="d-card-title">Nuanced Preferences</div>
-              <p className="d-card-body">Beyond risk tolerance: Identifying the specific implementation nuances—from autonomy to automated flow—that define your comfort zone.</p>
+              <p className="d-card-body">These dictate how we structure your income, protect your liquidity, and pace your distributions to align with your specific vision of financial independence.</p>
               <div className="d-card-accent"></div>
             </div>
             <div className="d-card reveal d3">
               <div className="d-card-title">Implementation Persona</div>
-              <p className="d-card-body">The execution roadmap: Strategic guidance on how best to partner with professionals to ensure your plan is executed with precision.</p>
+              <p className="d-card-body">Strategic guidance on how best to partner with professionals to ensure your plan is executed with precision.</p>
               <div className="d-card-accent"></div>
             </div>
           </div>
@@ -208,18 +208,18 @@ export default function LandingPage() {
       {/* ── HOW IT WORKS ── */}
       <section className="how">
         <div className="section-inner">
-          <div className="section-tag reveal">The Process</div>
+
           <h2 className="section-h reveal d1">How to get your assessment.</h2>
           <div className="how-steps">
             <div className="how-step reveal d1">
               <div className="how-step-num">01</div>
               <div className="how-step-title">Take the Assessment</div>
-              <p className="how-step-body">Answer key behavioral questions designed to identify your Wealth Implementation Persona in less than 17 minutes.</p>
+              <p className="how-step-body">Answer key behavioral questions in less than 17 minutes.</p>
             </div>
             <div className="how-step reveal d2">
               <div className="how-step-num">02</div>
               <div className="how-step-title">Instant Personal Analysis</div>
-              <p className="how-step-body">Receive your immediate alignment score and foundational results to better understand your capital conviction levels.</p>
+              <p className="how-step-body">Receive your ALIGN report.</p>
             </div>
             <div className="how-step reveal d3">
               <div className="how-step-num">03</div>
@@ -235,7 +235,7 @@ export default function LandingPage() {
         <div className="about-inner">
           <div className="about-left reveal d1">
             <div className="adam-photo-wrap">
-              <img src="https://images.squarespace-cdn.com/content/v1/67272895690b213b3e244837/4243a3fa-2388-466d-88b6-df0549419eee/Adam-headshot.jpg?format=500w" alt="Adam Kazinec" className="adam-photo" />
+              <img src="/adam.jpg" alt="Adam Kazinec" className="adam-photo" />
               <div className="adam-photo-badge">Multigeneration Experience</div>
             </div>
           </div>
