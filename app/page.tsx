@@ -6,8 +6,14 @@ import './landing.css';
 export default function LandingPage() {
   const [scrolled, setScrolled] = useState(false);
   const [faqOpen, setFaqOpen] = useState<number | null>(null);
+  const [assessmentCount, setAssessmentCount] = useState(77);
 
   useEffect(() => {
+    // Initial jump to make it feel "live" on load
+    const timer = setTimeout(() => {
+      setAssessmentCount(prev => prev + 1);
+    }, 3000);
+
     const handleScroll = () => {
       setScrolled(window.scrollY > 60);
     };
@@ -72,13 +78,17 @@ export default function LandingPage() {
           </p>
 
           <div className="hero-cta-group">
-            <a href="/quiz" className="btn-primary">
-              Begin Assessment <span className="btn-arr">→</span>
-            </a>
-            <a href="#why" className="btn-secondary">
-              Why it matters
-            </a>
+            <a href="/quiz" target="_blank" className="btn-primary">Begin My Strategic Assessment <span className="btn-arr">→</span></a>
+            <a href="#why" className="btn-secondary">Why It Matters</a>
           </div>
+          <p className="hero-meta">
+            No personally identifiable information is collected. &nbsp;·&nbsp; 
+            <span className="live-counter">
+              <span className="live-dot"></span> 
+              <strong>{assessmentCount}</strong> Assessments Completed
+            </span>
+          </p>
+
         </div>
 
         <div className="hero-corner tl"></div>
@@ -97,7 +107,7 @@ export default function LandingPage() {
         </div>
         <div className="stat-item">
           <div className="stat-num">ADVANCED PLANNING AUTHORITY</div>
-          <div className="stat-label">Leveraging RICP&reg;, CLU&reg; & ChFC&reg; designations for complex income and asset strategies.</div>
+          <div className="stat-label">Leveraging RICP&reg;, CLU&reg; & ChFC&reg; designations from <a href="https://www.theamericancollege.edu" target="_blank" rel="noopener noreferrer" style={{ color: 'inherit', textDecoration: 'underline' }}>The American College of Financial Services</a>.</div>
         </div>
         <div className="stat-item">
           <div className="stat-num">7-DIMENSION STRESS TEST</div>
@@ -242,7 +252,7 @@ export default function LandingPage() {
           <div className="about-right reveal d2">
             <div className="about-tag">About Adam Kazinec</div>
             <h2 className="about-h">Financial planning should feel <em>deeply personal.</em></h2>
-            <p className="about-body">Adam believes that true financial confidence doesn't come from a generic spreadsheet—it comes from an honest conversation about your goals, your vision, and your relationship with risk. With multigenerational experience, he has helped people step into retirement with genuine clarity and peace of mind.</p>
+            <p className="about-body">Adam replaces standard financial benchmarks with a rigorous, high-level exploration of your goals and your relationship with risk. By utilizing a framework built on multigenerational expertise, he helps families move beyond simple withdrawal percentages and into a bespoke strategy for You. For those seeking to preserve and grow what they have built, Adam offers the architectural insight necessary for a seamless transition into their next chapter.</p>
             <div className="about-creds">
               <div className="about-cred"><div className="cred-dot"></div> Host of Kaz's Korner Retirement Podcast & <a href="https://www.youtube.com/@KazsKornerPodcast" target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'underline', color: 'inherit' }}>YouTube Channel</a></div>
               <div className="about-cred"><div className="cred-dot"></div> Founder of ALIGN Assessment Framework</div>
