@@ -112,46 +112,78 @@ export default function LandingPage() {
             "A strategy you don't <em>emotionally believe in</em> is a strategy you cannot execute long-term."
           </h2>
 
-          <div className="problem-grid">
-            <div className="problem-left reveal d1">
-              <p className="problem-lead">Sophisticated math is only as effective as your <strong>ability to adhere to it.</strong></p>
-              <div className="problem-body">
-                <p>Most wealth management plans are built for "The Objective Investor." But your tolerance for risk, your need for autonomy, and your relationship with volatility are deeply personal. ALIGN bridges the gap between traditional financial modeling and your behavioral DNA.</p>
-              </div>
+          <div className="decoder-card reveal d3">
+            <div className="decoder-header">
+              DECODER: FINANCIAL STRATEGY FOR A $1M+ RETIREMENT
             </div>
-            <div className="problem-right reveal d2">
-              <div className="mismatch-card" style={{ padding: '40px', background: '#fff' }}>
-                <div className="mismatch-title" style={{ fontSize: '14px', color: 'var(--accent-mid)', marginBottom: '32px', letterSpacing: '0.05em' }}>THE STRATEGIC EVOLUTION</div>
-
-                <div className="mismatch-comparison">
-                  <div className="comparison-phase">
-                    <div className="phase-label">TRADITIONAL INSTITUTIONS</div>
-                    <ul className="phase-metrics">
-                      <li><span>○</span> Risk Tolerance Score</li>
-                      <li><span>○</span> Probability of Success (Monte Carlo)</li>
-                      <li><span>○</span> Static Asset Allocation</li>
-                    </ul>
-                    <div className="phase-result">The "Optimal" Spreadsheet</div>
+            <div className="decoder-grid">
+              <div className="decoder-transition">
+                Transition to a Diagnostic Approach →
+              </div>
+              
+              {/* Stage 1 */}
+              <div className="decoder-stage stage-1">
+                <div className="stage-num">STAGE 1: TRADITIONAL PLAN</div>
+                <div className="stage-title">Disorganized Accumulation</div>
+                <div className="decoder-point">
+                  <div className="point-icon">📋</div>
+                  <div className="point-content">
+                    <div className="point-label">Risk Tolerance</div>
+                    <div className="point-desc">A generic, one-size-fits-all questionnaire baseline.</div>
                   </div>
-
-                  <div className="comparison-arrow">
-                    <div className="arrow-line"></div>
-                    <div className="arrow-head"></div>
+                </div>
+                <div className="decoder-point">
+                  <div className="point-icon">📊</div>
+                  <div className="point-content">
+                    <div className="point-label">Asset Allocation</div>
+                    <div className="point-desc">Static mix of stocks and bonds based on generic age bands.</div>
                   </div>
+                </div>
+                <div className="decoder-point">
+                  <div className="point-icon">📅</div>
+                  <div className="point-content">
+                    <div className="point-label">Annual Portfolio Reviews</div>
+                    <div className="point-desc">A yearly, high-level, retrospective check-in.</div>
+                  </div>
+                </div>
+                <div className="decoder-point">
+                  <div className="point-icon">💰</div>
+                  <div className="point-content">
+                    <div className="point-label">Portfolio Distributions</div>
+                    <div className="point-desc">Standard, un-tuned, non-optimized payouts.</div>
+                  </div>
+                </div>
+              </div>
 
-                  <div className="comparison-phase align-phase" style={{ background: '#0047ff', color: '#fff', borderRadius: '12px', padding: '24px' }}>
-                    <div className="phase-label" style={{ color: 'rgba(255,255,255,0.7)' }}>THE ALIGN SYSTEM</div>
-                    <ul className="phase-metrics" style={{ color: '#fff' }}>
-                      <li><span style={{ color: 'var(--cyan)' }}>✦</span> Probability of Adherence</li>
-                      <li><span style={{ color: 'var(--cyan)' }}>✦</span> Emotional Conviction Levels</li>
-                      <li><span style={{ color: 'var(--cyan)' }}>✦</span> Behavioral Error Mitigation</li>
-                    </ul>
-                    <div className="phase-result" style={{ color: 'var(--cyan)', fontWeight: '700' }}>Strategic Clarity & Sustainable Flow</div>
+              {/* Stage 2 */}
+              <div className="decoder-stage stage-2">
+                <div className="stage-num">STAGE 2: ALIGNED STRATEGY</div>
+                <div className="stage-title">Integrated Architecture</div>
+                
+                <div className="align-box">
+                  <div className="decoder-point">
+                    <div className="point-icon">🔄</div>
+                    <div className="point-content">
+                      <div className="point-label">Dynamic Strategy Updates</div>
+                      <div className="point-desc">Iterative, data-driven plan corrections based on real-time life changes.</div>
+                    </div>
+                  </div>
+                  <div className="decoder-point">
+                    <div className="point-icon">🛡️</div>
+                    <div className="point-content">
+                      <div className="point-label">Emotional & Behavioral Framework</div>
+                      <div className="point-desc">Your "Income DNA" identified to create a unified plan that fits your nature.</div>
+                    </div>
                   </div>
                 </div>
 
-                <div className="mismatch-cost" style={{ borderTop: '1px solid var(--border)', marginTop: '24px' }}>
-                  <strong>The Reality:</strong> Mathematical precision is table stakes. ALIGN ensures your plan is resilient enough to survive the human at the center.
+                <div className="deliverables">
+                  <h4>KEY ALIGN&reg; DELIVERABLES</h4>
+                  <ul style={{ padding: 0 }}>
+                    <li>Custom Blueprint</li>
+                    <li>Stress-Tested Income Paths</li>
+                    <li>Behavior-Driven Advisory</li>
+                  </ul>
                 </div>
               </div>
             </div>
