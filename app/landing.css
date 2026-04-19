@@ -732,7 +732,7 @@ section{padding:100px 48px}
 }
 
 /* ─── HOW IT WORKS ─── */
-.how{background:var(--bg-alt)}
+.how{background:#edeff2;border-top:1px solid rgba(0,0,0,0.02)}
 .how-steps{
   display:flex;gap:0;margin-top:56px;
   position:relative;
