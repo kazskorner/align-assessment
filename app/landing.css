@@ -265,7 +265,7 @@ nav.scrolled .nav-cta:hover{background:var(--accent);color:#fff}
 
 /* ─── STAT STRIP ─── */
 .stat-strip{
-  background: #0047ff; /* Electric Blue */
+  background: var(--panel);
   padding: 40px 48px;
   display: flex;
   justify-content: space-around;
@@ -273,6 +273,7 @@ nav.scrolled .nav-cta:hover{background:var(--accent);color:#fff}
   position: relative;
   overflow: hidden;
   color: #fff;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
 }
 .stat-strip::before{
   content:'';position:absolute;inset:0;
@@ -287,13 +288,13 @@ nav.scrolled .nav-cta:hover{background:var(--accent);color:#fff}
 }
 .stat-item:last-child{border-right:none}
 .stat-num{
-  font-family:var(--font-display);font-size:clamp(16px,1.8vw,24px);
+  font-family:var(--font-display);font-size:22px;
   font-weight:800;color:#fff;
   line-height:1.2;margin-bottom:4px;
   letter-spacing:0.02em;
 }
 .stat-num span{font-size:0.55em;font-weight:400;vertical-align:super;color:var(--cyan)}
-.stat-label{font-size:10px;font-weight:600;color:rgba(255,255,255,0.7);letter-spacing:0.05em;text-transform:uppercase;font-family:var(--font-sans);}
+.stat-label{font-size:10px;font-weight:700;color:var(--cyan);letter-spacing:0.08em;text-transform:uppercase;font-family:var(--font-sans);}
 
 /* ─── SECTION BASE ─── */
 section{padding:100px 48px}

@@ -98,7 +98,7 @@ export default function LandingPage() {
       {/* ── STAT STRIP ── */}
       <div className="stat-strip">
         <div className="stat-item">
-          <div className="stat-num" style={{ fontSize: '18px' }}>MULTIGENERATION</div>
+          <div className="stat-num">MULTIGENERATION</div>
           <div className="stat-label">EXPERIENCED ADVISOR</div>
         </div>
         <div className="stat-item">
@@ -106,11 +106,11 @@ export default function LandingPage() {
           <div className="stat-label">DIMENSIONS ANALYZED</div>
         </div>
         <div className="stat-item">
-          <div className="stat-num" style={{ fontSize: '24px' }}>LESS THAN 17</div>
+          <div className="stat-num">LESS THAN 17</div>
           <div className="stat-label">MINUTES TO COMPLETE</div>
         </div>
         <div className="stat-item">
-          <div className="stat-num" style={{ fontSize: '24px' }}>PERSONALIZED</div>
+          <div className="stat-num">PERSONALIZED</div>
           <div className="stat-label">RESULTS</div>
         </div>
       </div>
