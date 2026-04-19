@@ -36,7 +36,7 @@ export default function LandingPage() {
       {/* ── NAV ── */}
       <nav id="nav" className={scrolled ? 'scrolled' : ''}>
         <div className="nav-logo">
-          <img src="/logo.jpg" alt="ALIGN Logo" style={{ height: '32px', width: 'auto' }} />
+          <img src="/logo.jpg" alt="ALIGN Logo" style={{ height: '64px', width: 'auto' }} />
         </div>
         <div className="nav-links">
           <a href="#why">Why It Matters</a>
@@ -59,12 +59,7 @@ export default function LandingPage() {
           <div className="hero-video-overlay"></div>
         </div>
 
-        <div className="hero-eyebrow-wrap">
-          <div className="hero-eyebrow">
-            <div className="hero-eyebrow-dot"></div>
-            The ALIGN Retirement Assessment
-          </div>
-        </div>
+
 
         <div className="hero-inner">
           <h1>
