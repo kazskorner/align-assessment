@@ -5,10 +5,7 @@ import './landing.css';
 
 export default function LandingPage() {
   const [scrolled, setScrolled] = useState(false);
-  const [curQ, setCurQ] = useState(1);
-  const [answers, setAnswers] = useState<Record<number, number>>({});
-  const [showResults, setShowResults] = useState(false);
-  const [score, setScore] = useState(0);
+  const [scrolled, setScrolled] = useState(false);
   const [faqOpen, setFaqOpen] = useState<number | null>(null);
   
   const rFillRef = useRef<SVGCircleElement>(null);
@@ -36,78 +33,7 @@ export default function LandingPage() {
     };
   }, []);
 
-  const handleOptionClick = (q: number, s: number) => {
-    setAnswers(prev => ({ ...prev, [q]: s }));
-  };
 
-  const nextQuestion = () => {
-    if (!answers[curQ]) return;
-    if (curQ < 5) {
-      setCurQ(curQ + 1);
-    } else {
-      calculateResults();
-    }
-  };
-
-  const prevQuestion = () => {
-    if (curQ > 1) {
-      setCurQ(curQ - 1);
-    }
-  };
-
-  const calculateResults = () => {
-    const total = Object.values(answers).reduce((a, b) => a + b, 0);
-    setScore(total);
-    setShowResults(true);
-
-    const pct = Math.round((total / 20) * 100);
-    const circ = 2 * Math.PI * 45;
-
-    setTimeout(() => {
-      if (rFillRef.current) {
-        rFillRef.current.style.strokeDashoffset = (circ - (circ * pct / 100)).toString();
-      }
-      if (rValRef.current) {
-        animateNumber(rValRef.current, 0, total, 1400);
-      }
-    }, 300);
-  };
-
-  const animateNumber = (el: HTMLElement, from: number, to: number, dur: number) => {
-    const start = performance.now();
-    const go = (now: number) => {
-      const p = Math.min((now - start) / dur, 1);
-      el.textContent = Math.round(from + (to - from) * p).toString();
-      if (p < 1) requestAnimationFrame(go);
-    };
-    requestAnimationFrame(go);
-  };
-
-  const resetQuiz = () => {
-    setCurQ(1);
-    setAnswers({});
-    setShowResults(false);
-    setScore(0);
-    const quizSection = document.getElementById('quiz');
-    if (quizSection) quizSection.scrollIntoView({ behavior: 'smooth' });
-  };
-
-  const profiles = [
-    { min: 0, max: 8, t: 'Significant Misalignment Detected', d: "Your responses suggest a meaningful gap between how you think about money and how most strategies are built. This is the most important signal you can get — and exactly what ALIGN is designed to address." },
-    { min: 9, max: 12, t: 'Partially Aligned', d: "You have some right pieces in place, but there are dimensions where strategy and psychology likely diverge. The full assessment will pinpoint exactly where the gaps are." },
-    { min: 13, max: 16, t: 'Largely Aligned', d: "A solid foundation. There are still specific areas where fine-tuning could prevent quiet misalignments from compounding over time." },
-    { min: 17, max: 20, t: 'Strongly Aligned', d: "Your instincts and approach are well-matched. The full assessment will confirm your strengths and identify any remaining blind spots worth addressing." }
-  ];
-
-  const currentProfile = profiles.find(x => score >= x.min && score <= x.max) || profiles[0];
-
-  const dimensions = [
-    { name: 'Income Security Preference', score: answers[1] || 1, labels: ['Market-Driven', 'Blended', 'Stability-Leaning', 'Contractual'] },
-    { name: 'Strategy Flexibility', score: answers[2] || 1, labels: ['Wants Full Control', 'Prefers Flexibility', 'Moderate', 'Committed Structure'] },
-    { name: 'Income vs. Net Worth', score: answers[3] || 1, labels: ['Net Worth Focus', 'Portfolio Growth', 'Income-Leaning', 'Income Mindset'] },
-    { name: 'Advisor Value', score: answers[4] || 1, labels: ['Self-Directed', 'Some Advisor Value', 'Values Guidance', 'High Advisor Value'] },
-    { name: 'Spending Pattern', score: answers[5] || 1, labels: ['Back-Loaded', 'Even Spending', 'Somewhat Front-Loaded', 'Front-Loaded'] }
-  ];
 
   return (
     <>
@@ -121,7 +47,7 @@ export default function LandingPage() {
           <a href="#why">Why It Matters</a>
           <a href="#discover">What You Learn</a>
           <a href="#adam">About Adam</a>
-          <a href="#quiz" className="nav-cta">Take Assessment <span>→</span></a>
+          <a href="/quiz" className="nav-cta">Take Assessment <span>→</span></a>
         </div>
       </nav>
 
@@ -157,7 +83,7 @@ export default function LandingPage() {
           </p>
 
           <div className="hero-cta-group">
-            <a href="#quiz" className="btn-primary">
+            <a href="/quiz" className="btn-primary">
               Begin Assessment <span className="btn-arr">→</span>
             </a>
             <a href="#why" className="btn-secondary">
@@ -360,180 +286,7 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* ── QUIZ PREVIEW ── */}
-      <section className="quiz-sec" id="quiz">
-        <div className="section-inner" style={{ textAlign: 'center' }}>
-          <div className="section-tag reveal">Quick Check</div>
-          <h2 className="section-h reveal d1">Sample Question Preview.</h2>
-          <p className="section-sub reveal d2" style={{ margin: '0 auto' }}>Answer these 5 questions to get a snapshot of your retirement income personality.</p>
 
-          <div className="quiz-container reveal d3">
-            {!showResults ? (
-              <>
-                <div className="quiz-header">
-                  <div className="quiz-header-title">Retirement Alignment Check</div>
-                  <div className="quiz-prog">
-                    {[1, 2, 3, 4, 5].map(i => (
-                      <div key={i} className={`qpb ${i <= curQ ? 'on' : ''}`}></div>
-                    ))}
-                  </div>
-                </div>
-
-                <div className="quiz-body">
-                  {/* Question 1 */}
-                  {curQ === 1 && (
-                    <div className="qblock on">
-                      <div className="q-num">Question 01 of 05</div>
-                      <div className="q-text">When you think about drawing income in retirement—what feels most reassuring?</div>
-                      <div className="opts">
-                        <div className={`opt ${answers[1] === 1 ? 'sel' : ''}`} onClick={() => handleOptionClick(1, 1)}>
-                          <div className="opt-bullet"></div> Guaranteed, predictable monthly payments — I need to know exactly what's coming.
-                        </div>
-                        <div className={`opt ${answers[1] === 2 ? 'sel' : ''}`} onClick={() => handleOptionClick(1, 2)}>
-                          <div className="opt-bullet"></div> Mostly predictable, with some built-in flexibility for unexpected needs.
-                        </div>
-                        <div className={`opt ${answers[1] === 3 ? 'sel' : ''}`} onClick={() => handleOptionClick(1, 3)}>
-                          <div className="opt-bullet"></div> A blend — stable base income with some market exposure for growth.
-                        </div>
-                        <div className={`opt ${answers[1] === 4 ? 'sel' : ''}`} onClick={() => handleOptionClick(1, 4)}>
-                          <div className="opt-bullet"></div> Full flexibility — I want control and am comfortable with market flux.
-                        </div>
-                      </div>
-                    </div>
-                  )}
-
-                  {/* Question 2 */}
-                  {curQ === 2 && (
-                    <div className="qblock on">
-                      <div className="q-num">Question 02 of 05</div>
-                      <div className="q-text">How would you react if your portfolio value dropped 25% in six months?</div>
-                      <div className="opts">
-                        <div className={`opt ${answers[2] === 1 ? 'sel' : ''}`} onClick={() => handleOptionClick(2, 1)}>
-                          <div className="opt-bullet"></div> Panic and immediate move to cash. I cannot handle loss.
-                        </div>
-                        <div className={`opt ${answers[2] === 2 ? 'sel' : ''}`} onClick={() => handleOptionClick(2, 2)}>
-                          <div className="opt-bullet"></div> Very stressed, would likely call my advisor weekly to check options.
-                        </div>
-                        <div className={`opt ${answers[2] === 3 ? 'sel' : ''}`} onClick={() => handleOptionClick(2, 3)}>
-                          <div className="opt-bullet"></div> Disciplined — I'd stay the course while reviewing long-term plans.
-                        </div>
-                        <div className={`opt ${answers[2] === 4 ? 'sel' : ''}`} onClick={() => handleOptionClick(2, 4)}>
-                          <div className="opt-bullet"></div> Steady. I've planned for volatility and would look for opportunities.
-                        </div>
-                      </div>
-                    </div>
-                  )}
-
-                  {/* Question 3 */}
-                  {curQ === 3 && (
-                    <div className="qblock on">
-                      <div className="q-num">Question 03 of 05</div>
-                      <div className="q-text">What best describes your primary financial mindset right now?</div>
-                      <div className="opts">
-                        <div className={`opt ${answers[3] === 1 ? 'sel' : ''}`} onClick={() => handleOptionClick(3, 1)}>
-                          <div className="opt-bullet"></div> Total Net Worth focus. I want to see the account balance grow.
-                        </div>
-                        <div className={`opt ${answers[3] === 2 ? 'sel' : ''}`} onClick={() => handleOptionClick(3, 2)}>
-                          <div className="opt-bullet"></div> Growth first. I'm okay with low income if the portfolio grows.
-                        </div>
-                        <div className={`opt ${answers[3] === 3 ? 'sel' : ''}`} onClick={() => handleOptionClick(3, 3)}>
-                          <div className="opt-bullet"></div> Balanced. I want both growth and a steady cash flow.
-                        </div>
-                        <div className={`opt ${answers[3] === 4 ? 'sel' : ''}`} onClick={() => handleOptionClick(3, 4)}>
-                          <div className="opt-bullet"></div> Pure Income Mindset. I only care about the monthly check.
-                        </div>
-                      </div>
-                    </div>
-                  )}
-
-                  {/* Question 4 */}
-                  {curQ === 4 && (
-                    <div className="qblock on">
-                      <div className="q-num">Question 04 of 05</div>
-                      <div className="q-text">How do you view the role of a professional financial advisor?</div>
-                      <div className="opts">
-                        <div className={`opt ${answers[4] === 1 ? 'sel' : ''}`} onClick={() => handleOptionClick(4, 1)}>
-                          <div className="opt-bullet"></div> Self-Directed. I prefer to manage my own investments.
-                        </div>
-                        <div className={`opt ${answers[4] === 2 ? 'sel' : ''}`} onClick={() => handleOptionClick(4, 2)}>
-                          <div className="opt-bullet"></div> Limited value. I only want help with complex tax or planning issues.
-                        </div>
-                        <div className={`opt ${answers[4] === 3 ? 'sel' : ''}`} onClick={() => handleOptionClick(4, 3)}>
-                          <div className="opt-bullet"></div> Highly Valued. I want a partner to guide all major decisions.
-                        </div>
-                        <div className={`opt ${answers[4] === 4 ? 'sel' : ''}`} onClick={() => handleOptionClick(4, 4)}>
-                          <div className="opt-bullet"></div> Essential. I want full delegation to a professional team.
-                        </div>
-                      </div>
-                    </div>
-                  )}
-
-                  {/* Question 5 */}
-                  {curQ === 5 && (
-                    <div className="qblock on">
-                      <div className="q-num">Question 05 of 05</div>
-                      <div className="q-text">How do you plan to handle your spending during the first 10 years of retirement?</div>
-                      <div className="opts">
-                        <div className={`opt ${answers[5] === 1 ? 'sel' : ''}`} onClick={() => handleOptionClick(5, 1)}>
-                          <div className="opt-bullet"></div> Conserve first. I want to save more in the early years for later.
-                        </div>
-                        <div className={`opt ${answers[5] === 2 ? 'sel' : ''}`} onClick={() => handleOptionClick(5, 2)}>
-                          <div className="opt-bullet"></div> Even spending throughout my entire retirement.
-                        </div>
-                        <div className={`opt ${answers[5] === 3 ? 'sel' : ''}`} onClick={() => handleOptionClick(5, 3)}>
-                          <div className="opt-bullet"></div> Front-loaded. I want to travel and enjoy while I'm healthy.
-                        </div>
-                        <div className={`opt ${answers[5] === 4 ? 'sel' : ''}`} onClick={() => handleOptionClick(5, 4)}>
-                          <div className="opt-bullet"></div> Aggressive early spending. Spend it while I can!
-                        </div>
-                      </div>
-                    </div>
-                  )}
-                </div>
-
-                <div className="quiz-nav">
-                  <button className="quiz-nav-btn q-back" style={{ visibility: curQ === 1 ? 'hidden' : 'visible' }} onClick={prevQuestion}>← Back</button>
-                  <button className="quiz-nav-btn q-next" disabled={!answers[curQ]} onClick={nextQuestion}>
-                    {curQ === 5 ? 'See My Results →' : 'Continue →'}
-                  </button>
-                </div>
-              </>
-            ) : (
-              <div id="results" className="on">
-                <div className="r-header">
-                  <div className="r-score-ring">
-                    <svg viewBox="0 0 100 100">
-                      <circle className="r-score-ring-bg" cx="50" cy="50" r="45" />
-                      <circle className="r-score-ring-fill" ref={rFillRef} cx="50" cy="50" r="45" />
-                    </svg>
-                    <div className="r-score-val" ref={rValRef}>0</div>
-                  </div>
-                  <h2 className="r-title">{currentProfile.t}</h2>
-                  <p className="r-desc">{currentProfile.d}</p>
-                </div>
-
-                <div className="r-dims">
-                  {dimensions.map((dim, i) => (
-                    <div className="r-dim" key={dim.name}>
-                      <div className="r-dim-name">{dim.name}</div>
-                      <div className="r-dim-track">
-                        <div className="r-dim-fill" id={`df${i}`} style={{ width: `${Math.max(((dim.score - 1) / 3 * 100), 5)}%` }}></div>
-                      </div>
-                      <div className="r-dim-val">{dim.labels[dim.score - 1]}</div>
-                    </div>
-                  ))}
-                </div>
-
-                <div className="r-cta">
-                  <p>Get the full picture of your retirement readiness.</p>
-                  <a href="/quiz" target="_blank" className="btn-primary">Take the full 20-question assessment <span className="btn-arr">→</span></a>
-                  <button className="r-reset" onClick={resetQuiz}>← Retake this preview</button>
-                </div>
-              </div>
-            )}
-          </div>
-        </div>
-      </section>
 
       {/* ── FAQ ── */}
       <section className="faq">
