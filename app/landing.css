@@ -637,7 +637,7 @@ section{padding:100px 48px}
   transition:all 0.3s ease;
   box-shadow:var(--shadow-sm);
 }
-.d-card:hover{border-color:var(--accent-border);box-shadow:var(--shadow-md);transform:translateY(-3px)}
+.d-card:hover{border-color:var(--cyan);box-shadow:var(--shadow-md);transform:translateY(-3px)}
 .d-num{
   font-family:var(--font-sans);font-size:11px;font-weight:500;
   color:var(--accent-mid);letter-spacing:0.02em;margin-bottom:14px;
@@ -651,8 +651,9 @@ section{padding:100px 48px}
   font-size:14px;font-weight:300;line-height:1.75;color:var(--mid-grey);letter-spacing:-0.005em;
 }
 .d-card-accent{
-  position:absolute;bottom:0;left:0;right:0;height:2px;
-  background:var(--ink);
+  position:absolute;bottom:0;left:0;right:0;height:3px;
+  background:var(--cyan);
+  box-shadow: 0 0 10px var(--cyan);
   transform:scaleX(0);transform-origin:left;transition:transform 0.3s;
 }
 .d-card:hover .d-card-accent{transform:scaleX(1)}
