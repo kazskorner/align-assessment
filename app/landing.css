@@ -101,14 +101,14 @@ nav.scrolled .nav-links a{color:var(--ink-muted)}
 .nav-links a:hover{color:#fff}
 nav.scrolled .nav-links a:hover{color:var(--ink)}
 .nav-cta{
-  background:rgba(255,255,255,0.15);color:#fff;
+  background:rgba(255,255,255,0.1);color:var(--cyan);
   padding:10px 24px;border-radius:var(--r-pill);
-  font-size:13px;font-weight:500;transition:all 0.25s;
+  font-size:13px;font-weight:600;transition:all 0.25s;
   letter-spacing:0.02em;font-family:var(--font-sans);
-  border:1px solid rgba(255,255,255,0.3);
+  border:1px solid rgba(0,240,255,0.3);
   backdrop-filter:blur(8px);
 }
-nav.scrolled .nav-cta{background:var(--ink);color:#fff;border-color:transparent}
+nav.scrolled .nav-cta{background:var(--ink);color:var(--cyan);border-color:rgba(0,240,255,0.2)}
 .nav-cta:hover{background:#fff;color:var(--ink);transform:translateY(-1px);box-shadow:var(--shadow-md)}
 nav.scrolled .nav-cta:hover{background:var(--accent);color:#fff}
 
