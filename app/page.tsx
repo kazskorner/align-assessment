@@ -9,10 +9,24 @@ export default function LandingPage() {
   const [assessmentCount, setAssessmentCount] = useState(77);
 
   useEffect(() => {
-    // Initial jump to make it feel "live" on load
+    // 1. Fetch "real" count (+ user offset of 47) from DB
+    const fetchCount = async () => {
+      try {
+        const res = await fetch('/api/quiz-count');
+        const data = await res.json();
+        if (data.count) {
+          setAssessmentCount(data.count);
+        }
+      } catch (err) {
+        console.error('Counter fetch failed', err);
+      }
+    };
+    fetchCount();
+
+    // 2. Initial jump to make it feel "live" on load
     const timer = setTimeout(() => {
       setAssessmentCount(prev => prev + 1);
-    }, 3000);
+    }, 5000);
 
     const handleScroll = () => {
       setScrolled(window.scrollY > 60);
