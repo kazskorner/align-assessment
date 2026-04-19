@@ -112,78 +112,58 @@ export default function LandingPage() {
             "A strategy you don't <em>emotionally believe in</em> is a strategy you cannot execute long-term."
           </h2>
 
-          <div className="decoder-card reveal d3">
-            <div className="decoder-header">
-              DECODER: FINANCIAL STRATEGY FOR A $1M+ RETIREMENT
+          <div className="transform-card reveal d3">
+            <div className="transform-header">
+              <div className="transform-title">The Retirement Transformation</div>
+              <p className="transform-subtitle">From static accumulation to dynamic behavioral stewardship.</p>
             </div>
-            <div className="decoder-grid">
-              <div className="decoder-transition">
-                Transition to a Diagnostic Approach →
-              </div>
-              
-              {/* Stage 1 */}
-              <div className="decoder-stage stage-1">
-                <div className="stage-num">STAGE 1: TRADITIONAL PLAN</div>
-                <div className="stage-title">Disorganized Accumulation</div>
-                <div className="decoder-point">
-                  <div className="point-icon">📋</div>
-                  <div className="point-content">
-                    <div className="point-label">Risk Tolerance</div>
-                    <div className="point-desc">A generic, one-size-fits-all questionnaire baseline.</div>
-                  </div>
-                </div>
-                <div className="decoder-point">
-                  <div className="point-icon">📊</div>
-                  <div className="point-content">
-                    <div className="point-label">Asset Allocation</div>
-                    <div className="point-desc">Static mix of stocks and bonds based on generic age bands.</div>
-                  </div>
-                </div>
-                <div className="decoder-point">
-                  <div className="point-icon">📅</div>
-                  <div className="point-content">
-                    <div className="point-label">Annual Portfolio Reviews</div>
-                    <div className="point-desc">A yearly, high-level, retrospective check-in.</div>
-                  </div>
-                </div>
-                <div className="decoder-point">
-                  <div className="point-icon">💰</div>
-                  <div className="point-content">
-                    <div className="point-label">Portfolio Distributions</div>
-                    <div className="point-desc">Standard, un-tuned, non-optimized payouts.</div>
-                  </div>
+            
+            <div className="transform-grid">
+              {/* Stage 1: Traditional */}
+              <div className="transform-side side-trad">
+                <div className="donut-wrap"></div>
+                <div className="trad-labels">
+                  <div>• Static Asset Allocation</div>
+                  <div>• Generic Risk Profiling</div>
+                  <div>• Infrequent Check-ins</div>
                 </div>
               </div>
 
-              {/* Stage 2 */}
-              <div className="decoder-stage stage-2">
-                <div className="stage-num">STAGE 2: ALIGNED STRATEGY</div>
-                <div className="stage-title">Integrated Architecture</div>
+              {/* Stage 2: ALIGN */}
+              <div className="transform-side side-align">
+                <div className="align-header">
+                  <h3>ALIGN Strategy</h3>
+                  <p>INTEGRATED ARCHITECTURE</p>
+                </div>
                 
-                <div className="align-box">
-                  <div className="decoder-point">
-                    <div className="point-icon">🔄</div>
-                    <div className="point-content">
-                      <div className="point-label">Dynamic Strategy Updates</div>
-                      <div className="point-desc">Iterative, data-driven plan corrections based on real-time life changes.</div>
+                <div className="align-features">
+                  <div className="feature-card">
+                    <div className="feature-dot"></div>
+                    <div className="feature-text">
+                      <div className="feature-title">Tax Strategies</div>
+                      <div className="feature-desc">Location planning and optimized withdrawal sequencing.</div>
                     </div>
                   </div>
-                  <div className="decoder-point">
-                    <div className="point-icon">🛡️</div>
-                    <div className="point-content">
-                      <div className="point-label">Emotional & Behavioral Framework</div>
-                      <div className="point-desc">Your "Income DNA" identified to create a unified plan that fits your nature.</div>
+                  <div className="feature-card">
+                    <div className="feature-dot"></div>
+                    <div className="feature-text">
+                      <div className="feature-title">Income Engine</div>
+                      <div className="feature-desc">Multi-source distribution tactics for durable cash flow.</div>
+                    </div>
+                  </div>
+                  <div className="feature-card">
+                    <div className="feature-dot"></div>
+                    <div className="feature-text">
+                      <div className="feature-title">Retirement Rhythm</div>
+                      <div className="feature-desc">Lifestyle-aligned spending driven by your Income DNA.</div>
                     </div>
                   </div>
                 </div>
 
-                <div className="deliverables">
-                  <h4>KEY ALIGN&reg; DELIVERABLES</h4>
-                  <ul style={{ padding: 0 }}>
-                    <li>Custom Blueprint</li>
-                    <li>Stress-Tested Income Paths</li>
-                    <li>Behavior-Driven Advisory</li>
-                  </ul>
+                <div className="deliverables-mini">
+                  <div className="dev-item">Custom Blueprint</div>
+                  <div className="dev-item">Income Paths</div>
+                  <div className="dev-item">Behavior-Driven</div>
                 </div>
               </div>
             </div>
