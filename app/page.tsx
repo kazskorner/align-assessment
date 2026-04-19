@@ -25,7 +25,7 @@ export default function LandingPage() {
 
     // 2. Initial jump to make it feel "live" on load
     const timer = setTimeout(() => {
-      setAssessmentCount(prev => prev + 1);
+      setAssessmentCount((prev: number) => prev + 1);
     }, 5000);
 
     const handleScroll = () => {
@@ -286,7 +286,7 @@ export default function LandingPage() {
           <div className="faq-grid">
             {[
               { q: 'Who is this assessment for?', a: 'For anyone within 10 years of retirement (or already retired) who feels their current financial plan doesn\'t reflect their personality.' },
-              { q: 'Is there a cost for the report?', a: 'The ALIGN assessment and your personalized report are a free value-added service designed to provide you with immediate strategic clarity.' },
+              { q: 'Is there a cost for the report?', a: 'The ALIGN assessment and your personalized report are complimentary.' },
               { q: 'How long do I have to wait for results?', a: 'Zero wait time. Your results are generated instantly and displayed on your screen, with a PDF download link sent to your email.' },
               { q: 'Is my data kept private?', a: 'Absolutely. We do not sell your data. Your responses are used solely to generate your personalized retirement alignment report.' }
             ].map((item, index) => (
