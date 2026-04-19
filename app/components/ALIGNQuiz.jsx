@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { QUESTIONS, US_STATES } from '../../lib/quiz-copy';
-import StarfieldBackground from './StarfieldBackground';
+import NeuralBackground from './NeuralBackground';
 
 /* ─── Brand ─────────────────────────────────────────────────────────────────── */
 const BRAND = '#1a3d5c';
@@ -282,7 +282,7 @@ export default function ALIGNQuiz() {
   if (showGate) {
     return (
       <div style={S.page}>
-        <StarfieldBackground />
+        <NeuralBackground />
         <div style={S.card}>
           <span style={S.logo}>ALIGN Assessment</span>
 
@@ -336,7 +336,7 @@ export default function ALIGNQuiz() {
 
   return (
     <div style={S.page}>
-      <StarfieldBackground />
+      <NeuralBackground />
       <div style={S.card}>
         <span style={S.logo}>ALIGN Assessment</span>
 

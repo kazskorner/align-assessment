@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { Suspense } from 'react';
-import StarfieldBackground from '../components/StarfieldBackground';
+import NeuralBackground from '../components/NeuralBackground';
 import {
   PRIMARY_TRAIT_COPY,
   SECONDARY_TRAIT_COPY,
@@ -131,7 +131,7 @@ function ResultsContent() {
 
   return (
     <>
-      <StarfieldBackground />
+      <NeuralBackground />
       <style>{`
         *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
         html{font-size:16px;scroll-behavior:smooth}
