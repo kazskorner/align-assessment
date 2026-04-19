@@ -279,9 +279,9 @@ export default function LandingPage() {
             <h2 className="about-h">Financial planning should feel <em>deeply personal.</em></h2>
             <p className="about-body">Adam believes that true financial confidence doesn't come from a generic spreadsheet—it comes from an honest conversation about your goals, your vision, and your relationship with risk. With multigenerational experience, he has helped people step into retirement with genuine clarity and peace of mind.</p>
             <div className="about-creds">
-              <div className="about-cred"><div className="cred-dot"></div> Host of Kaz's Korner Retirement Podcast</div>
+              <div className="about-cred"><div className="cred-dot"></div> Host of Kaz's Korner Retirement Podcast & <a href="https://www.youtube.com/@retirewithkaz" target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'underline', color: 'inherit' }}>YouTube Channel</a></div>
               <div className="about-cred"><div className="cred-dot"></div> Founder of ALIGN Assessment Framework</div>
-              <div className="about-cred"><div className="cred-dot"></div> Specialist in Retirement Income Guardrails</div>
+              <div className="about-cred"><div className="cred-dot"></div> Specialist in Retirement Guardrails & Time Segmentation</div>
             </div>
           </div>
         </div>
