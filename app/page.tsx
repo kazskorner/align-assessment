@@ -79,13 +79,13 @@ export default function LandingPage() {
           </p>
 
           <div className="hero-cta-group">
-            <a href="/quiz" target="_blank" className="btn-primary">Begin My Strategic Assessment <span className="btn-arr">→</span></a>
+            <a href="/quiz" target="_blank" className="btn-primary">Begin Assessment <span className="btn-arr">→</span></a>
             <a href="#why" className="btn-secondary">Why It Matters</a>
           </div>
           <p className="hero-meta">
-            No personally identifiable information is collected. &nbsp;·&nbsp; 
+            No personally identifiable information is collected. &nbsp;·&nbsp;
             <span className="live-counter">
-              <span className="live-dot"></span> 
+              <span className="live-dot"></span>
               <strong>{assessmentCount}</strong> Assessments Completed
             </span>
           </p>
@@ -112,7 +112,7 @@ export default function LandingPage() {
         </div>
         <div className="stat-item">
           <div className="stat-num">7-DIMENSION STRESS TEST</div>
-          <div className="stat-label">Translating your personal financial psychology and core metrics into an exact, actionable strategy.</div>
+          <div className="stat-label">Translating your personal financial psychology and core metrics into your actionable strategy.</div>
         </div>
       </div>
 
@@ -202,7 +202,7 @@ export default function LandingPage() {
             </div>
             <div className="d-card reveal d2">
               <div className="d-card-title">Nuanced Preferences</div>
-              <p className="d-card-body">These dictate how we structure your income, protect your liquidity, and pace your distributions to align with your specific vision of financial independence.</p>
+              <p className="d-card-body">These dictate how we structure your income, protect your liquidity, and pace your distributions.</p>
               <div className="d-card-accent"></div>
             </div>
             <div className="d-card reveal d3">
@@ -296,13 +296,12 @@ export default function LandingPage() {
         <a href="/quiz" target="_blank" className="btn-primary" style={{ padding: '20px 48px', fontSize: '16px' }}>
           Execute My Strategy Now <span className="btn-arr">→</span>
         </a>
-        <p className="cta-detail">Private &amp; Secure · Instant Strategic Insights · Multigenerational Experience</p>
       </div>
 
       {/* ── FOOTER ── */}
       <footer>
         <div className="foot-brand">
-          <img src="/logo.jpg" alt="ALIGN Logo" style={{ height: '24px', width: 'auto', filter: 'brightness(0) invert(1)' }} />
+          <img src="/logo.jpg" alt="ALIGN Logo" style={{ height: '24px', width: 'auto' }} />
         </div>
         <div className="foot-copy">© 2026 ALIGN Assessment. Part of Kaz's Korner Ecosystem. All rights reserved.</div>
         <div className="foot-links">
