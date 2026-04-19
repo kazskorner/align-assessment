@@ -4,7 +4,7 @@ Production-grade REST API for the ALIGN retirement quiz assessment. Built with N
 
 ## Features
 
-✅ **Scoring Engine** — 36-question quiz with sophisticated scoring logic
+✅ **Scoring Engine** — 34-question quiz with sophisticated scoring logic
 ✅ **Tier Calculation** — Waterfall rules for A/B/C tier assignment
 ✅ **Bipolar Traits** — 6 trait categories with tie-breaking logic
 ✅ **Quadrant Mapping** — Advisor value + Self efficacy → Implementation persona
