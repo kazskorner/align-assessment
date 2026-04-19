@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ALIGN — Retirement Income Assessment</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{font-size:16px}
+:root{
+  --cyan:#00f0ff;
+  --accent:#3a3a3c;
+  --accent-mid:#5a5a5e;
+  --accent-line:rgba(0,0,0,0.15);
+  --accent-tint:rgba(0,0,0,0.04);
+  --accent-border:rgba(0,0,0,0.12);
+  --charcoal:#4a4a4a;
+  --mid-grey:#666;
+  --bg:#f8f9fb;
+  --bg-alt:#f2f4f7;
+  --surface:#fff;
+  --ink:#1c1c1e;
+  --ink-soft:#4a4a4a;
+  --ink-muted:#666;
+  --ink-faint:#999;
+  --border:rgba(0,0,0,0.06);
+  --border-md:rgba(0,0,0,0.1);
+  --shadow-sm:0 1px 4px rgba(0,0,0,0.05);
+  --shadow-md:0 4px 24px rgba(0,0,0,0.08);
+  --shadow-lg:0 16px 56px rgba(0,0,0,0.10);
+  --panel:#1c1c1e;
+  --font-display:'Manrope',sans-serif;
+  --font-sans:'Inter',sans-serif;
+  --r-sm:8px;--r-md:14px;--r-lg:20px;--r-xl:28px;--r-pill:999px;
+}
+body{background:var(--bg);color:var(--ink);font-family:var(--font-sans);overflow-x:hidden;-webkit-font-smoothing:antialiased;min-height:100vh}
+a{text-decoration:none;color:inherit}
+nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:center;justify-content:space-between;padding:14px 48px;background:rgba(248,249,251,0.96);backdrop-filter:blur(20px);border-bottom:1px solid var(--border-md);box-shadow:var(--shadow-sm)}
+.nav-logo{display:flex;align-items:center;gap:12px;font-family:var(--font-display);font-size:17px;font-weight:700;letter-spacing:-0.02em;color:var(--ink)}
+.nav-logo-mark{width:30px;height:30px;border-radius:7px;background:var(--ink);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#fff;font-family:var(--font-display)}
+.nav-center{position:absolute;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:6px}
+.nav-prog-label{font-size:11px;font-weight:500;color:var(--ink-faint);letter-spacing:0.02em}
+.nav-prog-wrap{width:200px;height:3px;background:rgba(0,0,0,0.08);border-radius:2px;overflow:hidden}
+.nav-prog-fill{height:100%;background:var(--ink);border-radius:2px;transition:width 0.4s ease}
+.nav-right{font-size:13px;color:var(--ink-muted)}
+.quiz-page{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:100px 24px 60px}
+.quiz-card{width:100%;max-width:680px;background:var(--surface);border:1px solid var(--border-md);border-radius:var(--r-xl);box-shadow:var(--shadow-lg);overflow:hidden}
+.card-top{background:var(--panel);padding:20px 32px;display:flex;align-items:center;justify-content:space-between}
+.card-top-label{font-family:var(--font-display);font-size:12px;font-weight:600;color:rgba(255,255,255,0.4);letter-spacing:0.04em;text-transform:uppercase}
+.card-top-dots{display:flex;gap:5px;flex-wrap:wrap;max-width:300px;justify-content:flex-end}
+.dot{width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,0.12);transition:background 0.3s,transform 0.2s}
+.dot.done{background:rgba(255,255,255,0.35)}
+.dot.active{background:var(--cyan);transform:scale(1.35)}
+.card-prog{height:3px;background:rgba(0,0,0,0.06)}
+.card-prog-fill{height:100%;background:linear-gradient(90deg,var(--charcoal),var(--mid-grey));transition:width 0.5s ease}
+.card-body{padding:40px 40px 0}
+.q-meta{display:flex;align-items:center;gap:10px;margin-bottom:16px}
+.q-num-badge{width:28px;height:28px;border-radius:50%;background:rgba(0,0,0,0.05);display:flex;align-items:center;justify-content:center;font-family:var(--font-display);font-size:11px;font-weight:600;color:var(--charcoal);flex-shrink:0}
+.q-category{font-size:11px;font-weight:500;color:var(--accent-mid);letter-spacing:0.04em;text-transform:uppercase}
+.q-text{font-family:var(--font-display);font-size:clamp(20px,3vw,26px);font-weight:700;color:var(--ink);line-height:1.25;letter-spacing:-0.03em;margin-bottom:28px}
+.opts{display:flex;flex-direction:column;gap:10px}
+.opt{padding:15px 20px;border:1.5px solid var(--border-md);border-radius:var(--r-md);font-size:14px;font-weight:400;color:var(--ink-soft);cursor:pointer;transition:all 0.18s;display:flex;align-items:center;gap:14px;background:var(--bg);user-select:none}
+.opt:hover{border-color:var(--accent-border);background:var(--accent-tint);color:var(--ink)}
+.opt.sel{border-color:var(--charcoal);background:rgba(0,0,0,0.04);color:var(--charcoal);font-weight:500}
+.opt-radio{width:20px;height:20px;border-radius:50%;border:1.5px solid var(--border-md);flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:all 0.18s;background:var(--surface)}
+.opt.sel .opt-radio{background:var(--charcoal);border-color:var(--charcoal)}
+.opt.sel .opt-radio::after{content:'';width:7px;height:7px;border-radius:50%;background:#fff}
+.opt-text{line-height:1.5}
+.card-nav{padding:24px 40px 32px;display:flex;align-items:center;justify-content:space-between;border-top:1px solid var(--border);margin-top:28px}
+.q-back{padding:11px 24px;border-radius:var(--r-pill);font-size:13px;font-weight:500;cursor:pointer;background:transparent;color:var(--mid-grey);border:1px solid var(--border-md);font-family:var(--font-sans);transition:all 0.2s;letter-spacing:0.01em}
+.q-back:hover{color:var(--ink);border-color:var(--accent-border)}
+.q-back:disabled{opacity:0;pointer-events:none}
+.q-next{padding:13px 32px;border-radius:var(--r-pill);font-size:13px;font-weight:600;cursor:pointer;background:var(--ink);color:#fff;border:none;font-family:var(--font-sans);display:flex;align-items:center;gap:8px;transition:all 0.2s;letter-spacing:0.01em;margin-left:auto}
+.q-next:disabled{opacity:0.25;cursor:not-allowed}
+.q-next:not(:disabled):hover{background:var(--accent);transform:translateY(-1px);box-shadow:var(--shadow-md)}
+.qblock{display:none}
+.qblock.on{display:block;animation:fadeQ 0.22s ease}
+@keyframes fadeQ{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+#completion{display:none;flex-direction:column;align-items:center;text-align:center;padding:60px 40px}
+#completion.on{display:flex}
+.comp-icon{font-size:44px;margin-bottom:20px}
+.comp-title{font-family:var(--font-display);font-size:28px;font-weight:700;color:var(--ink);letter-spacing:-0.03em;margin-bottom:12px}
+.comp-sub{font-size:15px;font-weight:300;line-height:1.7;color:var(--mid-grey);max-width:380px;margin:0 auto 32px}
+.comp-btn{display:inline-flex;align-items:center;gap:10px;background:var(--ink);color:#fff;padding:16px 36px;border-radius:var(--r-pill);font-size:15px;font-weight:600;cursor:pointer;transition:all 0.3s;font-family:var(--font-sans);border:none;box-shadow:var(--shadow-md)}
+.comp-btn:hover{background:var(--accent);transform:translateY(-2px);box-shadow:var(--shadow-lg)}
+.comp-note{margin-top:14px;font-size:12px;color:var(--ink-faint)}
+.quiz-trust{margin-top:24px;display:flex;align-items:center;justify-content:center;gap:20px;flex-wrap:wrap}
+.trust-item{display:flex;align-items:center;gap:7px;font-size:12px;color:var(--ink-faint)}
+.trust-sep{width:1px;height:12px;background:rgba(0,0,0,0.12)}
+@media(max-width:600px){nav{padding:14px 20px}.nav-center{display:none}.card-body{padding:28px 24px 0}.card-nav{padding:16px 24px 24px}.card-top{padding:16px 24px}}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">
+    <div class="nav-logo-mark">A</div>
+    ALIGN
+  </a>
+  <div class="nav-center">
+    <div class="nav-prog-label" id="nav-label">Question 1 of 34</div>
+    <div class="nav-prog-wrap"><div class="nav-prog-fill" id="nav-bar" style="width:3%"></div></div>
+  </div>
+  <div class="nav-right" id="nav-pct">3% complete</div>
+</nav>
+
+<div class="quiz-page">
+  <div class="quiz-card">
+
+    <div class="card-top">
+      <div class="card-top-label">ALIGN Assessment</div>
+      <div class="card-top-dots" id="dots"></div>
+    </div>
+    <div class="card-prog"><div class="card-prog-fill" id="card-bar" style="width:3%"></div></div>
+
+    <div class="card-body" id="card-body">
+
+      <div class="qblock on" data-q="1">
+        <div class="q-meta"><div class="q-num-badge">1</div><div class="q-category">Income Philosophy</div></div>
+        <div class="q-text">When you imagine retirement income, which feels most like you?</div>
+        <div class="opts">
+          <div class="opt" data-val="A"><div class="opt-radio"></div><div class="opt-text">I want a guaranteed check — same amount, every month, regardless of markets</div></div>
+          <div class="opt" data-val="B"><div class="opt-radio"></div><div class="opt-text">I'm comfortable if income fluctuates somewhat based on portfolio performance</div></div>
+          <div class="opt" data-val="C"><div class="opt-radio"></div><div class="opt-text">I prefer maximum flexibility — I'll draw what I need from investments as needed</div></div>
+        </div>
+      </div>
+
+      <div class="qblock" data-q="2">
+        <div class="q-meta"><div class="q-num-badge">2</div><div class="q-category">Risk Tolerance</div></div>
+        <div class="q-text">A major market drop cuts your portfolio 25%. What's your first instinct?</div>
+        <div class="opts">
+          <div class="opt" data-val="A"><div class="opt-radio"></div><div class="opt-text">Make changes immediately — I can't afford to watch this continue</div></div>
+          <div class="opt" data-val="B"><div class="opt-radio"></div><div class="opt-text">Feel uneasy but stay the course — markets recover and I know it</div></div>
+          <div class="opt" data-val="C"><div class="opt-radio"></div><div class="opt-text">See it as an opportunity — I've been through downturns and don't panic</div></div>
+        </div>
+      </div>
+
+      <div class="qblock" data-q="3">
+        <div class="q-meta"><div class="q-num-badge">3</div><div class="q-category">Time to Retirement</div></div>
+        <div class="q-text">How many years until you expect to fully retire?</div>
+        <div class="opts">
+          <div class="opt" data-val="A"><div class="opt-radio"></div><div class="opt-text">2 years or less — I'm there or nearly there</div></div>
+          <div class="opt" data-val="B"><div class="opt-radio"></div><div class="opt-text">3 to 7 years — in the serious planning phase now</div></div>
+          <div class="opt" data-val="C"><div class="opt-radio"></div><div class="opt-text">8 to 15 years — runway, but planning correctly now</div></div>
+          <div class="opt" data-val="D"><div class="opt-radio"></div><div class="opt-text">More than 15 years — building the right foundation early</div></div>
+        </div>
+      </div>
+
+      <div class="qblock" data-q="4">
+        <div class="q-meta"><div class="q-num-badge">4</div><div class="q-category">Spending Psychology</div></div>
+        <div class="q-text">How do you envision spending across your retirement years?</div>
+        <div class="opts">
+          <div class="opt" data-val="A"><div class="opt-radio"></div><div class="opt-text">Spend more early — while health allows it — and scale back later</div></div>
+          <div class="opt" data-val="B"><div class="opt-radio"></div><div class="opt-text">Steady and consistent, with room for inflation adjustments</div></div>
+          <div class="opt" data-val="C"><div class="opt-radio"></div><div class="opt-text">Preserve now so resources are there for late-life healthcare needs</div></div>
+        </div>
+      </div>
+
+      <div class="qblock" data-q="5">
+        <div class="q-meta"><div class="q-num-badge">5</div><div class="q-category">Liquidity Preference</div></div>
+        <div class="q-text">A major unexpected expense hits — $30,000. How do you prefer to handle it?</div>
+        <div class="opts">
+          <div class="opt" data-val="A"><div class="opt-radio"></div><div class="opt-text">Pull from a dedicated cash reserve I keep for exactly this</div></div>
+          <div class="opt" data-val="B"><div class="opt-radio"></div><div class="opt-text">Sell a portion of investments — comfortable liquidating when needed</div></div>
+          <div class="opt" data-val="C"><div class="opt-radio"></div><div class="opt-text">Use a line of credit first, then repay from assets over time</div></div>
+        </div>
+      </div>
+
+      <div class="qblock" data-q="6">
+        <div class="q-meta"><div class="q-num-badge">6</div><div class="q-category">Advisor Relationship</div></div>
+        <div class="q-text">What role do you want a financial advisor to play?</div>
+        <div class="opts">
+          <div class="opt" data-val="A"><div class="opt-radio"></div><div class="opt-text">Lead the process — I want expert guidance and delegate decisions</div></div>
+          <div class="opt" data-val="B"><div class="opt-radio"></div><div class="opt-text">Collaborate — I want to understand rationale and participate</div></div>
+          <div class="opt" data-val="C"><div class="opt-radio"></div><div class="opt-text">Review and validate — I've done my own work, need a second set of eyes</div></div>
+          <div class="opt" data-val="D"><div class="opt-radio"></div><div class="opt-text">Educate first — building knowledge before deeper engagement</div></div>
+        </div>
+      </div>
+
+      <div class="qblock" data-q="7">
+        <div class="q-meta"><div class="q-num-badge">7</div><div class="q-category">Income Commitment</div></div>
+        <div class="q-text">How do you feel about locking income into a long-term structured product?</div>
+        <div class="opts">
+          <div class="opt" data-val="A"><div class="opt-radio"></div><div class="opt-text">Strongly prefer it — certainty is worth giving up flexibility</div></div>
+          <div class="opt" data-val="B"><div class="opt-radio"></div><div class="opt-text">Open to a portion locked in, the rest flexible</div></div>
+          <div class="opt" data-val="C"><div class="opt-radio"></div><div class="opt-text">Uncomfortable — I want full control of assets at all times</div></div>
+        </div>
+      </div>
+
+    </div><!-- /card-body -->
+
+    <div id="completion">
+      <div class="comp-icon">✦</div>
+      <div class="comp-title">Assessment Complete</div>
+      <div class="comp-sub">Your retirement income profile is ready. See your primary traits, secondary preferences, and implementation persona.</div>
+      <button class="comp-btn" onclick="window.location.href='align-results.html'">View My Results &nbsp;→</button>
+      <div class="comp-note">Results are shown immediately. No email required to view.</div>
+    </div>
+
+    <div class="card-nav" id="card-nav">
+      <button class="q-back" id="btn-back" onclick="prevQ()" disabled>← Back</button>
+      <button class="q-next" id="btn-next" onclick="nextQ()" disabled>Continue &nbsp;→</button>
+    </div>
+
+  </div><!-- /quiz-card -->
+
+  <div class="quiz-trust">
+    <div class="trust-item">✦ No email required to start</div>
+    <div class="trust-sep"></div>
+    <div class="trust-item">About 8 minutes</div>
+    <div class="trust-sep"></div>
+    <div class="trust-item">FINRA Registered · CLU® ChFC® RICP®</div>
+    <div class="trust-sep"></div>
+    <div class="trust-item">34 questions · Instant results</div>
+  </div>
+</div>
+
+<script>
+const TOTAL=34,DEMO=7;let current=1,answers={};
+const dotsEl=document.getElementById('dots');
+for(let i=1;i<=DEMO;i++){const d=document.createElement('div');d.className='dot';d.id='dot-'+i;dotsEl.appendChild(d);}
+function render(){
+  document.querySelectorAll('.qblock').forEach(b=>b.classList.toggle('on',+b.dataset.q===current));
+  for(let i=1;i<=DEMO;i++){const d=document.getElementById('dot-'+i);if(!d)continue;d.classList.remove('done','active');if(i<current)d.classList.add('done');else if(i===current)d.classList.add('active');}
+  document.querySelectorAll('.qblock.on .opt').forEach(o=>o.classList.toggle('sel',answers[current]===o.dataset.val));
+  const pct=Math.max(3,Math.round(((current-1)/TOTAL)*100));
+  document.getElementById('nav-bar').style.width=pct+'%';
+  document.getElementById('card-bar').style.width=pct+'%';
+  document.getElementById('nav-label').textContent='Question '+current+' of '+TOTAL;
+  document.getElementById('nav-pct').textContent=pct+'% complete';
+  document.getElementById('btn-back').disabled=current===1;
+  document.getElementById('btn-next').disabled=!answers[current];
+}
+document.querySelectorAll('.opt').forEach(opt=>{
+  opt.addEventListener('click',()=>{
+    const q=+opt.closest('.qblock').dataset.q;
+    answers[q]=opt.dataset.val;
+    document.querySelectorAll('.qblock[data-q="'+q+'"] .opt').forEach(o=>o.classList.remove('sel'));
+    opt.classList.add('sel');
+    document.getElementById('btn-next').disabled=false;
+    setTimeout(()=>nextQ(),300);
+  });
+});
+function nextQ(){
+  if(!answers[current])return;
+  if(current>=DEMO){
+    document.getElementById('card-body').style.display='none';
+    document.getElementById('card-nav').style.display='none';
+    document.getElementById('completion').classList.add('on');
+    document.getElementById('nav-bar').style.width='100%';
+    document.getElementById('card-bar').style.width='100%';
+    document.getElementById('nav-label').textContent='Assessment Complete';
+    document.getElementById('nav-pct').textContent='100% complete';
+    for(let i=1;i<=DEMO;i++){const d=document.getElementById('dot-'+i);if(d){d.classList.remove('active');d.classList.add('done');}}
+    return;
+  }
+  current++;render();
+}
+function prevQ(){if(current<=1)return;current--;render();}
+render();
+</script>
+</body>
+</html>
