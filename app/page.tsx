@@ -57,7 +57,7 @@ export default function LandingPage() {
       <section className="hero" id="top">
         <div className="hero-video-bg">
           <iframe
-            src="https://www.youtube.com/embed/fD5UqsrtuG4?autoplay=1&mute=1&loop=1&playlist=fD5UqsrtuG4&controls=0&showinfo=0&rel=0&modestbranding=1&playsinline=1&enablejsapi=1&version=3"
+            src="https://www.youtube.com/embed/fD5UqsrtuG4?autoplay=1&mute=1&loop=1&playlist=fD5UqsrtuG4&controls=0&showinfo=0&rel=0&modestbranding=1&playsinline=1&enablejsapi=1&version=3&rel=0"
             title="ALIGN Hero Background"
             frameBorder="0"
             className="hero-video"
