@@ -718,10 +718,10 @@ section{padding:100px 48px}
 }
 .how-step-num{
   width:56px;height:56px;border-radius:50%;
-  background:var(--surface);border:1px solid var(--accent-border);
+  background:var(--surface);border:2px solid var(--cyan);
   display:flex;align-items:center;justify-content:center;
-  font-family:var(--font-display);font-size:14px;font-weight:600;color:var(--charcoal);
-  margin:0 auto 24px;box-shadow:var(--shadow-sm);
+  font-family:var(--font-display);font-size:15px;font-weight:700;color:var(--ink);
+  margin:0 auto 24px;box-shadow: 0 0 15px rgba(0,240,255,0.15);
 }
 .how-step-title{
   font-family:var(--font-display);font-size:15px;font-weight:700;
