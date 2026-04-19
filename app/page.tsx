@@ -5,11 +5,7 @@ import './landing.css';
 
 export default function LandingPage() {
   const [scrolled, setScrolled] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
   const [faqOpen, setFaqOpen] = useState<number | null>(null);
-  
-  const rFillRef = useRef<SVGCircleElement>(null);
-  const rValRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const handleScroll = () => {
