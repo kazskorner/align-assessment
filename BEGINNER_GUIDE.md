@@ -11,11 +11,11 @@ Welcome, Kaz. This guide will walk you through **what each file does**, **why it
 When someone takes your retirement quiz, here's what happens:
 
 ```
-User fills out 36 questions
+User fills out 34 questions
           ↓
 Clicks "Get My Results"
           ↓
-Frontend sends all 36 answers to our API
+Frontend sends all 34 answers to our API
           ↓
 API (backend) calculates:
   - Which tier (A, B, or C)
