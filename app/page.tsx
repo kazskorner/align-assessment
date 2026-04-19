@@ -49,7 +49,7 @@ export default function LandingPage() {
       {/* ── HERO ── */}
       <section className="hero" id="top">
         <div className="hero-video-bg">
-          <iframe 
+          <iframe
             src="https://www.youtube.com/embed/fD5UqsrtuG4?autoplay=1&mute=1&loop=1&playlist=fD5UqsrtuG4&controls=0&showinfo=0&rel=0&modestbranding=1&playsinline=1&enablejsapi=1&version=3"
             title="ALIGN Hero Background"
             frameBorder="0"
@@ -98,20 +98,16 @@ export default function LandingPage() {
       {/* ── STAT STRIP ── */}
       <div className="stat-strip">
         <div className="stat-item">
-          <div className="stat-num">MULTIGENERATION</div>
-          <div className="stat-label">EXPERIENCED ADVISOR</div>
+          <div className="stat-num">SECOND GENERATION ADVISOR</div>
+          <div className="stat-label">17+ YEARS OF CLIENT EXPERIENCE</div>
         </div>
         <div className="stat-item">
-          <div className="stat-num">SEVEN</div>
-          <div className="stat-label">DIMENSIONS ANALYZED</div>
+          <div className="stat-num">ADVANCED PLANNING DESIGNATIONS</div>
+          <div className="stat-label">RICP&reg;, ChFC&reg;, CLU&reg;</div>
         </div>
         <div className="stat-item">
-          <div className="stat-num">LESS THAN 17</div>
-          <div className="stat-label">MINUTES TO COMPLETE</div>
-        </div>
-        <div className="stat-item">
-          <div className="stat-num">PERSONALIZED</div>
-          <div className="stat-label">RESULTS</div>
+          <div className="stat-num">SEVEN DIMENSIONS ANALYZED</div>
+          <div className="stat-label">USE IN YOUR OWN CUSTOMIZED STRATEGY</div>
         </div>
       </div>
 
@@ -122,7 +118,7 @@ export default function LandingPage() {
           <h2 className="section-h reveal d1" style={{ fontSize: 'clamp(32px, 5vw, 64px)', maxWidth: '900px' }}>
             "A strategy you don't <em>emotionally believe in</em> is a strategy you cannot execute long-term."
           </h2>
-          
+
           <div className="problem-grid">
             <div className="problem-left reveal d1">
               <p className="problem-lead">Sophisticated math is only as effective as your <strong>ability to adhere to it.</strong></p>
@@ -133,7 +129,7 @@ export default function LandingPage() {
             <div className="problem-right reveal d2">
               <div className="mismatch-card" style={{ padding: '40px', background: '#fff' }}>
                 <div className="mismatch-title" style={{ fontSize: '14px', color: 'var(--accent-mid)', marginBottom: '32px', letterSpacing: '0.05em' }}>THE STRATEGIC EVOLUTION</div>
-                
+
                 <div className="mismatch-comparison">
                   <div className="comparison-phase">
                     <div className="phase-label">TRADITIONAL INSTITUTIONS</div>
@@ -144,12 +140,12 @@ export default function LandingPage() {
                     </ul>
                     <div className="phase-result">The "Optimal" Spreadsheet</div>
                   </div>
-                  
+
                   <div className="comparison-arrow">
                     <div className="arrow-line"></div>
                     <div className="arrow-head"></div>
                   </div>
-                  
+
                   <div className="comparison-phase align-phase" style={{ background: '#0047ff', color: '#fff', borderRadius: '12px', padding: '24px' }}>
                     <div className="phase-label" style={{ color: 'rgba(255,255,255,0.7)' }}>THE ALIGN SYSTEM</div>
                     <ul className="phase-metrics" style={{ color: '#fff' }}>
@@ -160,7 +156,7 @@ export default function LandingPage() {
                     <div className="phase-result" style={{ color: 'var(--cyan)', fontWeight: '700' }}>Strategic Clarity & Sustainable Flow</div>
                   </div>
                 </div>
-                
+
                 <div className="mismatch-cost" style={{ borderTop: '1px solid var(--border)', marginTop: '24px' }}>
                   <strong>The Reality:</strong> Mathematical precision is table stakes. ALIGN ensures your plan is resilient enough to survive the human at the center.
                 </div>
@@ -187,7 +183,7 @@ export default function LandingPage() {
         <div className="section-inner">
           <div className="section-tag reveal">Impact Analysis</div>
           <h2 className="section-h reveal d1">What you'll discover about your<br /><em>optimized retirement strategy.</em></h2>
-          
+
           <div className="discover-grid">
             <div className="d-card reveal d1">
               <span className="d-num">COMPONENT 01</span>
