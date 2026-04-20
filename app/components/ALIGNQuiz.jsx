@@ -343,7 +343,7 @@ export default function ALIGNQuiz() {
         <div style={S.progressRow}>
           <div style={S.progressWrap}>
             <div style={S.progressBar}><div style={S.progressFill(progress)} /></div>
-            <p style={S.progressLabel}>{currentQuestion + 1} of {QUESTIONS.length}</p>
+            <p style={S.progressLabel}>{Math.round(progress)}% Complete</p>
           </div>
         </div>
 
