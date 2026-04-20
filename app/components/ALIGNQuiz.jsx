@@ -5,9 +5,10 @@ import { useRouter } from 'next/navigation';
 import { QUESTIONS, US_STATES } from '../../lib/quiz-copy';
 import NeuralBackground from './NeuralBackground';
 
-/* ─── Brand ─────────────────────────────────────────────────────────────────── */
-const BRAND = '#1a3d5c';
-const BRAND_LIGHT = '#e8f0f7';
+/* ─── Brand (from Brand Guide) ──────────────────────────────────────────────── */
+const BRAND = '#073557'; // Alternate Deep Blue
+const BRAND_SECONDARY = '#4a4a4a'; // Primary Charcoal
+const CYAN = '#00f0ff';
 
 /* ─── Helpers ────────────────────────────────────────────────────────────────── */
 function isValidEmail(email) {

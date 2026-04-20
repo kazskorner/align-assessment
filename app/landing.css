@@ -1,20 +1,16 @@
 :root {
-  /* Grey accent — LIGHT backgrounds */
-  --accent: #3a3a3c;
-  /* primary accent on light: near-ink, strong */
-  --accent-mid: #5a5a5e;
-  /* secondary accent: softer charcoal */
-  --accent-line: rgba(0, 0, 0, 0.15);
-  /* subtle dividers / tag lines */
-  --accent-tint: rgba(0, 0, 0, 0.04);
-  /* hover fills on light */
-  --accent-border: rgba(0, 0, 0, 0.12);
-  /* hover borders on light */
-
-  /* Brand greys */
+  /* Brand Colors (from Align Brand Guide.pdf) */
   --charcoal: #4a4a4a;
   --mid-grey: #666666;
-  --light-grey: #999999;
+  --cyan: #00f0ff;
+  --brand-blue: #073557;
+
+  /* Accent mapping */
+  --accent: var(--charcoal);
+  --accent-mid: var(--mid-grey);
+  --accent-line: rgba(74, 74, 74, 0.15);
+  --accent-tint: rgba(0, 240, 255, 0.04);
+  --accent-border: rgba(74, 74, 74, 0.12);
 
   /* Light mode surfaces */
   --bg: #f8f9fb;
@@ -24,8 +20,8 @@
 
   /* Text */
   --ink: #1c1c1e;
-  --ink-soft: #4a4a4a;
-  --ink-muted: #666666;
+  --ink-soft: var(--charcoal);
+  --ink-muted: var(--mid-grey);
   --ink-faint: #999999;
 
   /* Borders & shadows */
@@ -37,14 +33,17 @@
   --shadow-lg: 0 16px 56px rgba(0, 0, 0, 0.10);
   --shadow-cyan: 0 0 32px rgba(0, 240, 255, 0.12);
 
-  /* Dark panel (About section, stat strip, footer) */
-  --panel: #1c1c1e;
-  --panel-soft: #252528;
+  /* Panels */
+  --panel: #111113;
+  --panel-soft: #1c1c1e;
 
-  /* Fonts */
-  --font-display: 'Manrope', sans-serif;
+  /* Fonts (Updated for Brand Guide - Gotham fallback) */
+  --font-display: 'Gotham', 'Montserrat', 'Manrope', sans-serif;
   --font-sans: 'Inter', sans-serif;
   --font-mono: 'Manrope', sans-serif;
+
+  /* Tracking (from Brand Guide: tracking 60) */
+  --tracking-wide: 0.06em;
 
   /* Radii */
   --r-sm: 8px;
@@ -52,8 +51,6 @@
   --r-lg: 20px;
   --r-xl: 28px;
   --r-pill: 999px;
-
-  --cyan: #00f0ff;
 }
 
 *,
@@ -219,20 +216,17 @@ nav.scrolled .nav-cta:hover {
 /* ─── HERO VIDEO BACKGROUND ─── */
 .hero-video-bg {
   position: absolute;
-  inset: 0;
-  z-index: 0;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100%;
   overflow: hidden;
+  z-index: 1;
 }
 
 .hero-video {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  min-width: 100%;
-  min-height: 100%;
-  width: auto;
-  height: auto;
-  transform: translate(-50%, -50%);
+  width: 100%;
+  height: 100%;
   object-fit: cover;
 }
 

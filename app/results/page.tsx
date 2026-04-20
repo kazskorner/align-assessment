@@ -1,44 +1,57 @@
 'use client';
 
-import React, { useEffect, useState, Suspense } from 'react';
+import React, { useState, useEffect, Suspense } from 'react';
 import { useRouter } from 'next/navigation';
 import NeuralBackground from '../components/NeuralBackground';
-import {
-  PRIMARY_TRAIT_COPY,
-  SECONDARY_TRAIT_COPY,
-  PERSONA_COPY,
-} from '@/lib/quiz-copy';
+import { PRIMARY_TRAIT_COPY, SECONDARY_TRAIT_COPY, PERSONA_COPY } from '../../lib/quiz-copy';
 import './results.css';
 
-/* ─── CTA config (Dark themed) ──────────────────────────────────────────────── */
-const CTA_CONFIG = {
+const CTA_CONFIG: any = {
   A: {
-    heading: "Your profile is ready. Your strategy isn't built yet.",
-    sub: "This assessment identifies where you stand. A focused strategy session with Adam will translate it into a plan built around your psychology — not a template.",
-    card1: { num: '01', title: 'Review Your Full Profile', body: "You've just identified your income style, planning approach, and implementation persona. This is the foundation every good retirement strategy starts with." },
-    card2: { num: '02', title: 'Book a Strategy Session', body: "A focused 45-minute session with Adam — no sales pressure, just a real conversation about what your profile means in practice for your specific situation." },
-    card3: { num: '03', title: 'Build the Right Plan', body: "Adam will design a retirement income strategy built for your specific psychology — not what worked for your neighbor or what a generic plan recommends." },
-    btnText: 'Book My Strategy Session',
-    btnUrl: 'https://calendly.com/adam-kazinec/align-strategy-session',
+    heading: "Your strategy isn't built yet.",
+    sub: "You have the profile of a Strategic Principal. This warrants a direct conversation to bridge your persona with a high-conviction architecture.",
+    btnText: "Schedule Strategy Session",
+    btnUrl: "https://calendly.com/adam-kazinec/align-strategy-session",
+    card1: { num: "01", title: "Architecture Review", body: "We map your ALIGN results to a specific income framework built for HNW profiles." },
+    card2: { num: "02", title: "Gap Analysis", body: "Identify where your current portfolio origins might conflict with your cash flow governance." },
+    card3: { num: "03", title: "Governance Design", body: "Create a legacy-ready structure that synchronizes your capital with your lifestyle convictions." }
   },
   B: {
-    heading: "Your profile is ready. Let's map your next move.",
-    sub: "You're in a meaningful planning window. A focused conversation with Adam will show you exactly where you stand and what the highest-value next steps look like for your situation.",
-    card1: { num: '01', title: 'Understand Your Profile', body: "Your income preferences, planning style, and implementation persona are now clearly defined. That's more clarity than most people carry into a planning conversation." },
-    card2: { num: '02', title: 'Schedule a Discovery Call', body: "A structured 30-minute conversation to assess where you are, what your profile points to, and whether working together makes sense for your situation." },
-    card3: { num: '03', title: 'Move with Confidence', body: "Stop planning in the abstract. With a clear profile and the right guidance, the next steps become specific, actionable, and yours." },
-    btnText: 'Book My Discovery Call',
-    btnUrl: 'https://calendly.com/adam-kazinec/align-discovery-call',
+    heading: "Your strategy isn't built yet.",
+    sub: "As a Growth Visionary, your path to 'enough' requires intentional pivots. Let's align your current trajectory with your long-term engine.",
+    btnText: "Book Discovery Call",
+    btnUrl: "https://calendly.com/adam-kazinec/align-discovery-call",
+    card1: { num: "01", title: "Momentum Audit", body: "Evaluate your current growth velocity against your targeted retirement rhythm." },
+    card2: { num: "02", title: "Pivot identification", body: "Pinpoint where systematic adjustments can transform wealth into sustainable income." },
+    card3: { num: "03", title: "Strategic Roadmap", body: "Define the specific steps needed to transition from 'accumulation' to 'distribution'." }
   },
   C: {
-    heading: "Your profile is ready. Understanding where you stand is the first step.",
-    sub: "Knowing your income preferences, risk approach, and planning style puts you ahead of most people who enter retirement without ever asking these questions.",
-    card1: { num: '01', title: 'Study Your Profile', body: "You've just mapped six dimensions of how you think about retirement income. That's a real foundation — use it to evaluate any future planning conversation." },
-    card2: { num: '02', title: 'Learn at Your Pace', body: "Kaz's Korner has free resources built around the same philosophy behind this assessment — plain-language retirement education with no agenda attached." },
-    card3: { num: '03', title: 'Come Back When You\'re Ready', body: "When the timeline gets closer or the numbers start to align, Adam will be here. There's no pressure and no expiration date on this profile." },
-    btnText: 'Watch Kaz\'s Korner',
-    btnUrl: 'https://www.youtube.com/@KazsKorner',
+    heading: "Build your foundation.",
+    sub: "Clarity is the first step. Use these insights as a baseline for your future retirement rhythm and educational framework.",
+    btnText: "Review Master Guide",
+    btnUrl: "https://retirewithkaz.com/guide",
+    card1: { num: "01", title: "Education First", body: "Deep dive into the core mechanics of contractual vs. market-driven income." },
+    card2: { num: "02", title: "Baseline Mapping", body: "Use your ALIGN profile to evaluate your current savings strategy." },
+    card3: { num: "03", title: "Long Game Plan", body: "Establish the habits that will sustain your wealth through different retirement chapters." }
+  }
+};
+
+const TIER_MESSAGING = {
+  A: {
+    tagline: "you’ve achieved the summit.",
+    emp: "Now, let’s architect the view.",
+    sub: "Your results indicate a sophisticated wealth profile that requires a high-conviction governance model. Below is your bespoke ALIGN Strategic Outlook, designed to synchronize your capital origins with a legacy of lifestyle certainty."
   },
+  B: {
+    tagline: "your momentum is clear.",
+    emp: "Now, let’s align your trajectory.",
+    sub: "You are entering a critical phase of wealth optimization. Your ALIGN assessment highlights the key pivots needed to transition your current growth into a sustainable, long-term income engine. Let’s explore your path to ‘enough’."
+  },
+  C: {
+    tagline: "clarity is the first step.",
+    emp: "Now, let’s build your foundation.",
+    sub: "Understanding the mechanics of your future income is essential to long-term success. Your ALIGN results provide a baseline for your retirement rhythm, offering a clear framework for how you can begin to structure your path forward."
+  }
 };
 
 function ResultsContent() {
@@ -102,45 +115,12 @@ function ResultsContent() {
     return () => io.disconnect();
   }, [results]);
 
-  if (!mounted || !results) {
-    return (
-      <div className="loading-state-wrap">
-        <NeuralBackground />
-        <div className="loading-content">
-          <div className="loading-spinner"></div>
-          <p>Architecting Your Profile...</p>
-        </div>
-        <style>{`
-          .loading-state-wrap {
-            height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: #0c0c0e;
-            color: #00f0ff;
-          }
-          .loading-content {
-            text-align: center;
-            z-index: 10;
-          }
-          .loading-spinner {
-            width: 48px;
-            height: 48px;
-            border: 3px solid rgba(0, 240, 255, 0.1);
-            border-top-color: #00f0ff;
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-            margin: 0 auto 20px;
-          }
-          @keyframes spin { to { transform: rotate(360deg); } }
-        `}</style>
-      </div>
-    );
-  }
+  if (!mounted || !results) return null;
 
   const tr   = results.traitResults || {};
-  const tier = results.tier || 'C';
-  const cta  = CTA_CONFIG[tier as keyof typeof CTA_CONFIG] || CTA_CONFIG.C;
+  const tier = (results.tier || 'C') as keyof typeof TIER_MESSAGING;
+  const msg  = TIER_MESSAGING[tier] || TIER_MESSAGING.C;
+  const cta  = CTA_CONFIG[tier] || CTA_CONFIG.C;
   const firstName = results.firstName || '';
 
   const incomeSourceCopy = PRIMARY_TRAIT_COPY[tr.incomeSource] || '';
@@ -149,10 +129,10 @@ function ResultsContent() {
   const personaData = PERSONA_COPY[results.persona] || PERSONA_COPY['Pragmatic Realist'];
 
   const secondaryTraits = [
-    { label: 'Mindset',           icon: '🧠', val: tr.mindset,        desc: 'Approach to retirement wealth' },
-    { label: 'Liquidity',         icon: '💧', val: tr.liquidity,      desc: 'Preference for cash accessibility' },
-    { label: 'Spending Profile',  icon: '📈', val: tr.spender,        desc: 'Distribution of spending over time' },
-    { label: 'Payout Structure',  icon: '🗓', val: tr.payoutPattern,  desc: 'Structure of income delivery' },
+    { label: tr.mindset,         val: tr.mindset,        desc: 'Approach to retirement wealth' },
+    { label: 'Liquidity Preference', val: tr.liquidity,      desc: 'Preference for cash accessibility' },
+    { label: 'Spending Profile',  val: tr.spender,        desc: 'Distribution of spending over time' },
+    { label: 'Payout Pattern',    val: tr.payoutPattern,  desc: 'Structure of income delivery' },
   ];
 
   return (
@@ -170,32 +150,56 @@ function ResultsContent() {
       </nav>
 
       <main>
-        {/* HERO */}
-        <section className="results-hero">
-          <div className="hero-corner tl"></div>
-          <div className="hero-corner tr"></div>
+        {/* CINEMATIC VIDEO HERO */}
+        <section className="results-hero video-hero">
+          <div className="hero-video-wrap">
+            <video 
+              autoPlay 
+              muted 
+              loop 
+              playsInline 
+              className="hero-video-el"
+              src="/hero-video.mp4"
+            />
+            <div className="hero-video-scrim"></div>
+          </div>
           
           <div className="hero-inner">
-            <h1 className="hero-title reveal d1">
-              {firstName ? `${firstName}, your ` : 'Your '} Retirement Profile:
-              <em>{tr.incomeSource} · {tr.incomeStructure}</em>
-            </h1>
-            <p className="hero-desc reveal d2">
-              Your behavioral fingerprint reveals a specific set of needs for your retirement strategy. 
-              Below is how your capital should be aligned with your convictions.
+            <div className="hero-content reveal d1">
+              <h1 className="hero-tagline">
+                <span className="first-name">{firstName},</span> {msg.tagline}
+                <em className="hero-emp">{msg.emp}</em>
+              </h1>
+              <p className="hero-subheading-overlay">
+                {msg.sub}
+              </p>
+            </div>
+          </div>
+        </section>
+
+        {/* THE BRIDGE */}
+        <section className="bridge-section">
+          <div className="section-inner">
+            <p className="principal-mandate reveal d1">
+              "Your ALIGN results represent more than data; they reflect your personal philosophy on capital stewardship. 
+              Below, we break down the <strong>Strategic Architecture</strong> of your plan—starting with the core mechanics 
+              that will drive and sustain your future."
             </p>
           </div>
         </section>
 
-        {/* FOUNDATIONAL COMPONENTS */}
+        {/* FOUNDATIONAL COMPONENTS | STRATEGIC ARCHITECTURE */}
         <section className="res-section">
           <div className="section-inner">
-            <div className="section-tag reveal">Foundational Components</div>
-            <h2 className="section-h reveal">Two dimensions that define your <em>income strategy.</em></h2>
-            <p className="section-sub reveal">These traits have the most influence on which retirement income structure matches your psychology.</p>
+            <div className="section-tag reveal">Foundational Components | Strategic Architecture</div>
+            <h2 className="section-h reveal">The <em>Engine & The Rhythm.</em></h2>
+            <p className="section-sub reveal">
+              Every resilient strategy requires a dual-focus: <strong>Capital Origins</strong> and <strong>Cash Flow Governance.</strong> 
+              We begin by identifying the ‘Engine’—the sophisticated sources that will generate your revenue—and the 
+              ‘Rhythm’—the structural cadence that ensures your wealth supports your lifestyle without interruption.
+            </p>
             
             <div className="trait-grid">
-              {/* Your Retirement Engine */}
               <div className="trait-card reveal d1">
                 <div className="trait-name">Your Retirement Engine</div>
                 <div className="trait-result">
@@ -204,7 +208,6 @@ function ResultsContent() {
                 <div className="trait-body">{incomeSourceCopy}</div>
               </div>
 
-              {/* Your Retirement Rhythm */}
               <div className="trait-card reveal d2">
                 <div className="trait-name">Your Retirement Rhythm</div>
                 <div className="trait-result">
@@ -230,7 +233,6 @@ function ResultsContent() {
                 const copy = t.val ? SECONDARY_TRAIT_COPY[secondaryKey(t.val)] : '';
                 return (
                   <div key={t.label} className={`sec-card reveal d${i+1}`}>
-                    <span className="sec-card-icon">{t.icon}</span>
                     <div className="sec-name">{t.label}</div>
                     <p className="sec-body">
                       {copy ? copy.split('\n\n')[0] : t.desc}
@@ -246,8 +248,8 @@ function ResultsContent() {
         <section className="res-section" style={{ borderTop: '1px solid rgba(255,255,255,0.05)' }}>
           <div className="section-inner">
             <div className="section-tag reveal">Implementation Persona</div>
-            <div className="persona-wrap">
-              <div className="persona-card reveal d1">
+            <div className="persona-focus-wrap">
+              <div className="persona-card reveal d1" style={{ maxWidth: '800px', margin: '60px auto 0' }}>
                 <div className="persona-quadrant">Quadrant: {results.persona}</div>
                 <div className="persona-name">{results.persona}</div>
                 <div className="persona-tags">
@@ -255,30 +257,6 @@ function ResultsContent() {
                   <div className="p-tag">{results.quadrant?.selfEfficacy > 0 ? 'High' : 'Exploring'} Confidence</div>
                 </div>
                 <p className="persona-desc">{personaData.description}</p>
-              </div>
-
-              <div className="matrix-container reveal d2">
-                <div className="matrix-label">
-                  <span className="axis-label">Low Confidence</span>
-                  <span className="axis-label">High Confidence</span>
-                </div>
-                <div className="persona-matrix">
-                  {[
-                    { name: 'Collaborative Partner', sub: 'High advisor + High confidence' },
-                    { name: 'Strategic Delegator',   sub: 'High advisor + Low confidence' },
-                    { name: 'Confident Investor',    sub: 'Low advisor + High confidence' },
-                    { name: 'Independent Learner',   sub: 'Low advisor + Low confidence' },
-                  ].map((cell) => (
-                    <div key={cell.name} className={`pm-cell${results.persona === cell.name ? ' active' : ''}`}>
-                      <div className="pm-cell-name">{cell.name}</div>
-                      <div className="pm-cell-sub">{cell.sub}</div>
-                    </div>
-                  ))}
-                </div>
-                <div className="matrix-label">
-                  <span className="axis-label">Low Advisor Value</span>
-                  <span className="axis-label">High Advisor Value</span>
-                </div>
               </div>
             </div>
           </div>

@@ -70,13 +70,15 @@ export default function LandingPage() {
       {/* ── HERO ── */}
       <section className="hero" id="top">
         <div className="hero-video-bg">
-          <iframe
-            src="https://www.youtube.com/embed/fD5UqsrtuG4?autoplay=1&mute=1&loop=1&playlist=fD5UqsrtuG4&controls=0&showinfo=0&rel=0&modestbranding=1&playsinline=1&enablejsapi=1&version=3&rel=0"
-            title="ALIGN Hero Background"
-            frameBorder="0"
+          <video
+            autoPlay
+            muted
+            loop
+            playsInline
             className="hero-video"
-            style={{ width: '100vw', height: '56.25vw', minHeight: '100vh', minWidth: '177.77vh', position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', pointerEvents: 'none' }}
-          ></iframe>
+          >
+            <source src="/landing-hero.mp4" type="video/mp4" />
+          </video>
           <div className="hero-video-overlay"></div>
         </div>
 
@@ -89,7 +91,7 @@ export default function LandingPage() {
           </h1>
 
           <p className="hero-subtext">
-            Most retirement strategies fail not because of bad math, but because of <strong>emotional misalignment.</strong> Define your Wealth Implementation Persona in Less than 17 minutes.
+            After nearly 20 years helping people retire, I've found that most retirement plans fail for one reason <strong>the strategy doesn't match how you actually think and feel about money. </strong> Let's change that.
           </p>
 
           <div className="hero-cta-group">

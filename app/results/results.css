@@ -1,27 +1,39 @@
 
 /* ─── Variables (Aligned with landing.css) ─── */
 :root {
-  /* Colors */
+  /* Brand Colors (from Align Brand Guide.pdf) */
   --cyan: #00f0ff;
   --cyan-dim: rgba(0, 240, 255, 0.10);
   --cyan-border: rgba(0, 240, 255, 0.25);
+  --charcoal: #4a4a4a;
+  --brand-grey: #666666;
+  --brand-blue: #073557;
+
+  /* Theme Surfaces */
   --bg: #0c0c0e;
   --surface: #1c1c1e;
   --surface-alt: #252528;
   --panel: #1c1c1e;
+
+  /* Ink/Labels */
   --ink: #1c1c1e;
-  --ink-soft: #4a4a4a;
-  --ink-muted: #666666;
+  --ink-soft: var(--charcoal);
+  --ink-muted: var(--brand-grey);
   --ink-faint: #999999;
+
+  /* Global Colors mapping */
   --border: rgba(255, 255, 255, 0.08);
   --border-md: rgba(255, 255, 255, 0.12);
   --text-main: #ffffff;
   --text-dim: rgba(255, 255, 255, 0.7);
   --text-mute: rgba(255, 255, 255, 0.35);
 
-  /* Fonts */
-  --font-display: 'Manrope', sans-serif;
+  /* Fonts (Updated for Brand Guide - Gotham fallback) */
+  --font-display: 'Gotham', 'Montserrat', 'Manrope', sans-serif;
   --font-sans: 'Inter', sans-serif;
+
+  /* Tracking (from Brand Guide: tracking 60) */
+  --tracking-wide: 0.06em;
 
   /* Radii */
   --r-sm: 8px;
@@ -176,12 +188,113 @@ nav.results-nav {
   letter-spacing: 0.02em;
 }
 
+/* ─── Cinematic Video Hero ─── */
+.video-hero {
+  position: relative;
+  height: min(800px, 90vh); /* Cinematic aspect ratio preferred */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  padding: 0;
+  text-align: center;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+
+.hero-video-wrap {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+.hero-video-el {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.hero-video-scrim {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to bottom, rgba(12,12,14,0.4), rgba(12,12,14,0.8));
+  z-index: 2;
+}
+
+.hero-inner {
+  position: relative;
+  z-index: 3;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 40px;
+}
+
+.hero-tagline {
+  font-family: var(--font-display);
+  font-size: clamp(32px, 5vw, 64px);
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  color: #fff;
+  margin-bottom: 32px;
+}
+
+.hero-tagline .first-name {
+  color: var(--cyan);
+  display: block;
+}
+
+.hero-tagline em {
+  display: block;
+  font-style: italic;
+  font-weight: 300;
+  color: rgba(255,255,255,0.7);
+  font-size: 0.65em;
+  margin-top: 16px;
+}
+
+.hero-subheading-overlay {
+  max-width: 800px;
+  margin: 0 auto;
+  font-size: clamp(16px, 1.5vw, 20px);
+  line-height: 1.6;
+  color: rgba(255,255,255,0.8);
+  font-family: var(--font-sans);
+  font-weight: 400;
+}
+
+/* ─── The Bridge ─── */
+.bridge-section {
+  padding: 100px 0;
+  background: var(--bg);
+  text-align: center;
+}
+
+.principal-mandate {
+  max-width: 900px;
+  margin: 0 auto;
+  font-size: clamp(20px, 2.5vw, 28px);
+  line-height: 1.5;
+  color: #fff;
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-style: italic;
+}
+
 .hero-title {
   font-family: var(--font-display);
   font-size: clamp(40px, 6vw, 72px);
   font-weight: 700;
   line-height: 1.05;
-  letter-spacing: -0.04em;
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
   color: #fff;
   margin-bottom: 24px;
 }
@@ -312,9 +425,10 @@ nav.results-nav {
   font-size: clamp(32px, 4.5vw, 56px);
   font-weight: 700;
   line-height: 1.05;
-  letter-spacing: -0.035em;
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
   color: #fff;
-  margin-bottom: 20px;
+  margin-bottom: 24px;
 }
 
 .section-h em {
