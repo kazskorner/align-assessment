@@ -129,7 +129,7 @@ function ResultsContent() {
   const personaData = PERSONA_COPY[results.persona] || PERSONA_COPY['Pragmatic Realist'];
 
   const secondaryTraits = [
-    { label: tr.mindset,         val: tr.mindset,        desc: 'Approach to retirement wealth' },
+    { label: 'Strategic Mindset',  val: tr.mindset,        desc: 'Approach to retirement wealth' },
     { label: 'Liquidity Preference', val: tr.liquidity,      desc: 'Preference for cash accessibility' },
     { label: 'Spending Profile',  val: tr.spender,        desc: 'Distribution of spending over time' },
     { label: 'Payout Pattern',    val: tr.payoutPattern,  desc: 'Structure of income delivery' },
@@ -202,18 +202,12 @@ function ResultsContent() {
             <div className="trait-grid">
               <div className="trait-card reveal d1">
                 <div className="trait-name">Your Retirement Engine</div>
-                <div className="trait-result">
-                  <div className="trait-result-dot"></div> {tr.incomeSource}
-                </div>
-                <div className="trait-body">{incomeSourceCopy}</div>
+                <div className="trait-body" style={{ marginTop: '20px' }}>{incomeSourceCopy}</div>
               </div>
 
               <div className="trait-card reveal d2">
                 <div className="trait-name">Your Retirement Rhythm</div>
-                <div className="trait-result">
-                  <div className="trait-result-dot"></div> {tr.incomeStructure}
-                </div>
-                <div className="trait-body">{incomeStructCopy}</div>
+                <div className="trait-body" style={{ marginTop: '20px' }}>{incomeStructCopy}</div>
               </div>
             </div>
           </div>
