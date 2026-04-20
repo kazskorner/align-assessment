@@ -202,15 +202,16 @@ nav.scrolled .nav-cta {
 }
 
 .nav-cta:hover {
-  background: #fff;
-  color: var(--ink);
-  transform: translateY(-1px);
-  box-shadow: var(--shadow-md)
+  background: var(--cyan);
+  color: var(--ink) !important; /* Ensure visibility on cyan */
+  transform: translateY(-2px);
+  box-shadow: 0 8px 32px rgba(0, 240, 255, 0.25);
+  border-color: transparent;
 }
 
 nav.scrolled .nav-cta:hover {
-  background: var(--accent);
-  color: #fff
+  background: var(--cyan);
+  color: var(--ink) !important;
 }
 
 /* ─── HERO VIDEO BACKGROUND ─── */
@@ -248,7 +249,8 @@ nav.scrolled .nav-cta:hover {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center; /* CENTER CONTENT OVER VIDEO */
+  justify-content: center;
+  /* CENTER CONTENT OVER VIDEO */
   text-align: center;
   position: relative;
   overflow: hidden;
