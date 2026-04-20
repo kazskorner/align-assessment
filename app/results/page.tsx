@@ -48,6 +48,31 @@ function ResultsContent() {
 
   useEffect(() => {
     setMounted(true);
+    const params = new URLSearchParams(window.location.search);
+    const isMock = params.get('mock') === 'true';
+
+    if (isMock) {
+      setResults({
+        leadScore: 26,
+        tier: 'A',
+        firstName: 'Adam',
+        persona: 'Collaborative Partner',
+        traitResults: {
+          incomeSource: 'Contractual',
+          incomeStructure: 'Committed',
+          mindset: 'Income Mindset',
+          liquidity: 'Cash Liquidity',
+          spender: 'Front Loaded',
+          payoutPattern: 'Lifetime Income'
+        },
+        quadrant: {
+          advisorValue: 2.5,
+          selfEfficacy: 2.1
+        }
+      });
+      return;
+    }
+
     try {
       const raw = sessionStorage.getItem('alignResults');
       if (!raw) {
@@ -60,52 +85,10 @@ function ResultsContent() {
     }
   }, [router]);
 
-  // Animate elements on load/scroll
+  // Animate elements on scroll
   useEffect(() => {
     if (!results) return;
     
-    // 1. Score Ring Animation
-    const ringFill = document.getElementById('ring-fill');
-    if (ringFill) {
-      // Circumference is 377. 
-      // Use leadScore as a proxy for the ring fill (capped at 30)
-      const maxScore = 30;
-      const scoreValue = Math.min(results.leadScore || 0, maxScore);
-      const percentage = scoreValue / maxScore;
-      const offset = 377 * (1 - percentage);
-      setTimeout(() => {
-        ringFill.style.strokeDashoffset = offset.toString();
-      }, 300);
-    }
-
-    // 2. Primary Spectra Animation
-    setTimeout(() => {
-      const s1 = document.getElementById('spec-income-source');
-      const s2 = document.getElementById('spec-income-structure');
-      const isContractual  = results.traitResults?.incomeSource === 'Contractual';
-      const isCommitted    = results.traitResults?.incomeStructure === 'Committed';
-      if (s1) s1.style.width = isContractual  ? '22%' : '78%';
-      if (s2) s2.style.width = isCommitted    ? '22%' : '78%';
-    }, 600);
-
-    // 3. Secondary Bars Animation
-    setTimeout(() => {
-      const bars = [
-        { id: 'sb-mindset', val: results.traitResults?.mindset },
-        { id: 'sb-liquidity', val: results.traitResults?.liquidity },
-        { id: 'sb-spender', val: results.traitResults?.spender },
-        { id: 'sb-payout', val: results.traitResults?.payoutPattern },
-      ];
-      bars.forEach(({ id, val }) => {
-        const el = document.getElementById(id);
-        if (!el || !val) return;
-        // Identify "A" side traits for bar styling
-        const aSide = ['Income Mindset', 'Cash Liquidity', 'Back Loaded', 'Lifetime Income'];
-        el.style.width = aSide.includes(val) ? '85%' : '40%';
-      });
-    }, 900);
-
-    // 4. Intersection Observer for Reveal
     const io = new IntersectionObserver((entries) => {
       entries.forEach((e) => {
         if (e.isIntersecting) {
@@ -116,7 +99,6 @@ function ResultsContent() {
     }, { threshold: 0.1 });
     
     document.querySelectorAll('.reveal').forEach((el) => io.observe(el));
-
     return () => io.disconnect();
   }, [results]);
 
@@ -167,10 +149,10 @@ function ResultsContent() {
   const personaData = PERSONA_COPY[results.persona] || PERSONA_COPY['Pragmatic Realist'];
 
   const secondaryTraits = [
-    { id: 'sb-mindset',   label: 'Mindset',           icon: '🧠', val: tr.mindset,        num: '03', desc: 'Approach to retirement wealth' },
-    { id: 'sb-liquidity', label: 'Liquidity',         icon: '💧', val: tr.liquidity,      num: '04', desc: 'Preference for cash accessibility' },
-    { id: 'sb-spender',   label: 'Spending Pattern',  icon: '📈', val: tr.spender,        num: '05', desc: 'Distribution of spending over time' },
-    { id: 'sb-payout',    label: 'Payout Pattern',    icon: '🗓', val: tr.payoutPattern,  num: '06', desc: 'Structure of income delivery' },
+    { label: 'Mindset',           icon: '🧠', val: tr.mindset,        desc: 'Approach to retirement wealth' },
+    { label: 'Liquidity',         icon: '💧', val: tr.liquidity,      desc: 'Preference for cash accessibility' },
+    { label: 'Spending Profile',  icon: '📈', val: tr.spender,        desc: 'Distribution of spending over time' },
+    { label: 'Payout Structure',  icon: '🗓', val: tr.payoutPattern,  desc: 'Structure of income delivery' },
   ];
 
   return (
@@ -178,13 +160,11 @@ function ResultsContent() {
       <NeuralBackground />
 
       {/* NAV */}
-      <nav className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-12 py-6 bg-transparent">
-        <a href="/" className="flex items-center gap-3 no-underline text-white font-display font-bold text-lg tracking-tight">
-          <div className="w-8 h-8 bg-cyan-400 text-black rounded-lg flex items-center justify-center text-sm font-extrabold">A</div>
-          ALIGN
+      <nav className="results-nav">
+        <a href="/" className="nav-logo">
+          <img src="/logo.jpg" alt="ALIGN Logo" style={{ height: '64px', width: 'auto' }} />
         </a>
-        <a href={cta.btnUrl} target="_blank" rel="noopener noreferrer" 
-           className="bg-white text-black px-6 py-2.5 rounded-full text-sm font-bold no-underline hover:bg-cyan-400 transition-all hover:-translate-y-0.5 shadow-lg">
+        <a href={cta.btnUrl} target="_blank" rel="noopener noreferrer" className="nav-cta">
           {cta.btnText}
         </a>
       </nav>
@@ -192,80 +172,43 @@ function ResultsContent() {
       <main>
         {/* HERO */}
         <section className="results-hero">
+          <div className="hero-corner tl"></div>
+          <div className="hero-corner tr"></div>
+          
           <div className="hero-inner">
-            <div className="tier-badge reveal d1">
-              <div className="tier-dot">{tier}</div>
-              <div className="tier-label">Tier {tier} — {tier === 'A' ? 'High Readiness' : tier === 'B' ? 'Qualified' : 'Early Planning'}</div>
-            </div>
-
-            <div className="score-ring-wrap reveal d2">
-              <svg width="140" height="140" viewBox="0 0 140 140">
-                <circle className="ring-bg" cx="70" cy="70" r="60"/>
-                <circle className="ring-fill" id="ring-fill" cx="70" cy="70" r="60"/>
-              </svg>
-              <div className="ring-val">
-                {results.leadScore || 0}
-                <span className="ring-sub">/ 30 Score</span>
-              </div>
-            </div>
-
-            <h1 className="hero-title reveal d3">
-              {firstName ? `${firstName}, your ` : 'Your '} Retirement Profile:<br />
+            <h1 className="hero-title reveal d1">
+              {firstName ? `${firstName}, your ` : 'Your '} Retirement Profile:
               <em>{tr.incomeSource} · {tr.incomeStructure}</em>
             </h1>
-            <p className="hero-desc reveal d4">
+            <p className="hero-desc reveal d2">
               Your behavioral fingerprint reveals a specific set of needs for your retirement strategy. 
               Below is how your capital should be aligned with your convictions.
             </p>
           </div>
         </section>
 
-        {/* PRIMARY TRAITS */}
+        {/* FOUNDATIONAL COMPONENTS */}
         <section className="res-section">
           <div className="section-inner">
-            <div className="section-tag reveal">Primary Framework</div>
+            <div className="section-tag reveal">Foundational Components</div>
             <h2 className="section-h reveal">Two dimensions that define your <em>income strategy.</em></h2>
             <p className="section-sub reveal">These traits have the most influence on which retirement income structure matches your psychology.</p>
             
             <div className="trait-grid">
-              {/* Income Source */}
+              {/* Your Retirement Engine */}
               <div className="trait-card reveal d1">
-                <div className="trait-num">01 / SOURCE</div>
-                <div className="trait-name">Income Source</div>
+                <div className="trait-name">Your Retirement Engine</div>
                 <div className="trait-result">
                   <div className="trait-result-dot"></div> {tr.incomeSource}
-                </div>
-                <div className="trait-spectrum">
-                  <div className="spectrum-labels">
-                    <span className="spec-label">Contractual</span>
-                    <span className="spec-label">Market-Driven</span>
-                  </div>
-                  <div className="spectrum-track">
-                    <div className="spectrum-fill" id="spec-income-source" style={{ width: '0%' }}>
-                      <div className="spectrum-marker"></div>
-                    </div>
-                  </div>
                 </div>
                 <div className="trait-body">{incomeSourceCopy}</div>
               </div>
 
-              {/* Income Structure */}
+              {/* Your Retirement Rhythm */}
               <div className="trait-card reveal d2">
-                <div className="trait-num">02 / STRUCTURE</div>
-                <div className="trait-name">Income Structure</div>
+                <div className="trait-name">Your Retirement Rhythm</div>
                 <div className="trait-result">
                   <div className="trait-result-dot"></div> {tr.incomeStructure}
-                </div>
-                <div className="trait-spectrum">
-                  <div className="spectrum-labels">
-                    <span className="spec-label">Committed</span>
-                    <span className="spec-label">Adjustable</span>
-                  </div>
-                  <div className="spectrum-track">
-                    <div className="spectrum-fill" id="spec-income-structure" style={{ width: '0%' }}>
-                      <div className="spectrum-marker"></div>
-                    </div>
-                  </div>
                 </div>
                 <div className="trait-body">{incomeStructCopy}</div>
               </div>
@@ -273,11 +216,14 @@ function ResultsContent() {
           </div>
         </section>
 
-        {/* SECONDARY TRAITS */}
+        {/* NUANCED PREFERENCES */}
         <section className="res-section" style={{ background: 'rgba(255,255,255,0.01)' }}>
           <div className="section-inner">
-            <div className="section-tag reveal">Secondary Dimensions</div>
-            <h2 className="section-h reveal">Four traits that shape your <em>planning approach.</em></h2>
+            <div className="section-tag reveal">Nuanced Preferences</div>
+            <h2 className="section-h reveal">Four traits where the <em>fine-tuning comes in.</em></h2>
+            <p className="section-sub reveal">
+              This is really where the fine-tuning comes in and where your retirement strategy will really feel personalized for you.
+            </p>
             
             <div className="secondary-grid">
               {secondaryTraits.map((t, i) => {
@@ -285,15 +231,10 @@ function ResultsContent() {
                 return (
                   <div key={t.label} className={`sec-card reveal d${i+1}`}>
                     <span className="sec-card-icon">{t.icon}</span>
-                    <div className="sec-num">{t.num} / {t.label}</div>
                     <div className="sec-name">{t.label}</div>
-                    <div className="sec-result">{t.val}</div>
                     <p className="sec-body">
                       {copy ? copy.split('\n\n')[0] : t.desc}
                     </p>
-                    <div className="sec-bar-wrap">
-                      <div className="sec-bar" id={t.id}></div>
-                    </div>
                   </div>
                 );
               })}
@@ -301,10 +242,10 @@ function ResultsContent() {
           </div>
         </section>
 
-        {/* PERSONA */}
-        <section className="res-section" style={{ borderTop: '1px solid var(--border)' }}>
+        {/* IMPLEMENTATION PERSONA */}
+        <section className="res-section" style={{ borderTop: '1px solid rgba(255,255,255,0.05)' }}>
           <div className="section-inner">
-            <div className="section-tag reveal">Relationship Persona</div>
+            <div className="section-tag reveal">Implementation Persona</div>
             <div className="persona-wrap">
               <div className="persona-card reveal d1">
                 <div className="persona-quadrant">Quadrant: {results.persona}</div>
@@ -317,7 +258,7 @@ function ResultsContent() {
               </div>
 
               <div className="matrix-container reveal d2">
-                <div className="matrix-label-top">
+                <div className="matrix-label">
                   <span className="axis-label">Low Confidence</span>
                   <span className="axis-label">High Confidence</span>
                 </div>
@@ -334,7 +275,7 @@ function ResultsContent() {
                     </div>
                   ))}
                 </div>
-                <div className="matrix-label-bottom">
+                <div className="matrix-label">
                   <span className="axis-label">Low Advisor Value</span>
                   <span className="axis-label">High Advisor Value</span>
                 </div>
@@ -363,7 +304,7 @@ function ResultsContent() {
             </div>
 
             <div className="cta-group reveal">
-              <a href={cta.btnUrl} target="_blank" rel="noopener noreferrer" className="final-btn no-underline">
+              <a href={cta.btnUrl} target="_blank" rel="noopener noreferrer" className="final-btn">
                 {cta.btnText} →
               </a>
               <p className="cta-note">
@@ -374,18 +315,17 @@ function ResultsContent() {
         </section>
       </main>
 
-      <footer className="py-16 px-12 border-t border-white/5 bg-black/40">
-        <div className="section-inner flex flex-wrap justify-between items-center gap-6">
-          <div className="flex items-center gap-3 font-display font-bold text-lg">
-            <div className="w-8 h-8 bg-white/10 text-cyan-400 rounded-lg flex items-center justify-center text-sm font-extrabold border border-cyan-400/20">A</div>
-            ALIGN
+      <footer className="results-footer">
+        <div className="footer-inner">
+          <div className="foot-brand">
+            <img src="/logo.jpg" alt="ALIGN Logo" style={{ height: '32px', width: 'auto' }} />
           </div>
-          <p className="text-xs text-white/20 tracking-wide">
-            © 2026 Convergent Financial Partners · Adam Kazinec · Chamblee, GA · FINRA Registered
+          <p className="foot-copy">
+            © 2026 Convergent Financial Partners · Adam Kazinec · Chamblee, GA
           </p>
-          <div className="flex gap-6 text-xs text-white/30">
-            <a href="#" className="hover:text-cyan-400 transition-colors">Privacy</a>
-            <a href="#" className="hover:text-cyan-400 transition-colors">Disclosures</a>
+          <div className="foot-links">
+            <a href="#">Privacy</a>
+            <a href="#">Disclosures</a>
           </div>
         </div>
       </footer>

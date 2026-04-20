@@ -99,11 +99,11 @@ const S = {
   },
   questionText: {
     fontSize: '24px',
-    fontWeight: '700',
+    fontWeight: '400',
     color: '#ffffff',
     marginBottom: '36px',
-    lineHeight: '1.3',
-    letterSpacing: '-0.02em',
+    lineHeight: '1.4',
+    letterSpacing: '-0.01em',
   },
   optionBtn: (selected) => ({
     display: 'block',
@@ -118,7 +118,7 @@ const S = {
     textAlign: 'left',
     fontSize: '16px',
     fontWeight: selected ? '600' : '400',
-    transition: 'all 0.2s ease',
+    transition: 'all 0.2s cubic-bezier(0.4, 0, 0.2, 1)',
     outline: 'none',
     lineHeight: '1.4',
   }),
@@ -197,6 +197,21 @@ const S = {
 export default function ALIGNQuiz() {
   const router = useRouter();
 
+  return (
+    <>
+      <style>{`
+        .quiz-option-btn:hover {
+          background-color: rgba(0, 240, 255, 0.08) !important;
+          border-color: #00f0ff !important;
+          color: #00f0ff !important;
+        }
+      `}</style>
+      <QuizMain router={router} />
+    </>
+  );
+}
+
+function QuizMain({ router }) {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [responses, setResponses]             = useState({});
   const [selectedState, setSelectedState]     = useState('');
@@ -365,7 +380,12 @@ export default function ALIGNQuiz() {
         ) : (
           <div>
             {question.options.map((option) => (
-              <button key={option} onClick={() => handleAnswer(option)} style={S.optionBtn(responses[question.id] === option)}>
+              <button 
+                key={option} 
+                onClick={() => handleAnswer(option)} 
+                style={S.optionBtn(responses[question.id] === option)}
+                className="quiz-option-btn"
+              >
                 {option}
               </button>
             ))}
