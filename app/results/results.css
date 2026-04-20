@@ -191,7 +191,7 @@ nav.results-nav {
 /* ─── Cinematic Video Hero ─── */
 .video-hero {
   position: relative;
-  height: min(800px, 90vh); /* Cinematic aspect ratio preferred */
+  height: 100vh; /* CINEMATIC FULL SCREEN */
   display: flex;
   align-items: center;
   justify-content: center;
