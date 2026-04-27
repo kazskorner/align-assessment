@@ -1,72 +1,54 @@
 /**
  * Wealthbox CRM Integration
- *
  * Docs: https://dev.wealthbox.com/
- * Auth: Bearer token via WEALTHBOX_API_KEY env var
  *
- * Flow on each quiz submission:
- *   1. createContact()  — creates the Contact record
- *   2. createOpportunity() — attaches "Prospect Pipeline" opportunity
+ * Flow: createContact (always) → createOpportunity (if stage configured)
  *
- * TODO (once API token is active):
- *   - Replace TAG_NAMES values with exact tag names from your Wealthbox account
- *   - Replace PIPELINE_STAGE_IDS with real stage IDs (get them via GET /pipelines)
- *   - Replace CUSTOM_FIELD_IDS with real IDs (get them via GET /custom_fields)
+ * To activate opportunity creation:
+ *   1. Go to Wealthbox → Settings → Pipelines and create stages
+ *   2. Fill in OPPORTUNITY_STAGES below with the exact stage names you created
+ *      (e.g. "Strategy Session Scheduled", "Discovery Call", "Nurture")
+ *
+ * To add custom ALIGN fields to contacts:
+ *   1. Go to Wealthbox → Settings → Custom Fields → Create fields
+ *   2. Add them to the custom_fields array in createContact()
  */
 
-const WEALTHBOX_BASE = 'https://api.crmworkspace.com/v1';
+const WB_BASE = 'https://api.crmworkspace.com/v1';
 
-// ── Tags — update with exact names from Wealthbox > Settings > Tags ──────────
-const TAG_NAMES = {
-  tierA:  'ALIGN-Tier-A',   // TODO: confirm exact name
-  tierB:  'ALIGN-Tier-B',   // TODO: confirm exact name
-  tierC:  'ALIGN-Tier-C',   // TODO: confirm exact name
-  source: 'ALIGN-Assessment', // TODO: confirm exact name
+// Tags auto-create in Wealthbox on first use — these exact strings become tag names.
+const TAGS = {
+  source: 'ALIGN-Assessment',
+  tierA:  'ALIGN-Tier-A',
+  tierB:  'ALIGN-Tier-B',
+  tierC:  'ALIGN-Tier-C',
 } as const;
 
-// ── Pipeline — update after running GET /pipelines ───────────────────────────
-const PROSPECT_PIPELINE_ID = 'TODO_PIPELINE_ID';   // TODO: replace with real ID
-
-// Stage IDs within "Prospect Pipeline" — update after GET /pipelines/:id
-const PIPELINE_STAGE_IDS: Record<'A' | 'B' | 'C', string> = {
-  A: 'TODO_STAGE_ID_TIER_A',   // e.g. "Qualified - Strategy Session"
-  B: 'TODO_STAGE_ID_TIER_B',   // e.g. "Discovery Call"
-  C: 'TODO_STAGE_ID_TIER_C',   // e.g. "Nurture"
+// TODO: Set these to the exact stage names you create in Wealthbox → Settings → Pipelines.
+// Leave empty ('') to skip opportunity creation until stages are configured.
+const OPPORTUNITY_STAGES: Record<'A' | 'B' | 'C', string> = {
+  A: '',  // e.g. 'Strategy Session Scheduled'
+  B: '',  // e.g. 'Discovery Call Scheduled'
+  C: '',  // e.g. 'Nurture'
 };
-
-// ── Custom field IDs — update after GET /custom_fields ───────────────────────
-// These are the custom fields you created in Wealthbox
-const CUSTOM_FIELDS = {
-  alignTier:          'TODO_CF_TIER',           // "ALIGN Tier" field ID
-  alignPersona:       'TODO_CF_PERSONA',        // "ALIGN Persona" field ID
-  alignIncomeSource:  'TODO_CF_INCOME_SOURCE',  // "Income Source" field ID
-  alignIncomeStruct:  'TODO_CF_INCOME_STRUCT',  // "Income Structure" field ID
-  alignAssetsRange:   'TODO_CF_ASSETS',         // "Assets Range" field ID
-  alignRetirementTL:  'TODO_CF_RETIREMENT_TL',  // "Retirement Timeline" field ID
-} as const;
 
 // ── Helpers ──────────────────────────────────────────────────────────────────
 
-function headers() {
+function authHeaders() {
   const key = process.env.WEALTHBOX_API_KEY;
   if (!key) throw new Error('WEALTHBOX_API_KEY is not set');
-  return {
-    'Content-Type': 'application/json',
-    'ACCESS_TOKEN': key,
-  };
+  return { 'Content-Type': 'application/json', 'ACCESS_TOKEN': key };
 }
 
-async function wbFetch(path: string, method: string, body?: object) {
-  const res = await fetch(`${WEALTHBOX_BASE}${path}`, {
-    method,
-    headers: headers(),
-    body: body ? JSON.stringify(body) : undefined,
+async function wbPost(path: string, body: object): Promise<any> {
+  const res = await fetch(`${WB_BASE}${path}`, {
+    method: 'POST',
+    headers: authHeaders(),
+    body: JSON.stringify(body),
   });
-  if (!res.ok) {
-    const text = await res.text();
-    throw new Error(`Wealthbox ${method} ${path} → ${res.status}: ${text}`);
-  }
-  return res.json();
+  const text = await res.text();
+  if (!res.ok) throw new Error(`Wealthbox POST ${path} → ${res.status}: ${text}`);
+  return JSON.parse(text);
 }
 
 // ── Public API ────────────────────────────────────────────────────────────────
@@ -84,62 +66,62 @@ export interface WealthboxLeadPayload {
   retirementTimeline: string;
 }
 
-/**
- * Creates a Contact in Wealthbox and returns the contact ID.
- */
-export async function createContact(lead: WealthboxLeadPayload): Promise<string> {
-  const tierTag = TAG_NAMES[`tier${lead.tier}` as keyof typeof TAG_NAMES];
+async function createContact(lead: WealthboxLeadPayload): Promise<string> {
+  const tierTag = TAGS[`tier${lead.tier}` as keyof typeof TAGS];
 
-  const body = {
+  const body: Record<string, unknown> = {
     type: 'Person',
     first_name: lead.firstName,
     last_name: lead.lastName,
     email_addresses: [{ address: lead.email, kind: 'work' }],
-    ...(lead.phone && {
-      phone_numbers: [{ address: lead.phone, kind: 'mobile' }],
-    }),
-    tags: [TAG_NAMES.source, tierTag],
-    custom_fields: [
-      { id: CUSTOM_FIELDS.alignTier,         value: lead.tier },
-      { id: CUSTOM_FIELDS.alignPersona,      value: lead.persona },
-      { id: CUSTOM_FIELDS.alignIncomeSource, value: lead.incomeSource },
-      { id: CUSTOM_FIELDS.alignIncomeStruct, value: lead.incomeStructure },
-      { id: CUSTOM_FIELDS.alignAssetsRange,  value: lead.assetsRange },
-      { id: CUSTOM_FIELDS.alignRetirementTL, value: lead.retirementTimeline },
-    ],
+    tags: [TAGS.source, tierTag],
+    important_information: `ALIGN Tier: ${lead.tier} | Persona: ${lead.persona} | Income Source: ${lead.incomeSource} | Income Structure: ${lead.incomeStructure} | Assets: ${lead.assetsRange} | Retirement Timeline: ${lead.retirementTimeline}`,
   };
 
-  const data = await wbFetch('/contacts', 'POST', body);
-  return String(data.contact?.id ?? data.id);
+  if (lead.phone) {
+    body.phone_numbers = [{ address: lead.phone, kind: 'mobile' }];
+  }
+
+  const data = await wbPost('/contacts', body);
+  const id = data.id;
+  if (!id) throw new Error(`createContact: no id in response — ${JSON.stringify(data)}`);
+  return String(id);
 }
 
-/**
- * Creates a "Prospect Pipeline" Opportunity attached to the contact.
- */
-export async function createOpportunity(contactId: string, lead: WealthboxLeadPayload): Promise<void> {
-  const stageId = PIPELINE_STAGE_IDS[lead.tier];
-  const body = {
+async function createOpportunity(contactId: string, lead: WealthboxLeadPayload): Promise<void> {
+  const stage = OPPORTUNITY_STAGES[lead.tier];
+  if (!stage) return; // skip until stages are configured
+
+  const closeDate = new Date();
+  closeDate.setFullYear(closeDate.getFullYear() + 1);
+  const mm = String(closeDate.getMonth() + 1).padStart(2, '0');
+  const dd = String(closeDate.getDate()).padStart(2, '0');
+  const yyyy = closeDate.getFullYear();
+
+  await wbPost('/opportunities', {
     name: `ALIGN Assessment — ${lead.firstName} ${lead.lastName}`,
-    contact_id: contactId,
-    pipeline_id: PROSPECT_PIPELINE_ID,
-    pipeline_stage_id: stageId,
-    status: 'open',
-  };
-  await wbFetch('/opportunities', 'POST', body);
+    contact_id: Number(contactId),
+    stage,
+    probability: lead.tier === 'A' ? 70 : lead.tier === 'B' ? 40 : 10,
+    projected_close_date: `${mm}/${dd}/${yyyy}`,
+    revenue: 0,
+  });
 }
 
 /**
- * Main entry point — creates Contact + Opportunity.
- * Returns the Wealthbox contact ID, or null if anything fails.
- * Never throws — Wealthbox failure must never block the quiz flow.
+ * Creates a Contact in Wealthbox (and optionally an Opportunity).
+ * Returns the contact ID, or null on failure.
+ * Never throws — Wealthbox failure must never block the quiz response.
  */
 export async function pushLeadToWealthbox(lead: WealthboxLeadPayload): Promise<string | null> {
   try {
     const contactId = await createContact(lead);
-    await createOpportunity(contactId, lead);
+    await createOpportunity(contactId, lead).catch(err =>
+      console.error('[Wealthbox] Opportunity creation failed (non-fatal):', err instanceof Error ? err.message : err)
+    );
     return contactId;
   } catch (err) {
-    console.error('[Wealthbox] Push failed:', err instanceof Error ? err.message : err);
+    console.error('[Wealthbox] Contact creation failed:', err instanceof Error ? err.message : err);
     return null;
   }
 }
