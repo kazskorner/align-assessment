@@ -12,7 +12,14 @@ const CYAN = '#00f0ff';
 
 /* ─── Helpers ────────────────────────────────────────────────────────────────── */
 function isValidEmail(email) {
-  return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email.trim());
+  return /^[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}$/.test(email.trim());
+}
+
+function formatUSPhone(raw) {
+  const digits = raw.replace(/\D/g, '').slice(0, 10);
+  if (digits.length < 4)  return digits;
+  if (digits.length < 7)  return `(${digits.slice(0,3)}) ${digits.slice(3)}`;
+  return `(${digits.slice(0,3)}) ${digits.slice(3,6)}-${digits.slice(6)}`;
 }
 
 function getBlockLabel(id) {
@@ -221,6 +228,7 @@ function QuizMain({ router }) {
   const [gateFirstName, setGateFirstName] = useState('');
   const [gateLastName, setGateLastName]   = useState('');
   const [gateEmail, setGateEmail]         = useState('');
+  const [gatePhone, setGatePhone]         = useState('');
   const [gateErrors, setGateErrors]       = useState({});
 
   const [loading, setLoading] = useState(false);
@@ -258,19 +266,22 @@ function QuizMain({ router }) {
     const errors = {};
     if (!gateFirstName.trim()) errors.firstName = 'First name is required.';
     if (!gateLastName.trim())  errors.lastName  = 'Last name is required.';
-    if (!isValidEmail(gateEmail)) errors.email  = 'A valid email is required.';
+    if (!isValidEmail(gateEmail)) errors.email  = 'Please enter a valid email address.';
     if (Object.keys(errors).length > 0) { setGateErrors(errors); return; }
     setGateErrors({});
     setLoading(true);
+
+    const phoneDigits = gatePhone.replace(/\D/g, '');
 
     try {
       const response = await fetch('/api/score', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          email: gateEmail.trim(),
+          email:     gateEmail.trim(),
           firstName: gateFirstName.trim(),
-          lastName: gateLastName.trim(),
+          lastName:  gateLastName.trim(),
+          phone:     phoneDigits.length === 10 ? gatePhone : undefined,
           responses,
         }),
       });
@@ -326,6 +337,19 @@ function QuizMain({ router }) {
               <label htmlFor="gateEmail" style={S.label}>Email Address</label>
               <input id="gateEmail" type="email" value={gateEmail} onChange={(e) => setGateEmail(e.target.value)} placeholder="jane@example.com" style={S.input(!!gateErrors.email)} autoComplete="email" />
               {gateErrors.email && <p style={S.errorText}>{gateErrors.email}</p>}
+            </div>
+            <div style={S.fieldGroup}>
+              <label htmlFor="gatePhone" style={S.label}>Phone Number <span style={{ color: 'rgba(255,255,255,0.3)', fontWeight: 400 }}>(optional)</span></label>
+              <input
+                id="gatePhone"
+                type="tel"
+                value={gatePhone}
+                onChange={(e) => setGatePhone(formatUSPhone(e.target.value))}
+                placeholder="(555) 555-5555"
+                style={S.input(false)}
+                autoComplete="tel"
+                inputMode="numeric"
+              />
             </div>
             <button type="submit" disabled={loading} style={S.primaryBtn(loading)}>
               {loading ? 'Calculating your profile…' : 'Unlock My Results →'}

@@ -3,56 +3,13 @@
 import React, { useState, useEffect, Suspense } from 'react';
 import { useRouter } from 'next/navigation';
 import NeuralBackground from '../components/NeuralBackground';
-import { PRIMARY_TRAIT_COPY, SECONDARY_TRAIT_COPY, PERSONA_COPY } from '../../lib/quiz-copy';
+import { PRIMARY_TRAIT_COPY, SECONDARY_TRAIT_COPY, PERSONA_COPY, RESULTS_COPY } from '../../lib/quiz-copy';
 import './results.css';
 
-const CTA_CONFIG: any = {
-  A: {
-    heading: "Your strategy isn't built yet.",
-    sub: "You have the profile of a Strategic Principal. This warrants a direct conversation to bridge your persona with a high-conviction architecture.",
-    btnText: "Schedule Strategy Session",
-    btnUrl: "https://calendly.com/adam-kazinec/align-strategy-session",
-    card1: { num: "01", title: "Architecture Review", body: "We map your ALIGN results to a specific income framework built for HNW profiles." },
-    card2: { num: "02", title: "Gap Analysis", body: "Identify where your current portfolio origins might conflict with your cash flow governance." },
-    card3: { num: "03", title: "Governance Design", body: "Create a legacy-ready structure that synchronizes your capital with your lifestyle convictions." }
-  },
-  B: {
-    heading: "Your strategy isn't built yet.",
-    sub: "As a Growth Visionary, your path to 'enough' requires intentional pivots. Let's align your current trajectory with your long-term engine.",
-    btnText: "Book Discovery Call",
-    btnUrl: "https://calendly.com/adam-kazinec/align-discovery-call",
-    card1: { num: "01", title: "Momentum Audit", body: "Evaluate your current growth velocity against your targeted retirement rhythm." },
-    card2: { num: "02", title: "Pivot identification", body: "Pinpoint where systematic adjustments can transform wealth into sustainable income." },
-    card3: { num: "03", title: "Strategic Roadmap", body: "Define the specific steps needed to transition from 'accumulation' to 'distribution'." }
-  },
-  C: {
-    heading: "Build your foundation.",
-    sub: "Clarity is the first step. Use these insights as a baseline for your future retirement rhythm and educational framework.",
-    btnText: "Review Master Guide",
-    btnUrl: "https://retirewithkaz.com/guide",
-    card1: { num: "01", title: "Education First", body: "Deep dive into the core mechanics of contractual vs. market-driven income." },
-    card2: { num: "02", title: "Baseline Mapping", body: "Use your ALIGN profile to evaluate your current savings strategy." },
-    card3: { num: "03", title: "Long Game Plan", body: "Establish the habits that will sustain your wealth through different retirement chapters." }
-  }
-};
-
-const TIER_MESSAGING = {
-  A: {
-    tagline: "you’ve achieved the summit.",
-    emp: "Now, let’s architect the view.",
-    sub: "Your results indicate a sophisticated wealth profile that requires a high-conviction governance model. Below is your bespoke ALIGN Strategic Outlook, designed to synchronize your capital origins with a legacy of lifestyle certainty."
-  },
-  B: {
-    tagline: "your momentum is clear.",
-    emp: "Now, let’s align your trajectory.",
-    sub: "You are entering a critical phase of wealth optimization. Your ALIGN assessment highlights the key pivots needed to transition your current growth into a sustainable, long-term income engine. Let’s explore your path to ‘enough’."
-  },
-  C: {
-    tagline: "clarity is the first step.",
-    emp: "Now, let’s build your foundation.",
-    sub: "Understanding the mechanics of your future income is essential to long-term success. Your ALIGN results provide a baseline for your retirement rhythm, offering a clear framework for how you can begin to structure your path forward."
-  }
-};
+const CTA_CONFIG = RESULTS_COPY.ctaConfig;
+const TIER_MESSAGING = RESULTS_COPY.tierMessaging;
+const BRIDGE = RESULTS_COPY.bridge;
+const SECTIONS = RESULTS_COPY.sections;
 
 function ResultsContent() {
   const router = useRouter();
@@ -144,9 +101,11 @@ function ResultsContent() {
         <a href="/" className="nav-logo">
           <img src="/logo.jpg" alt="ALIGN Logo" style={{ height: '64px', width: 'auto' }} />
         </a>
-        <a href={cta.btnUrl} target="_blank" rel="noopener noreferrer" className="nav-cta">
-          {cta.btnText}
-        </a>
+        {cta.btnUrl && cta.btnText && (
+          <a href={cta.btnUrl} target="_blank" rel="noopener noreferrer" className="nav-cta">
+            {cta.btnText}
+          </a>
+        )}
       </nav>
 
       <main>
@@ -159,7 +118,7 @@ function ResultsContent() {
               loop 
               playsInline 
               className="hero-video-el"
-              src="/hero-video.mp4"
+              src="/results-hero-video.mp4"
             />
             <div className="hero-video-scrim"></div>
           </div>
@@ -181,9 +140,7 @@ function ResultsContent() {
         <section className="bridge-section">
           <div className="section-inner">
             <p className="principal-mandate reveal d1">
-              "Your ALIGN results represent more than data; they reflect your personal philosophy on capital stewardship. 
-              Below, we break down the <strong>Strategic Architecture</strong> of your plan—starting with the core mechanics 
-              that will drive and sustain your future."
+              \"{BRIDGE.mandate}\"
             </p>
           </div>
         </section>
@@ -191,12 +148,10 @@ function ResultsContent() {
         {/* FOUNDATIONAL COMPONENTS | STRATEGIC ARCHITECTURE */}
         <section className="res-section">
           <div className="section-inner">
-            <div className="section-tag reveal">Foundational Components | Strategic Architecture</div>
-            <h2 className="section-h reveal">The <em>Engine & The Rhythm.</em></h2>
+            <div className="section-tag reveal">{SECTIONS.architecture.tag}</div>
+            <h2 className="section-h reveal">{SECTIONS.architecture.title}</h2>
             <p className="section-sub reveal">
-              Every resilient strategy requires a dual-focus: <strong>Capital Origins</strong> and <strong>Cash Flow Governance.</strong> 
-              We begin by identifying the ‘Engine’—the sophisticated sources that will generate your revenue—and the 
-              ‘Rhythm’—the structural cadence that ensures your wealth supports your lifestyle without interruption.
+              {SECTIONS.architecture.sub}
             </p>
             
             <div className="trait-grid">
@@ -216,10 +171,10 @@ function ResultsContent() {
         {/* NUANCED PREFERENCES */}
         <section className="res-section" style={{ background: 'rgba(255,255,255,0.01)' }}>
           <div className="section-inner">
-            <div className="section-tag reveal">Nuanced Preferences</div>
-            <h2 className="section-h reveal">Four traits where the <em>fine-tuning comes in.</em></h2>
+            <div className="section-tag reveal">{SECTIONS.preferences.tag}</div>
+            <h2 className="section-h reveal">{SECTIONS.preferences.title}</h2>
             <p className="section-sub reveal">
-              This is really where the fine-tuning comes in and where your retirement strategy will really feel personalized for you.
+              {SECTIONS.preferences.sub}
             </p>
             
             <div className="secondary-grid">
@@ -261,12 +216,12 @@ function ResultsContent() {
           <div className="section-inner">
             <div className="section-tag reveal">Next Steps</div>
             <h2 className="section-h reveal" style={{ fontSize: '48px' }}>
-              {cta.heading.includes('isn\'t built yet') ? <>Your strategy<br /><em>isn't built yet.</em></> : cta.heading}
+              {cta.heading}
             </h2>
             <p className="section-sub reveal" style={{ margin: '0 auto 60px' }}>{cta.sub}</p>
 
             <div className="next-cards">
-              {[cta.card1, cta.card2, cta.card3].map((step, i) => (
+              {cta.cards.map((step: any, i: number) => (
                 <div key={i} className={`next-card reveal d${i+1}`}>
                   <div className="next-card-num">{step.num}</div>
                   <div className="next-card-title">{step.title}</div>
@@ -276,9 +231,45 @@ function ResultsContent() {
             </div>
 
             <div className="cta-group reveal">
-              <a href={cta.btnUrl} target="_blank" rel="noopener noreferrer" className="final-btn">
-                {cta.btnText} →
-              </a>
+              {/* Tier A + B: booking button */}
+              {cta.btnUrl && cta.btnText && (
+                <a href={cta.btnUrl} target="_blank" rel="noopener noreferrer" className="final-btn">
+                  {cta.btnText} →
+                </a>
+              )}
+
+              {/* Tier C: YouTube + Convergent links */}
+              {tier === 'C' && (
+                <div className="tier-c-links">
+                  <a
+                    href={(cta as any).youtubeUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="final-btn"
+                    style={{ marginBottom: '16px' }}
+                  >
+                    Watch Kaz's Korner on YouTube →
+                  </a>
+                  <a
+                    href={(cta as any).convergentUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="final-btn final-btn--outline"
+                  >
+                    Meet Adam at Convergent →
+                  </a>
+                </div>
+              )}
+
+              {/* PDF download — all tiers */}
+              <button
+                onClick={() => window.print()}
+                className="pdf-download-btn"
+                aria-label="Download results as PDF"
+              >
+                ↓ Download as PDF
+              </button>
+
               <p className="cta-note">
                 Adam Kazinec · RICP® ChFC® CLU® · Chamblee, GA · No Obligation
               </p>

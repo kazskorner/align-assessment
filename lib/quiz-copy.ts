@@ -170,13 +170,13 @@ export const TIER_CTA = {
   A: {
     label: "Strategy Session",
     sublabel: (firstName: string) => `${firstName}, you qualify for a personalized ALIGN Strategy Session.`,
-    url: "https://calendly.com/adam-kazinec/align-strategy-session",
+    url: "https://calendly.com/adam-kazinec/align-strategy-session", // TODO: replace with GoReminders link
     description: "Based on your profile, you're a strong candidate for a focused retirement income strategy conversation. This session is designed to map your ALIGN profile to a specific planning framework — not a product pitch, not a general overview.",
   },
   B: {
     label: "Discovery Call",
     sublabel: (firstName: string) => `${firstName}, you qualify for a complimentary Discovery Call.`,
-    url: "https://calendly.com/adam-kazinec/align-discovery-call",
+    url: "https://calendly.com/adam-kazinec/align-discovery-call", // TODO: replace with GoReminders link
     description: "Your profile indicates you're in a meaningful planning window. A Discovery Call is a structured 30-minute conversation to assess fit and identify the highest-value next steps for your situation.",
   },
   C: {
@@ -184,5 +184,148 @@ export const TIER_CTA = {
     sublabel: () => "Thank you for completing the assessment. Here is your personalized report.",
     url: null,
     description: "Your ALIGN profile gives you a clear picture of your retirement income preferences and implementation style. Use this as a starting point for your planning conversations.",
+    youtubeUrl: "https://www.youtube.com/@kazskornerpodcast",
+    convergentUrl: "https://www.convergentfp.com/team/adam-kazinec",
   },
 } as const;
+
+/* ─── LANDING PAGE COPY ─────────────────────────────────────────────────── */
+export const LANDING_COPY = {
+  hero: {
+    title: "Align your capital",
+    titleEmp: "with your convictions.",
+    subtext: "After nearly 20 years helping people retire, I've found that most retirement plans fail for one reason: the strategy doesn't match how you actually think and feel about money. Let's change that.",
+    ctaPrimary: "Begin Assessment",
+    ctaSecondary: "Why It Matters",
+    meta: "No personally identifiable information is collected."
+  },
+  stats: [
+    { num: "17+ YEARS OF INHERITED EXPERTISE", label: "A proprietary assessment designed by a 2nd generation advisor." },
+    { num: "ADVANCED PLANNING AUTHORITY", label: "Leveraging RICP®, CLU® & ChFC® designations." },
+    { num: "7-DIMENSION STRESS TEST", label: "Translating your personal financial psychology into your actionable strategy." }
+  ],
+  problem: {
+    title: "A strategy you don't emotionally believe in is a strategy you cannot execute long-term.",
+    badgeBefore: "Before",
+    badgeAfter: "After",
+    alignTitle: "ALIGN Strategy",
+    alignSub: "INTEGRATED ARCHITECTURE",
+    features: [
+      { title: "Tax Strategies", desc: "Validated withdrawal sequences and asset location planning." },
+      { title: "Income Engine", desc: "Dynamic cash flow management and distribution." },
+      { title: "Retirement Rhythm", desc: "Lifestyle spending updates driven by your financial DNA." }
+    ]
+  },
+  discover: {
+    title: "What you'll discover about your optimized retirement strategy.",
+    cards: [
+      { title: "Foundational Components", body: "Think of these as your Retirement \"Engine\" and \"Rhythm\"." },
+      { title: "Nuanced Preferences", body: "These dictate how we structure your income, protect your liquidity, and pace your distributions." },
+      { title: "Implementation Persona", body: "Strategic guidance on how best to partner with professionals to ensure your plan is executed with precision." }
+    ]
+  },
+  process: {
+    tag: "The Process",
+    title: "How to get your assessment.",
+    steps: [
+      { num: "01", title: "Take the Assessment", body: "Answer key behavioral questions in less than 17 minutes." },
+      { num: "02", title: "Instant Personal Analysis", body: "Receive your ALIGN report." },
+      { num: "03", title: "Strategy Integration", body: "Opportunity to schedule a strategy session to integrate these insights into your retirement plan." }
+    ]
+  },
+  about: {
+    tag: "About Adam Kazinec",
+    title: "Financial planning should feel deeply personal.",
+    body: "Adam replaces standard financial benchmarks with a rigorous, high-level exploration of your goals and your relationship with risk. By utilizing a framework built on multigenerational expertise, he helps families move beyond simple withdrawal percentages and into a bespoke strategy for You. For those seeking to preserve and grow what they have built, Adam offers the architectural insight necessary for a seamless transition into their next chapter.",
+    creds: [
+      "Host of Kaz's Korner Retirement Podcast & YouTube Channel",
+      "Founder of ALIGN Assessment Framework",
+      "Specialist in Retirement Guardrails & Time Segmentation"
+    ]
+  },
+  faq: [
+    { q: 'Who is this assessment for?', a: 'For anyone within 10 years of retirement (or already retired) who feels their current financial plan doesn\'t reflect their personality.' },
+    { q: 'Is there a cost for the report?', a: 'The ALIGN assessment and your personalized report are complimentary.' },
+    { q: 'How long do I have to wait for results?', a: 'Zero wait time. Your results are generated instantly and displayed on your screen, with a PDF download link sent to your email.' },
+    { q: 'Is my data kept private?', a: 'Absolutely. We do not sell your data. Your responses are used solely to generate your personalized retirement alignment report.' }
+  ],
+  finalCta: {
+    tag: "Start Today",
+    title: "Move beyond a money manager. Hire a distribution strategist.",
+    sub: "Any advisor can help you build a pile; few have a process to help you spend it. Moving from growth to income is a psychological pivot a spreadsheet can’t solve. The ALIGN Assessment replaces generic ROI with a Return on Life framework—turning your balance sheet into a distribution strategy that prioritizes your life over your ledger.",
+    btn: "Execute My Strategy Now"
+  }
+};
+
+/* ─── RESULTS PAGE COPY ─────────────────────────────────────────────────── */
+export const RESULTS_COPY = {
+  tierMessaging: {
+    A: {
+      tagline: "you’ve achieved the summit.",
+      emp: "Now, let’s architect the view.",
+      sub: "Your results indicate a sophisticated wealth profile that requires a high-conviction governance model. Below is your bespoke ALIGN Strategic Outlook, designed to synchronize your capital origins with a legacy of lifestyle certainty."
+    },
+    B: {
+      tagline: "your momentum is clear.",
+      emp: "Now, let’s align your trajectory.",
+      sub: "You are entering a critical phase of wealth optimization. Your ALIGN assessment highlights the key pivots needed to transition your current growth into a sustainable, long-term income engine. Let’s explore your path to ‘enough’."
+    },
+    C: {
+      tagline: "clarity is the first step.",
+      emp: "Now, let’s build your foundation.",
+      sub: "Understanding the mechanics of your future income is essential to long-term success. Your ALIGN results provide a baseline for your retirement rhythm, offering a clear framework for how you can begin to structure your path forward."
+    }
+  },
+  bridge: {
+    mandate: "Your ALIGN results represent more than data; they reflect your personal philosophy on capital stewardship. Below, we break down the Strategic Architecture of your plan—starting with the core mechanics that will drive and sustain your future."
+  },
+  sections: {
+    architecture: {
+      tag: "Foundational Components | Strategic Architecture",
+      title: "The Engine & The Rhythm.",
+      sub: "Every resilient strategy requires a dual-focus: Capital Origins and Cash Flow Governance. We begin by identifying the ‘Engine’—the sophisticated sources that will generate your revenue—and the ‘Rhythm’—the structural cadence that ensures your wealth supports your lifestyle without interruption."
+    },
+    preferences: {
+      tag: "Nuanced Preferences",
+      title: "Four traits where the fine-tuning comes in.",
+      sub: "This is really where the fine-tuning comes in and where your retirement strategy will really feel personalized for you."
+    }
+  },
+  ctaConfig: {
+    A: {
+      heading: "Your strategy isn't built yet.",
+      sub: "You have the profile of a Strategic Principal. This warrants a direct conversation to bridge your persona with a high-conviction architecture.",
+      btnText: "Schedule Strategy Session",
+      btnUrl: "https://calendly.com/adam-kazinec/align-strategy-session",
+      cards: [
+        { num: "01", title: "Architecture Review", body: "We map your ALIGN results to a specific income framework built for HNW profiles." },
+        { num: "02", title: "Gap Analysis", body: "Identify where your current portfolio origins might conflict with your cash flow governance." },
+        { num: "03", title: "Governance Design", body: "Create a legacy-ready structure that synchronizes your capital with your lifestyle convictions." }
+      ]
+    },
+    B: {
+      heading: "Your strategy isn't built yet.",
+      sub: "As a Growth Visionary, your path to 'enough' requires intentional pivots. Let's align your current trajectory with your long-term engine.",
+      btnText: "Book Discovery Call",
+      btnUrl: "https://calendly.com/adam-kazinec/align-discovery-call",
+      cards: [
+        { num: "01", title: "Momentum Audit", body: "Evaluate your current growth velocity against your targeted retirement rhythm." },
+        { num: "02", title: "Pivot identification", body: "Pinpoint where systematic adjustments can transform wealth into sustainable income." },
+        { num: "03", title: "Strategic Roadmap", body: "Define the specific steps needed to transition from 'accumulation' to 'distribution'." }
+      ]
+    },
+    C: {
+      heading: "Build your foundation.",
+      sub: "Clarity is the first step. Use these insights as a baseline for your future retirement rhythm and educational framework.",
+      btnText: null,
+      btnUrl: null,
+      youtubeUrl: "https://www.youtube.com/@kazskornerpodcast",
+      convergentUrl: "https://www.convergentfp.com/team/adam-kazinec",
+      cards: [
+        { num: "01", title: "Education First", body: "Deep dive into the core mechanics of contractual vs. market-driven income." },
+        { num: "02", title: "Baseline Mapping", body: "Use your ALIGN profile to evaluate your current savings strategy." },
+        { num: "03", title: "Long Game Plan", body: "Establish the habits that will sustain your wealth through different retirement chapters." }
+      ]
+    }
+  }
+};

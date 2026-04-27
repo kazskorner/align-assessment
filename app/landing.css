@@ -2090,3 +2090,10 @@ footer {
     justify-content: center
   }
 }
+/* ─── ROLLING COUNTER ─── */
+.rolling-num {
+  display: inline-block;
+  min-width: 2ch;
+  font-variant-numeric: tabular-nums;
+  transition: opacity 0.1s ease;
+}

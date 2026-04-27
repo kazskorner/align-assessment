@@ -1,32 +1,53 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
+import { LANDING_COPY } from '../lib/quiz-copy';
 import './landing.css';
+
+/** Animates a number rolling up from `from` to `to` over `duration` ms. */
+function useRollingCounter(target: number, duration = 1800) {
+  const [display, setDisplay] = useState(0);
+  const rafRef = useRef<number | null>(null);
+
+  useEffect(() => {
+    if (target === 0) return;
+    const start = performance.now();
+    const from = 0;
+
+    const tick = (now: number) => {
+      const elapsed = now - start;
+      const progress = Math.min(elapsed / duration, 1);
+      // Ease-out cubic
+      const eased = 1 - Math.pow(1 - progress, 3);
+      setDisplay(Math.round(from + (target - from) * eased));
+      if (progress < 1) rafRef.current = requestAnimationFrame(tick);
+    };
+
+    rafRef.current = requestAnimationFrame(tick);
+    return () => { if (rafRef.current) cancelAnimationFrame(rafRef.current); };
+  }, [target, duration]);
+
+  return display;
+}
 
 export default function LandingPage() {
   const [scrolled, setScrolled] = useState(false);
   const [faqOpen, setFaqOpen] = useState<number | null>(null);
-  const [assessmentCount, setAssessmentCount] = useState(77);
+  const [assessmentCount, setAssessmentCount] = useState(0);
+  const displayCount = useRollingCounter(assessmentCount, 2000);
 
   useEffect(() => {
-    // 1. Fetch "real" count (+ user offset of 47) from DB
     const fetchCount = async () => {
       try {
         const res = await fetch('/api/quiz-count');
         const data = await res.json();
-        if (data.count) {
-          setAssessmentCount(data.count);
-        }
+        if (data.count) setAssessmentCount(data.count);
       } catch (err) {
         console.error('Counter fetch failed', err);
+        setAssessmentCount(77);
       }
     };
     fetchCount();
-
-    // 2. Initial jump to make it feel "live" on load
-    const timer = setTimeout(() => {
-      setAssessmentCount((prev: number) => prev + 1);
-    }, 5000);
 
     const handleScroll = () => {
       setScrolled(window.scrollY > 60);
@@ -44,7 +65,6 @@ export default function LandingPage() {
     document.querySelectorAll('.reveal').forEach((el) => revealObserver.observe(el));
 
     return () => {
-      clearTimeout(timer);
       window.removeEventListener('scroll', handleScroll);
       revealObserver.disconnect();
     };
@@ -86,23 +106,23 @@ export default function LandingPage() {
 
         <div className="hero-inner">
           <h1>
-            Align your capital<br />
-            <em>with your convictions.</em>
+            {LANDING_COPY.hero.title}<br />
+            <em>{LANDING_COPY.hero.titleEmp}</em>
           </h1>
 
           <p className="hero-subtext">
-            After nearly 20 years helping people retire, I've found that most retirement plans fail for one reason <strong>the strategy doesn't match how you actually think and feel about money. </strong> Let's change that.
+            {LANDING_COPY.hero.subtext}
           </p>
 
           <div className="hero-cta-group">
-            <a href="/quiz" target="_blank" className="btn-primary">Begin Assessment <span className="btn-arr">→</span></a>
-            <a href="#why" className="btn-secondary">Why It Matters</a>
+            <a href="/quiz" target="_blank" className="btn-primary">{LANDING_COPY.hero.ctaPrimary} <span className="btn-arr">→</span></a>
+            <a href="#why" className="btn-secondary">{LANDING_COPY.hero.ctaSecondary}</a>
           </div>
           <p className="hero-meta">
-            No personally identifiable information is collected. &nbsp;·&nbsp;
+            {LANDING_COPY.hero.meta} &nbsp;·&nbsp;
             <span className="live-counter">
               <span className="live-dot"></span>
-              <strong>{assessmentCount}</strong> Assessments Completed
+              <strong className="rolling-num">{displayCount}</strong> Assessments Completed
             </span>
           </p>
 
@@ -118,18 +138,12 @@ export default function LandingPage() {
 
       {/* ── STAT STRIP ── */}
       <div className="stat-strip">
-        <div className="stat-item">
-          <div className="stat-num">17+ YEARS OF INHERITED EXPERTISE</div>
-          <div className="stat-label">A proprietary assessment designed by a 2nd generation advisor.</div>
-        </div>
-        <div className="stat-item">
-          <div className="stat-num">ADVANCED PLANNING AUTHORITY</div>
-          <div className="stat-label">Leveraging RICP&reg;, CLU&reg; & ChFC&reg; designations from <a href="https://www.theamericancollege.edu" target="_blank" rel="noopener noreferrer" style={{ color: 'inherit', textDecoration: 'underline' }}>The American College of Financial Services</a>.</div>
-        </div>
-        <div className="stat-item">
-          <div className="stat-num">7-DIMENSION STRESS TEST</div>
-          <div className="stat-label">Translating your personal financial psychology and core metrics into your actionable strategy.</div>
-        </div>
+        {LANDING_COPY.stats.map((stat, i) => (
+          <div key={i} className="stat-item">
+            <div className="stat-num">{stat.num}</div>
+            <div className="stat-label">{stat.label}</div>
+          </div>
+        ))}
       </div>
 
       {/* ── PROBLEM ── */}
@@ -160,29 +174,17 @@ export default function LandingPage() {
                   <p>INTEGRATED ARCHITECTURE</p>
                 </div>
 
-                <div className="align-features">
-                  <div className="feature-card">
-                    <div className="feature-dot"></div>
-                    <div className="feature-text">
-                      <div className="feature-title">Tax Strategies</div>
-                      <div className="feature-desc">Validated withdrawal sequences and asset location planning.</div>
-                    </div>
+                  <div className="align-features">
+                    {LANDING_COPY.problem.features.map((f, i) => (
+                      <div key={i} className="feature-card">
+                        <div className="feature-dot"></div>
+                        <div className="feature-text">
+                          <div className="feature-title">{f.title}</div>
+                          <div className="feature-desc">{f.desc}</div>
+                        </div>
+                      </div>
+                    ))}
                   </div>
-                  <div className="feature-card">
-                    <div className="feature-dot"></div>
-                    <div className="feature-text">
-                      <div className="feature-title">Income Engine</div>
-                      <div className="feature-desc">Dynamic cash flow management and distribution.</div>
-                    </div>
-                  </div>
-                  <div className="feature-card">
-                    <div className="feature-dot"></div>
-                    <div className="feature-text">
-                      <div className="feature-title">Retirement Rhythm</div>
-                      <div className="feature-desc">Lifestyle spending updates driven by your financial DNA.</div>
-                    </div>
-                  </div>
-                </div>
               </div>
             </div>
           </div>
@@ -211,21 +213,13 @@ export default function LandingPage() {
           <h2 className="section-h reveal d1">What you'll discover about your<br /><em>optimized retirement strategy.</em></h2>
 
           <div className="discover-grid">
-            <div className="d-card reveal d1">
-              <div className="d-card-title">Foundational Components</div>
-              <p className="d-card-body">Think of these as your Retirement "Engine" and "Rhythm".</p>
-              <div className="d-card-accent"></div>
-            </div>
-            <div className="d-card reveal d2">
-              <div className="d-card-title">Nuanced Preferences</div>
-              <p className="d-card-body">These dictate how we structure your income, protect your liquidity, and pace your distributions.</p>
-              <div className="d-card-accent"></div>
-            </div>
-            <div className="d-card reveal d3">
-              <div className="d-card-title">Implementation Persona</div>
-              <p className="d-card-body">Strategic guidance on how best to partner with professionals to ensure your plan is executed with precision.</p>
-              <div className="d-card-accent"></div>
-            </div>
+            {LANDING_COPY.discover.cards.map((c, i) => (
+              <div key={i} className={`d-card reveal d${i+1}`}>
+                <div className="d-card-title">{c.title}</div>
+                <p className="d-card-body">{c.body}</p>
+                <div className="d-card-accent"></div>
+              </div>
+            ))}
           </div>
         </div>
       </section>
@@ -238,21 +232,13 @@ export default function LandingPage() {
           <div className="section-tag reveal">The Process</div>
           <h2 className="section-h reveal d1">How to get your assessment.</h2>
           <div className="how-steps">
-            <div className="how-step reveal d1">
-              <div className="how-step-num">01</div>
-              <div className="how-step-title">Take the Assessment</div>
-              <p className="how-step-body">Answer key behavioral questions in less than 17 minutes.</p>
-            </div>
-            <div className="how-step reveal d2">
-              <div className="how-step-num">02</div>
-              <div className="how-step-title">Instant Personal Analysis</div>
-              <p className="how-step-body">Receive your ALIGN report.</p>
-            </div>
-            <div className="how-step reveal d3">
-              <div className="how-step-num">03</div>
-              <div className="how-step-title">Strategy Integration</div>
-              <p className="how-step-body">Opportunity to schedule a strategy session to integrate these insights into your retirement plan.</p>
-            </div>
+            {LANDING_COPY.process.steps.map((s, i) => (
+              <div key={i} className={`how-step reveal d${i+1}`}>
+                <div className="how-step-num">{s.num}</div>
+                <div className="how-step-title">{s.title}</div>
+                <p className="how-step-body">{s.body}</p>
+              </div>
+            ))}
           </div>
         </div>
       </section>
@@ -267,13 +253,13 @@ export default function LandingPage() {
             </div>
           </div>
           <div className="about-right reveal d2">
-            <div className="about-tag">About Adam Kazinec</div>
-            <h2 className="about-h">Financial planning should feel <em>deeply personal.</em></h2>
-            <p className="about-body">Adam replaces standard financial benchmarks with a rigorous, high-level exploration of your goals and your relationship with risk. By utilizing a framework built on multigenerational expertise, he helps families move beyond simple withdrawal percentages and into a bespoke strategy for You. For those seeking to preserve and grow what they have built, Adam offers the architectural insight necessary for a seamless transition into their next chapter.</p>
+            <div className="about-tag">{LANDING_COPY.about.tag}</div>
+            <h2 className="about-h">{LANDING_COPY.about.title}</h2>
+            <p className="about-body">{LANDING_COPY.about.body}</p>
             <div className="about-creds">
-              <div className="about-cred"><div className="cred-dot"></div> Host of Kaz's Korner Retirement Podcast & <a href="https://www.youtube.com/@KazsKornerPodcast" target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'underline', color: 'inherit' }}>YouTube Channel</a></div>
-              <div className="about-cred"><div className="cred-dot"></div> Founder of ALIGN Assessment Framework</div>
-              <div className="about-cred"><div className="cred-dot"></div> Specialist in Retirement Guardrails & Time Segmentation</div>
+              {LANDING_COPY.about.creds.map((cred, i) => (
+                <div key={i} className="about-cred"><div className="cred-dot"></div> {cred}</div>
+              ))}
             </div>
           </div>
         </div>
@@ -286,12 +272,7 @@ export default function LandingPage() {
         <div className="section-inner">
           <h2 className="section-h reveal d1">Frequently Asked Questions.</h2>
           <div className="faq-grid">
-            {[
-              { q: 'Who is this assessment for?', a: 'For anyone within 10 years of retirement (or already retired) who feels their current financial plan doesn\'t reflect their personality.' },
-              { q: 'Is there a cost for the report?', a: 'The ALIGN assessment and your personalized report are complimentary.' },
-              { q: 'How long do I have to wait for results?', a: 'Zero wait time. Your results are generated instantly and displayed on your screen, with a PDF download link sent to your email.' },
-              { q: 'Is my data kept private?', a: 'Absolutely. We do not sell your data. Your responses are used solely to generate your personalized retirement alignment report.' }
-            ].map((item, index) => (
+            {LANDING_COPY.faq.map((item, index) => (
               <div key={index} className={`faq-item ${faqOpen === index ? 'open' : ''}`}>
                 <div className="faq-q" onClick={() => setFaqOpen(faqOpen === index ? null : index)}>
                   <span>{item.q}</span>
@@ -304,14 +285,13 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* ── FINAL CTA ── */}
       <div className="cta-band reveal">
         <div className="section-inner">
-          <div className="section-tag">Start Today</div>
-          <h2 className="section-h">Move beyond a money manager.<br />Hire a <em>distribution strategist.</em></h2>
-          <p className="section-sub">Any advisor can help you build a pile; few have a process to help you spend it. Moving from growth to income is a psychological pivot a spreadsheet can’t solve. The ALIGN Assessment replaces generic ROI with a Return on Life framework—turning your balance sheet into a distribution strategy that prioritizes your life over your ledger.</p>
+          <div className="section-tag">{LANDING_COPY.finalCta.tag}</div>
+          <h2 className="section-h">{LANDING_COPY.finalCta.title}</h2>
+          <p className="section-sub">{LANDING_COPY.finalCta.sub}</p>
           <a href="/quiz" target="_blank" className="btn-primary" style={{ padding: '20px 48px', fontSize: '16px' }}>
-            Execute My Strategy Now <span className="btn-arr">→</span>
+            {LANDING_COPY.finalCta.btn} <span className="btn-arr">→</span>
           </a>
         </div>
       </div>

@@ -3,13 +3,14 @@ import { NextResponse } from 'next/server';
 import { query } from '@/lib/db';
 import AlignScoringEngine from '@/lib/scoring-engine';
 import type { QuizResponse } from '@/lib/types';
+import { PRIMARY_TRAIT_COPY, SECONDARY_TRAIT_COPY, PERSONA_COPY } from '@/lib/quiz-copy';
+import { pushLeadToWealthbox } from '@/lib/wealthbox';
 
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
     const { email, firstName, lastName, phone, responses } = body;
 
-    // Validate required fields
     if (!email || !responses || Object.keys(responses).length < 34) {
       return NextResponse.json(
         { error: 'Missing required fields: email and all 34 quiz responses' },
@@ -17,97 +18,117 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Initialize scoring engine
     const engine = new AlignScoringEngine();
-
-    const quizResponse: QuizResponse = {
-      email,
-      firstName,
-      lastName,
-      phone,
-      responses,
-    };
-
+    const quizResponse: QuizResponse = { email, firstName, lastName, phone, responses };
     const result = engine.score(quizResponse);
+    const tr = result.traitResults;
 
-    // ── Save to quiz_responses table (existing, full schema) ─────────────
+    // ── Resolve copy for storage ──────────────────────────────────────────────
+    const primary1Desc = PRIMARY_TRAIT_COPY[tr.incomeSource] ?? '';
+    const primary2Desc = PRIMARY_TRAIT_COPY[tr.incomeStructure] ?? '';
+    const secondaryKey = (val: string) => `${val}|${tr.incomeSource}|${tr.incomeStructure}`;
+    const secondaryTraitsJson = {
+      mindset:       tr.mindset,
+      liquidity:     tr.liquidity,
+      spender:       tr.spender,
+      payoutPattern: tr.payoutPattern,
+      descriptions: {
+        mindset:       SECONDARY_TRAIT_COPY[secondaryKey(tr.mindset)]       ?? '',
+        liquidity:     SECONDARY_TRAIT_COPY[secondaryKey(tr.liquidity)]     ?? '',
+        spender:       SECONDARY_TRAIT_COPY[secondaryKey(tr.spender)]       ?? '',
+        payoutPattern: SECONDARY_TRAIT_COPY[secondaryKey(tr.payoutPattern)] ?? '',
+      },
+    };
+    const personaDesc = PERSONA_COPY[result.persona]?.description ?? '';
+
+    // ── Write to quiz_results_full (single source of truth) ──────────────────
+    let insertedId: number | null = null;
     try {
-      await query(
-        `INSERT INTO quiz_responses
-         (email, first_name, last_name, phone, tier, persona, lead_score,
-          income_source, income_structure, mindset, liquidity, spender, payout_pattern,
-          advisor_value_score, self_efficacy_score, age_range, time_to_retirement, assets_saved, tags_applied)
-         VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19)
-         ON CONFLICT (email) DO UPDATE SET
-         tier = EXCLUDED.tier,
-         persona = EXCLUDED.persona,
-         lead_score = EXCLUDED.lead_score,
-         updated_at = CURRENT_TIMESTAMP`,
+      const dbResult = await query(
+        `INSERT INTO quiz_results_full (
+          first_name, last_name, email, phone,
+          age_range, assets_range, retirement_timeline,
+          lead_tier, lead_score,
+          primary_component_1, primary_component_1_desc,
+          primary_component_2, primary_component_2_desc,
+          secondary_traits_json,
+          implementation_persona, implementation_persona_desc,
+          raw_answers_json
+        ) VALUES (
+          $1,  $2,  $3,  $4,
+          $5,  $6,  $7,
+          $8,  $9,
+          $10, $11,
+          $12, $13,
+          $14,
+          $15, $16,
+          $17
+        ) RETURNING id`,
         [
+          firstName ?? null,
+          lastName  ?? null,
           email,
-          firstName || null,
-          lastName || null,
-          phone || null,
-          result.tier,
-          result.persona,
-          result.leadScore,
-          result.traitResults.incomeSource,
-          result.traitResults.incomeStructure,
-          result.traitResults.mindset,
-          result.traitResults.liquidity,
-          result.traitResults.spender,
-          result.traitResults.payoutPattern,
-          result.quadrant.advisorValue,
-          result.quadrant.selfEfficacy,
+          phone     ?? null,
           result.demographics.ageRange,
-          result.demographics.timeToRetirement,
           result.demographics.assetsSaved,
-          false,
+          result.demographics.timeToRetirement,
+          result.tier,
+          result.leadScore,
+          tr.incomeSource,
+          primary1Desc,
+          tr.incomeStructure,
+          primary2Desc,
+          JSON.stringify(secondaryTraitsJson),
+          result.persona,
+          personaDesc,
+          JSON.stringify(responses),
         ]
       );
-    } catch (dbError) {
-      console.error('quiz_responses insert error:', dbError);
-      // Continue — don't fail the API if this table has an issue
+      insertedId = dbResult.rows[0]?.id ?? null;
+    } catch (dbErr) {
+      console.error('[DB] quiz_results_full insert failed:', dbErr);
     }
 
-    // ── Also save to quiz_results table (simpler lead-capture schema) ───
+    // ── Update trust counter (best-effort) ────────────────────────────────────
     try {
       await query(
-        `INSERT INTO quiz_results (
-          firstName, lastName, email, tier,
-          incomeSource, incomeStructure, mindset, liquidity, spender, payoutPattern,
-          persona, leadScore
-        ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12)`,
-        [
-          firstName || '',
-          lastName || '',
-          email,
-          result.tier,
-          result.traitResults.incomeSource,
-          result.traitResults.incomeStructure,
-          result.traitResults.mindset,
-          result.traitResults.liquidity,
-          result.traitResults.spender,
-          result.traitResults.payoutPattern,
-          result.persona,
-          result.leadScore,
-        ]
+        `UPDATE trust_counters SET counter_value = counter_value + 1, updated_at = NOW()
+         WHERE counter_type = 'total_quizzes'`
       );
-    } catch (dbError) {
-      console.error('quiz_results insert error:', dbError);
-      // Continue — run schema.sql in Neon to create this table if not yet created
-    }
+      await query(
+        `UPDATE trust_counters SET counter_value = counter_value + 1, updated_at = NOW()
+         WHERE counter_type = $1`,
+        [`total_tier_${result.tier.toLowerCase()}`]
+      );
+    } catch { /* non-critical */ }
 
-    // ── Update trust counters (best-effort) ──────────────────────────────
-    try {
-      await query(`UPDATE trust_counters SET counter_value = counter_value + 1 WHERE counter_type = 'total_quizzes'`);
-      await query(`UPDATE trust_counters SET counter_value = counter_value + 1 WHERE counter_type = $1`, [`total_tier_${result.tier.toLowerCase()}`]);
-    } catch { /* ignore if table not present */ }
+    // ── Push to Wealthbox (async, never blocks the response) ─────────────────
+    if (insertedId !== null) {
+      pushLeadToWealthbox({
+        firstName:          firstName ?? '',
+        lastName:           lastName  ?? '',
+        email,
+        phone:              phone     ?? undefined,
+        tier:               result.tier,
+        persona:            result.persona,
+        incomeSource:       tr.incomeSource,
+        incomeStructure:    tr.incomeStructure,
+        assetsRange:        result.demographics.assetsSaved,
+        retirementTimeline: result.demographics.timeToRetirement,
+      }).then(async (wbContactId) => {
+        if (wbContactId && insertedId) {
+          await query(
+            `UPDATE quiz_results_full SET wealthbox_contact_id = $1 WHERE id = $2`,
+            [wbContactId, insertedId]
+          ).catch(e => console.error('[DB] wealthbox_contact_id update failed:', e));
+        }
+      });
+    }
 
     return NextResponse.json(result, { status: 200 });
 
   } catch (error) {
-    console.error('Scoring error:', error);
+    console.error('[Score API] Unexpected error:', error);
     return NextResponse.json(
       { error: 'Failed to score quiz', details: error instanceof Error ? error.message : 'Unknown error' },
       { status: 500 }
@@ -118,4 +139,3 @@ export async function POST(request: NextRequest) {
 export async function GET() {
   return NextResponse.json({ status: 'healthy', service: 'ALIGN API v2' });
 }
-
