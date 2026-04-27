@@ -2,21 +2,15 @@
  * Wealthbox CRM Integration
  * Docs: https://dev.wealthbox.com/
  *
- * Flow: createContact (always) → createOpportunity (if stage configured)
+ * Flow: createContact → createOpportunity (Prospect Pipeline)
  *
- * To activate opportunity creation:
- *   1. Go to Wealthbox → Settings → Pipelines and create stages
- *   2. Fill in OPPORTUNITY_STAGES below with the exact stage names you created
- *      (e.g. "Strategy Session Scheduled", "Discovery Call", "Nurture")
- *
- * To add custom ALIGN fields to contacts:
- *   1. Go to Wealthbox → Settings → Custom Fields → Create fields
- *   2. Add them to the custom_fields array in createContact()
+ * Pipeline: "Prospect Pipeline" (ID: 123026)
+ * Stage IDs confirmed via GET /v1/categories/opportunity_stages
  */
 
 const WB_BASE = 'https://api.crmworkspace.com/v1';
 
-// Tags auto-create in Wealthbox on first use — these exact strings become tag names.
+// Tags auto-create in Wealthbox on first use.
 const TAGS = {
   source: 'ALIGN-Assessment',
   tierA:  'ALIGN-Tier-A',
@@ -24,12 +18,18 @@ const TAGS = {
   tierC:  'ALIGN-Tier-C',
 } as const;
 
-// TODO: Set these to the exact stage names you create in Wealthbox → Settings → Pipelines.
-// Leave empty ('') to skip opportunity creation until stages are configured.
-const OPPORTUNITY_STAGES: Record<'A' | 'B' | 'C', string> = {
-  A: '',  // e.g. 'Strategy Session Scheduled'
-  B: '',  // e.g. 'Discovery Call Scheduled'
-  C: '',  // e.g. 'Nurture'
+// Prospect Pipeline (123026) stage IDs per tier.
+const STAGE_IDS: Record<'A' | 'B' | 'C', number> = {
+  A: 988759,  // New Lead
+  B: 988759,  // New Lead
+  C: 989670,  // Nurturing/Long Game
+};
+
+// Probabilities per tier (percentage).
+const PROBABILITY: Record<'A' | 'B' | 'C', number> = {
+  A: 70,
+  B: 40,
+  C: 10,
 };
 
 // ── Helpers ──────────────────────────────────────────────────────────────────
@@ -89,9 +89,6 @@ async function createContact(lead: WealthboxLeadPayload): Promise<string> {
 }
 
 async function createOpportunity(contactId: string, lead: WealthboxLeadPayload): Promise<void> {
-  const stage = OPPORTUNITY_STAGES[lead.tier];
-  if (!stage) return; // skip until stages are configured
-
   const closeDate = new Date();
   closeDate.setFullYear(closeDate.getFullYear() + 1);
   const mm = String(closeDate.getMonth() + 1).padStart(2, '0');
@@ -100,16 +97,16 @@ async function createOpportunity(contactId: string, lead: WealthboxLeadPayload):
 
   await wbPost('/opportunities', {
     name: `ALIGN Assessment — ${lead.firstName} ${lead.lastName}`,
-    contact_id: Number(contactId),
-    stage,
-    probability: lead.tier === 'A' ? 70 : lead.tier === 'B' ? 40 : 10,
-    projected_close_date: `${mm}/${dd}/${yyyy}`,
-    revenue: 0,
+    linked_to: [{ id: Number(contactId), type: 'Contact' }],
+    stage: STAGE_IDS[lead.tier],
+    probability: PROBABILITY[lead.tier],
+    target_close: `${mm}/${dd}/${yyyy}`,
+    amounts: [{ amount: 0, currency: '$', kind: 'AUM' }],
   });
 }
 
 /**
- * Creates a Contact in Wealthbox (and optionally an Opportunity).
+ * Creates a Contact + Opportunity in Wealthbox.
  * Returns the contact ID, or null on failure.
  * Never throws — Wealthbox failure must never block the quiz response.
  */
@@ -117,7 +114,7 @@ export async function pushLeadToWealthbox(lead: WealthboxLeadPayload): Promise<s
   try {
     const contactId = await createContact(lead);
     await createOpportunity(contactId, lead).catch(err =>
-      console.error('[Wealthbox] Opportunity creation failed (non-fatal):', err instanceof Error ? err.message : err)
+      console.error('[Wealthbox] Opportunity failed (non-fatal):', err instanceof Error ? err.message : err)
     );
     return contactId;
   } catch (err) {
