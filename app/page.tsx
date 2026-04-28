@@ -73,7 +73,7 @@ export default function Home() {
   useEffect(() => {
     // ─── CAROUSEL PANELS ─── 
     document.querySelectorAll('.car-panel').forEach((panel) => {
-      panel.addEventListener('click', function (this: HTMLElement) {
+      panel.addEventListener('click', function () {
         document.querySelectorAll('.car-panel').forEach((p) => p.classList.remove('active'));
         this.classList.add('active');
       });
@@ -155,7 +155,7 @@ export default function Home() {
       const circ = 2 * Math.PI * r;
 
       setTimeout(() => {
-        const rFill = document.getElementById('rFill') as unknown as SVGCircleElement;
+        const rFill = document.getElementById('rFill') as SVGCircleElement;
         if (rFill) rFill.style.strokeDashoffset = String(circ - (circ * pct) / 100);
         animN(document.getElementById('rVal') as HTMLElement, 0, total, 1400);
       }, 300);
@@ -236,7 +236,7 @@ export default function Home() {
         qnext.textContent = 'Continue →';
       }
       document.querySelectorAll('.qpb').forEach((b, i) => b.classList.toggle('on', i === 0));
-      (document.getElementById('rFill') as unknown as SVGCircleElement).style.strokeDashoffset = '283';
+      (document.getElementById('rFill') as SVGCircleElement).style.strokeDashoffset = '283';
       (document.getElementById('results') as HTMLElement).style.display = 'none';
       document.getElementById('quiz')?.scrollIntoView({ behavior: 'smooth' });
     };
