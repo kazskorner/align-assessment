@@ -268,7 +268,7 @@ export default function LandingPage() {
           <div className="stat-label">Unique Outcome Profiles</div>
         </div>
         <div className="stat-item">
-          <div className="stat-num stat-num--small">CLU · ChFC · RICP</div>
+          <div className="stat-num">CLU<span className="stat-sep"> · </span>ChFC<span className="stat-sep"> · </span>RICP</div>
           <div className="stat-label">Professional Designations</div>
         </div>
       </div>
@@ -276,6 +276,7 @@ export default function LandingPage() {
       {/* ── PROBLEM ── */}
       <section className="problem" id="why">
         <div className="section-inner">
+          <div className="section-tag reveal">The Problem</div>
           <h2 className="section-h reveal d1">
             Most retirement plans fail<br />
             not because of bad <em>math —</em><br />
@@ -309,13 +310,13 @@ export default function LandingPage() {
               <div className="mismatch-card">
                 <div className="mismatch-title">The Costly Mismatch in Action</div>
 
-                <div className="mismatch-pair">
-                  <div className="mismatch-side bad">
+                <div className="mismatch-pair mismatch-pair--bad">
+                  <div className="mismatch-side bad bad-left">
                     <div className="ms-label">Their Emotions</div>
                     Needs reliable income regardless of market. Loses sleep during volatility.
                   </div>
-                  <div className="mismatch-arrow">≠</div>
-                  <div className="mismatch-side bad">
+                  <div className="mismatch-arrow mismatch-arrow--bad">≠</div>
+                  <div className="mismatch-side bad bad-right">
                     <div className="ms-label">Their Strategy</div>
                     Fully market-driven portfolio. Income depends on performance.
                   </div>
@@ -465,7 +466,7 @@ export default function LandingPage() {
           {FAQ_ITEMS.map((item, index) => (
             <div
               key={index}
-              className={`faq-item reveal${index > 0 ? ` d${index + 1}` : ''}${faqOpen === index ? ' open' : ''}`}
+              className={`faq-item${faqOpen === index ? ' open' : ''}`}
             >
               <div className="faq-q" onClick={() => setFaqOpen(faqOpen === index ? null : index)}>
                 <span>{item.q}</span>

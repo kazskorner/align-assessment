@@ -300,12 +300,11 @@ nav.scrolled .nav-cta:hover {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  /* CENTER CONTENT OVER VIDEO */
+  justify-content: flex-end;
   text-align: center;
   position: relative;
   overflow: hidden;
-  padding: 0 40px;
+  padding: 0 40px 88px;
   background: var(--ink);
 }
 
@@ -667,12 +666,10 @@ nav.scrolled .nav-cta:hover {
   color: var(--cyan)
 }
 
-/* Smaller variant for text-based stat (designations) */
-.stat-num--small {
-  font-size: clamp(13px, 1.4vw, 18px);
-  font-weight: 600;
-  letter-spacing: 0.02em;
-  line-height: 1.3;
+/* stat-sep: cyan dots between CLU / ChFC / RICP */
+.stat-sep {
+  color: var(--cyan);
+  font-weight: 700;
 }
 
 .stat-label {
@@ -695,24 +692,25 @@ section {
   margin: 0 auto
 }
 
+/* Section tag: charcoal/grey on light backgrounds (matches source HTML) */
 .section-tag {
   display: inline-flex;
   align-items: center;
   gap: 8px;
   font-family: var(--font-sans);
-  font-size: 14px;
-  font-weight: 700;
-  color: var(--cyan);
-  letter-spacing: 0.04em;
-  margin-bottom: 20px;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--accent-mid);
+  letter-spacing: 0.08em;
   text-transform: uppercase;
+  margin-bottom: 20px;
 }
 
 .section-tag::before {
   content: '';
   width: 20px;
-  height: 2px;
-  background: var(--cyan)
+  height: 1px;
+  background: var(--accent-mid)
 }
 
 .section-h {
@@ -804,6 +802,77 @@ section {
   color: var(--ink);
   margin-bottom: 24px;
   letter-spacing: -0.01em;
+}
+
+/* Bad pair: grey, slightly crooked */
+.mismatch-pair--bad {
+  margin-bottom: 16px;
+}
+
+.mismatch-side.bad {
+  background: #f0f0f0;
+  border: 1px solid #d4d4d4;
+  color: #777;
+}
+
+.bad-left {
+  transform: rotate(-1.2deg) translateY(-2px);
+  transform-origin: center;
+}
+
+.bad-right {
+  transform: rotate(0.7deg) translateY(3px);
+  transform-origin: center;
+}
+
+.mismatch-side.bad .ms-label {
+  color: #999;
+}
+
+/* Arrow: navy for bad, cyan for good */
+.mismatch-arrow--bad {
+  color: var(--brand-blue) !important;
+  font-size: 22px;
+  font-weight: 700;
+}
+
+/* Navy middle cost panel */
+.mismatch-cost {
+  background: var(--brand-blue);
+  border: none;
+  border-radius: var(--r-sm);
+  padding: 14px 16px;
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.85);
+  line-height: 1.5;
+  margin: 0;
+}
+
+.mismatch-cost strong {
+  color: var(--cyan);
+  font-weight: 600;
+}
+
+/* Good pair: cyan accent */
+.mismatch-side.good {
+  background: rgba(0, 240, 255, 0.08);
+  border: 1px solid rgba(0, 240, 255, 0.3);
+  color: var(--ink);
+}
+
+.mismatch-side.good .ms-label {
+  color: var(--cyan);
+  opacity: 1;
+}
+
+.mismatch-arrow {
+  width: 32px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  color: var(--cyan);
 }
 
 /* ─── TRANSFORMATION VISUAL ─── */
@@ -1025,68 +1094,6 @@ section {
   }
 }
 
-.mismatch-pair {
-  display: flex;
-  gap: 16px;
-  margin-bottom: 16px;
-  align-items: stretch;
-}
-
-.mismatch-side {
-  flex: 1;
-  padding: 16px;
-  border-radius: var(--r-sm);
-  font-size: 13px;
-  font-weight: 400;
-  line-height: 1.5;
-}
-
-.mismatch-side.bad {
-  background: #FFF2F2;
-  border: 1px solid #FFCCCC;
-  color: #8B2020;
-}
-
-.mismatch-side.good {
-  background: #F0FFF8;
-  border: 1px solid #CCFFE8;
-  color: #1A5C40;
-}
-
-.mismatch-side .ms-label {
-  font-size: 10px;
-  font-weight: 600;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  margin-bottom: 6px;
-  opacity: 0.55;
-  font-family: var(--font-mono);
-}
-
-.mismatch-arrow {
-  width: 32px;
-  flex-shrink: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 18px;
-  color: var(--ink-faint);
-}
-
-.mismatch-cost {
-  background: rgba(0, 0, 0, 0.03);
-  border: 1px solid var(--accent-border);
-  border-radius: var(--r-sm);
-  padding: 14px 16px;
-  font-size: 13px;
-  color: var(--ink-soft);
-  line-height: 1.5;
-}
-
-.mismatch-cost strong {
-  color: var(--charcoal);
-  font-weight: 600
-}
 
 /* ─── VIDEO SECTION ─── */
 .video-sec {
@@ -1112,17 +1119,14 @@ section {
 }
 
 .video-caption {
-  max-width: 720px;
-  margin: 40px auto 0;
+  max-width: 600px;
+  margin: 28px auto 0;
   text-align: center;
-  font-size: 19px;
+  font-size: 13px;
   font-weight: 300;
-  color: var(--ink-soft);
+  color: var(--ink-faint);
   line-height: 1.6;
-  font-family: var(--font-display);
-  font-style: italic;
-  position: relative;
-  padding: 0 40px;
+  font-family: var(--font-mono);
 }
 
 .video-caption::before {
@@ -1462,16 +1466,25 @@ section {
   height: 56px;
   border-radius: 50%;
   background: var(--surface);
-  border: 2px solid var(--cyan);
+  border: 1px solid var(--accent-border);
   display: flex;
   align-items: center;
   justify-content: center;
   font-family: var(--font-display);
-  font-size: 15px;
-  font-weight: 700;
-  color: var(--ink);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--charcoal);
   margin: 0 auto 24px;
-  box-shadow: 0 0 15px rgba(0, 240, 255, 0.15);
+  box-shadow: var(--shadow-sm);
+  transition: all 0.3s ease;
+}
+
+.how-step:hover .how-step-num {
+  background: var(--cyan);
+  color: var(--panel);
+  border-color: var(--cyan);
+  transform: scale(1.15);
+  box-shadow: 0 0 28px rgba(0, 240, 255, 0.4), 0 0 0 6px rgba(0, 240, 255, 0.12);
 }
 
 .how-step-title {
@@ -1523,8 +1536,8 @@ section {
 
 .adam-photo-badge {
   position: absolute;
-  bottom: -16px;
-  right: -16px;
+  bottom: -32px;
+  right: -32px;
   background: var(--cyan);
   color: var(--panel);
   border-radius: var(--r-sm);
@@ -1535,6 +1548,12 @@ section {
   line-height: 1.4;
   box-shadow: var(--shadow-md);
   font-family: var(--font-display);
+  white-space: nowrap;
+}
+
+.about-left {
+  padding-bottom: 40px;
+  padding-right: 40px;
 }
 
 .about-tag {
@@ -1947,6 +1966,15 @@ section {
   background: var(--surface)
 }
 
+/* Section tag inside FAQ: charcoal on white for legibility */
+.faq .section-tag {
+  color: var(--ink);
+}
+
+.faq .section-tag::before {
+  background: var(--ink);
+}
+
 .faq-grid {
   max-width: 720px;
   margin: 24px auto 0;
@@ -2041,6 +2069,7 @@ section {
   pointer-events: none;
 }
 
+/* CTA band: cyan section tag overrides charcoal default */
 .cta-band .section-tag {
   color: var(--cyan);
   margin-bottom: 20px
@@ -2178,7 +2207,7 @@ footer {
   }
 
   .hero {
-    padding: 100px 24px 60px
+    padding: 100px 24px 80px
   }
 
   .hero-corner {
