@@ -304,7 +304,7 @@ nav.scrolled .nav-cta:hover {
   text-align: center;
   position: relative;
   overflow: hidden;
-  padding: 0 40px 88px;
+  padding: 0 40px 48px;
   background: var(--ink);
 }
 
@@ -804,9 +804,38 @@ section {
   letter-spacing: -0.01em;
 }
 
+/* ─── MISMATCH CARD ─── */
+
+/* Base pair and side styles */
+.mismatch-pair {
+  display: flex;
+  gap: 12px;
+  align-items: stretch;
+  margin-bottom: 0;
+}
+
+.mismatch-side {
+  flex: 1;
+  padding: 14px 16px;
+  border-radius: var(--r-sm);
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+.mismatch-side .ms-label {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+  font-family: var(--font-sans);
+  display: block;
+}
+
 /* Bad pair: grey, slightly crooked */
 .mismatch-pair--bad {
-  margin-bottom: 16px;
+  margin-bottom: 12px;
 }
 
 .mismatch-side.bad {
@@ -836,21 +865,77 @@ section {
   font-weight: 700;
 }
 
-/* Navy middle cost panel */
-.mismatch-cost {
+/* Navy chaos / cost band */
+.mismatch-chaos {
   background: var(--brand-blue);
-  border: none;
   border-radius: var(--r-sm);
-  padding: 14px 16px;
+  padding: 16px 18px;
+  margin: 0 0 12px;
+}
+
+.mismatch-chaos-label {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.45);
+  margin-bottom: 8px;
+  font-family: var(--font-sans);
+}
+
+.mismatch-cost {
   font-size: 13px;
   color: rgba(255, 255, 255, 0.85);
-  line-height: 1.5;
-  margin: 0;
+  line-height: 1.55;
+  margin: 0 0 12px;
 }
 
 .mismatch-cost strong {
   color: var(--cyan);
   font-weight: 600;
+}
+
+/* Tension → Harmony slider */
+.mismatch-transition-bar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.mt-label {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  white-space: nowrap;
+  font-family: var(--font-sans);
+}
+
+.mt-tension { color: rgba(255, 255, 255, 0.3); }
+.mt-harmony { color: var(--cyan); }
+
+.mt-track {
+  flex: 1;
+  height: 4px;
+  background: linear-gradient(to right, rgba(255, 255, 255, 0.12), var(--cyan));
+  border-radius: 2px;
+  position: relative;
+}
+
+.mt-dot {
+  position: absolute;
+  right: -5px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--cyan);
+  box-shadow: 0 0 10px rgba(0, 240, 255, 0.7);
+}
+
+/* Good pair: no top margin needed */
+.mismatch-pair--good {
+  margin-top: 0;
 }
 
 /* Good pair: cyan accent */
@@ -862,11 +947,11 @@ section {
 
 .mismatch-side.good .ms-label {
   color: var(--cyan);
-  opacity: 1;
 }
 
+/* Arrows */
 .mismatch-arrow {
-  width: 32px;
+  width: 28px;
   flex-shrink: 0;
   display: flex;
   align-items: center;

@@ -308,36 +308,49 @@ export default function LandingPage() {
 
             <div className="problem-right reveal d2">
               <div className="mismatch-card">
-                <div className="mismatch-title">The Costly Mismatch in Action</div>
+                <div className="mismatch-title">
+                  ⛈ The Costly Mismatch in Action
+                </div>
 
+                {/* Zone 1 – Misaligned top row */}
                 <div className="mismatch-pair mismatch-pair--bad">
                   <div className="mismatch-side bad bad-left">
-                    <div className="ms-label">Their Emotions</div>
+                    <div className="ms-label">😟 Their Emotions</div>
                     Needs reliable income regardless of market. Loses sleep during volatility.
                   </div>
                   <div className="mismatch-arrow mismatch-arrow--bad">≠</div>
                   <div className="mismatch-side bad bad-right">
-                    <div className="ms-label">Their Strategy</div>
+                    <div className="ms-label">📊 Their Strategy</div>
                     Fully market-driven portfolio. Income depends on performance.
                   </div>
                 </div>
 
-                <div className="mismatch-cost">
-                  <strong>The real cost:</strong> Panic selling at the bottom, unnecessary fees to
-                  restructure, emotional decisions that compound across 20+ years of retirement.
+                {/* Zone 2 – Navy chaos / cost band */}
+                <div className="mismatch-chaos">
+                  <div className="mismatch-chaos-label">⚡ The Real Cost</div>
+                  <p className="mismatch-cost">
+                    <strong>Panic selling</strong> at the bottom, unnecessary fees to restructure,
+                    emotional decisions that compound across <strong>20+ years</strong> of retirement.
+                  </p>
+                  <div className="mismatch-transition-bar">
+                    <span className="mt-label mt-tension">TENSION</span>
+                    <div className="mt-track">
+                      <div className="mt-dot" />
+                    </div>
+                    <span className="mt-label mt-harmony">HARMONY</span>
+                  </div>
                 </div>
 
-                <div style={{ marginTop: '20px' }}>
-                  <div className="mismatch-pair" style={{ marginBottom: 0 }}>
-                    <div className="mismatch-side good">
-                      <div className="ms-label">Their Emotions</div>
-                      Same person — but strategy matches their psychology.
-                    </div>
-                    <div className="mismatch-arrow">→</div>
-                    <div className="mismatch-side good">
-                      <div className="ms-label">The Result</div>
-                      Contractual income floor. Sleep. Confidence. Commitment.
-                    </div>
+                {/* Zone 3 – Aligned good row */}
+                <div className="mismatch-pair mismatch-pair--good">
+                  <div className="mismatch-side good">
+                    <div className="ms-label">😊 Their Emotions</div>
+                    Same person — but strategy matches their psychology.
+                  </div>
+                  <div className="mismatch-arrow">→</div>
+                  <div className="mismatch-side good">
+                    <div className="ms-label">✅ The Result</div>
+                    Contractual income floor. Sleep. Confidence. Commitment.
                   </div>
                 </div>
               </div>
