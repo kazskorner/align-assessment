@@ -294,24 +294,24 @@ export const RESULTS_COPY = {
   ctaConfig: {
     A: {
       heading: "Your strategy isn't built yet.",
-      sub: "You have the profile of a Strategic Principal. This warrants a direct conversation to bridge your persona with a high-conviction architecture.",
+      sub: "",
       btnText: "Schedule Strategy Session",
       btnUrl: "https://calendly.com/adam-kazinec/align-strategy-session",
       cards: [
-        { num: "01", title: "Architecture Review", body: "We map your ALIGN results to a specific income framework built for HNW profiles." },
-        { num: "02", title: "Gap Analysis", body: "Identify where your current portfolio origins might conflict with your cash flow governance." },
-        { num: "03", title: "Governance Design", body: "Create a legacy-ready structure that synchronizes your capital with your lifestyle convictions." }
+        { num: "01", title: "Assessment Complete", body: "You have successfully defined your retirement engine and distribution rhythm.", highlight: true },
+        { num: "02", title: "Gap Analysis", body: "Review your ALIGN report to see how it compares to your current strategy." },
+        { num: "03", title: "Realign Strategy", body: "Synchronize your capital with your lifestyle convictions." }
       ]
     },
     B: {
       heading: "Your strategy isn't built yet.",
-      sub: "As a Growth Visionary, your path to 'enough' requires intentional pivots. Let's align your current trajectory with your long-term engine.",
+      sub: "",
       btnText: "Book Discovery Call",
       btnUrl: "https://calendly.com/adam-kazinec/align-discovery-call",
       cards: [
-        { num: "01", title: "Momentum Audit", body: "Evaluate your current growth velocity against your targeted retirement rhythm." },
-        { num: "02", title: "Pivot identification", body: "Pinpoint where systematic adjustments can transform wealth into sustainable income." },
-        { num: "03", title: "Strategic Roadmap", body: "Define the specific steps needed to transition from 'accumulation' to 'distribution'." }
+        { num: "01", title: "Assessment Complete", body: "You have successfully defined your retirement engine and distribution rhythm.", highlight: true },
+        { num: "02", title: "Gap Analysis", body: "Review your ALIGN report to see how it compares to your current strategy." },
+        { num: "03", title: "Realign Strategy", body: "Synchronize your capital with your lifestyle convictions." }
       ]
     },
     C: {
@@ -322,9 +322,9 @@ export const RESULTS_COPY = {
       youtubeUrl: "https://www.youtube.com/@kazskornerpodcast",
       convergentUrl: "https://www.convergentfp.com/team/adam-kazinec",
       cards: [
-        { num: "01", title: "Education First", body: "Deep dive into the core mechanics of contractual vs. market-driven income." },
-        { num: "02", title: "Baseline Mapping", body: "Use your ALIGN profile to evaluate your current savings strategy." },
-        { num: "03", title: "Long Game Plan", body: "Establish the habits that will sustain your wealth through different retirement chapters." }
+        { num: "01", title: "Assessment Complete", body: "You have successfully defined your retirement engine and distribution rhythm.", highlight: true },
+        { num: "02", title: "Gap Analysis", body: "Review your ALIGN report to see how it compares to your current strategy." },
+        { num: "03", title: "Realign Strategy", body: "Synchronize your capital with your lifestyle convictions." }
       ]
     }
   }

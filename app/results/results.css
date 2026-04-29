@@ -801,7 +801,7 @@ nav.results-nav.scrolled .nav-logo-img--dark {
 
 /* ─── NEXT STEPS ─── */
 .next-inner {
-  text-align: center;
+  text-align: left;
 }
 
 .next-cards {
@@ -818,6 +818,28 @@ nav.results-nav.scrolled .nav-logo-img--dark {
   padding: 40px;
   text-align: left;
   transition: all 0.3s;
+  position: relative;
+  overflow: hidden;
+}
+
+.next-card.highlight {
+  background: rgba(0, 240, 255, 0.05);
+  border-color: var(--cyan-border);
+  box-shadow: var(--shadow-cyan);
+}
+
+.next-card.highlight::after {
+  content: 'COMPLETED';
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  font-size: 9px;
+  font-weight: 800;
+  color: var(--cyan);
+  letter-spacing: 0.1em;
+  background: rgba(0, 240, 255, 0.1);
+  padding: 4px 8px;
+  border-radius: 4px;
 }
 
 .next-card:hover {
@@ -851,7 +873,7 @@ nav.results-nav.scrolled .nav-logo-img--dark {
 .cta-group {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
   gap: 24px;
 }
 
@@ -966,11 +988,11 @@ footer.results-footer {
 .tier-c-links {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
   gap: 16px;
   width: 100%;
   max-width: 400px;
-  margin: 0 auto 24px;
+  margin: 0 0 24px;
 }
 
 .final-btn--outline {

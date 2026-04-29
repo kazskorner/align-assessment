@@ -217,12 +217,7 @@ function ResultsContent() {
             <div className="section-tag reveal">Implementation</div>
             <div className="persona-focus-wrap">
               <div className="persona-card reveal d1" style={{ maxWidth: '800px', margin: '60px auto 0' }}>
-                <div className="persona-quadrant">Quadrant: {results.persona}</div>
                 <div className="persona-name">{results.persona}</div>
-                <div className="persona-tags">
-                  <div className="p-tag">{results.quadrant?.advisorValue > 0 ? 'High' : 'Selective'} Advisor Value</div>
-                  <div className="p-tag">{results.quadrant?.selfEfficacy > 0 ? 'High' : 'Exploring'} Confidence</div>
-                </div>
                 <p className="persona-desc">{personaData.description}</p>
                 
                 {cta.btnUrl && (
@@ -245,14 +240,16 @@ function ResultsContent() {
         <section className="res-section next-inner" id="cta-section">
           <div className="section-inner">
             <div className="section-tag reveal">Next Steps</div>
-            <h2 className="section-h reveal" style={{ fontSize: '48px' }}>
-              {cta.heading}
-            </h2>
-            <p className="section-sub reveal" style={{ margin: '0 auto 60px' }}>{cta.sub}</p>
+            {cta.heading && (
+              <h2 className="section-h reveal" style={{ fontSize: '48px' }}>
+                {cta.heading}
+              </h2>
+            )}
+            {cta.sub && <p className="section-sub reveal" style={{ marginBottom: '60px' }}>{cta.sub}</p>}
 
             <div className="next-cards">
               {cta.cards.map((step: any, i: number) => (
-                <div key={i} className={`next-card reveal d${i + 1}`}>
+                <div key={i} className={`next-card ${step.highlight ? 'highlight' : ''} reveal d${i + 1}`}>
                   <div className="next-card-num">{step.num}</div>
                   <div className="next-card-title">{step.title}</div>
                   <p className="next-card-body">{step.body}</p>
