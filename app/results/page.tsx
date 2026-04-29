@@ -58,7 +58,7 @@ function ResultsContent() {
   // Animate elements on scroll
   useEffect(() => {
     if (!results) return;
-    
+
     const io = new IntersectionObserver((entries) => {
       entries.forEach((e) => {
         if (e.isIntersecting) {
@@ -67,17 +67,17 @@ function ResultsContent() {
         }
       });
     }, { threshold: 0.1 });
-    
+
     document.querySelectorAll('.reveal').forEach((el) => io.observe(el));
     return () => io.disconnect();
   }, [results]);
 
   if (!mounted || !results) return null;
 
-  const tr   = results.traitResults || {};
+  const tr = results.traitResults || {};
   const tier = (results.tier || 'C') as keyof typeof TIER_MESSAGING;
-  const msg  = TIER_MESSAGING[tier] || TIER_MESSAGING.C;
-  const cta  = CTA_CONFIG[tier] || CTA_CONFIG.C;
+  const msg = TIER_MESSAGING[tier] || TIER_MESSAGING.C;
+  const cta = CTA_CONFIG[tier] || CTA_CONFIG.C;
   const firstName = results.firstName || '';
 
   const incomeSourceCopy = PRIMARY_TRAIT_COPY[tr.incomeSource] || '';
@@ -86,10 +86,10 @@ function ResultsContent() {
   const personaData = PERSONA_COPY[results.persona] || PERSONA_COPY['Pragmatic Realist'];
 
   const secondaryTraits = [
-    { label: 'Strategic Mindset',  val: tr.mindset,        desc: 'Approach to retirement wealth' },
-    { label: 'Liquidity Preference', val: tr.liquidity,      desc: 'Preference for cash accessibility' },
-    { label: 'Spending Profile',  val: tr.spender,        desc: 'Distribution of spending over time' },
-    { label: 'Payout Pattern',    val: tr.payoutPattern,  desc: 'Structure of income delivery' },
+    { label: 'Strategic Mindset', val: tr.mindset, desc: 'Approach to retirement wealth' },
+    { label: 'Liquidity Preference', val: tr.liquidity, desc: 'Preference for cash accessibility' },
+    { label: 'Spending Profile', val: tr.spender, desc: 'Distribution of spending over time' },
+    { label: 'Payout Pattern', val: tr.payoutPattern, desc: 'Structure of income delivery' },
   ];
 
   return (
@@ -112,17 +112,17 @@ function ResultsContent() {
         {/* CINEMATIC VIDEO HERO */}
         <section className="results-hero video-hero">
           <div className="hero-video-wrap">
-            <video 
-              autoPlay 
-              muted 
-              loop 
-              playsInline 
+            <video
+              autoPlay
+              muted
+              loop
+              playsInline
               className="hero-video-el"
               src="/Align Results Hero Video Compressed.mp4"
             />
             <div className="hero-video-scrim"></div>
           </div>
-          
+
           <div className="hero-inner">
             <div className="hero-content reveal d1">
               <h1 className="hero-tagline">
@@ -145,7 +145,7 @@ function ResultsContent() {
           </div>
         </section>
 
-        {/* FOUNDATIONAL COMPONENTS | STRATEGIC ARCHITECTURE */}
+        {/* FOUNDATIONAL COMPONENTS */}
         <section className="res-section">
           <div className="section-inner">
             <div className="section-tag reveal">{SECTIONS.architecture.tag}</div>
@@ -153,7 +153,7 @@ function ResultsContent() {
             <p className="section-sub reveal">
               {SECTIONS.architecture.sub}
             </p>
-            
+
             <div className="trait-grid">
               <div className="trait-card reveal d1">
                 <div className="trait-name">Your Retirement Engine</div>
@@ -176,12 +176,12 @@ function ResultsContent() {
             <p className="section-sub reveal">
               {SECTIONS.preferences.sub}
             </p>
-            
+
             <div className="secondary-grid">
               {secondaryTraits.map((t, i) => {
                 const copy = t.val ? SECONDARY_TRAIT_COPY[secondaryKey(t.val)] : '';
                 return (
-                  <div key={t.label} className={`sec-card reveal d${i+1}`}>
+                  <div key={t.label} className={`sec-card reveal d${i + 1}`}>
                     <div className="sec-name">{t.label}</div>
                     <p className="sec-body">
                       {copy ? copy.split('\n\n')[0] : t.desc}
@@ -193,10 +193,10 @@ function ResultsContent() {
           </div>
         </section>
 
-        {/* IMPLEMENTATION PERSONA */}
+        {/* IMPLEMENTATION */}
         <section className="res-section" style={{ borderTop: '1px solid rgba(255,255,255,0.05)' }}>
           <div className="section-inner">
-            <div className="section-tag reveal">Implementation Persona</div>
+            <div className="section-tag reveal">Implementation</div>
             <div className="persona-focus-wrap">
               <div className="persona-card reveal d1" style={{ maxWidth: '800px', margin: '60px auto 0' }}>
                 <div className="persona-quadrant">Quadrant: {results.persona}</div>
@@ -222,7 +222,7 @@ function ResultsContent() {
 
             <div className="next-cards">
               {cta.cards.map((step: any, i: number) => (
-                <div key={i} className={`next-card reveal d${i+1}`}>
+                <div key={i} className={`next-card reveal d${i + 1}`}>
                   <div className="next-card-num">{step.num}</div>
                   <div className="next-card-title">{step.title}</div>
                   <p className="next-card-body">{step.body}</p>

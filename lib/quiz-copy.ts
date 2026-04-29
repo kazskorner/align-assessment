@@ -281,7 +281,7 @@ export const RESULTS_COPY = {
   },
   sections: {
     architecture: {
-      tag: "Foundational Components | Strategic Architecture",
+      tag: "Foundational Components",
       title: "The Engine & The Rhythm.",
       sub: "Every resilient strategy requires a dual-focus: Capital Origins and Cash Flow Governance. We begin by identifying the ‘Engine’—the sophisticated sources that will generate your revenue—and the ‘Rhythm’—the structural cadence that ensures your wealth supports your lifestyle without interruption."
     },
