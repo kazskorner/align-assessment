@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect, Suspense } from 'react';
 import { useRouter } from 'next/navigation';
+import QRCode from 'react-qr-code';
 import NeuralBackground from '../components/NeuralBackground';
 import { PRIMARY_TRAIT_COPY, SECONDARY_TRAIT_COPY, PERSONA_COPY, RESULTS_COPY } from '../../lib/quiz-copy';
 import './results.css';
@@ -15,6 +16,7 @@ function ResultsContent() {
   const router = useRouter();
   const [results, setResults] = useState<any>(null);
   const [mounted, setMounted] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
     setMounted(true);
@@ -69,7 +71,14 @@ function ResultsContent() {
     }, { threshold: 0.1 });
 
     document.querySelectorAll('.reveal').forEach((el) => io.observe(el));
-    return () => io.disconnect();
+    
+    const handleScroll = () => setScrolled(window.scrollY > 60);
+    window.addEventListener('scroll', handleScroll);
+
+    return () => {
+      io.disconnect();
+      window.removeEventListener('scroll', handleScroll);
+    };
   }, [results]);
 
   if (!mounted || !results) return null;
@@ -97,9 +106,18 @@ function ResultsContent() {
       <NeuralBackground />
 
       {/* NAV */}
-      <nav className="results-nav">
+      <nav className={`results-nav ${scrolled ? 'scrolled' : ''}`}>
         <a href="/" className="nav-logo">
-          <img src="/logo.jpg" alt="ALIGN Logo" style={{ height: '64px', width: 'auto' }} />
+          <img
+            src="/ALIGN_Logo_White_Primary.png"
+            alt="ALIGN"
+            className="nav-logo-img nav-logo-img--light"
+          />
+          <img
+            src="/ALIGN_Logo_Black_Primary.png"
+            alt="ALIGN"
+            className="nav-logo-img nav-logo-img--dark"
+          />
         </a>
         {cta.btnUrl && cta.btnText && (
           <a href={cta.btnUrl} target="_blank" rel="noopener noreferrer" className="nav-cta">
@@ -206,6 +224,18 @@ function ResultsContent() {
                   <div className="p-tag">{results.quadrant?.selfEfficacy > 0 ? 'High' : 'Exploring'} Confidence</div>
                 </div>
                 <p className="persona-desc">{personaData.description}</p>
+                
+                {cta.btnUrl && (
+                  <div className="print-qr-section">
+                    <div className="print-qr-code">
+                      <QRCode value={cta.btnUrl} size={100} />
+                    </div>
+                    <div className="print-qr-text">
+                      <h4>Schedule Your Next Step</h4>
+                      <p>Scan this code to book your {cta.btnText} with Adam.</p>
+                    </div>
+                  </div>
+                )}
               </div>
             </div>
           </div>

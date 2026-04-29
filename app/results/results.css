@@ -85,6 +85,15 @@ nav.results-nav {
   border-bottom: 1px solid var(--border);
 }
 
+nav.results-nav.scrolled {
+  background: rgba(248, 249, 251, 0.96);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border-md);
+  padding: 14px 48px;
+  box-shadow: var(--shadow-sm);
+}
+
 .nav-logo {
   display: flex;
   align-items: center;
@@ -94,6 +103,34 @@ nav.results-nav {
   font-weight: 700;
   letter-spacing: -0.02em;
   color: #fff;
+}
+
+.nav-logo-img {
+  height: 48px;
+  width: auto;
+  display: block;
+  transition: opacity 0.35s ease;
+}
+
+.nav-logo-img--light {
+  opacity: 1;
+  position: relative;
+}
+
+.nav-logo-img--dark {
+  opacity: 0;
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+nav.results-nav.scrolled .nav-logo-img--light {
+  opacity: 0;
+}
+
+nav.results-nav.scrolled .nav-logo-img--dark {
+  opacity: 1;
 }
 
 .nav-logo-mark {
@@ -971,39 +1008,139 @@ footer.results-footer {
   .cta-group,
   .pdf-download-btn,
   .results-footer,
-  .hero-video-wrap {
+  .hero-video-wrap,
+  #cta-section {
     display: none !important;
   }
+  
+  @page {
+    margin: 0.5in;
+    size: letter;
+  }
+  
   .results-page {
     background: #ffffff !important;
     color: #111111 !important;
   }
+  
   .results-hero {
     background: #073557 !important;
     color: #ffffff !important;
     min-height: auto !important;
-    padding: 48px 40px !important;
+    padding: 60px 40px !important;
+    -webkit-print-color-adjust: exact;
   }
-  .hero-tagline, .hero-subheading-overlay,
-  .section-h, .section-sub, .section-tag,
-  .trait-name, .trait-body,
-  .sec-name, .sec-body,
-  .persona-name, .persona-desc {
-    color: inherit !important;
+  
+  .hero-tagline, .hero-subheading-overlay, .hero-tagline .first-name, .hero-emp {
+    color: #ffffff !important;
   }
+  
+  .bridge-section {
+    padding: 30px 0 !important;
+    page-break-after: avoid;
+    color: #111 !important;
+  }
+  .principal-mandate {
+    color: #111 !important;
+  }
+  
   .res-section {
+    padding: 30px 0 !important;
     background: #ffffff !important;
     border-color: #e0e0e0 !important;
     page-break-inside: avoid;
+    color: #111 !important;
   }
+  
+  /* First res-section is architecture/engine */
+  .res-section:nth-of-type(1) {
+    page-break-after: always !important;
+  }
+  
   .trait-card, .sec-card, .persona-card, .next-card {
-    background: #f5f5f5 !important;
-    border-color: #cccccc !important;
+    background: #f8f9fb !important;
+    border: 1px solid #cccccc !important;
     page-break-inside: avoid;
+    -webkit-print-color-adjust: exact;
+    color: #111 !important;
   }
+  
+  .trait-name, .trait-body, .sec-name, .sec-body, .persona-name, .persona-desc, .section-h, .section-sub, .section-tag, .sec-num {
+    color: #111111 !important;
+  }
+  
+  .section-h {
+    font-size: 24pt !important;
+    margin-bottom: 8pt !important;
+  }
+  
+  .section-sub {
+    font-size: 12pt !important;
+    margin-bottom: 16pt !important;
+  }
+  
+  .trait-card {
+    padding: 24pt !important;
+  }
+  
+  .sec-card {
+    padding: 16pt !important;
+  }
+  
+  .secondary-grid {
+    gap: 12pt !important;
+  }
+  
+  .persona-card {
+    padding: 24pt !important;
+    margin-top: 16pt !important;
+  }
+  
+  .trait-grid {
+    margin-top: 16pt !important;
+  }
+  
+  .persona-focus-wrap {
+    margin-top: 0 !important;
+  }
+  
+  .print-qr-section {
+    display: flex !important;
+  }
+
   .reveal {
     opacity: 1 !important;
     transform: none !important;
   }
   canvas { display: none !important; }
+}
+
+.print-qr-section {
+  display: none;
+  align-items: center;
+  gap: 24px;
+  margin-top: 32px;
+  padding-top: 32px;
+  border-top: 1px solid #cccccc;
+}
+
+.print-qr-code {
+  width: 100px;
+  height: 100px;
+  background: white;
+  padding: 4px;
+  border-radius: 8px;
+}
+
+.print-qr-text {
+  font-size: 14px;
+  color: #111;
+  text-align: left;
+}
+
+.print-qr-text h4 {
+  font-size: 18px;
+  font-family: var(--font-display);
+  margin-bottom: 6px;
+  color: #000;
 }
