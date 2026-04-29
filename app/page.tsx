@@ -330,17 +330,17 @@ export default function LandingPage() {
                   <div className="mismatch-chaos-label">The Real Cost</div>
                   <div className="mismatch-costs-grid">
                     <div className="cost-item">
-                      <div className="cost-title">Emotion Decisions</div>
+                      <div className="cost-title">Emotional Decisions</div>
                       <div className="cost-desc">Panic selling at the market bottom.</div>
                     </div>
                     <div className="cost-sep">+</div>
                     <div className="cost-item">
-                      <div className="cost-title">Unnecessary Fees</div>
-                      <div className="cost-desc">To repeatedly restructure and surrender contracts.</div>
+                      <div className="cost-title">Surrender charges & Fees</div>
+                      <div className="cost-desc">Repeatedly restructuring and surrendering contracts.</div>
                     </div>
                     <div className="cost-sep">=</div>
                     <div className="cost-item">
-                      <div className="cost-title">Permanent Loss</div>
+                      <div className="cost-title">Unnecessary Losses</div>
                       <div className="cost-desc">Compounding over 20+ years.</div>
                     </div>
                   </div>
@@ -349,13 +349,15 @@ export default function LandingPage() {
                 {/* Zone 3 – Aligned good row */}
                 <div className="mismatch-pair mismatch-pair--good">
                   <div className="mismatch-side good">
-                    <div className="ms-label">Their Emotions</div>
+                    <div className="ms-label">Aligned Strategy & Psychology</div>
                     Same person — but strategy matches their psychology.
                   </div>
                   <div className="mismatch-joint"></div>
                   <div className="mismatch-side good">
-                    <div className="ms-label">The Result</div>
-                    LIfetime income floor. Confidence. Commitment.Sleep.
+                    <div className="ms-label">Aligned Result</div>
+                    Lifetime income floor.<br />
+                    Confidence.<br />
+                    A good night sleep.
                   </div>
                 </div>
               </div>
