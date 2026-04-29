@@ -45,7 +45,7 @@ export const QUESTIONS = [
   { id: 30, text: "About how much do you currently have saved and invested, excluding your home?", options: ["$3M+", "$1.5M – $3M", "$750k – $1.5M", "$250k – $750k", "Less than $250k"] },
   { id: 31, text: "Which of the following apply to you?", options: ["$5M+ active investments", "Net worth excl. home ≥ $2.2M", "$1.1M+ managed by advisor", "Individual income $200k+ (past 2 yrs)", "Household income $300k+ (past 2 yrs)", "Net worth excl. home ≥ $1M", "None of the above"] },
   { id: 32, text: "The thought of a major financial need late in life keeps me up at night.", options: ["Strongly Agree", "Agree", "Neutral", "Disagree", "Strongly Disagree"] },
-  { id: 33, text: "Which types of accounts hold your retirement savings?", options: ["Pre Tax", "Tax Free", "Taxable", "Not Sure"] },
+  { id: 33, text: "Which types of accounts hold your retirement savings?", options: ["Pre Tax", "Tax Free", "Taxable", "Not Sure"], isMultiSelect: true },
   { id: 34, text: "State of residence", options: [], isDropdown: true },
 ] as const;
 
@@ -281,13 +281,13 @@ export const RESULTS_COPY = {
   },
   sections: {
     architecture: {
-      tag: "Foundational Components",
-      title: "The Engine & The Rhythm.",
+      tag: "Primary Traits",
+      title: "",
       sub: "Every resilient strategy requires a dual-focus: Capital Origins and Cash Flow Governance. We begin by identifying the ‘Engine’—the sophisticated sources that will generate your revenue—and the ‘Rhythm’—the structural cadence that ensures your wealth supports your lifestyle without interruption."
     },
     preferences: {
-      tag: "Nuanced Preferences",
-      title: "Four traits where the fine-tuning comes in.",
+      tag: "Secondary Traits",
+      title: "Four nuanced preferences where the fine-tuning comes in.",
       sub: "This is really where the fine-tuning comes in and where your retirement strategy will really feel personalized for you."
     }
   },

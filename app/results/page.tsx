@@ -167,19 +167,19 @@ function ResultsContent() {
         <section className="res-section">
           <div className="section-inner">
             <div className="section-tag reveal">{SECTIONS.architecture.tag}</div>
-            <h2 className="section-h reveal">{SECTIONS.architecture.title}</h2>
+            {SECTIONS.architecture.title && <h2 className="section-h reveal">{SECTIONS.architecture.title}</h2>}
             <p className="section-sub reveal">
               {SECTIONS.architecture.sub}
             </p>
 
             <div className="trait-grid">
               <div className="trait-card reveal d1">
-                <div className="trait-name">Your Retirement Engine</div>
+                <div className="trait-name">Your Engine</div>
                 <div className="trait-body" style={{ marginTop: '20px' }}>{incomeSourceCopy}</div>
               </div>
 
               <div className="trait-card reveal d2">
-                <div className="trait-name">Your Retirement Rhythm</div>
+                <div className="trait-name">Your Ride</div>
                 <div className="trait-body" style={{ marginTop: '20px' }}>{incomeStructCopy}</div>
               </div>
             </div>

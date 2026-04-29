@@ -310,7 +310,7 @@ nav.results-nav.scrolled .nav-logo-img--dark {
 
 /* ─── The Bridge ─── */
 .bridge-section {
-  padding: 100px 0;
+  padding: 80px 0 40px;
   background: var(--bg);
   text-align: center;
 }
@@ -428,7 +428,7 @@ nav.results-nav.scrolled .nav-logo-img--dark {
 
 /* ─── SECTIONS ─── */
 .res-section {
-  padding: 120px 48px;
+  padding: 80px 48px 120px;
   position: relative;
   z-index: 1;
 }
