@@ -51,7 +51,7 @@ export const QUESTIONS = [
 
 /* ─── US STATES ─────────────────────────────────────────────────────────── */
 export const US_STATES = [
-  "Alabama","Alaska","Arizona","Arkansas","California","Colorado","Connecticut","Delaware","Florida","Georgia","Hawaii","Idaho","Illinois","Indiana","Iowa","Kansas","Kentucky","Louisiana","Maine","Maryland","Massachusetts","Michigan","Minnesota","Mississippi","Missouri","Montana","Nebraska","Nevada","New Hampshire","New Jersey","New Mexico","New York","North Carolina","North Dakota","Ohio","Oklahoma","Oregon","Pennsylvania","Rhode Island","South Carolina","South Dakota","Tennessee","Texas","Utah","Vermont","Virginia","Washington","West Virginia","Wisconsin","Wyoming",
+  "Alabama", "Alaska", "Arizona", "Arkansas", "California", "Colorado", "Connecticut", "Delaware", "Florida", "Georgia", "Hawaii", "Idaho", "Illinois", "Indiana", "Iowa", "Kansas", "Kentucky", "Louisiana", "Maine", "Maryland", "Massachusetts", "Michigan", "Minnesota", "Mississippi", "Missouri", "Montana", "Nebraska", "Nevada", "New Hampshire", "New Jersey", "New Mexico", "New York", "North Carolina", "North Dakota", "Ohio", "Oklahoma", "Oregon", "Pennsylvania", "Rhode Island", "South Carolina", "South Dakota", "Tennessee", "Texas", "Utah", "Vermont", "Virginia", "Washington", "West Virginia", "Wisconsin", "Wyoming",
 ];
 
 /* ─── PRIMARY TRAIT COPY ─────────────────────────────────────────────────── */
@@ -283,12 +283,12 @@ export const RESULTS_COPY = {
     architecture: {
       tag: "Primary Traits",
       title: "",
-      sub: "Every resilient strategy requires a dual-focus: Capital Origins and Cash Flow Governance. We begin by identifying the ‘Engine’—the sophisticated sources that will generate your revenue—and the ‘Rhythm’—the structural cadence that ensures your wealth supports your lifestyle without interruption."
+      sub: "Every resilient strategy requires a dual-focus: Capital Sources and Cash Flow Structure. We begin by identifying 'Your Engine'. The preferred sources that will generate your retirement income. Next we will look at your ‘Ride Through Time’. This represents the structural cadence that ensures your wealth supports your lifestyle through the various stages of your retirement."
     },
     preferences: {
       tag: "Secondary Traits",
-      title: "Four nuanced preferences where the fine-tuning comes in.",
-      sub: "This is really where the fine-tuning comes in and where your retirement strategy will really feel personalized for you."
+      title: "Four nuanced preferences where the fine-tuning is done.",
+      sub: "This is where the details are felt and your retirement strategy will begin look like it was made just for you ."
     }
   },
   ctaConfig: {
