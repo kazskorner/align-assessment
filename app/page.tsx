@@ -328,10 +328,23 @@ export default function LandingPage() {
                 {/* Zone 2 – Navy chaos / cost band */}
                 <div className="mismatch-chaos">
                   <div className="mismatch-chaos-label">The Real Cost</div>
-                  <p className="mismatch-cost">
-                    <strong>Panic selling</strong> at the bottom, unnecessary fees to restructure,
-                    emotional decisions that compound across <strong>20+ years</strong> of retirement.
-                  </p>
+                  <div className="mismatch-costs-grid">
+                    <div className="cost-item">
+                      <div className="cost-num">1</div>
+                      <div className="cost-title">Panic Selling</div>
+                      <div className="cost-desc">At the market bottom.</div>
+                    </div>
+                    <div className="cost-item">
+                      <div className="cost-num">2</div>
+                      <div className="cost-title">Unnecessary Fees</div>
+                      <div className="cost-desc">To repeatedly restructure.</div>
+                    </div>
+                    <div className="cost-item">
+                      <div className="cost-num">3</div>
+                      <div className="cost-title">Emotional Decisions</div>
+                      <div className="cost-desc">Compounding over 20+ years.</div>
+                    </div>
+                  </div>
                   <div className="mismatch-transition-bar">
                     <span className="mt-label mt-tension">TENSION</span>
                     <div className="mt-track">

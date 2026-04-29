@@ -232,8 +232,8 @@ nav.scrolled .nav-links a:hover {
 }
 
 .nav-cta {
-  background: rgba(255, 255, 255, 0.1);
-  color: var(--cyan);
+  background: var(--cyan);
+  color: var(--ink);
   padding: 10px 24px;
   border-radius: var(--r-pill);
   font-size: 13px;
@@ -241,14 +241,12 @@ nav.scrolled .nav-links a:hover {
   transition: all 0.25s;
   letter-spacing: 0.02em;
   font-family: var(--font-sans);
-  border: 1px solid rgba(0, 240, 255, 0.3);
-  backdrop-filter: blur(8px);
+  border: none;
 }
 
 nav.scrolled .nav-cta {
   background: var(--cyan);
   color: var(--ink);
-  border-color: transparent;
 }
 
 .nav-cta:hover {
@@ -257,7 +255,6 @@ nav.scrolled .nav-cta {
   /* Ensure visibility on cyan */
   transform: translateY(-2px);
   box-shadow: 0 8px 32px rgba(0, 240, 255, 0.25);
-  border-color: transparent;
 }
 
 nav.scrolled .nav-cta:hover {
@@ -833,29 +830,31 @@ section {
   display: block;
 }
 
-/* Bad pair: grey, slightly crooked */
+/* Bad pair: charcoal, dull looking, misaligned */
 .mismatch-pair--bad {
   margin-bottom: 12px;
 }
 
 .mismatch-side.bad {
-  background: #f0f0f0;
-  border: 1px solid #d4d4d4;
-  color: #777;
+  background: var(--charcoal);
+  border: none;
+  color: #999;
 }
 
 .bad-left {
-  transform: rotate(-1.2deg) translateY(-2px);
-  transform-origin: center;
+  border-radius: 20px 8px 8px 20px;
+  transform: rotate(-1.5deg) translateY(-2px);
+  transform-origin: center right;
 }
 
 .bad-right {
-  transform: rotate(0.7deg) translateY(3px);
-  transform-origin: center;
+  border-radius: 8px 20px 20px 8px;
+  transform: rotate(1.5deg) translateY(2px);
+  transform-origin: center left;
 }
 
 .mismatch-side.bad .ms-label {
-  color: #999;
+  color: #bbb;
 }
 
 /* Arrow: navy for bad, cyan for good */
@@ -869,8 +868,44 @@ section {
 .mismatch-chaos {
   background: var(--brand-blue);
   border-radius: var(--r-sm);
-  padding: 16px 18px;
-  margin: 0 0 12px;
+  padding: 20px;
+  margin: 0 0 16px;
+}
+
+.mismatch-costs-grid {
+  display: flex;
+  gap: 12px;
+  margin: 0 0 16px;
+}
+
+.cost-item {
+  flex: 1;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--r-sm);
+  padding: 12px;
+  text-align: left;
+}
+
+.cost-num {
+  font-family: var(--font-display);
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--cyan);
+  margin-bottom: 4px;
+}
+
+.cost-title {
+  font-size: 12px;
+  font-weight: 600;
+  color: #fff;
+  margin-bottom: 4px;
+}
+
+.cost-desc {
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.6);
+  line-height: 1.4;
 }
 
 .mismatch-chaos-label {
@@ -879,20 +914,8 @@ section {
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: rgba(255, 255, 255, 0.45);
-  margin-bottom: 8px;
+  margin-bottom: 12px;
   font-family: var(--font-sans);
-}
-
-.mismatch-cost {
-  font-size: 13px;
-  color: rgba(255, 255, 255, 0.85);
-  line-height: 1.55;
-  margin: 0 0 12px;
-}
-
-.mismatch-cost strong {
-  color: var(--cyan);
-  font-weight: 600;
 }
 
 /* Tension → Harmony slider */
@@ -938,11 +961,17 @@ section {
   margin-top: 0;
 }
 
-/* Good pair: cyan accent */
+/* Good pair: navy outline, white bg, glow on hover */
 .mismatch-side.good {
-  background: rgba(0, 240, 255, 0.08);
-  border: 1px solid rgba(0, 240, 255, 0.3);
+  background: #ffffff;
+  border: 2px solid var(--brand-blue);
   color: var(--ink);
+  transition: all 0.3s ease;
+}
+
+.mismatch-side.good:hover {
+  box-shadow: 0 0 15px rgba(0, 240, 255, 0.4), inset 0 0 8px rgba(0, 240, 255, 0.1);
+  border-color: var(--cyan);
 }
 
 .mismatch-side.good .ms-label {
@@ -1621,9 +1650,9 @@ section {
 
 .adam-photo-badge {
   position: absolute;
-  bottom: -8px;
-  left: 12px;
-  right: auto;
+  bottom: 12px;
+  right: -24px;
+  left: auto;
   background: var(--cyan);
   color: var(--panel);
   border-radius: var(--r-sm);
@@ -1638,8 +1667,8 @@ section {
 }
 
 .about-left {
-  padding-bottom: 16px;
-  padding-right: 0;
+  padding-bottom: 0;
+  padding-right: 24px;
 }
 
 .about-tag {
