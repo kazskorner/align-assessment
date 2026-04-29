@@ -140,7 +140,7 @@ function ResultsContent() {
         <section className="bridge-section">
           <div className="section-inner">
             <p className="principal-mandate reveal d1">
-              \"{BRIDGE.mandate}\"
+              {BRIDGE.mandate}
             </p>
           </div>
         </section>
