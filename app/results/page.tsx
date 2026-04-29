@@ -258,44 +258,45 @@ function ResultsContent() {
             </div>
 
             <div className="cta-group reveal">
-              {/* Tier A + B: booking button */}
-              {cta.btnUrl && cta.btnText && (
-                <a href={cta.btnUrl} target="_blank" rel="noopener noreferrer" className="final-btn">
-                  {cta.btnText} →
-                </a>
-              )}
-
-              {/* Tier C: YouTube + Convergent links */}
-              {tier === 'C' && (
-                <div className="tier-c-links">
-                  <a
-                    href={(cta as any).youtubeUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="final-btn"
-                    style={{ marginBottom: '16px' }}
-                  >
-                    Watch Kaz's Korner on YouTube →
+              <div className="cta-buttons">
+                {/* Tier A + B: booking button */}
+                {cta.btnUrl && cta.btnText && (
+                  <a href={cta.btnUrl} target="_blank" rel="noopener noreferrer" className="final-btn">
+                    {cta.btnText} →
                   </a>
-                  <a
-                    href={(cta as any).convergentUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="final-btn final-btn--outline"
-                  >
-                    Meet Adam at Convergent →
-                  </a>
-                </div>
-              )}
+                )}
 
-              {/* PDF download — all tiers */}
-              <button
-                onClick={() => window.print()}
-                className="pdf-download-btn"
-                aria-label="Download results as PDF"
-              >
-                ↓ Download as PDF
-              </button>
+                {/* Tier C: YouTube + Convergent links */}
+                {tier === 'C' && (
+                  <>
+                    <a
+                      href={(cta as any).convergentUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="final-btn final-btn--outline"
+                    >
+                      Learn More →
+                    </a>
+                    <a
+                      href={(cta as any).youtubeUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="final-btn"
+                    >
+                      YouTube Channel →
+                    </a>
+                  </>
+                )}
+
+                {/* PDF download — all tiers */}
+                <button
+                  onClick={() => window.print()}
+                  className="pdf-download-btn"
+                  aria-label="Download results as PDF"
+                >
+                  ↓ Download as PDF
+                </button>
+              </div>
 
               <p className="cta-note">
                 Adam Kazinec · RICP® ChFC® CLU® · Chamblee, GA · No Obligation
@@ -308,15 +309,11 @@ function ResultsContent() {
       <footer className="results-footer">
         <div className="footer-inner">
           <div className="foot-brand">
-            <img src="/logo.jpg" alt="ALIGN Logo" style={{ height: '32px', width: 'auto' }} />
+            <img src="/logo.jpg" alt="ALIGN Logo" className="footer-logo" />
           </div>
-          <p className="foot-copy">
-            © 2026 Convergent Financial Partners · Adam Kazinec · Chamblee, GA
+          <p className="foot-copy-centered">
+            Assessment for Long-term Income & Goal Navigation · © 2026 Adam Kazinec · All rights reserved
           </p>
-          <div className="foot-links">
-            <a href="#">Privacy</a>
-            <a href="#">Disclosures</a>
-          </div>
         </div>
       </footer>
     </div>
