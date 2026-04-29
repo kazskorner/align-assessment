@@ -874,7 +874,7 @@ section {
 
 .mismatch-costs-grid {
   display: flex;
-  gap: 12px;
+  gap: 8px;
   margin: 0 0 16px;
 }
 
@@ -885,14 +885,6 @@ section {
   border-radius: var(--r-sm);
   padding: 12px;
   text-align: left;
-}
-
-.cost-num {
-  font-family: var(--font-display);
-  font-size: 11px;
-  font-weight: 700;
-  color: var(--cyan);
-  margin-bottom: 4px;
 }
 
 .cost-title {
@@ -908,6 +900,16 @@ section {
   line-height: 1.4;
 }
 
+.cost-sep {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-display);
+  font-size: 20px;
+  font-weight: 400;
+  color: var(--cyan);
+}
+
 .mismatch-chaos-label {
   font-size: 9px;
   font-weight: 700;
@@ -918,64 +920,75 @@ section {
   font-family: var(--font-sans);
 }
 
-/* Tension → Harmony slider */
-.mismatch-transition-bar {
+/* Good pair container */
+.mismatch-pair--good {
   display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.mt-label {
-  font-size: 9px;
-  font-weight: 700;
-  letter-spacing: 0.1em;
-  white-space: nowrap;
-  font-family: var(--font-sans);
-}
-
-.mt-tension { color: rgba(255, 255, 255, 0.3); }
-.mt-harmony { color: var(--cyan); }
-
-.mt-track {
-  flex: 1;
-  height: 4px;
-  background: linear-gradient(to right, rgba(255, 255, 255, 0.12), var(--cyan));
-  border-radius: 2px;
+  margin-top: 0;
+  border-radius: var(--r-sm);
+  background: #ffffff;
+  border: 2px solid var(--brand-blue);
+  transition: all 0.3s ease;
+  overflow: hidden;
   position: relative;
 }
 
-.mt-dot {
-  position: absolute;
-  right: -5px;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
-  background: var(--cyan);
-  box-shadow: 0 0 10px rgba(0, 240, 255, 0.7);
-}
-
-/* Good pair: no top margin needed */
-.mismatch-pair--good {
-  margin-top: 0;
-}
-
-/* Good pair: navy outline, white bg, glow on hover */
-.mismatch-side.good {
-  background: #ffffff;
-  border: 2px solid var(--brand-blue);
-  color: var(--ink);
-  transition: all 0.3s ease;
-}
-
-.mismatch-side.good:hover {
-  box-shadow: 0 0 15px rgba(0, 240, 255, 0.4), inset 0 0 8px rgba(0, 240, 255, 0.1);
+.mismatch-pair--good:hover {
+  box-shadow: 0 0 20px rgba(0, 240, 255, 0.4);
   border-color: var(--cyan);
 }
 
+/* Good pair sides */
+.mismatch-side.good {
+  flex: 1;
+  background: transparent;
+  border: none;
+  color: #000;
+  padding: 14px 16px;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1.5;
+}
+
 .mismatch-side.good .ms-label {
-  color: var(--cyan);
+  color: #000;
+}
+
+/* Joint (Tongue and Groove) */
+.mismatch-joint {
+  width: 24px;
+  flex-shrink: 0;
+  position: relative;
+  z-index: 2;
+}
+
+.mismatch-joint::before {
+  content: '';
+  position: absolute;
+  top: 0; bottom: 0; left: 10px;
+  width: 2px;
+  background: var(--brand-blue);
+  transition: background 0.3s ease;
+}
+
+.mismatch-joint::after {
+  content: '';
+  position: absolute;
+  top: 50%; left: 10px;
+  width: 14px; height: 28px;
+  transform: translateY(-50%);
+  border: 2px solid var(--brand-blue);
+  border-left: none;
+  background: #fff;
+  border-radius: 0 4px 4px 0;
+  transition: border-color 0.3s ease;
+}
+
+.mismatch-pair--good:hover .mismatch-joint::before {
+  background: var(--cyan);
+}
+
+.mismatch-pair--good:hover .mismatch-joint::after {
+  border-color: var(--cyan);
 }
 
 /* Arrows */

@@ -315,12 +315,12 @@ export default function LandingPage() {
                 {/* Zone 1 – Misaligned top row */}
                 <div className="mismatch-pair mismatch-pair--bad">
                   <div className="mismatch-side bad bad-left">
-                    <div className="ms-label">Their Emotions</div>
+                    <div className="ms-label">Emotions</div>
                     Needs reliable income regardless of market. Loses sleep during volatility.
                   </div>
                   <div className="mismatch-arrow mismatch-arrow--bad">≠</div>
                   <div className="mismatch-side bad bad-right">
-                    <div className="ms-label">Their Strategy</div>
+                    <div className="ms-label">Strategy</div>
                     Fully market-driven portfolio. Income depends on performance.
                   </div>
                 </div>
@@ -330,27 +330,19 @@ export default function LandingPage() {
                   <div className="mismatch-chaos-label">The Real Cost</div>
                   <div className="mismatch-costs-grid">
                     <div className="cost-item">
-                      <div className="cost-num">1</div>
-                      <div className="cost-title">Panic Selling</div>
-                      <div className="cost-desc">At the market bottom.</div>
+                      <div className="cost-title">Emotion Decisions</div>
+                      <div className="cost-desc">Panic selling at the market bottom.</div>
                     </div>
+                    <div className="cost-sep">+</div>
                     <div className="cost-item">
-                      <div className="cost-num">2</div>
                       <div className="cost-title">Unnecessary Fees</div>
-                      <div className="cost-desc">To repeatedly restructure.</div>
+                      <div className="cost-desc">To repeatedly restructure and surrender contracts.</div>
                     </div>
+                    <div className="cost-sep">=</div>
                     <div className="cost-item">
-                      <div className="cost-num">3</div>
-                      <div className="cost-title">Emotional Decisions</div>
+                      <div className="cost-title">Permanent Loss</div>
                       <div className="cost-desc">Compounding over 20+ years.</div>
                     </div>
-                  </div>
-                  <div className="mismatch-transition-bar">
-                    <span className="mt-label mt-tension">TENSION</span>
-                    <div className="mt-track">
-                      <div className="mt-dot" />
-                    </div>
-                    <span className="mt-label mt-harmony">HARMONY</span>
                   </div>
                 </div>
 
@@ -360,10 +352,10 @@ export default function LandingPage() {
                     <div className="ms-label">Their Emotions</div>
                     Same person — but strategy matches their psychology.
                   </div>
-                  <div className="mismatch-arrow">→</div>
+                  <div className="mismatch-joint"></div>
                   <div className="mismatch-side good">
                     <div className="ms-label">The Result</div>
-                    Contractual income floor. Sleep. Confidence. Commitment.
+                    LIfetime income floor. Confidence. Commitment.Sleep.
                   </div>
                 </div>
               </div>
