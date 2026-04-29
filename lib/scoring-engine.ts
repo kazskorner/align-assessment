@@ -17,7 +17,7 @@ export class AlignScoringEngine {
    * Tier B (11–19): Qualified prospects
    * Tier C (0–10): Education-first prospects
    */
-  calculateTier(responses: Record<number, string>): {
+  calculateTier(responses: Record<number, string | string[]>): {
     tier: 'A' | 'B' | 'C';
     score: number;
   } {
@@ -37,14 +37,17 @@ export class AlignScoringEngine {
     const q31Points = this.getPointValue(31, q31Response);
     const q16Points = this.getPointValue(16, q16Response);
     const q17Points = this.getPointValue(17, q17Response);
-    const q33Points = q33Response && q33Response !== "not_sure" ? 1 : 0; // Bonus if they know their tax buckets
+    
+    // Q33 is multi-select: Bonus if they know their tax buckets (any non-"Not Sure" selected)
+    const q33Array = Array.isArray(q33Response) ? q33Response : [q33Response];
+    const q33Points = q33Array.some(r => r && r !== "Not Sure" && r !== "not_sure") ? 1 : 0;
 
     // Calculate raw tier score
     const rawScore = q18Points + q29Points + q30Points + q31Points + q16Points + q17Points + q33Points;
 
     // Parse assets for waterfall rule
-    const assetsValue = this.parseAssets(q30Response);
-    const timeToRetirementValue = this.parseTimeToRetirement(q18Response);
+    const assetsValue = this.parseAssets(q30Response as string);
+    const timeToRetirementValue = this.parseTimeToRetirement(q18Response as string);
 
     // Apply Waterfall Rules
     // Rule 1: Hard Knockout
@@ -69,7 +72,7 @@ export class AlignScoringEngine {
   /**
    * Calculate 6 Bipolar Traits with tie-breaking logic
    */
-  calculateTraits(responses: Record<number, string>): Record<string, string> {
+  calculateTraits(responses: Record<number, string | string[]>): Record<string, string> {
     return {
       incomeSource: this.calculateBipolarTrait('incomeSource', responses),
       incomeStructure: this.calculateBipolarTrait('incomeStructure', responses),
@@ -82,7 +85,7 @@ export class AlignScoringEngine {
 
   private calculateBipolarTrait(
     category: BipolarTraitCategory,
-    responses: Record<number, string>
+    responses: Record<number, string | string[]>
   ): string {
     // Question mappings for each category
     const questionMaps: Record<BipolarTraitCategory, { qNumbers: number[]; aQuestions: number[] }> = {
@@ -104,7 +107,7 @@ export class AlignScoringEngine {
       const question = ALIGN_QUESTIONS[qNum as keyof typeof ALIGN_QUESTIONS];
 
       if (question && response) {
-        const answerData = question.answers[response as keyof typeof question.answers] as any;
+        const answerData = question.answers[response as string as keyof typeof question.answers] as any;
         if (answerData && answerData.points !== undefined) {
           const points = answerData.points;
           const direction = answerData.trait;
@@ -134,7 +137,7 @@ export class AlignScoringEngine {
     return this.resolveBipolarTie(category, responses);
   }
 
-  private resolveBipolarTie(category: BipolarTraitCategory, responses: Record<number, string>): string {
+  private resolveBipolarTie(category: BipolarTraitCategory, responses: Record<number, string | string[]>): string {
     const traitCategory = BIPOLAR_TRAIT_CATEGORIES[category];
 
     // PRIMARY traits: Default to conservative (A side)
@@ -166,7 +169,7 @@ export class AlignScoringEngine {
   /**
    * Calculate Quadrant (Advisor Value + Self Efficacy)
    */
-  calculateQuadrant(responses: Record<number, string>): {
+  calculateQuadrant(responses: Record<number, string | string[]>): {
     advisorValue: number;
     selfEfficacy: number;
     persona: PersonaType;
@@ -188,14 +191,14 @@ export class AlignScoringEngine {
     };
   }
 
-  private calculateSubScore(questions: number[], responses: Record<number, string>): number {
+  private calculateSubScore(questions: number[], responses: Record<number, string | string[]>): number {
     let score = 0;
     const scores: { question: number; points: number }[] = [];
 
     questions.forEach((qNum) => {
       const response = responses[qNum];
       const points = this.getPointValue(qNum, response);
-
+      scores.push({ question: qNum, points });
       score += points;
     });
 
@@ -217,15 +220,19 @@ export class AlignScoringEngine {
     return score > 0 ? 'High' : 'Low';
   }
 
-  private getPointValue(questionNum: number, response: string): number {
+  private getPointValue(questionNum: number, response: string | string[]): number {
     const question = ALIGN_QUESTIONS[questionNum as keyof typeof ALIGN_QUESTIONS];
-    if (question && response) {
-      const answerData = question.answers[response as keyof typeof question.answers] as any;
-      if (answerData && answerData.points !== undefined) {
-        return answerData.points;
-      }
+    if (!question || !response) return 0;
+
+    if (Array.isArray(response)) {
+      return response.reduce((sum, r) => {
+        const answerData = question.answers[r as keyof typeof question.answers] as any;
+        return sum + (answerData?.points || 0);
+      }, 0);
     }
-    return 0;
+
+    const answerData = question.answers[response as keyof typeof question.answers] as any;
+    return answerData?.points || 0;
   }
 
   /**
@@ -276,10 +283,12 @@ export class AlignScoringEngine {
     const leadScore = tierScore + (advisorValue > 0 ? advisorValue : 0) + (selfEfficacy > 0 ? selfEfficacy : 0);
 
     // Get demographics
-    const ageRange = responses[29] || "Unknown";
-    const timeToRetirement = responses[18] || "Unknown"; // Q18: "When will you retire?"
-    const assetsSaved = responses[30] || "Unknown";
-    const taxBuckets = responses[33] || "Unknown";
+    const ageRange = (responses[29] as string) || "Unknown";
+    const timeToRetirement = (responses[18] as string) || "Unknown"; // Q18: "When will you retire?"
+    const assetsSaved = (responses[30] as string) || "Unknown";
+    const taxBuckets = Array.isArray(responses[33]) 
+      ? (responses[33] as string[]).join(', ') 
+      : (responses[33] || "Unknown");
 
     // Generate Redtail tags
     const redtailTags = this.generateRedtailTags(tier, timeToRetirement, ageRange);

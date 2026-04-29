@@ -43,15 +43,15 @@ export const QUESTIONS = [
   { id: 29, text: "What is your age range?", options: ["Under 50", "51–62", "62–67", "68–74", "75+"] },
   // Block 7 — Financial profile (Q30–34)
   { id: 30, text: "About how much do you currently have saved and invested, excluding your home?", options: ["$3M+", "$1.5M – $3M", "$750k – $1.5M", "$250k – $750k", "Less than $250k"] },
-  { id: 31, text: "Which of the following apply to you?", options: ["$5M+ active investments", "Net worth excl. home ≥ $2.2M", "$1.1M+ managed by advisor", "Individual income $200k+ (past 2 yrs)", "Household income $300k+ (past 2 yrs)", "Net worth excl. home ≥ $1M", "None of the above"] },
+  { id: 31, text: "The primary classifications recognized for investment access include Retail Customers, Institutional Investors, and Accredited Investors. Do any of the following apply to you?", options: ["$5M+ active investments", "Net worth excl. home ≥ $2.2M", "$1.1M+ managed by advisor", "Individual income $200k+ (past 2 yrs)", "Household income $300k+ (past 2 yrs)", "Net worth excl. home ≥ $1M", "None of the above"], isMultiSelect: true },
   { id: 32, text: "The thought of a major financial need late in life keeps me up at night.", options: ["Strongly Agree", "Agree", "Neutral", "Disagree", "Strongly Disagree"] },
-  { id: 33, text: "Which types of accounts hold your retirement savings?", options: ["Pre Tax", "Tax Free", "Taxable", "Not Sure"] },
+  { id: 33, text: "Which types of accounts hold your retirement savings?", options: ["Pre Tax", "Tax Free", "Taxable", "Not Sure"], isMultiSelect: true },
   { id: 34, text: "State of residence", options: [], isDropdown: true },
 ] as const;
 
 /* ─── US STATES ─────────────────────────────────────────────────────────── */
 export const US_STATES = [
-  "Alabama","Alaska","Arizona","Arkansas","California","Colorado","Connecticut","Delaware","Florida","Georgia","Hawaii","Idaho","Illinois","Indiana","Iowa","Kansas","Kentucky","Louisiana","Maine","Maryland","Massachusetts","Michigan","Minnesota","Mississippi","Missouri","Montana","Nebraska","Nevada","New Hampshire","New Jersey","New Mexico","New York","North Carolina","North Dakota","Ohio","Oklahoma","Oregon","Pennsylvania","Rhode Island","South Carolina","South Dakota","Tennessee","Texas","Utah","Vermont","Virginia","Washington","West Virginia","Wisconsin","Wyoming",
+  "Alabama", "Alaska", "Arizona", "Arkansas", "California", "Colorado", "Connecticut", "Delaware", "Florida", "Georgia", "Hawaii", "Idaho", "Illinois", "Indiana", "Iowa", "Kansas", "Kentucky", "Louisiana", "Maine", "Maryland", "Massachusetts", "Michigan", "Minnesota", "Mississippi", "Missouri", "Montana", "Nebraska", "Nevada", "New Hampshire", "New Jersey", "New Mexico", "New York", "North Carolina", "North Dakota", "Ohio", "Oklahoma", "Oregon", "Pennsylvania", "Rhode Island", "South Carolina", "South Dakota", "Tennessee", "Texas", "Utah", "Vermont", "Virginia", "Washington", "West Virginia", "Wisconsin", "Wyoming",
 ];
 
 /* ─── PRIMARY TRAIT COPY ─────────────────────────────────────────────────── */
@@ -281,37 +281,37 @@ export const RESULTS_COPY = {
   },
   sections: {
     architecture: {
-      tag: "Foundational Components | Strategic Architecture",
-      title: "The Engine & The Rhythm.",
-      sub: "Every resilient strategy requires a dual-focus: Capital Origins and Cash Flow Governance. We begin by identifying the ‘Engine’—the sophisticated sources that will generate your revenue—and the ‘Rhythm’—the structural cadence that ensures your wealth supports your lifestyle without interruption."
+      tag: "Primary Traits",
+      title: "",
+      sub: "Every resilient strategy requires a dual-focus: Capital Sources and Cash Flow Structure. We begin by identifying 'Your Engine'. The preferred sources that will generate your retirement income. Next we will look at your ‘Ride Through Time’. This represents the structural cadence that ensures your wealth supports your lifestyle through the various stages of your retirement."
     },
     preferences: {
-      tag: "Nuanced Preferences",
-      title: "Four traits where the fine-tuning comes in.",
-      sub: "This is really where the fine-tuning comes in and where your retirement strategy will really feel personalized for you."
+      tag: "Secondary Traits",
+      title: "Four nuanced preferences where the fine-tuning is done.",
+      sub: "This is where the details are felt and your retirement strategy will begin look like it was made just for you ."
     }
   },
   ctaConfig: {
     A: {
       heading: "Your strategy isn't built yet.",
-      sub: "You have the profile of a Strategic Principal. This warrants a direct conversation to bridge your persona with a high-conviction architecture.",
+      sub: "",
       btnText: "Schedule Strategy Session",
       btnUrl: "https://calendly.com/adam-kazinec/align-strategy-session",
       cards: [
-        { num: "01", title: "Architecture Review", body: "We map your ALIGN results to a specific income framework built for HNW profiles." },
-        { num: "02", title: "Gap Analysis", body: "Identify where your current portfolio origins might conflict with your cash flow governance." },
-        { num: "03", title: "Governance Design", body: "Create a legacy-ready structure that synchronizes your capital with your lifestyle convictions." }
+        { num: "01", title: "Assessment Complete", body: "You have successfully defined your retirement engine and distribution rhythm.", highlight: true },
+        { num: "02", title: "Gap Analysis", body: "Review your ALIGN report to see how it compares to your current strategy." },
+        { num: "03", title: "Realign Strategy", body: "Synchronize your capital with your lifestyle convictions." }
       ]
     },
     B: {
       heading: "Your strategy isn't built yet.",
-      sub: "As a Growth Visionary, your path to 'enough' requires intentional pivots. Let's align your current trajectory with your long-term engine.",
+      sub: "",
       btnText: "Book Discovery Call",
       btnUrl: "https://calendly.com/adam-kazinec/align-discovery-call",
       cards: [
-        { num: "01", title: "Momentum Audit", body: "Evaluate your current growth velocity against your targeted retirement rhythm." },
-        { num: "02", title: "Pivot identification", body: "Pinpoint where systematic adjustments can transform wealth into sustainable income." },
-        { num: "03", title: "Strategic Roadmap", body: "Define the specific steps needed to transition from 'accumulation' to 'distribution'." }
+        { num: "01", title: "Assessment Complete", body: "You have successfully defined your retirement engine and distribution rhythm.", highlight: true },
+        { num: "02", title: "Gap Analysis", body: "Review your ALIGN report to see how it compares to your current strategy." },
+        { num: "03", title: "Realign Strategy", body: "Synchronize your capital with your lifestyle convictions." }
       ]
     },
     C: {
@@ -322,9 +322,9 @@ export const RESULTS_COPY = {
       youtubeUrl: "https://www.youtube.com/@kazskornerpodcast",
       convergentUrl: "https://www.convergentfp.com/team/adam-kazinec",
       cards: [
-        { num: "01", title: "Education First", body: "Deep dive into the core mechanics of contractual vs. market-driven income." },
-        { num: "02", title: "Baseline Mapping", body: "Use your ALIGN profile to evaluate your current savings strategy." },
-        { num: "03", title: "Long Game Plan", body: "Establish the habits that will sustain your wealth through different retirement chapters." }
+        { num: "01", title: "Assessment Complete", body: "You have successfully defined your retirement engine and distribution rhythm.", highlight: true },
+        { num: "02", title: "Gap Analysis", body: "Review your ALIGN report to see how it compares to your current strategy." },
+        { num: "03", title: "Realign Strategy", body: "Synchronize your capital with your lifestyle convictions." }
       ]
     }
   }

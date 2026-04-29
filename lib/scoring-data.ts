@@ -360,7 +360,7 @@ export const ALIGN_QUESTIONS = {
     },
   },
   31: {
-    text: "Which of the following apply to you?",
+    text: "The primary classifications recognized for investment access include Retail Customers, Institutional Investors, and Accredited Investors. Do any of the following apply to you?",
     category: "Demographics",
     engine: "Tier Calc",
     answers: {
@@ -370,7 +370,7 @@ export const ALIGN_QUESTIONS = {
       "Individual income $200k+ (past 2 yrs)": { points: 1, trait: "Financial" },
       "Household income $300k+ (past 2 yrs)": { points: 1, trait: "Financial" },
       "Net worth excl. home ≥ $1M": { points: 1, trait: "Financial" },
-      "None of the above": { points: 1, trait: "Financial" },
+      "None of the above": { points: 0, trait: "Financial" },
     },
   },
   32: {
@@ -390,10 +390,10 @@ export const ALIGN_QUESTIONS = {
     category: "Demographics",
     engine: "Tier Calc",
     answers: {
-      "pre_tax": { points: 1, trait: "Tax" },
-      "roth": { points: 1, trait: "Tax" },
-      "taxable": { points: 1, trait: "Tax" },
-      "not_sure": { points: 0, trait: "Tax" },
+      "Pre Tax": { points: 1, trait: "Tax" },
+      "Tax Free": { points: 1, trait: "Tax" },
+      "Taxable": { points: 1, trait: "Tax" },
+      "Not Sure": { points: 0, trait: "Tax" },
     },
   },
   34: {
