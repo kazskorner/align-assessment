@@ -377,7 +377,7 @@ export default function LandingPage() {
 
         <div className="video-wrap reveal" style={{ maxWidth: '800px', margin: '48px auto 0' }}>
           <iframe
-            src="https://www.youtube.com/embed/sJzrmBE8lic?rel=0&modestbranding=1"
+            src="https://www.youtube.com/embed/mzKr8hsrFSk?rel=0&modestbranding=1"
             title="Adam Kazinec explains the ALIGN assessment"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             allowFullScreen
