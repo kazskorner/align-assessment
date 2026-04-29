@@ -30,7 +30,7 @@ export interface ScoringResult {
     advisorValue: number; // -9 to +9
     selfEfficacy: number; // -9 to +9
   };
-  persona: 'Confident Investor' | 'Collaborative Visionary' | 'Lifestyle Curator' | 'Pragmatic Realist';
+  persona: 'Confident Investor' | 'Collaborative Partner' | 'Strategic Delegator' | 'Independent Learner' | 'Pragmatic Realist';
   
   // Copy for Results Page
   copy: {
@@ -94,6 +94,7 @@ export type BipolarTraitValue =
 
 export type PersonaType = 
   | 'Confident Investor' 
-  | 'Collaborative Visionary' 
-  | 'Lifestyle Curator' 
+  | 'Collaborative Partner' 
+  | 'Strategic Delegator' 
+  | 'Independent Learner' 
   | 'Pragmatic Realist';
