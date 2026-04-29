@@ -34,6 +34,8 @@ function getBlockLabel(id) {
 }
 
 /* ─── Styles ─────────────────────────────────────────────────────────────────── */
+// Multi-select: keys that are mutually exclusive
+const EXCLUSIVE_OPTS = ['Not Sure', 'None of the above'];
 const S = {
   page: {
     minHeight: '100vh',
@@ -130,6 +132,45 @@ const S = {
     outline: 'none',
     lineHeight: '1.4',
   }),
+  multiSelectBtn: (selected) => ({
+    display: 'flex',
+    alignItems: 'center',
+    gap: '14px',
+    width: '100%',
+    padding: '16px 20px',
+    marginBottom: '10px',
+    backgroundColor: selected ? 'rgba(0,240,255,0.08)' : 'rgba(255,255,255,0.03)',
+    color: selected ? '#00f0ff' : 'rgba(255,255,255,0.85)',
+    border: `1px solid ${selected ? '#00f0ff' : 'rgba(255,255,255,0.08)'}`,
+    borderRadius: '14px',
+    cursor: 'pointer',
+    textAlign: 'left',
+    fontSize: '15px',
+    fontWeight: selected ? '600' : '400',
+    transition: 'all 0.2s cubic-bezier(0.4, 0, 0.2, 1)',
+    outline: 'none',
+    lineHeight: '1.4',
+  }),
+  checkBox: (selected) => ({
+    flexShrink: 0,
+    width: '20px',
+    height: '20px',
+    borderRadius: '6px',
+    border: `2px solid ${selected ? '#00f0ff' : 'rgba(255,255,255,0.2)'}`,
+    backgroundColor: selected ? '#00f0ff' : 'transparent',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    fontSize: '12px',
+    color: '#0c0c0e',
+    transition: 'all 0.2s ease',
+  }),
+  multiHint: {
+    fontSize: '12px',
+    color: 'rgba(255,255,255,0.35)',
+    marginBottom: '18px',
+    letterSpacing: '0.03em',
+  },
   dropdown: {
     width: '100%',
     padding: '16px 20px',
@@ -223,6 +264,7 @@ function QuizMain({ router }) {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [responses, setResponses]             = useState({});
   const [selectedState, setSelectedState]     = useState('');
+  const [multiSelections, setMultiSelections] = useState({}); // { [questionId]: string[] }
 
   const [showGate, setShowGate]           = useState(false);
   const [gateFirstName, setGateFirstName] = useState('');
@@ -239,7 +281,7 @@ function QuizMain({ router }) {
     if (currentQuestion > 0) setCurrentQuestion(currentQuestion - 1);
   };
 
-  /* ── Answer handler ──────────────────────────────────────────────────── */
+  /* ── Answer handler (single-select — auto-advances) ─────────────────── */
   const handleAnswer = (answer) => {
     const newResponses = { ...responses, [QUESTIONS[currentQuestion].id]: answer };
     setResponses(newResponses);
@@ -248,6 +290,35 @@ function QuizMain({ router }) {
     } else {
       setShowGate(true);
     }
+  };
+
+  /* ── Multi-select handlers ───────────────────────────────────────────── */
+  const handleMultiToggle = (qId, option) => {
+    setMultiSelections((prev) => {
+      const current = prev[qId] ?? [];
+      let next;
+      if (EXCLUSIVE_OPTS.includes(option)) {
+        // Exclusive option: select only this one (or deselect if already selected)
+        next = current.includes(option) ? [] : [option];
+      } else {
+        // Regular option: clear any exclusive selections, then toggle
+        const withoutExclusive = current.filter((o) => !EXCLUSIVE_OPTS.includes(o));
+        next = withoutExclusive.includes(option)
+          ? withoutExclusive.filter((o) => o !== option)
+          : [...withoutExclusive, option];
+      }
+      return { ...prev, [qId]: next };
+    });
+  };
+
+  const handleMultiConfirm = () => {
+    const qId = QUESTIONS[currentQuestion].id;
+    const selected = multiSelections[qId] ?? [];
+    if (selected.length === 0) return;
+    const newResponses = { ...responses, [qId]: selected };
+    setResponses(newResponses);
+    if (currentQuestion >= QUESTIONS.length - 1) setShowGate(true);
+    else setCurrentQuestion(currentQuestion + 1);
   };
 
   /* ── Dropdown handlers ───────────────────────────────────────────────── */
@@ -399,6 +470,31 @@ function QuizMain({ router }) {
               ))}
             </select>
             <button onClick={handleDropdownConfirm} disabled={!selectedState} style={S.primaryBtn(!selectedState)}>
+              Continue →
+            </button>
+          </div>
+        ) : question.isMultiSelect ? (
+          <div>
+            <p style={S.multiHint}>Select all that apply</p>
+            {question.options.map((option) => {
+              const selected = (multiSelections[question.id] ?? []).includes(option);
+              return (
+                <button
+                  key={option}
+                  onClick={() => handleMultiToggle(question.id, option)}
+                  style={S.multiSelectBtn(selected)}
+                  className="quiz-option-btn"
+                >
+                  <span style={S.checkBox(selected)}>{selected ? '✓' : ''}</span>
+                  {option}
+                </button>
+              );
+            })}
+            <button
+              onClick={handleMultiConfirm}
+              disabled={(multiSelections[question.id] ?? []).length === 0}
+              style={S.primaryBtn((multiSelections[question.id] ?? []).length === 0)}
+            >
               Continue →
             </button>
           </div>

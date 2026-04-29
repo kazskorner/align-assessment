@@ -5,7 +5,7 @@ export interface QuizResponse {
   firstName?: string;
   lastName?: string;
   phone?: string;
-  responses: Record<number, string>; // Q1: "Strongly Agree", Q2: "Agree", etc.
+  responses: Record<number, string | string[]>; // Q1: "Strongly Agree", Q33: ["Pre Tax", "Taxable"], etc.
 }
 
 export interface ScoringResult {

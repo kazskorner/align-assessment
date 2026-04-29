@@ -43,7 +43,7 @@ export const QUESTIONS = [
   { id: 29, text: "What is your age range?", options: ["Under 50", "51–62", "62–67", "68–74", "75+"] },
   // Block 7 — Financial profile (Q30–34)
   { id: 30, text: "About how much do you currently have saved and invested, excluding your home?", options: ["$3M+", "$1.5M – $3M", "$750k – $1.5M", "$250k – $750k", "Less than $250k"] },
-  { id: 31, text: "Which of the following apply to you?", options: ["$5M+ active investments", "Net worth excl. home ≥ $2.2M", "$1.1M+ managed by advisor", "Individual income $200k+ (past 2 yrs)", "Household income $300k+ (past 2 yrs)", "Net worth excl. home ≥ $1M", "None of the above"] },
+  { id: 31, text: "The primary classifications recognized for investment access include Retail Customers, Institutional Investors, and Accredited Investors. Do any of the following apply to you?", options: ["$5M+ active investments", "Net worth excl. home ≥ $2.2M", "$1.1M+ managed by advisor", "Individual income $200k+ (past 2 yrs)", "Household income $300k+ (past 2 yrs)", "Net worth excl. home ≥ $1M", "None of the above"], isMultiSelect: true },
   { id: 32, text: "The thought of a major financial need late in life keeps me up at night.", options: ["Strongly Agree", "Agree", "Neutral", "Disagree", "Strongly Disagree"] },
   { id: 33, text: "Which types of accounts hold your retirement savings?", options: ["Pre Tax", "Tax Free", "Taxable", "Not Sure"], isMultiSelect: true },
   { id: 34, text: "State of residence", options: [], isDropdown: true },

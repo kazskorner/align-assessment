@@ -37,7 +37,10 @@ export class AlignScoringEngine {
     const q31Points = this.getPointValue(31, q31Response);
     const q16Points = this.getPointValue(16, q16Response);
     const q17Points = this.getPointValue(17, q17Response);
-    const q33Points = q33Response && q33Response !== "not_sure" ? 1 : 0; // Bonus if they know their tax buckets
+    
+    // Q33 is multi-select: Bonus if they know their tax buckets (any non-"Not Sure" selected)
+    const q33Array = Array.isArray(q33Response) ? q33Response : [q33Response];
+    const q33Points = q33Array.some(r => r && r !== "Not Sure" && r !== "not_sure") ? 1 : 0;
 
     // Calculate raw tier score
     const rawScore = q18Points + q29Points + q30Points + q31Points + q16Points + q17Points + q33Points;
@@ -217,15 +220,19 @@ export class AlignScoringEngine {
     return score > 0 ? 'High' : 'Low';
   }
 
-  private getPointValue(questionNum: number, response: string): number {
+  private getPointValue(questionNum: number, response: string | string[]): number {
     const question = ALIGN_QUESTIONS[questionNum as keyof typeof ALIGN_QUESTIONS];
-    if (question && response) {
-      const answerData = question.answers[response as keyof typeof question.answers] as any;
-      if (answerData && answerData.points !== undefined) {
-        return answerData.points;
-      }
+    if (!question || !response) return 0;
+
+    if (Array.isArray(response)) {
+      return response.reduce((sum, r) => {
+        const answerData = question.answers[r as keyof typeof question.answers] as any;
+        return sum + (answerData?.points || 0);
+      }, 0);
     }
-    return 0;
+
+    const answerData = question.answers[response as keyof typeof question.answers] as any;
+    return answerData?.points || 0;
   }
 
   /**
@@ -279,7 +286,9 @@ export class AlignScoringEngine {
     const ageRange = responses[29] || "Unknown";
     const timeToRetirement = responses[18] || "Unknown"; // Q18: "When will you retire?"
     const assetsSaved = responses[30] || "Unknown";
-    const taxBuckets = responses[33] || "Unknown";
+    const taxBuckets = Array.isArray(responses[33]) 
+      ? (responses[33] as string[]).join(', ') 
+      : (responses[33] || "Unknown");
 
     // Generate Redtail tags
     const redtailTags = this.generateRedtailTags(tier, timeToRetirement, ageRange);
