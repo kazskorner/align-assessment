@@ -30,6 +30,42 @@ function useRollingCounter(target: number, duration = 1800) {
   return display;
 }
 
+/** Individual car accordion panel — hover or click to expand */
+interface CarPanelData {
+  num: string;
+  label: string;
+  tag: string;
+  title: string;
+  body: string;
+  img: string;
+  key: string;
+}
+
+function CarPanel({ panel, defaultActive }: { panel: CarPanelData; defaultActive?: boolean }) {
+  const [active, setActive] = useState(!!defaultActive);
+
+  return (
+    <div
+      className={`car-panel${active ? ' active' : ''}`}
+      onMouseEnter={() => setActive(true)}
+      onMouseLeave={() => setActive(false)}
+      onClick={() => setActive((v) => !v)}
+    >
+      <div className="car-bg" style={{ backgroundImage: `url('${panel.img}')`, backgroundSize: 'cover', backgroundPosition: 'center' }} />
+      <div className="car-overlay" />
+      <div className="car-collapsed">
+        <span className="car-num">{panel.num}</span>
+        <span className="car-label">{panel.label}</span>
+      </div>
+      <div className="car-expanded">
+        <div className="car-tag">{panel.tag}</div>
+        <h3>{panel.title}</h3>
+        <p>{panel.body}</p>
+      </div>
+    </div>
+  );
+}
+
 export default function LandingPage() {
   const [scrolled, setScrolled] = useState(false);
   const [faqOpen, setFaqOpen] = useState<number | null>(null);
@@ -77,7 +113,8 @@ export default function LandingPage() {
       {/* ── NAV ── */}
       <nav id="nav" className={scrolled ? 'scrolled' : ''}>
         <div className="nav-logo">
-          <img src="/logo.jpg" alt="ALIGN Logo" style={{ height: '64px', width: 'auto' }} />
+          <img src="/ALIGN_Logo_White_Primary.png" alt="ALIGN Logo" className="logo-white" style={{ height: '48px', width: 'auto' }} />
+          <img src="/ALIGN_Logo_Black_Primary.png" alt="ALIGN Logo" className="logo-black" style={{ height: '48px', width: 'auto' }} />
         </div>
         <div className="nav-links">
           <a href="#why">Why It Matters</a>
@@ -97,7 +134,7 @@ export default function LandingPage() {
             playsInline
             className="hero-video"
           >
-            <source src="/landing-hero.mp4" type="video/mp4" />
+            <source src="/Align Results Hero Video Compressed.mp4" type="video/mp4" />
           </video>
           <div className="hero-video-overlay"></div>
         </div>
@@ -209,17 +246,46 @@ export default function LandingPage() {
       {/* ── DISCOVER ── */}
       <section className="discover" id="discover">
         <div className="section-inner">
+          <div className="section-tag">What You Discover</div>
+          <h2 className="section-h reveal d1">Think of your retirement plan<br />like a <em>car.</em></h2>
+          <p className="section-sub reveal d2" style={{ maxWidth: '680px' }}>
+            Every car has an engine, an interior, and a driver assistance system. Each one plays a different role — and together, they determine how the whole ride feels. Your retirement plan works the same way. The ALIGN assessment reveals all three layers of how yours is built.
+          </p>
 
-          <h2 className="section-h reveal d1">What you'll discover about your<br /><em>optimized retirement strategy.</em></h2>
+          <div className="car-accordion-wrap reveal" style={{ marginTop: '56px', maxWidth: '780px' }}>
 
-          <div className="discover-grid">
-            {LANDING_COPY.discover.cards.map((c, i) => (
-              <div key={i} className={`d-card reveal d${i+1}`}>
-                <div className="d-card-title">{c.title}</div>
-                <p className="d-card-body">{c.body}</p>
-                <div className="d-card-accent"></div>
-              </div>
+            {[
+              {
+                num: '01',
+                label: 'Primary Traits — The Engine',
+                tag: '01 — Primary Traits',
+                title: 'The Engine',
+                body: 'The engine determines how the car fundamentally runs. If the engine is built for stability, the ride feels smooth and dependable. If it\'s built for performance and flexibility, the ride may change depending on conditions. Your primary traits shape the core way your retirement plan operates day to day.',
+                img: '/Car_Engine.jpg',
+                key: 'car1',
+              },
+              {
+                num: '02',
+                label: 'Secondary Traits — The Interior Features',
+                tag: '02 — Secondary Traits',
+                title: 'The Interior Features',
+                body: 'The seats, temperature controls, sound system, and storage spaces affect how comfortable you feel while riding in the car. Secondary traits influence how you emotionally experience retirement — how comfortable you feel spending, saving, accessing money, and adapting along the way.',
+                img: '/Car_Interior.jpg',
+                key: 'car2',
+              },
+              {
+                num: '03',
+                label: 'Implementation — The Driver Assistance System',
+                tag: '03 — Implementation',
+                title: 'The Driver Assistance System',
+                body: 'Some people want full GPS guidance, lane assist, and alerts helping them drive. Others prefer full control with minimal assistance. Implementation reflects how you prefer to make decisions and how much guidance or support you want while navigating retirement.',
+                img: '/Car_Navigation.jpg',
+                key: 'car3',
+              },
+            ].map((panel, i) => (
+              <CarPanel key={panel.key} panel={panel} defaultActive={i === 0} />
             ))}
+
           </div>
         </div>
       </section>
@@ -299,7 +365,7 @@ export default function LandingPage() {
       {/* ── FOOTER ── */}
       <footer>
         <div className="foot-brand">
-          <img src="/logo.jpg" alt="ALIGN Logo" style={{ height: '24px', width: 'auto' }} />
+          <img src="/ALIGN_Logo_Black_Primary.png" alt="ALIGN Logo" style={{ height: '24px', width: 'auto' }} />
         </div>
         <div className="foot-copy">© 2026 ALIGN Assessment. Part of Kaz's Korner Ecosystem. All rights reserved.</div>
         <div className="foot-links">

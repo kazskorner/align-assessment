@@ -127,6 +127,32 @@ nav.scrolled {
   letter-spacing: -0.02em;
   color: #fff;
   transition: color 0.4s;
+  position: relative;
+}
+
+/* Logo swap: white shown on dark bg, black shown on light bg */
+.logo-white {
+  display: block;
+  transition: opacity 0.35s ease;
+  opacity: 1;
+}
+
+.logo-black {
+  display: block;
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  transition: opacity 0.35s ease;
+  opacity: 0;
+}
+
+nav.scrolled .logo-white {
+  opacity: 0;
+}
+
+nav.scrolled .logo-black {
+  opacity: 1;
 }
 
 nav.scrolled .nav-logo {
@@ -203,7 +229,8 @@ nav.scrolled .nav-cta {
 
 .nav-cta:hover {
   background: var(--cyan);
-  color: var(--ink) !important; /* Ensure visibility on cyan */
+  color: var(--ink) !important;
+  /* Ensure visibility on cyan */
   transform: translateY(-2px);
   box-shadow: 0 8px 32px rgba(0, 240, 255, 0.25);
   border-color: transparent;
@@ -1088,11 +1115,122 @@ section {
   background: var(--bg-alt)
 }
 
-.discover-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
-  margin-top: 56px;
+/* ─── CAR ACCORDION ─── */
+.car-accordion-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.car-panel {
+  height: 64px;
+  border-radius: 14px;
+  overflow: hidden;
+  position: relative;
+  cursor: pointer;
+  transition: height 0.52s cubic-bezier(0.16, 1, 0.3, 1);
+  border: 1px solid var(--border-md);
+  box-shadow: var(--shadow-sm);
+}
+
+.car-panel:hover,
+.car-panel.active {
+  height: 260px;
+}
+
+.car-bg {
+  position: absolute;
+  inset: 0;
+  transition: transform 0.52s ease;
+}
+
+.car-panel:hover .car-bg,
+.car-panel.active .car-bg {
+  transform: scale(1.03);
+}
+
+.car-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to right, rgba(28, 28, 30, 0.88) 0%, rgba(28, 28, 30, 0.5) 55%, transparent 85%);
+}
+
+.car-collapsed {
+  position: absolute;
+  top: 50%;
+  left: 24px;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  z-index: 2;
+  transition: opacity 0.25s;
+}
+
+.car-panel:hover .car-collapsed,
+.car-panel.active .car-collapsed {
+  opacity: 0;
+}
+
+.car-num {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--cyan);
+  letter-spacing: 0.08em;
+}
+
+.car-label {
+  font-family: var(--font-display);
+  font-size: 14px;
+  font-weight: 600;
+  color: #fff;
+  letter-spacing: -0.01em;
+}
+
+.car-expanded {
+  position: absolute;
+  bottom: 26px;
+  left: 28px;
+  right: 28px;
+  z-index: 2;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1) 0.1s;
+}
+
+.car-panel:hover .car-expanded,
+.car-panel.active .car-expanded {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.car-tag {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--cyan);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 7px;
+}
+
+.car-expanded h3 {
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: -0.025em;
+  margin-bottom: 8px;
+  line-height: 1.1;
+}
+
+.car-expanded p {
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.65;
+  color: rgba(255, 255, 255, 0.72);
+  max-width: 52ch;
 }
 
 .d-card {
@@ -2090,6 +2228,7 @@ footer {
     justify-content: center
   }
 }
+
 /* ─── ROLLING COUNTER ─── */
 .rolling-num {
   display: inline-block;
