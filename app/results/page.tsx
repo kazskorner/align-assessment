@@ -118,7 +118,7 @@ function ResultsContent() {
               loop 
               playsInline 
               className="hero-video-el"
-              src="/results-hero-video.mp4"
+              src="/Align Results Hero Video Compressed.mp4"
             />
             <div className="hero-video-scrim"></div>
           </div>

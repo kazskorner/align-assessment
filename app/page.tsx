@@ -134,7 +134,7 @@ export default function LandingPage() {
             playsInline
             className="hero-video"
           >
-            <source src="/Align Results Hero Video Compressed.mp4" type="video/mp4" />
+            <source src="/Align_Hero_Video_W_Words_Rev_3_Compressed.mp4" type="video/mp4" />
           </video>
           <div className="hero-video-overlay"></div>
         </div>
